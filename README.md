@@ -82,7 +82,8 @@ Everything plays through a concrete-room reverb.
 |---|---|
 | `S` | Auto start / light up |
 | `X` | Shutdown |
-| `↑` / `↓` | Throttle |
+| `↑` / `↓` | Throttle ±5% (hold Shift for ±1%) |
+| `Home` / `End` | Idle / full power |
 | `End` | Full power |
 | `PgUp` | Afterburner (or push the throttle past the 100% gate) |
 | `R` | Reverser |

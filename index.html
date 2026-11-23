@@ -42,7 +42,7 @@ h3{font:700 15px "Barlow Condensed",sans-serif;color:var(--mute);margin:0 0 10px
 .lcd{font:15px/1.5 "Share Tech Mono",monospace;background:#08100b;color:#9dffb8;border:1px solid #000;border-radius:4px;padding:8px 10px;margin-top:10px;display:grid;grid-template-columns:auto auto;gap:0 12px;box-shadow:inset 0 0 18px rgba(0,0,0,.8)}
 .lcd span{color:#6a9d7a}.lcd b{font-weight:400;text-align:right;white-space:nowrap}
 #chart{width:100%;height:64px;display:block;margin-top:10px;background:#08100b;border:1px solid #000;border-radius:4px}
-.ctlgrid{display:grid;grid-template-columns:minmax(0,1fr) 74px;gap:12px}
+.ctlgrid{display:grid;grid-template-columns:minmax(0,1fr) 164px;gap:12px}
 .btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;align-content:start}
 button,select,input{font:inherit;font-size:16px;color:inherit}
 button{min-height:44px;padding:0 10px;border-radius:5px;border:1px solid #000;background:linear-gradient(180deg,#3d4440,#262b28);cursor:pointer;font:700 15px "Barlow Condensed",sans-serif;letter-spacing:.03em;color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 2px 0 #000}
@@ -52,9 +52,17 @@ button.go{background:linear-gradient(180deg,#ff7d33,#c8470c);color:#1b0b02}butto
 button.hzb{background:repeating-linear-gradient(-45deg,#e8b923 0 10px,#c99c14 10px 20px);color:#111}
 button:disabled{opacity:.35;cursor:not-allowed}
 :focus-visible{outline:3px solid var(--hz);outline-offset:2px}
-.quad{display:flex;flex-direction:column;align-items:center;gap:4px;font:700 13px "Barlow Condensed",sans-serif;color:var(--mute);background:#151816;border:1px solid #000;border-radius:6px;padding:8px 4px}
-.quad b{font:18px "Share Tech Mono",monospace;color:#ffd9a8}
-input.vert{writing-mode:vertical-lr;direction:rtl;width:44px;height:210px;accent-color:var(--hot)}
+.quad{user-select:none;-webkit-user-select:none;display:grid;grid-template-columns:72px minmax(0,1fr);gap:8px;background:#151816;border:1px solid #000;border-radius:6px;padding:10px 8px}
+.lever{position:relative;height:330px;touch-action:none;cursor:ns-resize;outline:none}.lever:focus-visible{outline:3px solid var(--hz);outline-offset:2px;border-radius:6px}
+.ltrack{position:absolute;left:50%;top:14px;bottom:14px;width:16px;margin-left:-8px;background:#0a0c0b;border:1px solid #000;border-radius:8px;box-shadow:inset 0 2px 6px #000}
+.lfill{position:absolute;left:0;right:0;bottom:0;border-radius:8px;background:linear-gradient(0deg,#c8470c,#ff8a3d)}
+.lgate{position:absolute;left:-14px;right:-14px;top:0;border-bottom:3px solid var(--hot);background:repeating-linear-gradient(-45deg,rgba(255,106,26,.35) 0 6px,transparent 6px 12px);border-radius:6px 6px 0 0}.lgate span{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font:700 11px "Barlow Condensed",sans-serif;color:var(--hot)}
+.lticks{position:absolute;inset:0}.lticks i{position:absolute;left:-12px;width:8px;height:1px;background:#6d7671}.lticks i.mj{width:12px;left:-16px;background:#b9c1bc}.lticks i.mj+i{}
+.lticks em{position:absolute;left:24px;font:11px "Share Tech Mono",monospace;color:#8a938f;font-style:normal;transform:translateY(-50%)}
+.lhandle{position:absolute;left:2px;right:2px;height:30px;margin-top:-15px;border-radius:5px;background:linear-gradient(180deg,#ff9a55,#c8470c);border:1px solid #000;box-shadow:0 3px 6px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;pointer-events:none}
+.lhandle b{font:16px "Share Tech Mono",monospace;color:#1b0b02;font-weight:400}
+.ldet{display:flex;flex-direction:column;gap:5px}.ldet button{min-height:40px;padding:0 6px;font-size:14px}.ldet button.on{background:linear-gradient(180deg,#5c4512,#3a2b0a);color:#ffd98a}
+.lfine{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:auto}.lfine button{min-height:44px;font:16px "Share Tech Mono",monospace}
 .row2{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;color:var(--mute);font:600 15px "Barlow Condensed",sans-serif}.row2 b{color:var(--ink);min-width:3.5em;text-align:center}
 .fcp{margin-top:14px}.fcgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.8fr);gap:16px;align-items:end}
 label.row{display:block;margin:6px 0}label.row span{display:flex;justify-content:space-between;font:600 15px "Barlow Condensed",sans-serif;color:var(--mute)}label.row span b{color:var(--ink);white-space:nowrap}
@@ -107,7 +115,7 @@ textarea{font:13px "Share Tech Mono",monospace;min-height:64px;overflow-wrap:any
 .gate{position:relative}.gatelbl{font:11px "Share Tech Mono",monospace;color:var(--hot)}
 @media(max-width:1000px){.offgrid,.office.wide .offgrid,.two2{grid-template-columns:minmax(0,1fr)}.drawing{position:static;min-height:0}}
 @media(max-width:1000px){.console{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.ctlp{grid-column:1/-1}}
-@media(max-width:700px){.console,.two,.fcgrid{grid-template-columns:minmax(0,1fr)}.bay{aspect-ratio:1.15/1;min-height:0}.fig{height:320px}.ann{grid-template-columns:repeat(3,minmax(0,1fr))}.tabs a{font-size:17px;padding:8px 10px}}
+@media(max-width:700px){.ctlgrid{grid-template-columns:minmax(0,1fr)}.quad{grid-template-columns:90px minmax(0,1fr)}.console,.two,.fcgrid{grid-template-columns:minmax(0,1fr)}.bay{aspect-ratio:1.15/1;min-height:0}.fig{height:320px}.ann{grid-template-columns:repeat(3,minmax(0,1fr))}.tabs a{font-size:17px;padding:8px 10px}}
 @media(prefers-reduced-motion:reduce){.status.bad,.ann .r{animation:none}}
 </style>
 </head>
@@ -137,7 +145,14 @@ textarea{font:13px "Share Tech Mono",monospace;min-height:64px;overflow-wrap:any
      <button id="bTherm" aria-pressed="false">Thermal view</button>
      <button id="bRepair" class="hzb" hidden>Rebuild engine</button>
     </div>
-    <div class="quad"><span class="gatelbl" id="abGate">Reheat</span><input type="range" id="thr" class="vert" min="0" max="120" value="0" aria-label="Throttle"><span>Idle</span><b id="thrV">0%</b></div>
+    <div class="quad">
+     <div class="lever" id="lever" role="slider" tabindex="0" aria-label="Throttle" aria-valuemin="0" aria-valuemax="120" aria-valuenow="0">
+      <div class="ltrack"><div class="lgate" id="abGate"><span>Reheat</span></div><div class="lfill" id="lfill"></div><div class="lticks" id="lticks"></div></div>
+      <div class="lhandle" id="lhandle"><b id="thrV">0%</b></div>
+     </div>
+     <div class="ldet" id="ldet"><button data-tv="115" id="detAB">Reheat</button><button data-tv="100">100</button><button data-tv="75">75</button><button data-tv="50">50</button><button data-tv="25">25</button><button data-tv="0">Idle</button>
+      <div class="lfine"><button data-tf="-1" aria-label="Throttle down 1%">−1</button><button data-tf="1" aria-label="Throttle up 1%">+1</button></div></div>
+    </div>
    </div>
    <div class="row2" id="pitchRow"><span id="pitchLbl">Prop pitch</span> <button id="bDn" aria-label="Lower">−</button><b id="pitchV">3</b><button id="bUp" aria-label="Raise">+</button></div>
    <div class="row2" id="nozRow">Nozzle <button id="bNozAuto" aria-pressed="true">Auto</button><input type="range" id="nozA" min="70" max="130" value="100" aria-label="Nozzle area" style="flex:1;min-width:120px"><b id="nozV">×1.00</b></div>
@@ -188,7 +203,7 @@ textarea{font:13px "Share Tech Mono",monospace;min-height:64px;overflow-wrap:any
   <div class="plate"><h3>Records on this device</h3><ul class="kv" id="records" style="margin-bottom:14px"></ul><h3>My runs</h3><ul class="list" id="runs"></ul></div>
  </div></section>
 
- <p class="note" style="margin:18px 0 30px">Keys: <kbd>S</kbd> auto start · <kbd>X</kbd> shutdown · <kbd>↑</kbd>/<kbd>↓</kbd> throttle · <kbd>End</kbd> full power · <kbd>PgUp</kbd> afterburner · <kbd>R</kbd> reverser · <kbd>E</kbd>/<kbd>Q</kbd> Mach up/down · <kbd>W</kbd>/<kbd>A</kbd> altitude up/down · <kbd>[</kbd>/<kbd>]</kbd> prop pitch or collective · <kbd>T</kbd> thermal view. Push the throttle past 100% for the afterburner. The physics is a simplified gas-path model built for fun, not certification.</p>
+ <p class="note" style="margin:18px 0 30px">Keys: <kbd>S</kbd> auto start · <kbd>X</kbd> shutdown · <kbd>↑</kbd>/<kbd>↓</kbd> throttle ±5 (hold Shift for ±1, or scroll on the lever) · <kbd>End</kbd> full power · <kbd>PgUp</kbd> afterburner · <kbd>R</kbd> reverser · <kbd>E</kbd>/<kbd>Q</kbd> Mach up/down · <kbd>W</kbd>/<kbd>A</kbd> altitude up/down · <kbd>[</kbd>/<kbd>]</kbd> prop pitch or collective · <kbd>T</kbd> thermal view. Push the throttle past 100% for the afterburner. The physics is a simplified gas-path model built for fun, not certification.</p>
 </main>
 
 <script>
@@ -873,7 +888,7 @@ function updateUI(){const o=S.out,isR=ram(d.type),th=o.thrust||0,w=weight(d),sh=
  const rows=[sh?['Shaft SFC',o.shp>1&&o.fuel>0?(o.fuel/(o.shp*.7457)*3.6e6).toFixed(0)+' g/kWh':'—']:['TSFC',sfc?sfc.toFixed(1)+' g/kN·s':'—'],sh?['Available',Math.round(o.shp||0).toLocaleString()+' hp']:['TSFC',sfc?(sfc*.0353).toFixed(3)+' lb/lbf·h':'—'],['EGT',Math.round((o.egt||288)-273)+' °C'],['Comp exit T3',Math.round((o.T3||288)-273)+' °C'],
   ['Airflow',(o.mdot||0).toFixed((o.mdot||0)<10?2:0)+' kg/s'],['Pressure ratio',(o.pr||1).toFixed(1)+' : 1'],sh?['Rotor (Np)',Math.round(S.Np*100)+' %']:['Thrust/weight',(th/(w*9.81)).toFixed(2)],d.type==='turboprop'?['Shaft power',Math.round(o.shp||0).toLocaleString()+' hp']:['Jet velocity',Math.round(o.Vj||0)+' m/s']];
  $('lcd').innerHTML=rows.map(([a,b])=>`<span>${a}</span><b>${b}</b>`).join('');
- $('thrV').textContent=S.thr>1.02&&d.ab?'RHT':Math.round(Math.min(1,S.thr)*100)+'%';if(+$('thr').value!==Math.round(S.thr*100))$('thr').value=Math.round(S.thr*100);
+ thrUI();
  let st=S.broken?'Engine destroyed — rebuild it':S.surge>0?'SURGE':S.lit?(isR?'Burning':S.N<d.idle-.02?'Accelerating to idle':o.abOn?'Afterburner lit':S.rev?'Reverse thrust':sh?(S.fadec&&d.fadecFit?'Governor holding rotor':'Manual fuel — watch the rotor'):'Running'):S.N>.02?(S.starter?'Cranking':fc.M>.25?'Windmilling':'Spooling down'):isR?(fc.M>0?'Air supply running — cold':'Cold — ramjets need airflow'):'Cold and dark';
  if(S.msgT>0)st=S.msg;const se=$('status');const txt=st+(stage()&&!S.broken?` · damage ${stage()}/3`:'');if(se.textContent!==txt){se.textContent=txt;se.className='status'+(/SURGE|COOKED|MELTED|BURNED|BURST|Flameout|damage|destroyed|over-limit/i.test(txt)?' bad':'')}
  $('bRepair').hidden=!(S.broken||S.dmg>0)}
@@ -951,7 +966,19 @@ window.addEventListener('hashchange',route);
 /* events */
 $('alt').oninput=e=>setFC({h:+e.target.value});$('mach').oninput=e=>setFC({M:+e.target.value});$('amb').onchange=e=>{setFC({dT:+e.target.value});envDirty=true;envMark()};
 $('fcPresets').onclick=e=>{const b=e.target.closest('[data-f]');if(b)setFC({...FCP[b.dataset.f][1]})};
-$('thr').oninput=e=>{if(!test){S.thr=e.target.value/100;if(S.thr>1&&!d.ab)S.thr=1}};
+/* throttle lever */
+const lever=$('lever'),TMAX=120;
+$('lticks').innerHTML=Array.from({length:25},(_,i)=>{const v=i*5,y=100-v/TMAX*100,mj=v%25===0||v===100;return `<i class="${mj?'mj':''}" style="top:${y}%"></i>${mj&&v<=100?`<em style="top:${y}%">${v}</em>`:''}`}).join('');
+function setThr(v){if(test)return;v=Math.round(v);if(!d.ab||ram(d.type)||shaftT(d.type))v=Math.min(v,100);S.thr=clamp(v,0,TMAX)/100;thrUI()}
+function thrUI(){const p=Math.round(S.thr*100),y=100-p/TMAX*100;$('lhandle').style.top=`calc(14px + (100% - 28px) * ${y/100})`;$('lfill').style.height=(p/TMAX*100)+'%';
+ $('thrV').textContent=p>100?'RHT '+(p-100)*5+'%':p+'%';lever.setAttribute('aria-valuenow',p);lever.setAttribute('aria-valuetext',p>100?'Reheat':p+'%');
+ const ab=d.ab&&!ram(d.type)&&!shaftT(d.type);$('abGate').style.height=(20/TMAX*100)+'%';$('abGate').style.opacity=ab?1:.25;$('detAB').disabled=!ab;
+ document.querySelectorAll('#ldet [data-tv]').forEach(b=>b.classList.toggle('on',+b.dataset.tv===p||(b.dataset.tv==='115'&&p>100)))}
+function leverAt(e){const r=lever.querySelector('.ltrack').getBoundingClientRect();let v=(r.bottom-e.clientY)/r.height*TMAX;if(Math.abs(v-100)<2)v=100;setThr(v)}
+lever.addEventListener('pointerdown',e=>{lever.setPointerCapture(e.pointerId);lever.focus();leverAt(e)});
+lever.addEventListener('pointermove',e=>{if(lever.hasPointerCapture(e.pointerId))leverAt(e)});
+lever.addEventListener('wheel',e=>{e.preventDefault();setThr(S.thr*100+(e.deltaY<0?1:-1)*(e.shiftKey?5:1))},{passive:false});
+$('ldet').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.tv!=null)setThr(+b.dataset.tv);if(b.dataset.tf)setThr(S.thr*100+(+b.dataset.tf))});
 const tog=k=>()=>{initSound();S[k]=!S[k];sync()};
 $('bStart').onclick=()=>{if(!S.broken)tog('starter')()};$('bIgn').onclick=tog('ign');$('bFuel').onclick=tog('fuel');$('bFadec').onclick=()=>{if(d.fadecFit)tog('fadec')()};
 $('bAB').onclick=()=>{initSound();toggleAB()};$('bRev').onclick=()=>{initSound();toggleRev()};
@@ -965,9 +992,9 @@ const pitch=dir=>{if(d.type==='turboshaft'){S.coll=clamp(Math.round((S.coll+dir*
 $('bUp').onclick=()=>pitch(1);$('bDn').onclick=()=>pitch(-1);
 $('bDyno').onclick=()=>{initSound();startTest('dyno',null)};
 $('runs').onclick=e=>{if(e.target.id==='bClr'){runs=[];store.set('ggf-runs',runs);renderRuns()}};
-document.addEventListener('keydown',e=>{if(e.target.matches('input[type=text],textarea,select'))return;const k=e.key;let h=true;
+document.addEventListener('keydown',e=>{if(e.target.matches('input[type=text],textarea,select'))return;if(e.target.matches('input[type=range]')&&e.key.startsWith('Arrow'))return;const k=e.key;let h=true;
  if(k==='s'||k==='S'){if(!snd){initAudio();snd=true;try{ac.resume()}catch(_){}}autoStart()}else if(k==='x'||k==='X')stop();
- else if(k==='ArrowUp'&&!test)S.thr=Math.min(d.ab?1.2:1,S.thr+.05);else if(k==='ArrowDown'&&!test)S.thr=Math.max(0,S.thr-.05);else if(k==='End'&&!test)S.thr=1;
+ else if(k==='ArrowUp')setThr(S.thr*100+(e.shiftKey?1:5));else if(k==='ArrowDown')setThr(S.thr*100-(e.shiftKey?1:5));else if(k==='End')setThr(100);else if(k==='Home')setThr(0);
  else if(k==='PageUp'){initSound();toggleAB()}else if(k==='r'||k==='R'){initSound();toggleRev()}else if(k==='t'||k==='T'){thermal=!thermal}
  else if(k==='e'||k==='E')setFC({M:Math.round((fc.M+.1)*100)/100});else if(k==='q'||k==='Q')setFC({M:Math.round((fc.M-.1)*100)/100});
  else if(k==='w'||k==='W')setFC({h:fc.h+.5});else if(k==='a'||k==='A')setFC({h:fc.h-.5});
