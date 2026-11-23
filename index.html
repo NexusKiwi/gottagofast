@@ -217,7 +217,7 @@ const ROTORS={al:{n:'Aluminium alloy',lim:1.05,w:.9,c:.85},ti:{n:'Titanium alloy
 const TYPES={turbojet:'Turbojet',turbofan:'Turbofan',turboprop:'Turboprop',turboshaft:'Turboshaft',ramjet:'Ramjet',scramjet:'Scramjet'};
 const TYPEDESC={turbojet:'Pure jet. Simple, loud and fast.',turbofan:'Bypass fan. Low ratio for fighters, high for airliners.',turboprop:'Drives a propeller through a gearbox, with pitch gears.',turboshaft:'Drives a helicopter rotor, held at speed by a governor.',ramjet:'No moving parts. Needs supersonic air to light.',scramjet:'Burns hydrogen in supersonic air. Mach 4.5 and up.'};
 const GEARS=[{x:.75,e:.84},{x:.85,e:.81},{x:.92,e:.77},{x:.96,e:.71}];
-const AF0={S:30,sweep:40,AR:3.2,L:15,FD:1.5,fuel:3000,mat:'al',eng:1};
+const AF0={S:30,sweep:40,AR:3.2,taper:.3,wpos:.5,L:15,FD:1.5,fuel:3000,mat:'al',eng:1,tail:'tail',tailA:20,tailSweep:40,fins:1,finA:16,cant:0};
 const DEF={name:'Custom engine',notes:'',type:'turbojet',D:.45,opr:6,tit:1150,bpr:0,fpr:0,prop:2.5,mat:'steel',noz:'conv',ab:false,spools:1,vigv:false,rev:false,cool:0,bleed:0,inlet:'pitot',
  stages:0,ec:.88,dpb:5,tstages:0,et:.9,throat:1,abFuel:28,abOpen:40,rotorMat:'ti',rotorMass:1,idle:.6,map:[0,.25,.5,.75,1],fadecFit:true,af:{...AF0}};
 const P=o=>({...DEF,...o});
@@ -1145,6 +1145,7 @@ office.addEventListener('click',e=>{const b=e.target.closest('button,a');if(!b)r
  if(b.dataset.del!=null){saved.splice(b.dataset.del,1);store.set('ggf-engines',saved);renderSaved();return}
  if(b.id==='bCopy'){const t=$('code');navigator.clipboard.writeText(t.value).then(()=>$('codeMsg').textContent='Copied',()=>{t.select();$('codeMsg').textContent='Selected — press Ctrl+C'});return}
  if(b.id==='bLoadCode'){try{const nd=dec($('code').value);if(!TYPES[nd.type])throw 0;d=norm(nd);designChanged('type');renderSheet();$('codeMsg').textContent='Loaded'}catch(_){$('codeMsg').textContent='That code is not valid'}return}
+ if(b.dataset.frame!=null){d.af={...AF0,...FRAMES[b.dataset.frame].af};designChanged('af');renderSheet();return}
  if(b.id==='ftRun'){runFlightTest();return}if(b.id==='afReset'){d.af={...AF0};designChanged('af');renderSheet();return}
 });
 function saveEngine(){const n=(d.name||'Custom engine').trim();d.name=n;const i=saved.findIndex(s=>s.name===n);if(i>=0)saved[i]=JSON.parse(JSON.stringify(d));else saved.push(JSON.parse(JSON.stringify(d)));store.set('ggf-engines',saved);renderSaved();sync()}
@@ -1203,22 +1204,42 @@ ofDia.addEventListener('pointerup',()=>{if(mapDrag>0){mapDrag=-1;designChanged('
 
 /* ================= AIRFRAME + FLIGHT TEST ================= */
 const AFM={al:{n:'Al-Li alloy',d:'Light and cheap. Softens with heat, good to about Mach 2.2.',w:1,c:1,Tlim:400,g:7.5,q:70},ti:{n:'Titanium',d:'Heavy and very costly. Keeps its strength past Mach 3.',w:1.35,c:2.8,Tlim:720,g:9,q:95},cf:{n:'Carbon composite',d:'Lightest by far. The resin limits skin heat to about Mach 1.9.',w:.72,c:2.2,Tlim:380,g:9,q:65}};
-function airframe(){const a=d.af,g=9.81,sw=a.sweep*Math.PI/180,cs=Math.cos(sw),m=AFM[a.mat]||AFM.al,eng=a.eng;
+const FRAMES=[
+ {n:'Stealth twin-fin (F-22 style)',d:'Diamond wing, big canted twin fins, tail. Supersonic and agile.',af:{S:78,sweep:42,AR:2.4,taper:.12,wpos:.55,L:19,FD:2.4,fuel:8000,mat:'cf',eng:2,tail:'tail',tailA:21,tailSweep:42,fins:2,finA:22,cant:28}},
+ {n:'Single-engine stealth (F-35 style)',d:'Compact trapezoid wing, twin canted fins, one big engine.',af:{S:43,sweep:35,AR:2.7,taper:.2,wpos:.52,L:15.7,FD:2.2,fuel:8000,mat:'cf',eng:1,tail:'tail',tailA:22,tailSweep:40,fins:2,finA:18,cant:25}},
+ {n:'Tailless delta (Mirage style)',d:'Big 60° delta, no tailplane, single fin. Fast and simple.',af:{S:41,sweep:58,AR:1.9,taper:0,wpos:.6,L:14.4,FD:1.6,fuel:3200,mat:'al',eng:1,tail:'none',tailA:0,tailSweep:45,fins:1,finA:16,cant:0}},
+ {n:'Forward-swept (Su-47 style)',d:'Wings swept forward, canards and tail, twin fins. Needs composites.',af:{S:62,sweep:-20,AR:4.5,taper:.3,wpos:.6,L:22.5,FD:2.4,fuel:9000,mat:'cf',eng:2,tail:'both',tailA:14,tailSweep:40,fins:2,finA:16,cant:10}},
+ {n:'Classic swept fighter',d:'Swept trapezoid, conventional tail, single fin.',af:{...AF0}},
+ {n:'Straight-wing trainer',d:'Low sweep, high aspect ratio, docile and frugal.',af:{S:18,sweep:5,AR:6,taper:.5,wpos:.45,L:10,FD:1.3,fuel:800,mat:'al',eng:1,tail:'tail',tailA:22,tailSweep:10,fins:1,finA:14,cant:0}}];
+function airframe(){const a=d.af,g=9.81,m=AFM[a.mat]||AFM.al,eng=a.eng,rad=Math.PI/180;
+ const b=Math.sqrt(a.AR*a.S),lam=a.taper,cr=2*a.S/(b*(1+lam)),ct=cr*lam,mac=2/3*cr*(1+lam+lam*lam)/(1+lam),tLE=Math.tan(a.sweep*rad);
+ const tc4=tLE-(1-lam)/(a.AR*(1+lam)),sw4=Math.atan(tc4),cs=Math.cos(sw4),fwd=a.sweep<0,delta=lam<.15&&a.sweep>=45;
  const Deng=d.type==='turboprop'?d.D*1.4:d.type==='turboshaft'?d.D*1.6:d.D*1.08,engW=weight(d)*eng;
- const wingM=a.S*(16+2.4*a.AR)*(1+a.sweep/120)*m.w,fusM=Math.PI*a.FD*a.L*20*m.w,empty=wingM+fusM+600+(eng===2?250:0),payload=600;
- const fuelCap=Math.PI*(a.FD/2)**2*a.L*.33*800+a.S*.06*800,fuel=Math.min(a.fuel,fuelCap),TOW=empty+engW+fuel+payload;
- const fits=[[`Engine diameter (≤ ${(a.FD*(eng===2?.48:.9)).toFixed(2)} m)`,Deng.toFixed(2)+' m',Deng<=a.FD*(eng===2?.48:.9)],[`Engine mass (≤ 40% of take-off)`,Math.round(engW).toLocaleString()+' kg',engW<=TOW*.4],[`Fuel (≤ ${Math.round(fuelCap).toLocaleString()} kg tankage)`,Math.round(a.fuel).toLocaleString()+' kg',a.fuel<=fuelCap]];
- const Swf=Math.PI*a.FD*a.L*.9,Sww=2.05*a.S,Cf=.0032,CD0=Cf*(Swf+Sww)/a.S*1.1*(eng===2?1.08:1);
- const e=clamp(1.78*(1-.045*Math.pow(a.AR,.68))-.64,.55,.9),K=1/(Math.PI*a.AR*e),CLmax=1.45*Math.sqrt(cs)+.15;
- const fin=a.L/a.FD,CDwPk=(18/(fin*fin))*(Math.PI*a.FD*a.FD/4)/a.S*1.5+.008*cs;
- const Mdd=CL=>clamp(.87/cs-.1/(cs*cs)-CL/(10*cs*cs*cs),.55,.99);
+ const Sh=a.tail==='none'?0:a.S*a.tailA/100,Sv=a.S*a.finA/100;
+ const div=fwd?(a.mat==='cf'?1+Math.abs(a.sweep)/150:1+Math.abs(a.sweep)/35):1;
+ const wingM=a.S*(16+2.4*a.AR)*(1+Math.abs(a.sweep)/120)*m.w*div,tailM=(Sh+Sv)*22*m.w*(a.fins===2?1.08:1),fusM=Math.PI*a.FD*a.L*20*m.w,empty=wingM+tailM+fusM+600+(eng===2?250:0),payload=600;
+ const fuelCap=Math.PI*(a.FD/2)**2*a.L*.33*800+a.S*cr*.04*.5*800,fuel=Math.min(a.fuel,fuelCap),TOW=empty+engW+fuel+payload;
+ // stability: tail and fin volume coefficients
+ const yb=b/2*(1+2*lam)/(3*(1+lam)),rootLE=a.wpos*a.L-cr/2,xac=rootLE+tLE*yb+.25*mac;
+ const xt=a.L*.88,xc=a.L*.16,armT=xt-xac,armC=xac-xc;
+ const Vh=a.tail==='tail'?Sh*armT/(a.S*mac):a.tail==='canard'?Sh*armC/(a.S*mac):a.tail==='both'?Sh*.5*(armT+armC)/(a.S*mac):0;
+ const Vv=Sv*Math.cos(a.cant*rad)*(a.L*.86-xac)/(a.S*b);
+ const pitchOK=a.tail==='none'?delta:Vh>=.18&&xac<a.L*.85,yawOK=Vv>=.035;
+ const fits=[[`Engine diameter (≤ ${(a.FD*(eng===2?.48:.9)).toFixed(2)} m)`,Deng.toFixed(2)+' m',Deng<=a.FD*(eng===2?.48:.9)],[`Engine mass (≤ 40% of take-off)`,Math.round(engW).toLocaleString()+' kg',engW<=TOW*.4],[`Fuel (≤ ${Math.round(fuelCap).toLocaleString()} kg tankage)`,Math.round(a.fuel).toLocaleString()+' kg',a.fuel<=fuelCap],
+  [a.tail==='none'?'Pitch stability (tailless needs a delta: taper < 0.15, sweep ≥ 45°)':'Pitch stability (tail volume ≥ 0.18)',a.tail==='none'?(delta?'delta, elevons':'not a delta'):Vh.toFixed(2),pitchOK],['Yaw stability (fin volume ≥ 0.035)',Vv.toFixed(3),yawOK]];
+ if(fwd)fits.push(['Wing divergence (forward sweep beyond 10° needs carbon composite)',AFM[a.mat].n,a.mat==='cf'||Math.abs(a.sweep)<=10]);
+ const Swf=Math.PI*a.FD*a.L*.9,Sww=2.05*(a.S+Sh+Sv),Cf=.0032,CD0=Cf*(Swf+Sww)/a.S*1.1*(eng===2?1.08:1)*(a.fins===2?1.03:1);
+ let e=clamp(1.78*(1-.045*Math.pow(a.AR,.68))-.64,.55,.9),K=1/(Math.PI*a.AR*e),CLmax=1.45*Math.sqrt(cs)+.15;
+ if(fwd){CLmax+=.12;K*=.95}if(a.tail==='none')K*=1.12;if(a.tail==='canard')CLmax+=.1;if(a.tail==='both'){CLmax+=.15;K*=.97}if(delta)CLmax=Math.max(CLmax,1.15);
+ const fin=a.L/a.FD,CDwPk=(18/(fin*fin))*(Math.PI*a.FD*a.FD/4)/a.S*1.5+.02*Math.pow(cs,2.5)*(delta?.7:1)+(Sh+Sv)/a.S*.004;
+ const Mdd=CL=>clamp(.87/cs-.1/(cs*cs)-CL/(10*cs*cs*cs)+(delta?.03:0),.55,.99);
  const CDw=(M,CL)=>{const Mc=Mdd(CL)-.08;if(M<=Mc)return 0;if(M<1.2){const s=clamp((M-Mc)/(1.2-Mc));return CDwPk*(s*s*(3-2*s))*(1+.25*Math.sin(s*Math.PI))}return CDwPk*Math.pow(1.2/M,.5)};
  const CD=(M,CL)=>CD0*(M>1?1.15:1)+K*CL*CL+CDw(M,CL);
- const rho0=1.225,Vs=Math.sqrt(2*TOW*g/(rho0*a.S*CLmax)),b=Math.sqrt(a.AR*a.S);
- const at11=atmo(11,0),Mskin=Math.sqrt(Math.max(0,((m.Tlim)/(at11.T*.92)-1)/.2)+0),Mq=Math.sqrt(m.q*1000*2/(1.4*at11.p));
- const Mlim=Math.min(Mskin,Mq*1.6,4);
- const cst=(wingM+fusM)*1.4*m.c+cost(d)*eng*1000/1000;
- return {a,TOW,empty,engW,fuel,fuelCap,fits,CD0,K,e,CLmax,Mdd,CD,CDw,Vs,b,Mlim,Mskin,m,eng,cost:cst,wingM,fusM,payload}}
+ const rho0=1.225,Vs=Math.sqrt(2*TOW*g/(rho0*a.S*CLmax));
+ const at11=atmo(11,0),Mskin=Math.sqrt(Math.max(0,((m.Tlim)/(at11.T*.92)-1)/.2)),Mq=Math.sqrt(m.q*1000*2/(1.4*at11.p)),Mlim=Math.min(Mskin,Mq*1.6,4);
+ const cst=(wingM+fusM+tailM)*1.4*m.c+cost(d)*eng;
+ return {a,TOW,empty,engW,fuel,fuelCap,fits,CD0,K,e,CLmax,Mdd,CD,CDw,Vs,b,cr,ct,mac,tLE,sw4,Mlim,Mskin,m,eng,cost:cst,wingM,fusM,tailM,payload,Sh,Sv,Vh,Vv,stable:pitchOK&&yawOK,xac,rootLE,fwd,delta}}
+
 function perfAt(A,h,M,ab,W){const at=atmo(h,0),V=Math.max(1,M*at.a),q=.5*at.rho*V*V,CL=W*9.81/(q*A.a.S),D=q*A.a.S*A.CD(M,CL);let Th=0,ff=0;
  if(!ram(d.type)){const o=cycle(d,topN(d),T4cap(d),ab,{h,M,dT:0},S.gear);Th=Math.max(0,o.thrust)*A.eng;ff=o.fuel*A.eng;if(d.type==='turboshaft'){Th=Math.min(o.shp*745.7*.7/Math.max(V,30),o.shp*745.7*.7/30);}}
  else if(M>=minM(d)){const o=ramCycle(d,{h,M,dT:0},1,true);Th=Math.max(0,o.thrust)*A.eng;ff=o.fuel*A.eng}
@@ -1227,42 +1248,64 @@ function topSpeed(A,h,ab,W){let best=0;for(let M=.2;M<=4.01;M+=.01){const p=perf
 function afPerf(){const A=airframe(),Wm=A.TOW-A.fuel*.5,dry=topSpeed(A,11,false,Wm),wet=d.ab?topSpeed(A,11,true,Wm):dry,p=perfAt(A,5,.9,false,Wm),pw=d.ab?perfAt(A,5,.9,true,Wm):p;
  const Ps=(p.T-p.D)*p.V/(Wm*9.81),Psw=(pw.T-pw.D)*pw.V/(Wm*9.81),sl=perfAt(A,0,.2,false,A.TOW),slw=d.ab?perfAt(A,0,.2,true,A.TOW):sl;
  return {A,dry,wet,Ps,Psw,LD:p.LD,TWd:sl.T/(A.TOW*9.81),TWw:slw.T/(A.TOW*9.81)}}
-function airframeHTML(){const A=airframe(),P_=afPerf(),r=v=>Math.round(v).toLocaleString();
+function airframeHTML(){const A=airframe(),P_=afPerf(),r=v=>Math.round(v).toLocaleString(),a=d.af;
  const row=(l,v,ok)=>`<li><span>${l}</span><b class="${ok==null?'':ok?'okc':'bad'}">${ok==null?'':ok?'✓ ':'✗ '}${v}</b></li>`;
- return `<p class="lead">Design an aircraft around the engine: wing, fuselage, fuel, structure and engine mount. Everything updates live, and the flight test flies it from brake release to top speed.</p>
- <div class="two2"><div>
-  ${sec('12.1','Wing')}${sld('af.S','Wing area',8,150,1,fx(0,'m²'),'')}${sld('af.sweep','Sweep angle',0,65,1,fx(0,'°'),'')}${sld('af.AR','Aspect ratio',1.5,10,.1,fx(1),'More sweep delays the drag rise near the speed of sound but cuts lift. A long thin wing glides and turns well but is heavy and draggy when fast.')}
-  ${sec('12.2','Fuselage and fuel')}${sld('af.L','Fuselage length',5,45,.5,fx(1,'m'),'')}${sld('af.FD','Fuselage diameter',.6,5,.05,fx(2,'m'),'')}${sld('af.fuel','Fuel',200,40000,100,v=>r(v)+' kg','A long slim body has low supersonic drag. A wide one carries more fuel and bigger engines.')}
-  ${sec('12.3','Structure')}${picks('af.mat',Object.entries(AFM).map(([k,m])=>({v:k,l:m.n,d:m.d})))}
-  ${sec('12.4','Engines')}${picks('af.eng',[{v:1,l:'Single engine',d:'One engine in the fuselage. Simple and light.'},{v:2,l:'Twin engine',d:'Two side by side. Twice the thrust, each gets half the room.'}])}
+ return `<p class="lead">Design an aircraft around the engine: wing, tail, fins, fuselage, fuel, structure and engine mount. Everything updates live, and the flight test flies it from brake release to top speed.</p>
+ ${sec('12.0','Start from a frame')}<div class="picks">${FRAMES.map((f,i)=>`<button class="pick" data-frame="${i}"><b>${f.n}</b><small>${f.d}</small></button>`).join('')}</div>
+ <div class="two2" style="margin-top:8px"><div>
+  ${sec('12.1','Wing')}${sld('af.S','Wing area',8,150,1,fx(0,'m²'),'')}${sld('af.sweep','Leading-edge sweep',-45,70,1,v=>v<0?Math.abs(Math.round(v))+'° forward':Math.round(v)+'° back','Back-sweep delays the drag rise near Mach 1. Forward sweep does too, and keeps the ailerons working at high angles of attack — but the wing wants to twist off unless it is carbon composite.')}
+  ${sld('af.AR','Aspect ratio',1.5,10,.1,fx(1),'Long thin wings glide and turn well; short stubby ones are light and slick when fast.')}${sld('af.taper','Taper (tip ÷ root chord)',0,1,.02,fx(2),'0 makes a pointed delta. Low taper with sweep makes a diamond like the F-22.')}${sld('af.wpos','Wing position along the body',.3,.75,.01,v=>Math.round(v*100)+' %','Further aft suits deltas and canards. The tail needs room behind the wing to work.')}
+  ${sec('12.2','Tail')}${picks('af.tail',[{v:'tail',l:'Conventional tail',d:'Tailplane at the back. Stable and simple.'},{v:'canard',l:'Canards',d:'Foreplanes ahead of the wing. They lift instead of push down.'},{v:'both',l:'Canards + tail',d:'Three surfaces. Most lift and agility, more weight.'},{v:'none',l:'Tailless',d:'No tailplane — only works on a delta wing.'}])}
+  ${a.tail!=='none'?sld('af.tailA','Tailplane / canard area',4,40,1,v=>Math.round(v)+' % of wing','Bigger surfaces give more pitch authority, at a cost in drag and weight.')+sld('af.tailSweep','Tailplane sweep',0,65,1,fx(0,'°'),''):''}
+  ${sec('12.3','Vertical fins')}${picks('af.fins',[{v:1,l:'Single fin',d:'One fin on the centreline. Light and simple.'},{v:2,l:'Twin fins',d:'Two fins, often canted. Keeps working at high angle of attack.'}])}
+  ${sld('af.finA','Total fin area',4,40,1,v=>Math.round(v)+' % of wing','Too little and the aircraft weathervanes badly or departs.')}${a.fins===2?sld('af.cant','Fin cant',0,45,1,fx(0,'° outward'),'Canting the fins hides them from radar but each degree takes away some yaw authority.'):''}
+  ${sec('12.4','Fuselage and fuel')}${sld('af.L','Fuselage length',5,45,.5,fx(1,'m'),'')}${sld('af.FD','Fuselage diameter',.6,5,.05,fx(2,'m'),'')}${sld('af.fuel','Fuel',200,40000,100,v=>r(v)+' kg','A long slim body has low supersonic drag. A wide one carries more fuel and bigger engines.')}
+  ${sec('12.5','Structure')}${picks('af.mat',Object.entries(AFM).map(([k,m])=>({v:k,l:m.n,d:m.d})))}
+  ${sec('12.6','Engines')}${picks('af.eng',[{v:1,l:'Single engine',d:'One engine in the fuselage. Simple and light.'},{v:2,l:'Twin engine',d:'Two side by side. Twice the thrust, each gets half the room.'}])}
  </div><div>
   <div class="seg" style="margin:4px 0 10px"><button class="go" id="ftRun" ${ram(d.type)?'disabled':''}>${ft&&ft.anim?'Flying…':'Flight test this aircraft'}</button><button id="afReset">Reset airframe</button></div>
   ${ram(d.type)?'<p class="help">Ramjet and scramjet aircraft need a rocket booster to get going, so they can\'t take off for a flight test. Try a turbo engine.</p>':''}
   ${ftResultsHTML()}
-  ${sec('12.5','Engine fit')}<ul class="kv">${A.fits.map(f=>row(f[0],f[1],f[2])).join('')}</ul>
-  ${sec('12.6','Mass')}<ul class="kv">${row('Airframe, empty',r(A.empty)+' kg')}${row('Engines',r(A.engW)+' kg')}${row('Fuel',r(A.fuel)+' kg')}${row('Take-off mass',r(A.TOW)+' kg')}${row('Wing loading',r(A.TOW/A.a.S)+' kg/m²')}${row('Thrust/weight',P_.TWd.toFixed(2)+' dry'+(d.ab?' · '+P_.TWw.toFixed(2)+' reheat':''))}${row('Span · stall speed',A.b.toFixed(1)+' m · '+Math.round(A.Vs*1.944)+' kt')}${row('Cost, airframe + engines',money(A.cost))}</ul>
-  ${sec('12.7','Aerodynamics')}<ul class="kv">${row('Zero-lift drag CD0',A.CD0.toFixed(4))}${row('Induced drag K · Oswald e',A.K.toFixed(3)+' · '+A.e.toFixed(2))}${row('Max lift CL · L/D at M0.9 5 km',A.CLmax.toFixed(2)+' · '+P_.LD.toFixed(1))}${row('Drag-rise Mach (CL 0.2)',A.Mdd(.2).toFixed(2))}</ul>
-  ${sec('12.8','Performance with this engine')}<ul class="kv">${row('Supercruise (above Mach 1 dry)',P_.dry>1?'Yes, Mach '+P_.dry.toFixed(2):'No',P_.dry>1)}${row('Top speed at 11 km',P_.wet?'Mach '+Math.min(P_.wet,A.Mlim).toFixed(2)+(d.ab?' with reheat':''):'Can\'t hold level flight',P_.wet>0)}${row('Climb rate, M0.9 at 5 km',Math.round(P_.Ps)+' m/s'+(d.ab?' · '+Math.round(P_.Psw)+' reheat':''))}${row('Load limit · dynamic pressure',A.m.g+' g · '+A.m.q+' kPa')}${row('Skin-heat speed limit',`Mach ${A.Mskin.toFixed(1)} · ${A.m.Tlim-273} °C`)}</ul>
+  ${sec('12.7','Fit and stability')}<ul class="kv">${A.fits.map(f=>row(f[0],f[1],f[2])).join('')}</ul>
+  ${sec('12.8','Mass')}<ul class="kv">${row('Wing · tail and fins',r(A.wingM)+' · '+r(A.tailM)+' kg')}${row('Airframe, empty',r(A.empty)+' kg')}${row('Engines',r(A.engW)+' kg')}${row('Fuel',r(A.fuel)+' kg')}${row('Take-off mass',r(A.TOW)+' kg')}${row('Wing loading',r(A.TOW/a.S)+' kg/m²')}${row('Thrust/weight',P_.TWd.toFixed(2)+' dry'+(d.ab?' · '+P_.TWw.toFixed(2)+' reheat':''))}${row('Span · stall speed',A.b.toFixed(1)+' m · '+Math.round(A.Vs*1.944)+' kt')}${row('Cost, airframe + engines',money(A.cost))}</ul>
+  ${sec('12.9','Aerodynamics')}<ul class="kv">${row('Quarter-chord sweep',Math.round(A.sw4*180/Math.PI)+'°'+(A.fwd?' (forward)':'')+(A.delta?' · delta':''))}${row('Zero-lift drag CD0',A.CD0.toFixed(4))}${row('Induced drag K · Oswald e',A.K.toFixed(3)+' · '+A.e.toFixed(2))}${row('Max lift CL · L/D at M0.9 5 km',A.CLmax.toFixed(2)+' · '+P_.LD.toFixed(1))}${row('Drag-rise Mach (CL 0.2)',A.Mdd(.2).toFixed(2))}</ul>
+  ${sec('12.10','Performance with this engine')}<ul class="kv">${row('Supercruise (above Mach 1 dry)',P_.dry>1?'Yes, Mach '+P_.dry.toFixed(2):'No',P_.dry>1)}${row('Top speed at 11 km',P_.wet?'Mach '+Math.min(P_.wet,A.Mlim).toFixed(2)+(d.ab?' with reheat':''):'Can\'t hold level flight',P_.wet>0)}${row('Climb rate, M0.9 at 5 km',Math.round(P_.Ps)+' m/s'+(d.ab?' · '+Math.round(P_.Psw)+' reheat':''))}${row('Load limit · dynamic pressure',A.m.g+' g · '+A.m.q+' kPa')}${row('Skin-heat speed limit',`Mach ${A.Mskin.toFixed(1)} · ${A.m.Tlim-273} °C`)}</ul>
  </div></div>`}
-function drawPlan(g,W,H){g.fillStyle='#0f1311';g.fillRect(0,0,W,H);grid(g,W,H);const A=airframe(),a=A.a,sw=a.sweep*Math.PI/180,b=A.b;const sc=Math.min((W-60)/a.L,(H-60)/b),cx=W/2,cy=H/2,X=v=>cx+(v-a.L/2)*sc;
- const lam=.3,cr=2*a.S/(b*(1+lam)),ct=cr*lam,xr=a.L*.42,LEtip=xr+Math.tan(sw)*b/2;
- g.fillStyle='rgba(143,182,216,.22)';g.strokeStyle='#bcd3e6';g.lineWidth=1.5;
- for(const s of[-1,1]){g.beginPath();g.moveTo(X(xr),cy);g.lineTo(X(LEtip),cy+s*b/2*sc);g.lineTo(X(LEtip+ct),cy+s*b/2*sc);g.lineTo(X(xr+cr),cy);g.closePath();g.fill();g.stroke()}
- const tb=b*.38,tc=cr*.45,tx=a.L*.82;for(const s of[-1,1]){g.beginPath();g.moveTo(X(tx),cy);g.lineTo(X(tx+Math.tan(sw)*tb/2),cy+s*tb/2*sc);g.lineTo(X(tx+Math.tan(sw)*tb/2+tc*.4),cy+s*tb/2*sc);g.lineTo(X(Math.min(a.L,tx+tc)),cy);g.closePath();g.fill();g.stroke()}
- g.fillStyle='#1e2a33';g.beginPath();g.moveTo(X(0),cy);g.quadraticCurveTo(X(a.L*.15),cy-a.FD/2*sc,X(a.L*.3),cy-a.FD/2*sc);g.lineTo(X(a.L*.97),cy-a.FD/2*sc*.85);g.lineTo(X(a.L),cy-a.FD/2*sc*.6);g.lineTo(X(a.L),cy+a.FD/2*sc*.6);g.lineTo(X(a.L*.97),cy+a.FD/2*sc*.85);g.lineTo(X(a.L*.3),cy+a.FD/2*sc);g.quadraticCurveTo(X(a.L*.15),cy+a.FD/2*sc,X(0),cy);g.fill();g.stroke();
+
+function drawPlan(g,W,H){g.fillStyle='#0f1311';g.fillRect(0,0,W,H);grid(g,W,H);const A=airframe(),a=A.a,b=A.b,rad=Math.PI/180;
+ const sc=Math.min((W-60)/a.L,(H-50)/Math.max(b,a.FD*2)),cx=W/2,cy=H/2+6,X=v=>cx+(v-a.L/2)*sc,Y=v=>cy+v*sc;
+ const surf=(rootLE,cr,span,sweep,taper,col,stroke)=>{const ct=cr*taper,tip=rootLE+Math.tan(sweep*rad)*span;g.fillStyle=col;g.strokeStyle=stroke;g.lineWidth=1.5;
+  for(const s of[-1,1]){g.beginPath();g.moveTo(X(rootLE),Y(0));g.lineTo(X(tip),Y(s*span));g.lineTo(X(tip+ct),Y(s*span));g.lineTo(X(rootLE+cr),Y(0));g.closePath();g.fill();g.stroke()}};
+ // tailplane / canards
+ if(a.tail!=='none'){const Sh=A.Sh/(a.tail==='both'?2:1),ARt=3,bt=Math.sqrt(ARt*Sh),crt=2*Sh/(bt*1.35);
+  if(a.tail==='tail'||a.tail==='both')surf(a.L*.86-crt*.6,crt,bt/2,a.tailSweep,.35,'rgba(143,182,216,.2)','#bcd3e6');
+  if(a.tail==='canard'||a.tail==='both')surf(a.L*.14,crt,bt/2,a.tailSweep,.35,'rgba(143,182,216,.2)','#bcd3e6')}
+ // wing
+ surf(A.rootLE,A.cr,b/2,a.sweep,a.taper,'rgba(143,182,216,.24)','#bcd3e6');
+ // fuselage
+ g.fillStyle='#1e2a33';g.strokeStyle='#bcd3e6';g.lineWidth=1.5;const r=a.FD/2;g.beginPath();g.moveTo(X(0),Y(0));g.quadraticCurveTo(X(a.L*.12),Y(-r),X(a.L*.28),Y(-r));g.lineTo(X(a.L*.96),Y(-r*.85));g.lineTo(X(a.L),Y(-r*.6));g.lineTo(X(a.L),Y(r*.6));g.lineTo(X(a.L*.96),Y(r*.85));g.lineTo(X(a.L*.28),Y(r));g.quadraticCurveTo(X(a.L*.12),Y(r),X(0),Y(0));g.fill();g.stroke();
+ g.fillStyle='rgba(94,224,240,.25)';g.beginPath();g.ellipse(X(a.L*.17),Y(0),a.L*.06*sc,r*.45*sc,0,0,7);g.fill();
+ // engines
  const el=Math.min(a.L*.35,d.D*4.5+1),ed=Math.min(a.FD*.9,d.D*1.08);g.strokeStyle=A.fits[0][2]?'#5ee0f0':'#ff6b5e';g.fillStyle='rgba(94,224,240,.18)';
- (a.eng===2?[-1,1]:[0]).forEach(s=>{const oy=s*a.FD*.24*sc,h=(a.eng===2?Math.min(ed,a.FD*.46):ed)*sc;g.beginPath();g.rect(X(a.L-el-.2),cy+oy-h/2,el*sc,h);g.fill();g.stroke()});
- g.strokeStyle='#e8b923';g.setLineDash([5,4]);const fl=clamp(A.fuel/A.fuelCap,.05,1)*a.L*.45;g.strokeRect(X(a.L*.22),cy-a.FD*.3*sc,fl*sc,a.FD*.6*sc);g.setLineDash([]);
- T(g,`Wing ${a.S} m² · sweep ${a.sweep}° · AR ${a.AR.toFixed(1)} · ${AFM[a.mat].n}`,12,20,12,'#e8b923','left');T(g,`Span ${b.toFixed(1)} m · length ${a.L} m`,12,H-10,12,'#9ba39d','left')}
+ (a.eng===2?[-1,1]:[0]).forEach(s=>{const oy=s*a.FD*.24,h=(a.eng===2?Math.min(ed,a.FD*.46):ed);g.beginPath();g.rect(X(a.L-el-.2),Y(oy-h/2),el*sc,h*sc);g.fill();g.stroke()});
+ // fins seen from above (cant shows as width)
+ const finH=Math.sqrt(A.Sv/a.fins*1.4),finC=A.Sv/a.fins/finH,fx0=a.L*.97-finC*1.3;g.fillStyle='rgba(232,185,35,.35)';g.strokeStyle='#e8b923';
+ (a.fins===2?[-1,1]:[0]).forEach(s=>{const y0=s*r*.75,w=Math.max(.06,finH*Math.sin(a.cant*rad))*s||.06,sw_=Math.tan(Math.max(a.tailSweep,30)*rad)*finH*Math.cos(a.cant*rad);g.beginPath();g.moveTo(X(fx0),Y(y0));g.lineTo(X(fx0+sw_),Y(y0+(a.fins===2?w:0)-(a.fins===1?.06:0)));g.lineTo(X(fx0+sw_+finC*.4),Y(y0+(a.fins===2?w:0)+(a.fins===1?.06:0)));g.lineTo(X(fx0+finC),Y(y0));g.closePath();g.fill();g.stroke()});
+ // fuel and centre of lift
+ g.strokeStyle='#e8b923';g.setLineDash([5,4]);const fl=clamp(A.fuel/A.fuelCap,.05,1)*a.L*.4;g.strokeRect(X(a.L*.24),Y(-r*.55),fl*sc,r*1.1*sc);g.setLineDash([]);
+ g.fillStyle=A.stable?'#63e08b':'#ff6b5e';g.beginPath();g.arc(X(A.xac),Y(0),5,0,7);g.fill();
+ T(g,`Wing ${a.S} m² · ${a.sweep<0?Math.abs(a.sweep)+'° forward':a.sweep+'°'} · AR ${a.AR.toFixed(1)} · ${a.tail==='none'?'tailless':a.tail==='both'?'canard + tail':a.tail} · ${a.fins===2?'twin fins':'single fin'}`,12,20,12,'#e8b923','left');
+ T(g,`Span ${b.toFixed(1)} m · length ${a.L} m · ${AFM[a.mat].n}`,12,H-10,12,'#9ba39d','left');T(g,A.stable?'● lift centre · stable':'● lift centre · UNSTABLE',W-12,H-10,12,A.stable?'#63e08b':'#ff6b5e','right')}
+
 function drawDrag(g,W,H){g.fillStyle='#0f1311';g.fillRect(0,0,W,H);grid(g,W,H);const A=airframe(),X=M=>40+(M-.3)/(2.7)*(W-60);let mx=.01;const pts=[];for(let M=.3;M<=3.001;M+=.02){const v=A.CD0*(M>1?1.15:1)+A.CDw(M,.2);pts.push([M,v]);mx=Math.max(mx,v)}
  const Y=v=>H-30-v/(mx*1.15)*(H-50);g.strokeStyle='#5ee0f0';g.lineWidth=2.5;g.beginPath();pts.forEach(([m,v],i)=>i?g.lineTo(X(m),Y(v)):g.moveTo(X(m),Y(v)));g.stroke();
  const md=A.Mdd(.2);g.strokeStyle='#ff8a3d';g.setLineDash([5,4]);g.beginPath();g.moveTo(X(md),10);g.lineTo(X(md),H-30);g.stroke();g.setLineDash([]);T(g,'drag rise',X(md)+6,22,12,'#ff8a3d','left');
  [.5,1,1.5,2,2.5,3].forEach(m=>T(g,'M'+m,X(m),H-10,11,'#9ba39d'));T(g,'CD '+(mx).toFixed(3),8,16,11,'#9ba39d','left')}
 let ft=null;
 function runFlightTest(){if(ram(d.type))return;const A=airframe(),g=9.81,pts=[];let W=A.TOW,fuel=A.fuel,t=0,h=0,M=0,x_=0,V=0,phase='Take-off roll',res={};
- const at0=atmo(0,0),Vlof=A.Vs*1.2,ab=d.ab;
+ const at0=atmo(0,0),Vlof=A.Vs*1.2,ab=d.ab;if(!A.stable)res.fail=A.fits.slice(3).find(f=>!f[2])[0].startsWith('Pitch')?'Departed in pitch right after lift-off — needs more tail or a delta wing':A.fits.slice(3).find(f=>!f[2])[0].startsWith('Yaw')?'Departed in yaw — needs more fin area':'Wing twisted off in the first turn — forward sweep needs carbon composite';
  // take-off roll
- while(V<Vlof&&t<240){const p=perfAt(A,0,Math.max(V/at0.a,.01),ab,W),qS=.5*at0.rho*V*V*A.a.S,Dg=qS*(A.CD0+A.K*.04+.012),acc=(p.T-Dg-.03*Math.max(0,W*g-qS*.4))/W;if(acc<=.05){res.fail='Not enough thrust to take off';break}V+=acc;x_+=V;fuel-=p.ff;W-=p.ff;t+=1;pts.push([t,0,V/at0.a,'Take-off roll'])}
+ while(!res.fail&&V<Vlof&&t<240){const p=perfAt(A,0,Math.max(V/at0.a,.01),ab,W),qS=.5*at0.rho*V*V*A.a.S,Dg=qS*(A.CD0+A.K*.04+.012),acc=(p.T-Dg-.03*Math.max(0,W*g-qS*.4))/W;if(acc<=.05){res.fail='Not enough thrust to take off';break}V+=acc;x_+=V;fuel-=p.ff;W-=p.ff;t+=1;pts.push([t,0,V/at0.a,'Take-off roll'])}
  res.roll=x_;
  if(!res.fail){// climb to 11 km at best of M0.6–0.9
   const Mc=clamp(topSpeed(A,5,false,W)*.85,.45,.9);let stall=0;

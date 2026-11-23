@@ -40,7 +40,14 @@ A step-by-step build across 13 sheets. Each sheet has a live cutaway with that p
 - **Rotor:** single, twin or triple spool, disc material (sets the speed limit) and rotor mass.
 - **FADEC:** fitted or not, idle speed, and a throttle map you drag into shape.
 - **Conditions.**
-- **Airframe:** wing, fuselage, fuel, structure, single or twin engines, fit checks, mass, drag polar, performance, and an animated flight test (take-off roll, climb to 11 km, top speed, range).
+- **Airframe:**
+  - Wing: area, sweep (from 45° forward to 70° back), aspect ratio, taper (down to a pure delta) and position along the body.
+  - Tail: conventional tail, canards, canards plus tail, or tailless delta, with tail area and sweep.
+  - Fins: single or twin, with fin area and cant angle.
+  - Fuselage, fuel, structure (forward sweep needs carbon composite) and single or twin engines.
+  - Checks for engine fit plus pitch, yaw and wing-twist stability, then mass, drag polar and performance figures.
+  - Frame presets in F-22, F-35, Mirage and Su-47 style.
+  - An animated flight test: take-off roll, climb to 11 km, top speed and range. An unstable design departs instead.
 - **Review:** a list of design problems.
 
 ### Helicopter turboshaft
