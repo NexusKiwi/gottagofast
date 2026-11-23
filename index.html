@@ -1017,7 +1017,7 @@ const STEPS=[{id:'id',n:'Identity'},{id:'layout',n:'Layout'},{id:'comp',n:'Compr
  {id:'rotor',n:'Rotor',hl:z=>[z.comp[0],z.turb[1]],turbo:1},{id:'fadec',n:'FADEC'},{id:'cond',n:'Conditions'},{id:'af',n:'Airframe'},{id:'review',n:'Review'}];
 let stepI=0;const FMT={};
 const fx=(n,u='')=>v=>(+v).toFixed(n)+(u?' '+u:'');
-const getK=k=>k.startsWith('af.')?d.af[k.slice(3)]:k.startsWith('fc.')?fc[k.slice(3)]:d[k];
+const getK=k=>k==='fprAuto'?d.fpr===0:k.startsWith('af.')?d.af[k.slice(3)]:k.startsWith('fc.')?fc[k.slice(3)]:d[k];
 function setK(k,v){if(k.startsWith('af.'))d.af[k.slice(3)]=v;else if(k.startsWith('fc.'))setFC({[k.slice(3)]:v});else d[k]=v;designChanged(k)}
 function sld(k,l,min,max,st,fmt,help){FMT[k]={fmt,min,max,st};const v=getK(k);return `<div class="ctl"><div class="cl"><span>${l}</span><b id="v_${k.replace('.','_')}">${fmt(v)}</b></div><div class="sr"><button class="nud" data-n="${k}" data-d="-1" aria-label="Decrease ${l}">−</button><input type="range" data-k="${k}" min="${min}" max="${max}" step="${st}" value="${v}" aria-label="${l}"><button class="nud" data-n="${k}" data-d="1" aria-label="Increase ${l}">+</button></div>${help?`<p class="help">${help}</p>`:''}</div>`}
 function picks(k,opts){const cur=getK(k);return `<div class="picks">${opts.map(o=>`<button class="pick" data-pk="${k}" data-pv="${o.v}" aria-pressed="${String(cur)===String(o.v)}"><b>${o.l}</b><small>${o.d||''}</small></button>`).join('')}</div>`}
@@ -1043,12 +1043,12 @@ function sheetHTML(){const s=STEPS[stepI].id,t=d.type,isR=ram(t);
   ${sec('1.5','Build code')}<textarea id="code" aria-label="Build code">${enc(d)}</textarea><div class="seg" style="margin-top:8px"><button id="bCopy">Copy code</button><button id="bLoadCode">Load code</button><span class="note" id="codeMsg" style="align-self:center"></span></div>`;
  case 'layout':return `<p class="lead">Pick the kind of engine, then size its inlet. More inlet area swallows more air: more thrust, more weight and more cost.</p>
   ${sec('2.1','Engine type')}${picks('type',Object.keys(TYPES).map(k=>({v:k,l:TYPES[k],d:TYPEDESC[k]})))}
-  ${sec('2.2','Inlet diameter')}${sld('D','Inlet / fan diameter',.08,3.6,.01,fx(2,'m'),'Airflow grows with the square of the diameter. Fans can be huge; small jets and turboshafts are a fraction of a metre.')}
+  ${sec('2.2','Inlet diameter')}${sld('D','Inlet / fan diameter',.08,3.6,.005,fx(3,'m'),'Airflow grows with the square of the diameter. Fans can be huge; small jets and turboshafts are a fraction of a metre.')}
   ${t!=='scramjet'?sec('2.3','Inlet type')+picks('inlet',[{v:'pitot',l:'Fixed pitot',d:'Simple and light. Loses a lot to shock waves above Mach 1.5.'},{v:'ramp',l:'Variable ramp',d:'Heavier, costly. Keeps pressure recovery high at supersonic speed.'}]):''}`;
  case 'comp':if(isR)return na('Ramjets and scramjets have no compressor: the inlet compresses the air using flight speed alone. That is why they need Mach '+minM(d)+' or more to light.');
   return `<p class="lead">The compressor squeezes the air before it burns. A higher pressure ratio saves fuel. More stages share the work, so each blade row is less likely to stall.</p>
   ${sld('stages','Compressor stages',0,20,1,v=>+v?String(v):'Auto ('+autoStages(d)+')','Leave on auto for a sensible count. Fewer stages are lighter, but each one works harder and the surge margin shrinks.')}
-  ${sld('opr','Overall pressure ratio',2,55,.5,fx(1,': 1'),'Higher ratio saves fuel and makes more power, but heats the air and needs more stages.')}
+  ${sld('opr','Overall pressure ratio',2,55,.1,fx(1,': 1'),'Higher ratio saves fuel and makes more power, but heats the air and needs more stages.')}
   ${sld('ec','Compressor efficiency',.78,.92,.005,v=>(v*100).toFixed(1)+' %','Better blades waste less work. Each point above 88% costs more to make.')}
   ${sld('bleed','Customer bleed air',0,10,.5,fx(1,'%'),'Air taken off for the cabin and anti-ice. It costs thrust; some contracts need it.')}
   ${togK('vigv','Variable inlet guide vanes','Adjustable vanes ahead of the first stage. They add stall margin and keep part-power efficiency up.')}`;
@@ -1057,12 +1057,12 @@ function sheetHTML(){const s=STEPS[stepI].id,t=d.type,isR=ram(t);
   if(t==='turboprop')return `<p class="lead">The turbine drives a propeller through a reduction gearbox. A bigger prop moves more air gently: more static thrust per horsepower.</p>${sld('prop','Propeller diameter',1,5,.05,fx(2,'m'),'Static thrust grows with prop disc area. Pitch gears in the test cell trade grip for power absorbed.')}`;
   if(t==='turboshaft')return `<p class="lead">A free power turbine drives the helicopter rotor through a gearbox. The governor in the FADEC holds the rotor at 100% while the pilot moves the collective.</p>${na('Rated shaft power comes from the core. Raise the pressure ratio, turbine temperature or inlet size to get more.')}`;
   return `<p class="lead">Bypass air goes around the core. A little bypass makes a fighter engine; a lot makes a quiet, frugal airliner engine.</p>
-  ${sld('bpr','Bypass ratio',.2,14,.1,fx(1,': 1'),'Around 0.5 is a fighter, 5 a business jet, 10 or more an airliner.')}
+  ${sld('bpr','Bypass ratio',.1,14,.01,fx(2,': 1'),'Around 0.5 is a fighter, 5 a business jet, 10 or more an airliner.')}
   ${togK('fprAuto','Auto-match fan pressure ratio','Picks the fan pressure ratio that gives the most thrust for this core.')}
-  ${d.fpr>0?sld('fpr','Fan pressure ratio',1.15,4,.05,fx(2,': 1'),'Low ratios move a lot of air gently and use little fuel. High ratios make a fast, loud stream — and too high starves the core.'):''}`;
+  ${d.fpr>0?sld('fpr','Fan pressure ratio',1.15,4,.01,fx(2,': 1'),'Low ratios move a lot of air gently and use little fuel. High ratios make a fast, loud stream — and too high starves the core.'):''}`;
  case 'comb':if(isR)return `<p class="lead">The burner adds heat to the rammed air. The liner material sets how hot it can run.</p>${sld('cool','Liner cooling air',0,20,1,fx(0,'%'),'Each percent buys about 12 K of extra liner temperature.')}${sld('dpb','Burner pressure loss',2,10,.5,fx(1,'%'),'Flameholders and mixing cost pressure. Less loss, more thrust.')}`;
   return `<p class="lead">Hotter gas makes more thrust from every kilo of air, until the turbine metal gives up. Cooling air lets the blades live hotter, at a cost in efficiency.</p>
-  ${sld('tit','Turbine inlet temperature',1000,2100,10,v=>Math.round(v)+' K · '+Math.round(v-273)+' °C','Set it above the blade limit and the FADEC will hold the engine back — or, with no FADEC, cook the turbine.')}
+  ${sld('tit','Turbine inlet temperature',1000,2100,5,v=>Math.round(v)+' K · '+Math.round(v-273)+' °C','Set it above the blade limit and the FADEC will hold the engine back — or, with no FADEC, cook the turbine.')}
   ${sld('dpb','Combustor pressure loss',2,10,.5,fx(1,'%'),'A shorter, rougher burner is lighter but wastes pressure.')}
   ${sld('cool','Blade cooling air',0,20,1,fx(0,'%'),'Each percent lets the blades live about 12 K hotter.')}`;
  case 'turb':if(isR)return `<p class="lead">No turbine, but the material still sets how hot the burner liner can run.</p>${sec('6.1','Hot-section material')}${matPicks()}`;
@@ -1135,7 +1135,7 @@ office.addEventListener('change',e=>{const el=e.target;if(el.dataset.tk){const k
 office.addEventListener('click',e=>{const b=e.target.closest('button,a');if(!b)return;
  if(b.dataset.step!=null){stepI=+b.dataset.step;renderSheet();return}
  if(b.id==='stPrev'){stepI=Math.max(0,stepI-1);renderSheet();return}if(b.id==='stNext'){if(stepI<STEPS.length-1){stepI++;renderSheet()}else location.hash='contracts';return}
- if(b.dataset.n){const k=b.dataset.n,f=FMT[k],v=clamp(+getK(k)+(+b.dataset.d)*f.st,f.min,f.max);setK(k,Math.round(v/f.st)*f.st);renderSheet();return}
+ if(b.dataset.n){const k=b.dataset.n,f=FMT[k],v=clamp(+getK(k)+(+b.dataset.d)*f.st,f.min,f.max);setK(k,+(Math.round(v/f.st)*f.st).toFixed(4));renderSheet();return}
  if(b.dataset.pk){const k=b.dataset.pk,cur=getK(k),v=typeof cur==='number'?+b.dataset.pv:b.dataset.pv;if(k==='type'&&v!==d.type){const base=PRESETS.find(p=>p.type===v);d=norm({...base,name:d.name,notes:d.notes,af:d.af});designChanged('type')}else setK(k,v);renderSheet();return}
  if(b.dataset.preset!=null){d=norm(PRESETS[b.dataset.preset]);designChanged('type');S.gear=2;if(ram(d.type)&&fc.M<minM(d))setFC({M:d.type==='scramjet'?6:3,h:d.type==='scramjet'?20:10});renderSheet();return}
  if(b.id==='toFan'){d=norm({...PRESETS.find(p=>p.name==='Bizjet cruiser'),name:d.name,notes:d.notes,af:d.af});designChanged('type');renderSheet();return}
@@ -1159,15 +1159,15 @@ function drawOffice(){const s=STEPS[stepI];
  const b=fitC(ofDia);if(b){b.g.fillStyle='#0f1311';b.g.fillRect(0,0,b.W,b.H);grid(b.g,b.W,b.H);dia(b.g,b.W,b.H,s.id)}}
 function grid(g,W,H){g.strokeStyle='rgba(232,185,35,.06)';g.lineWidth=1;for(let i=0;i<W;i+=24){g.beginPath();g.moveTo(i,0);g.lineTo(i,H);g.stroke()}for(let j=0;j<H;j+=24){g.beginPath();g.moveTo(0,j);g.lineTo(W,j);g.stroke()}}
 const T=(g,txt,x_,y,sz=14,col='#ebe8df',al='center',f='"Share Tech Mono",monospace')=>{g.fillStyle=col;g.font=`${sz}px ${f}`;g.textAlign=al;g.fillText(txt,x_,y)};
-function bars(g,W,H,vals,cols,labels,top,redAt){const n=vals.length,pad=30,bw=Math.min(70,(W-pad*2)/n*.7),gap=(W-pad*2-bw*n)/Math.max(1,n-1||1),mx=Math.max(...vals,redAt||0)*1.15||1,bh=H-70;
- vals.forEach((v,i)=>{const px=pad+i*(bw+(n>1?gap:0))+(n===1?(W-pad*2-bw)/2:0),h=bh*v/mx;g.fillStyle=cols[i]||cols[0];g.beginPath();g.roundRect(px,H-36-h,bw,h,4);g.fill();if(labels)T(g,labels[i],px+bw/2,H-16,12,'#9ba39d')});
+function bars(g,W,H,vals,cols,labels,top,redAt,mid){const n=vals.length,pad=30,bw=Math.min(70,(W-pad*2)/n*.7),gap=(W-pad*2-bw*n)/Math.max(1,n-1||1),mx=Math.max(...vals,redAt||0)*1.15||1,bh=H-70;
+ vals.forEach((v,i)=>{const px=pad+i*(bw+(n>1?gap:0))+(n===1?(W-pad*2-bw)/2:0),h=bh*v/mx,y0=mid?(H+4)/2-h/2:H-36-h;g.fillStyle=cols[i]||cols[0];g.beginPath();g.roundRect(px,y0,bw,h,4);g.fill();if(labels)T(g,labels[i],px+bw/2,H-16,12,'#9ba39d')});
  if(redAt){const y=H-36-bh*redAt/mx;g.strokeStyle='#ff3b2f';g.setLineDash([8,6]);g.lineWidth=2;g.beginPath();g.moveTo(pad-10,y);g.lineTo(W-pad+10,y);g.stroke();g.setLineDash([])}if(top)T(g,top,W/2,22,15,'#e8b923')}
 function dia(g,W,H,id){const t=d.type,o=ram(t)?null:cycle(d,1,T4cap(d),false,SL_,S.gear);
  if(id==='id'||id==='review'){T(g,`${(designMax().wet/1e3).toFixed(1)} kN · ${Math.round(weight(d)).toLocaleString()} kg · ${money(cost(d))}`,W/2,H/2+5,18,'#ffd9a8');T(g,TYPES[t]+(d.ab?' · afterburner':'')+(d.rev?' · reverser':''),W/2,H/2+30,13,'#9ba39d');return}
  if(id==='layout'){const sc=(H-60)/Math.max(1.9,d.D*1.15),px=W*.62,cy=H/2+5,r=d.D/2*sc;g.strokeStyle='#8fb6d8';g.lineWidth=3;g.beginPath();g.arc(px,cy,r,0,7);g.stroke();g.fillStyle='rgba(143,182,216,.12)';g.fill();
   const ph=1.8*sc,mx_=W*.2,base=cy+Math.max(r,ph/2);g.fillStyle='#e8b923';g.beginPath();g.arc(mx_,base-ph+ph*.07,ph*.07,0,7);g.fill();g.fillRect(mx_-ph*.06,base-ph*.86,ph*.12,ph*.45);g.fillRect(mx_-ph*.05,base-ph*.42,ph*.04,ph*.42);g.fillRect(mx_+ph*.01,base-ph*.42,ph*.04,ph*.42);
   T(g,'1.8 m person',mx_,base+16,12,'#9ba39d');T(g,d.D.toFixed(2)+' m inlet · '+mdotD(d).toFixed(mdotD(d)<10?1:0)+' kg/s',px,Math.min(H-8,cy+r+20),14,'#ffd9a8');return}
- if(id==='comp'){if(!o)return dia(g,W,H,'id');const n=clamp(nStages(d),1,20),spr=stagePR(d),vals=Array.from({length:n},(_,i)=>1-.45*i/n);bars(g,W,H,vals,[d.spools>=2?'#9fb2c0':'#8fb6d8'],null,`${spr.toFixed(2)} : 1 per stage · surge margin ${Math.round(surgeMargin(d,SL_)*100)}%`);return}
+ if(id==='comp'){if(!o)return dia(g,W,H,'id');const n=clamp(nStages(d),1,20),spr=stagePR(d),vals=Array.from({length:n},(_,i)=>1-.45*i/n);const lp=d.spools>=2?Math.round(n*.38):0;bars(g,W,H,vals,vals.map((_,i)=>i<lp?'#a9bccb':'#7fa6c8'),null,`${spr.toFixed(2)} : 1 per stage · surge margin ${Math.round(surgeMargin(d,SL_)*100)}%${lp?' · LP / HP':''}`,0,1);return}
  if(id==='fan'){if(t==='turbofan'){const tot=mdotD(d),core=tot/(1+d.bpr),byp=tot-core,w=W-60;g.fillStyle='#d9862a';g.fillRect(30,H/2-18,w*core/tot,36);g.fillStyle='#8fb6d8';g.fillRect(30+w*core/tot,H/2-18,w*byp/tot,36);
    T(g,`Core ${core.toFixed(0)} kg/s`,30,H/2-30,13,'#ffb36b','left');T(g,`Bypass ${byp.toFixed(0)} kg/s`,W-30,H/2-30,13,'#8fb6d8','right');T(g,`Fan pressure ratio ${o.fpr.toFixed(2)}${d.fpr>0?'':' (auto)'}${o.starve?' · core starved':''}`,W/2,H/2+44,14,o.starve?'#ff6b5e':'#ffd9a8');return}
   if(t==='turboprop'){const r=Math.min(H*.4,d.prop/5*H*.45);g.strokeStyle='#8fb6d8';g.lineWidth=2;g.beginPath();g.ellipse(W/2,H/2,r*.15,r,0,0,7);g.stroke();T(g,`${Math.round(o.shp).toLocaleString()} hp · ${(o.thrust/1e3).toFixed(1)} kN static`,W/2,H-12,14,'#ffd9a8');return}
