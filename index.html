@@ -5,415 +5,901 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Gotta Go Fast — Engine Test Cell</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Big+Shoulders+Stencil+Display:wght@800&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-/* VOICE: an engine test cell — industrial, precise, a bit loud.
-   IDEA: the control room window: engine on its thrust stand, the console beside it.
-   PICTURE: live cutaway of the engine on the stand with heat-coloured core and plume.
-   COLOUR and TYPE: oil-green concrete, bare steel, flame orange accent; Barlow Condensed + Barlow.
-   LAYOUT: test cell + console first screen, design office and dyno sheet below. */
-:root{color-scheme:light dark;
---bg:light-dark(#e7eae4,#121c19);--panel:light-dark(#f6f7f3,#1a2723);--ink:light-dark(#14211d,#e4ebe6);--mute:light-dark(#5b6a64,#93a49d);
---line:light-dark(#c9d0c9,#2c3d37);--cell:light-dark(#cfd6cf,#0c1412);--steel:light-dark(#8d9b97,#7e908b);--hot:#ff6a1a;--warn:#e5432f;--ok:light-dark(#2f7d4f,#5fcf8a)}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+/* VOICE: gritty industrial — a concrete engine test cell at night, loud and hot.
+   IDEA: the control room: blast window onto the bay, steel console with dials and annunciators.
+   PICTURE: live cutaway engine on its stand under floodlights, plume roaring into the exhaust collector.
+   COLOUR and TYPE: wet concrete greys, hazard yellow trim, flame orange; Big Shoulders (stencil) + Barlow.
+   LAYOUT: bay full width, console beneath, flight condition, then tabbed design office / contracts / envelope / dyno. */
+:root{color-scheme:dark;--bg:#121413;--plate:#232826;--plate2:#2c322f;--ink:#ebe8df;--mute:#9ba39d;--line:#3b433f;--hz:#e8b923;--hot:#ff6a1a;--red:#ff3b2f;--grn:#63e08b;--amb:#ffb02e}
 *{box-sizing:border-box;min-width:0}[hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Barlow,system-ui,sans-serif;overflow-x:clip}
-h1,h2,h3{font-family:"Barlow Condensed",sans-serif;font-weight:700;line-height:1.05;margin:0;text-wrap:balance}
-h1{font-size:clamp(32px,4vw,46px)}h2{font-size:28px;margin-bottom:12px}h3{font-size:19px;margin:0 0 8px}
-.band{padding:clamp(18px,3vw,40px) max(4vw,14px)}.wrap{max-width:1320px;margin:0 auto}
-header.band{padding-bottom:10px}header p{margin:4px 0 0;color:var(--mute)}
-.cell{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;padding-top:6px}
-.fig{position:relative;min-height:420px;border-radius:10px;overflow:hidden;background:var(--cell);border:1px solid var(--line)}
-.fig>canvas{position:absolute;inset:0;width:100%;height:100%}
-.status{position:absolute;left:12px;top:10px;font:700 20px "Barlow Condensed",sans-serif;padding:2px 10px;border-radius:6px;background:color-mix(in srgb,var(--panel) 80%,transparent)}
-.status.bad{color:#fff;background:var(--warn)}
-.big{position:absolute;right:12px;top:10px;text-align:right;font-family:"Barlow Condensed",sans-serif;background:color-mix(in srgb,var(--panel) 80%,transparent);padding:4px 10px;border-radius:6px}
-.big b{font-size:clamp(30px,4vw,44px);display:block;line-height:1}.big span{color:var(--mute);font-size:15px;white-space:nowrap}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
-.g{display:grid;grid-template-columns:7.2em minmax(0,1fr) 6.6em;gap:8px;align-items:center;font-size:14px;margin:5px 0}
-.bar{height:12px;background:var(--line);border-radius:6px;position:relative;overflow:hidden}.bar i{position:absolute;inset:0 auto 0 0;background:var(--steel);border-radius:6px}
-.bar.t i{background:var(--hot)}.bar em{position:absolute;top:0;bottom:0;width:2px;background:var(--warn)}
-.g output{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.ctl{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+body{margin:0;background:var(--bg) radial-gradient(1200px 500px at 50% -10%,#232826,transparent);color:var(--ink);font:16px/1.5 Barlow,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{margin:0;line-height:1.05;text-wrap:balance}
+h1{font:800 clamp(34px,5vw,52px)/1 "Big Shoulders Stencil Display","Big Shoulders Display","Barlow Condensed",sans-serif;letter-spacing:.02em}
+h3{font:700 15px "Barlow Condensed",sans-serif;color:var(--mute);margin:0 0 10px;padding-left:14px}
+.wrap{max-width:1360px;margin:0 auto;padding:0 max(3vw,12px)}
+.hz{height:9px;background:repeating-linear-gradient(-45deg,var(--hz) 0 12px,#141414 12px 24px);opacity:.9}
+.hd{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;padding-top:16px;padding-bottom:12px}
+.sub{margin:4px 0 0;color:var(--mute)}
+.rep{text-align:right;font-family:"Barlow Condensed",sans-serif}.rep b{display:block;font:800 30px "Big Shoulders Display","Barlow Condensed",sans-serif;color:var(--hz)}.rep span{color:var(--mute);font-size:14px}
+.bay{position:relative;aspect-ratio:2.3/1;min-height:330px;border:2px solid #000;border-radius:6px;overflow:hidden;background:#111;box-shadow:0 0 0 6px #1c201e,0 10px 30px #000}
+.bay canvas{position:absolute;inset:0;width:100%;height:100%}
+.status{position:absolute;left:12px;top:10px;font:700 19px "Barlow Condensed",sans-serif;padding:3px 10px;border-radius:4px;background:rgba(10,12,11,.75);border:1px solid #000}
+.status.bad{background:var(--red);color:#fff;animation:blink .5s steps(2) infinite}
+.big{position:absolute;right:12px;top:10px;text-align:right;font-family:"Share Tech Mono",monospace;background:rgba(5,9,7,.8);border:1px solid #000;padding:6px 12px;border-radius:4px;color:#ffd9a8}
+.big b{font-size:clamp(26px,3.4vw,40px);display:block;line-height:1;font-weight:400}.big span{color:#a3907a;font-size:14px;white-space:nowrap}
+.testbadge{position:absolute;left:12px;bottom:10px;font:700 16px "Barlow Condensed",sans-serif;background:var(--hz);color:#111;padding:3px 10px;border-radius:3px}
+@keyframes blink{50%{opacity:.55}}
+.console{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(0,1.1fr);gap:14px;margin-top:20px}
+.plate{background:linear-gradient(180deg,var(--plate2),var(--plate));border:1px solid #000;border-radius:8px;padding:14px;position:relative;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 3px 0 #000}
+.plate::before,.plate::after{content:'';position:absolute;top:8px;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#9aa19d,#2a2e2c 70%)}
+.plate::before{left:8px}.plate::after{right:8px}
+.dials{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.dials canvas{width:100%;aspect-ratio:1;display:block}
+.ann{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.ann div{font:700 12px "Barlow Condensed",sans-serif;letter-spacing:.03em;text-align:center;padding:7px 2px;border-radius:3px;background:#121513;color:#4d5650;border:1px solid #000;white-space:nowrap;overflow:hidden}
+.ann .g{background:#163a23;color:#8dffb2;box-shadow:0 0 12px rgba(99,224,139,.35)}.ann .a{background:#3e2c08;color:#ffcd6b;box-shadow:0 0 12px rgba(255,176,46,.35)}.ann .r{background:#4a0f0b;color:#ff8d84;box-shadow:0 0 14px rgba(255,59,47,.5);animation:blink .5s steps(2) infinite}
+.lcd{font:15px/1.5 "Share Tech Mono",monospace;background:#08100b;color:#9dffb8;border:1px solid #000;border-radius:4px;padding:8px 10px;margin-top:10px;display:grid;grid-template-columns:auto auto;gap:0 12px;box-shadow:inset 0 0 18px rgba(0,0,0,.8)}
+.lcd span{color:#6a9d7a}.lcd b{font-weight:400;text-align:right;white-space:nowrap}
+#chart{width:100%;height:64px;display:block;margin-top:10px;background:#08100b;border:1px solid #000;border-radius:4px}
+.ctlgrid{display:grid;grid-template-columns:minmax(0,1fr) 74px;gap:12px}
+.btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;align-content:start}
 button,select,input{font:inherit;font-size:16px;color:inherit}
-button{min-height:44px;padding:0 14px;border-radius:8px;border:1px solid var(--line);background:var(--bg);cursor:pointer;font-weight:600}
-button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-button.hot{background:var(--hot);color:#1a0d05;border-color:var(--hot)}button.stop{background:var(--warn);color:#fff;border-color:var(--warn)}
-button:disabled{opacity:.4;cursor:not-allowed}
-:focus-visible{outline:3px solid var(--hot);outline-offset:2px}
-label.row{display:block;margin:10px 0}label.row span{display:flex;justify-content:space-between;font-size:14px;color:var(--mute)}label.row span b{color:var(--ink);font-weight:600}
+button{min-height:44px;padding:0 10px;border-radius:5px;border:1px solid #000;background:linear-gradient(180deg,#3d4440,#262b28);cursor:pointer;font:700 15px "Barlow Condensed",sans-serif;letter-spacing:.03em;color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 2px 0 #000}
+button:active{transform:translateY(1px)}
+button[aria-pressed=true]{background:linear-gradient(180deg,#5c4512,#3a2b0a);color:#ffd98a;box-shadow:inset 0 0 12px rgba(255,176,46,.35),0 2px 0 #000}
+button.go{background:linear-gradient(180deg,#ff7d33,#c8470c);color:#1b0b02}button.kill{background:linear-gradient(180deg,#d8352a,#8f1a12);color:#fff}
+button.hzb{background:repeating-linear-gradient(-45deg,#e8b923 0 10px,#c99c14 10px 20px);color:#111}
+button:disabled{opacity:.35;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--hz);outline-offset:2px}
+.quad{display:flex;flex-direction:column;align-items:center;gap:4px;font:700 13px "Barlow Condensed",sans-serif;color:var(--mute);background:#151816;border:1px solid #000;border-radius:6px;padding:8px 4px}
+.quad b{font:18px "Share Tech Mono",monospace;color:#ffd9a8}
+input.vert{writing-mode:vertical-lr;direction:rtl;width:44px;height:210px;accent-color:var(--hot)}
+.row2{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;color:var(--mute);font:600 15px "Barlow Condensed",sans-serif}.row2 b{color:var(--ink);min-width:3.5em;text-align:center}
+.fcp{margin-top:14px}.fcgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.8fr);gap:16px;align-items:end}
+label.row{display:block;margin:6px 0}label.row span{display:flex;justify-content:space-between;font:600 15px "Barlow Condensed",sans-serif;color:var(--mute)}label.row span b{color:var(--ink);white-space:nowrap}
 input[type=range]{width:100%;accent-color:var(--hot);height:32px}
-select,input[type=text],textarea{width:100%;min-height:44px;border-radius:8px;border:1px solid var(--line);background:var(--bg);padding:6px 10px}
-textarea{font:13px ui-monospace,monospace;min-height:64px;color:inherit;overflow-wrap:anywhere}
+select,input[type=text],textarea{width:100%;min-height:44px;border-radius:5px;border:1px solid #000;background:#151816;padding:6px 10px;color:var(--ink)}
+textarea{font:13px "Share Tech Mono",monospace;min-height:64px;overflow-wrap:anywhere}
 .seg{display:flex;flex-wrap:wrap;gap:6px}
-.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
-.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:10px}
-.spec div{background:var(--bg);border-radius:8px;padding:8px 10px}.spec small{display:block;color:var(--mute);font-size:13px}.spec b{font:700 22px "Barlow Condensed",sans-serif;white-space:nowrap}
-.list{list-style:none;padding:0;margin:8px 0 0}.list li{display:flex;gap:6px;align-items:center;border-top:1px solid var(--line);padding:6px 0;flex-wrap:wrap}.list li span{flex:1 1 140px}
-.note{color:var(--mute);font-size:14px}kbd{font:13px ui-monospace,monospace;border:1px solid var(--line);border-radius:4px;padding:0 5px;background:var(--bg)}
-#chart{width:100%;height:70px;display:block;margin-top:8px}
-@media(max-width:900px){.cell,.two,.three{grid-template-columns:minmax(0,1fr)}.fig{min-height:300px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+.tabs{display:flex;gap:6px;margin:28px 0 0;flex-wrap:wrap;border-bottom:3px solid var(--hz)}
+.tabs a{font:800 20px "Big Shoulders Display","Barlow Condensed",sans-serif;color:var(--mute);text-decoration:none;padding:10px 16px;border-radius:6px 6px 0 0;background:#1b1f1d;border:1px solid #000;border-bottom:0}
+.tabs a[aria-current=page]{background:var(--hz);color:#111}
+.tab{padding:18px 0 8px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:7px}
+.spec div{background:#151816;border:1px solid #000;border-radius:5px;padding:7px 10px}.spec small{display:block;color:var(--mute);font-size:13px}.spec b{font:19px "Share Tech Mono",monospace;font-weight:400;color:#ffd9a8;display:block;overflow-wrap:anywhere}
+.spec .bad b{color:var(--red)}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:4px 14px}
+.checks label{display:flex;gap:10px;align-items:center;min-height:44px;font-weight:600}.checks input{width:22px;height:22px;accent-color:var(--hot)}
+.list{list-style:none;padding:0;margin:8px 0 0}.list li{display:flex;gap:6px;align-items:center;border-top:1px solid var(--line);padding:7px 0;flex-wrap:wrap}.list li span{flex:1 1 160px}
+.note{color:var(--mute);font-size:14px}kbd{font:13px "Share Tech Mono",monospace;border:1px solid var(--line);border-radius:3px;padding:0 5px;background:#151816}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,310px),1fr));gap:14px}
+.card h4{font:800 23px "Big Shoulders Display","Barlow Condensed",sans-serif;margin:0 0 2px;padding:0 14px}.card .cl{color:var(--mute);font-size:14px;margin:0 0 8px;padding:0 14px}
+.card p{margin:0 0 8px}.stars{color:var(--hz);font-size:20px;letter-spacing:2px}.stars i{color:#3f4843;font-style:normal}
+.req{list-style:none;margin:0 0 10px;padding:0;font-size:15px}.req li{display:flex;justify-content:space-between;gap:8px;border-top:1px dashed var(--line);padding:4px 0}
+.req .ok{color:var(--grn)}.req .no{color:var(--red)}.req b{font-family:"Share Tech Mono",monospace;font-weight:400;white-space:nowrap}
+.fig{position:relative;height:440px;background:#0b0e0c;border:1px solid #000;border-radius:6px}.fig canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
+.resline{font:15px "Share Tech Mono",monospace;color:#ffd9a8;min-height:24px}
+@media(max-width:1000px){.console{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.ctlp{grid-column:1/-1}}
+@media(max-width:700px){.console,.two,.fcgrid{grid-template-columns:minmax(0,1fr)}.bay{aspect-ratio:1.15/1;min-height:0}.fig{height:320px}.ann{grid-template-columns:repeat(3,minmax(0,1fr))}.tabs a{font-size:17px;padding:8px 10px}}
+@media(prefers-reduced-motion:reduce){.status.bad,.ann .r{animation:none}}
 </style>
 </head>
 <body>
-<header class="band"><div class="wrap">
-<h1>Gotta Go Fast — engine test cell</h1>
-<p>Design a turbojet, turbofan, turboprop, ramjet or scramjet, bolt it to the stand and light it up. Every engine, part and material is unlocked.</p>
-</div></header>
+<header><div class="hz"></div>
+ <div class="hd wrap"><div><h1>GOTTA GO FAST</h1><p class="sub">Engine test cell 3 · <span id="engName">Engine</span></p></div>
+ <div class="rep"><b id="stars">★ 0</b><span>contract stars earned</span></div></div>
+</header>
+<main class="wrap">
+ <div class="bay" id="bay"><canvas id="cv"></canvas><div class="status" id="status">Cold and dark</div><div class="big"><b id="bigT">0.0 kN</b><span id="bigL">0 lbf</span></div><div class="testbadge" id="testBadge" hidden></div></div>
 
-<section class="band" style="padding-top:0"><div class="wrap cell">
- <div class="fig" id="fig"><canvas id="cv"></canvas><div class="status" id="status">Cold and dark</div><div class="big"><b id="bigT">0.0 kN</b><span id="bigL">0 lbf</span></div></div>
- <div class="panel">
-  <h3 id="engName">Engine</h3>
-  <div id="gauges"></div>
-  <canvas id="chart"></canvas>
-  <label class="row"><span>Throttle <b id="thrV">0%</b></span><input type="range" id="thr" min="0" max="100" value="0"></label>
-  <div class="ctl">
-   <button id="bStart" aria-pressed="false">Starter</button>
-   <button id="bIgn" aria-pressed="false">Ignition</button>
-   <button id="bFuel" aria-pressed="false">Fuel</button>
-   <button id="bAuto" class="hot">Auto start</button>
-   <button id="bStop" class="stop">Stop</button>
-  </div>
-  <div class="ctl">
-   <button id="bAB" aria-pressed="false">Afterburner</button>
-   <button id="bFadec" aria-pressed="true">FADEC</button>
-   <button id="bSnd" aria-pressed="false">Sound</button>
-   <button id="bRepair" hidden>Repair engine</button>
-  </div>
-  <div class="ctl" id="modeRow"><span id="modeLbl" class="note" style="align-self:center"></span><button id="bDn">−</button><b id="modeV" style="align-self:center;min-width:4em;text-align:center"></b><button id="bUp">+</button></div>
-  <label class="row"><span>Test conditions</span><select id="amb"><option value="0">Standard day, 15 °C</option><option value="1">Tropical, 40 °C</option><option value="2">Arctic, −40 °C</option></select></label>
- </div>
-</div></section>
-
-<section class="band" style="padding-top:0"><div class="wrap">
- <h2>Design office</h2>
- <div class="two">
-  <div class="panel">
-   <h3>Presets</h3><div class="seg" id="presets"></div>
-   <h3 style="margin-top:16px">Engine type</h3><div class="seg" id="types"></div>
-   <div id="sliders"></div>
-   <div class="two">
-    <label class="row"><span>Hot-section material</span><select id="mat"></select></label>
-    <label class="row"><span>Nozzle</span><select id="noz"><option value="conv">Convergent</option><option value="cd">Convergent–divergent</option></select></label>
+ <div class="console">
+  <div class="plate"><h3>Instruments</h3><div class="dials" id="dials"></div></div>
+  <div class="plate"><h3>Annunciators</h3><div class="ann" id="ann"></div><div class="lcd" id="lcd"></div><canvas id="chart"></canvas></div>
+  <div class="plate ctlp"><h3>Controls</h3>
+   <div class="ctlgrid">
+    <div class="btns">
+     <button id="bStart" aria-pressed="false">Starter</button>
+     <button id="bIgn" aria-pressed="false">Ignition</button>
+     <button id="bFuel" aria-pressed="false">Fuel pump</button>
+     <button id="bAuto" class="go">Auto start</button>
+     <button id="bAB" aria-pressed="false">Afterburner</button>
+     <button id="bRev" aria-pressed="false">Reverser</button>
+     <button id="bFadec" aria-pressed="true">FADEC</button>
+     <button id="bSnd" aria-pressed="false">Sound</button>
+     <button id="bStop" class="kill">Shutdown</button>
+     <button id="bRepair" class="hzb" hidden>Rebuild engine</button>
+    </div>
+    <div class="quad"><span>Max</span><input type="range" id="thr" class="vert" min="0" max="100" value="0" aria-label="Throttle"><span>Idle</span><b id="thrV">0%</b></div>
    </div>
-   <label style="display:flex;gap:8px;align-items:center;min-height:44px"><input type="checkbox" id="abFit" style="width:22px;height:22px;accent-color:var(--hot)"> Fit afterburner</label>
+   <div class="row2" id="pitchRow">Prop pitch <button id="bDn" aria-label="Lower pitch">−</button><b id="pitchV">3</b><button id="bUp" aria-label="Raise pitch">+</button></div>
   </div>
-  <div class="panel">
-   <h3>Design sheet (standard day)</h3>
+ </div>
+
+ <div class="plate fcp"><h3>Flight condition — test cell air supply</h3>
+  <div class="fcgrid">
+   <label class="row"><span>Altitude <b id="altV">0.0 km</b></span><input type="range" id="alt" min="0" max="30" step="0.5" value="0"></label>
+   <label class="row"><span>Mach <b id="machV">0.00</b></span><input type="range" id="mach" min="0" max="8" step="0.05" value="0"></label>
+   <label class="row"><span>Day</span><select id="amb"><option value="0">Standard day</option><option value="25">Hot day (+25 °C)</option><option value="-55">Arctic (−55 °C)</option></select></label>
+  </div>
+  <div class="seg" id="fcPresets" style="margin-top:8px"></div>
+ </div>
+
+ <nav class="tabs" id="tabs"><a href="#design">Design office</a><a href="#contracts">Contracts</a><a href="#envelope">Flight envelope</a><a href="#dyno">Dyno &amp; runs</a></nav>
+
+ <section class="tab" id="p-design"><div class="two">
+  <div class="plate"><h3>Presets</h3><div class="seg" id="presets"></div>
+   <h3 style="margin-top:16px">Engine type</h3><div class="seg" id="types"></div>
+   <div id="sliders" style="margin-top:8px"></div>
+   <div class="two" style="gap:10px">
+    <label class="row"><span>Hot-section material</span><select id="mat"></select></label>
+    <label class="row" id="spoolRow"><span>Spools</span><select id="spools"><option value="1">Single spool</option><option value="2">Twin spool</option></select></label>
+    <label class="row"><span>Nozzle</span><select id="noz"><option value="conv">Convergent</option><option value="cd">Convergent–divergent</option></select></label>
+    <label class="row" id="inletRow"><span>Inlet</span><select id="inlet"><option value="pitot">Fixed pitot</option><option value="ramp">Variable ramp (supersonic)</option></select></label>
+   </div>
+   <div class="checks">
+    <label id="abL"><input type="checkbox" id="abFit"> Afterburner</label>
+    <label id="revL"><input type="checkbox" id="revFit"> Thrust reverser</label>
+    <label id="vigvL"><input type="checkbox" id="vigvFit"> Variable inlet guide vanes</label>
+   </div>
+  </div>
+  <div class="plate"><h3>Design sheet — standard day, ground stand</h3>
    <div class="spec" id="spec"></div>
    <h3 style="margin-top:18px">Hangar</h3>
    <div style="display:flex;gap:8px"><input type="text" id="saveName" placeholder="Engine name" aria-label="Engine name"><button id="bSave">Save</button></div>
    <ul class="list" id="saved"></ul>
    <h3 style="margin-top:14px">Build code</h3>
    <textarea id="code" aria-label="Build code"></textarea>
-   <div class="ctl"><button id="bCopy">Copy code</button><button id="bLoadCode">Load code</button><span class="note" id="codeMsg" style="align-self:center"></span></div>
+   <div class="seg" style="margin-top:8px"><button id="bCopy">Copy code</button><button id="bLoadCode">Load code</button><span class="note" id="codeMsg" style="align-self:center"></span></div>
   </div>
- </div>
-</div></section>
+ </div></section>
 
-<section class="band" style="padding-top:0"><div class="wrap">
- <h2>Dyno</h2>
- <div class="two">
-  <div class="panel"><p class="note" style="margin-top:0">Runs an automatic test: idle hold, slam to full power to time spool-up, a throttle sweep for best fuel economy, then afterburner if fitted. Start the engine (or light the ramjet in the tunnel) first.</p>
-   <div class="ctl"><button id="bDyno" class="hot">Run dyno</button><span class="note" id="dynoMsg" style="align-self:center"></span></div>
-   <div class="spec" id="dynoRes"></div></div>
-  <div class="panel"><h3>My runs</h3><ul class="list" id="runs"><li class="note">No runs yet.</li></ul></div>
- </div>
- <p class="note" style="margin-top:16px">Keys: <kbd>S</kbd> auto start, <kbd>X</kbd> stop, <kbd>↑</kbd>/<kbd>↓</kbd> throttle, <kbd>End</kbd> full power, <kbd>PgUp</kbd> afterburner, <kbd>E</kbd>/<kbd>Q</kbd> tunnel speed or prop pitch. Physics is a simplified gas-path model meant for fun, not certification.</p>
-</div></section>
+ <section class="tab" id="p-contracts" hidden>
+  <p class="note" style="margin-top:0">Design an engine that meets the brief, then run certification. The test cell sets the flight condition, runs the engine through its paces and grades it: one star to pass, two with a 5% margin on everything, three with 15%. Predicted figures update live as you change the design.</p>
+  <div class="resline" id="certMsg"></div>
+  <div class="cards" id="contracts"></div>
+ </section>
+
+ <section class="tab" id="p-envelope" hidden>
+  <div class="plate"><h3>Max net thrust across altitude and Mach — click the map to test there</h3>
+   <div class="seg" style="margin-bottom:10px;align-items:center"><label style="display:flex;gap:10px;align-items:center;min-height:44px;font-weight:600"><input type="checkbox" id="envAB" style="width:22px;height:22px;accent-color:var(--hot)"> With afterburner</label><span class="resline" id="envHover"></span></div>
+   <div class="fig"><canvas id="env"></canvas></div>
+   <p class="note">Grey: the engine can't light or stay lit there. Red hatching: air leaving the compressor is too hot for the blades. Dark: no positive thrust. The crosshair is the current test condition.</p>
+  </div>
+ </section>
+
+ <section class="tab" id="p-dyno" hidden><div class="two">
+  <div class="plate"><h3>Dyno</h3><p class="note" style="margin:0 0 10px">Automatic test at the current flight condition: start, idle hold, slam to full power to time spool-up, economy sweep, then afterburner if fitted.</p>
+   <div class="seg"><button id="bDyno" class="go">Run dyno</button><span class="note" id="dynoMsg" style="align-self:center"></span></div>
+   <div class="spec" id="dynoRes" style="margin-top:10px"></div></div>
+  <div class="plate"><h3>My runs</h3><ul class="list" id="runs"></ul></div>
+ </div></section>
+
+ <p class="note" style="margin:18px 0 30px">Keys: <kbd>S</kbd> auto start · <kbd>X</kbd> shutdown · <kbd>↑</kbd>/<kbd>↓</kbd> throttle · <kbd>End</kbd> full power · <kbd>PgUp</kbd> afterburner · <kbd>R</kbd> reverser · <kbd>E</kbd>/<kbd>Q</kbd> Mach up/down · <kbd>W</kbd>/<kbd>A</kbd> altitude up/down · <kbd>[</kbd>/<kbd>]</kbd> prop pitch. The physics is a simplified gas-path model built for fun, not certification.</p>
+</main>
 
 <script>
 {
-const $=id=>document.getElementById(id);
+const $=id=>document.getElementById(id),clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-const MATS={steel:{n:'Steel (1250 K)',lim:1250,w:1.15},nickel:{n:'Nickel superalloy (1500 K)',lim:1500,w:1},sx:{n:'Single-crystal blades (1750 K)',lim:1750,w:.97},cmc:{n:'Ceramic matrix (2000 K)',lim:2000,w:.82}};
+
+/* ================= DATA ================= */
+const MATS={steel:{n:'Steel (1250 K)',lim:1250,w:1.15,c:1},nickel:{n:'Nickel superalloy (1500 K)',lim:1500,w:1,c:1.6},sx:{n:'Single-crystal (1750 K)',lim:1750,w:.97,c:2.6},cmc:{n:'Ceramic matrix (2000 K)',lim:2000,w:.82,c:4}};
 const TYPES={turbojet:'Turbojet',turbofan:'Turbofan',turboprop:'Turboprop',ramjet:'Ramjet',scramjet:'Scramjet'};
-const AMB=[{T:288.15,n:'15 °C'},{T:313.15,n:'40 °C'},{T:233.15,n:'−40 °C'}];
+const GEARS=[{x:.75,e:.84},{x:.85,e:.81},{x:.92,e:.77},{x:.96,e:.71}];
+const DEF={name:'Custom engine',type:'turbojet',D:.45,opr:6,tit:1150,bpr:0,prop:2.5,mat:'steel',noz:'conv',ab:false,spools:1,vigv:false,rev:false,cool:0,bleed:0,inlet:'pitot'};
+const P=o=>({...DEF,...o});
 const PRESETS=[
- {name:'Trainer jet',type:'turbojet',D:.45,opr:6,tit:1150,bpr:0,prop:2.5,mat:'steel',noz:'conv',ab:false},
- {name:'Bizjet cruiser',type:'turbofan',D:.9,opr:22,tit:1450,bpr:4.5,prop:2.5,mat:'nickel',noz:'conv',ab:false},
- {name:'Strike fighter',type:'turbofan',D:.85,opr:26,tit:1700,bpr:.4,prop:2.5,mat:'sx',noz:'cd',ab:true},
- {name:'Widebody fan',type:'turbofan',D:2.9,opr:42,tit:1650,bpr:10,prop:2.5,mat:'sx',noz:'conv',ab:false},
- {name:'Cargo lifter',type:'turbofan',D:3.3,opr:46,tit:1850,bpr:12,prop:2.5,mat:'cmc',noz:'conv',ab:false},
- {name:'Commuter prop',type:'turboprop',D:.2,opr:9,tit:1300,bpr:0,prop:2.6,mat:'nickel',noz:'conv',ab:false},
- {name:'Micro drone jet',type:'turbojet',D:.11,opr:3.5,tit:1100,bpr:0,prop:2.5,mat:'steel',noz:'conv',ab:false},
- {name:'Ramjet test article',type:'ramjet',D:.5,opr:6,tit:1400,bpr:0,prop:2.5,mat:'nickel',noz:'cd',ab:false},
- {name:'Scramjet test article',type:'scramjet',D:.4,opr:6,tit:1400,bpr:0,prop:2.5,mat:'cmc',noz:'cd',ab:false}];
-const SL=[{k:'D',l:'Inlet / fan diameter',min:.08,max:3.6,st:.01,u:'m',f:2,show:()=>true},
- {k:'opr',l:'Overall pressure ratio',min:2,max:55,st:.5,u:':1',f:1,show:t=>!ram(t)},
- {k:'tit',l:'Design turbine inlet temp',min:1000,max:2100,st:10,u:'K',f:0,show:t=>!ram(t)},
- {k:'bpr',l:'Bypass ratio',min:.2,max:14,st:.1,u:'',f:1,show:t=>t==='turbofan'},
- {k:'prop',l:'Propeller diameter',min:1,max:5,st:.05,u:'m',f:2,show:t=>t==='turboprop'}];
-const RAMM=[0,1.5,2,2.5,3,3.5,4],SCRM=[0,4,4.5,5,5.5,6,7],GEARS=[{x:.75,e:.84},{x:.85,e:.81},{x:.92,e:.77},{x:.96,e:.71}];
+ P({name:'Trainer jet',type:'turbojet',D:.45,opr:6,tit:1150,mat:'steel'}),
+ P({name:'Bizjet cruiser',type:'turbofan',D:.9,opr:22,tit:1450,bpr:4.5,mat:'nickel',spools:2,vigv:true,rev:true,bleed:3,cool:4}),
+ P({name:'Strike fighter',type:'turbofan',D:.85,opr:26,tit:1700,bpr:.4,mat:'sx',noz:'cd',ab:true,spools:2,vigv:true,inlet:'ramp',cool:8}),
+ P({name:'Widebody fan',type:'turbofan',D:2.9,opr:42,tit:1650,bpr:10,mat:'sx',spools:2,vigv:true,rev:true,bleed:2,cool:10}),
+ P({name:'Cargo lifter',type:'turbofan',D:3.3,opr:46,tit:1850,bpr:12,mat:'cmc',spools:2,vigv:true,rev:true,bleed:2,cool:8}),
+ P({name:'Commuter prop',type:'turboprop',D:.2,opr:9,tit:1300,prop:2.6,mat:'nickel',vigv:true}),
+ P({name:'Micro drone jet',type:'turbojet',D:.11,opr:3.5,tit:1100,mat:'steel'}),
+ P({name:'Ramjet missile',type:'ramjet',D:.5,mat:'nickel',noz:'cd',inlet:'ramp'}),
+ P({name:'Scramjet demonstrator',type:'scramjet',D:.4,mat:'cmc',noz:'cd',cool:10})];
+const SL_={h:0,M:0,dT:0};
+const CONTRACTS=[
+ {id:'trainer',name:'Flight school trainer',client:'Ruahine Flying School',brief:'Cheap, tough and simple to keep running.',fc:SL_,req:{thrust:12e3,weight:330,cost:950}},
+ {id:'drone',name:'Target drone',client:'Range services',brief:'A disposable target. Light and dirt cheap.',fc:SL_,req:{thrust:900,weight:25,cost:70}},
+ {id:'topdress',name:'Topdressing plane',client:'Rural aviation operator',brief:'Haul fertiliser off short farm strips on a hot day.',fc:{h:0,M:0,dT:25},req:{types:['turboprop'],shp:700,weight:300,cost:900}},
+ {id:'bizjet',name:'Business jet cruise',client:'Corporate jet maker',brief:'Frugal at 12 km and Mach 0.8, with bleed air for the cabin.',fc:{h:12,M:.8,dT:0},req:{types:['turbofan'],thrust:8e3,sfc:19,bleed:3}},
+ {id:'hothigh',name:'Hot and high regional',client:'Regional airline',brief:'Full power from a 2 km high airfield at 40 °C. Needs a reverser.',fc:{h:2,M:0,dT:25},req:{thrust:90e3,sfc:11,weight:3000,rev:true}},
+ {id:'arctic',name:'Arctic patrol',client:'Polar survey',brief:'Big shaft power and quick response at −40 °C.',fc:{h:0,M:0,dT:-55},req:{types:['turboprop'],shp:3000,spool:8}},
+ {id:'widebody',name:'Widebody launch',client:'Long-haul airline',brief:'Big and frugal. Reverser and cabin bleed required.',fc:SL_,req:{thrust:380e3,sfc:8.5,rev:true,bleed:2,spool:14}},
+ {id:'intercept',name:'Interceptor',client:'Air force',brief:'Huge reheat thrust at 11 km and Mach 1.6.',fc:{h:11,M:1.6,dT:0},req:{wet:70e3,weight:1800}},
+ {id:'supercruise',name:'Supercruise',client:'Air force',brief:'Mach 1.5 at 11 km without lighting the afterburner.',fc:{h:11,M:1.5,dT:0},req:{thrust:45e3,weight:2000}},
+ {id:'missile',name:'Ramjet missile',client:'Defence research',brief:'Sustain Mach 3 at 10 km.',fc:{h:10,M:3,dT:0},req:{types:['ramjet'],thrust:18e3,weight:150}},
+ {id:'hyper',name:'Hypersonic demonstrator',client:'Space agency',brief:'Real thrust at Mach 6 and 20 km.',fc:{h:20,M:6,dT:0},req:{types:['scramjet'],thrust:5e3,weight:300}},
+ {id:'lifter',name:'Heavy airlifter',client:'Cargo airline',brief:'Raw thrust on a budget. Reverser required.',fc:SL_,req:{thrust:450e3,cost:30000,sfc:9,rev:true}},
+ {id:'miser',name:'Fuel miser',client:'Green aviation fund',brief:'The lowest fuel burn money can buy.',fc:SL_,req:{thrust:150e3,sfc:6.8}}];
+const FCP=[['Ground stand',{h:0,M:0}],['Climb 5 km M0.5',{h:5,M:.5}],['Cruise 11 km M0.8',{h:11,M:.8}],['Supersonic 11 km M1.6',{h:11,M:1.6}],['Ramjet 10 km M3',{h:10,M:3}],['Hypersonic 20 km M6',{h:20,M:6}]];
+
+/* ================= PHYSICS ================= */
 const ram=t=>t==='ramjet'||t==='scramjet';
-let d={...PRESETS[0]};
-const S={N:0,lit:false,litT:0,starter:false,ign:false,fuel:false,thr:0,fa:0,ab:false,fadec:true,dmg:0,broken:false,surge:0,gear:2,mi:0,amb:0,T4:288,out:{},auto:0,hist:[],msg:'',msgT:0};
+function atmo(h,dT){const hm=h*1000;let Ts,p;if(hm<11000){Ts=288.15-.0065*hm;p=101325*Math.pow(Ts/288.15,5.2559)}else{Ts=216.65;p=22632*Math.exp(-(hm-11000)/6341.6)}const T=Math.max(150,Ts+dT);return{T,p,rho:p/(287*T),a:Math.sqrt(401.8*T)}}
+function shockRec(M){if(M<=1)return 1;const g=1.4,M2=M*M;return Math.pow((g+1)*M2/((g-1)*M2+2),g/(g-1))*Math.pow((g+1)/(2*g*M2-(g-1)),1/(g-1))}
+const inletRec=(d,M)=>M<=1?.98:d.inlet==='ramp'?.98*Math.max(.25,1-.075*Math.pow(M-1,1.35)):.98*shockRec(M);
+const mdotD=d=>1.225*Math.PI*d.D*d.D/4*(120+40*Math.min(d.D,1));
+const limEff=d=>MATS[d.mat].lim+(d.cool||0)*12;
+const T3max=d=>900+(d.mat==='sx'||d.mat==='cmc'?80:0);
+const minM=d=>d.type==='scramjet'?4.5:1.2;
+function surgeMargin(d,fc){if(ram(d.type))return 1;let s=.3+(d.spools===2?.15:0)+(d.vigv?.1:0)-Math.max(0,d.opr-12)*.012*(d.spools===2?.45:1);if(fc&&fc.M>1.5&&d.inlet!=='ramp')s-=(fc.M-1.5)*.12;return s}
+const effC=(d,Nc)=>.885-(d.spools===1?Math.max(0,d.opr-16)*.004:0)-Math.max(0,.85-Nc)*(d.vigv?.04:.12);
+const tau=d=>(.4+.55*Math.pow(mdotD(d),.25)+(d.type==='turboprop'?.6*d.prop/2.5:0))*(d.spools===2?.88:1);
+function cycle(d,N,T4,ab,fc,gear=2,rev=false){
+ const cpa=1005,cpg=1150,LHV=43e6,at=atmo(fc.h,fc.dT),V0=fc.M*at.a,tr=1+.2*fc.M*fc.M,Tt2=at.T*tr,Pt2=at.p*Math.pow(tr,3.5)*inletRec(d,fc.M);
+ const th=Tt2/288.15,dl=Pt2/101325,Nc=Math.max(.001,N/Math.sqrt(th));
+ const mt=mdotD(d)*Math.pow(Math.min(Nc,1.08),1.6)*dl/Math.sqrt(th);
+ const bpr=d.type==='turbofan'?d.bpr:0,mc=mt/(1+bpr),mtb=mc*(1-(d.bleed||0)/100);
+ const pr=1+(d.opr-1)*Math.pow(Math.min(Nc,1.05),2.5),ec=effC(d,Nc),T3=Tt2*(1+(Math.pow(pr,.2857)-1)/ec);
+ T4=Math.max(T4,T3+30);
+ const dTt=cpa*(T3-Tt2)*mc/(cpg*mtb),T5=T4-dTt,T5s=T4-dTt/.9;
+ const P5r=(Pt2/at.p)*pr*.95*Math.pow(Math.max(T5s,1)/T4,4.03),ne=d.noz==='cd'?.98:(P5r>1.85?.93:.97);
+ let KE=P5r>1&&T5>0?cpg*T5*ne*(1-Math.pow(1/P5r,.248)):0;KE*=1-(d.cool||0)*.006;
+ let fuel=mtb*cpg*(T4-T3)/(LHV*.98),Vc=Math.sqrt(2*KE),Vb=V0,shp=0,egt=T5,fpr=1,propT=0,Tb=Tt2,abOn=false;
+ if(bpr>0){const et=.82,av=Math.max(0,KE-.5*V0*V0);let best=-1e18,bx=0;
+  for(let i=0;i<=24;i++){const ex=i/25*av,vc=Math.sqrt(Math.max(0,2*(KE-ex))),vb=Math.sqrt(V0*V0+2*et*ex*mtb/(mc*bpr)),F=mtb*vc+mc*bpr*vb;if(F>best){best=F;bx=ex;Vc=vc;Vb=vb}}
+  egt=T5-bx/cpg;Tb=Tt2+(Vb*Vb-V0*V0)/(2*cpa*.9);fpr=Math.pow(1+(Vb*Vb-V0*V0)/(2*cpa*Tt2),3.5)}
+ if(d.type==='turboprop'){const g=GEARS[gear],Pw=mtb*KE*g.x;Vc=Math.sqrt(2*KE*(1-g.x));const Ap=Math.PI*d.prop*d.prop/4,Ts=Math.cbrt(2*at.rho*Ap)*Math.pow(g.e*Pw,2/3);
+  let ep=.85;if(fc.M>.55)ep*=clamp(1-((fc.M-.55)/.35)**2);propT=V0<1?Ts:(Pw>0?ep*Pw/(V0+ep*Pw/Math.max(Ts,1)):0);shp=Pw/745.7;egt=T5-g.x*KE/cpg}
+ if(ab&&d.ab&&d.type!=='turboprop'){const T7=2050;if(egt<T7){abOn=true;const k=d.noz==='cd'?1.04:1;fuel+=mtb*cpg*(T7-egt)/(LHV*.9);Vc=Vc*Math.sqrt(T7/Math.max(egt,300))*k;
+  if(bpr>0&&bpr<1.5){fuel+=mc*bpr*cpg*(T7-Tb)/(LHV*.9);Vb=Math.max(V0,Vb)*Math.sqrt(T7/Tb)*k}}}
+ let gross=mtb*Vc+mc*bpr*Vb+propT;
+ if(rev&&d.rev)gross=bpr>0?mtb*Vc-.45*mc*bpr*Vb:-.4*mtb*Vc;
+ return {thrust:gross-mt*V0,gross,fuel,mdot:mt,pr,T3,T4,egt,Vj:Vc,Vb,shp,fpr,V0,Tt2,dl,abOn,Nc}}
+function ramCycle(d,fc,thr,lit){const at=atmo(fc.h,fc.dT),M=fc.M,V0=M*at.a,A=Math.PI*d.D*d.D/4,m=at.rho*V0*A,tr=1+.2*M*M,Tt=at.T*tr,scr=d.type==='scramjet';
+ const rec=scr?.275:inletRec(d,M)*.9,Pr=Math.pow(tr,3.5)*rec,Tmax=Math.max(limEff(d)+(scr?600:450),Tt);
+ const T4=lit?Tt+(Tmax-Tt)*thr:Tt,ne=d.noz==='cd'?.96:.9,KE=Pr>1?1150*T4*ne*(1-Math.pow(1/Pr,.248)):0,V=Math.sqrt(2*KE);
+ return {thrust:M>0?m*(V-V0):0,fuel:lit?m*1150*(T4-Tt)/((scr?120e6:43e6)*.92):0,mdot:m,pr:Pr,T4,T3:Tt,egt:T4,Vj:V,V0,Tt2:Tt,shp:0,lim:Tmax,abOn:lit,dl:1}}
+const T4cap=d=>Math.min(d.tit,limEff(d)*.97);
+function perfMax(d,fc,ab,gear=2){if(ram(d.type))return ramCycle(d,fc,1,fc.M>=minM(d));return cycle(d,1,T4cap(d),ab,fc,gear)}
+const shaftKW=d=>d.type==='turboprop'?cycle(d,1,T4cap(d),false,SL_,2).shp*.7457:0;
+function weight(d){const md=mdotD(d),t=d.type;if(ram(t))return (40+220*d.D*d.D)*(d.inlet==='ramp'&&t==='ramjet'?1.15:1)*MATS[d.mat].w*(1+d.cool*.004);
+ const mc=md/(1+(t==='turbofan'?d.bpr:0));let w=9*Math.pow(mc,.9)*(1+d.opr/20)*MATS[d.mat].w;
+ if(t==='turbofan')w+=300*Math.pow(d.D,2.5)*Math.min(1,d.bpr/3+.3);if(t==='turboprop')w+=25*d.prop*d.prop+.12*shaftKW(d);
+ return w*(1+(d.ab?.25:0)+(d.noz==='cd'?.08:0)+(d.spools===2?.06:0)+(d.vigv?.03:0)+(d.rev?.1:0)+(d.inlet==='ramp'?.08:0)+d.cool*.004)}
+function cost(d){const md=mdotD(d),t=d.type,M=MATS[d.mat];let c;
+ if(ram(t))c=(30+150*d.D*d.D)*M.c*(t==='scramjet'?2.5:1);
+ else{const mc=md/(1+(t==='turbofan'?d.bpr:0));c=40*Math.pow(mc,.85)*(1+d.opr/25)*M.c;if(t==='turbofan')c+=350*Math.pow(d.D,2.2);if(t==='turboprop')c+=60*d.prop*d.prop+.15*shaftKW(d)}
+ return c*(1+(d.ab?.25:0)+(d.noz==='cd'?.08:0)+(d.spools===2?.18:0)+(d.vigv?.06:0)+(d.rev?.1:0)+(d.inlet==='ramp'?.12:0)+d.cool*.012)}
+const money=k=>k>=1000?'$'+(k/1000).toFixed(k>=10000?1:2)+'M':'$'+Math.round(k)+'k';
+function predSpool(d,fc){const a=clamp(surgeMargin(d,fc)-.04,.03,.35);return 3*tau(d)*Math.sqrt(.35/a)*.75}
 
-/* ---------- physics ---------- */
-function weight(d){const m=mdotD(d);if(ram(d.type))return 40+220*d.D*d.D;
- const mc=m/(1+(d.type==='turbofan'?d.bpr:0));let w=9*Math.pow(mc,.9)*(1+d.opr/20)*MATS[d.mat].w;
- if(d.type==='turbofan')w+=300*Math.pow(d.D,2.5)*Math.min(1,d.bpr/3+.3);
- if(d.type==='turboprop')w+=25*d.prop*d.prop+0.12*(cycle(d,1,Math.min(d.tit,MATS[d.mat].lim),false,0,2).shp*.7457);
- if(d.ab)w*=1.25;if(d.noz==='cd')w*=1.08;return w}
-function mdotD(d,T0=288.15){return 101325/(287*T0)*Math.PI*d.D*d.D/4*(120+40*Math.min(d.D,1))}
-function cycle(d,N,T4,ab,amb,gear){
- const cpa=1005,cpg=1150,LHV=43e6,T0=AMB[amb].T;
- const mt=mdotD(d,T0)*Math.pow(N,1.6),bpr=d.type==='turbofan'?d.bpr:0,mc=mt/(1+bpr);
- const pr=1+(d.opr-1)*Math.pow(N,2.5),T2=T0*(1+(Math.pow(pr,.2857)-1)/.87);
- T4=Math.max(T4,T2+30);const dTt=cpa*(T2-T0)/cpg,T5=T4-dTt,T5s=T4-dTt/.9;
- const P5=pr*.95*Math.pow(Math.max(T5s,1)/T4,4.03),ne=d.noz==='cd'?.98:(P5>1.85?.93:.97);
- const KE=P5>1?cpg*T5*ne*(1-Math.pow(1/P5,.248)):0;
- let fuel=mc*cpg*(T4-T2)/(LHV*.98),Vj=Math.sqrt(2*KE),thrust=mc*Vj,shp=0,egt=T5,fpr=1;
- if(bpr>0){const et=.8,x=bpr*et/(1+bpr*et),Vb=Math.sqrt(2*et*x*KE/bpr);Vj=Math.sqrt(2*KE*(1-x));thrust=mc*Vj+mc*bpr*Vb;egt=T5-x*KE/cpg;fpr=Math.pow(1+Vb*Vb/(2*cpa*T0*.9),3.5)}
- if(d.type==='turboprop'){const g=GEARS[gear],P=mc*KE*g.x;Vj=Math.sqrt(2*KE*(1-g.x));const rho=101325/(287*T0),Ap=Math.PI*d.prop*d.prop/4;
-  thrust=mc*Vj+Math.cbrt(2*rho*Ap)*Math.pow(g.e*P,2/3);shp=P/745.7;egt=T5-g.x*KE/cpg}
- if(ab&&d.ab&&d.type!=='turboprop'){const T7=2050;if(egt<T7){fuel+=mc*cpg*(T7-egt)/(LHV*.9);const Va=Vj*Math.sqrt(T7/egt)*(d.noz==='cd'?1.04:1);thrust+=mc*(Va-Vj);Vj=Va}}
- return {thrust,fuel,mdot:mt,pr,T4,egt,Vj,shp,fpr,T2}}
-function ramCycle(d,M,thr,lit){
- const T0=216.65,p0=12045,rho=p0/(287*T0),a0=Math.sqrt(1.4*287*T0),V0=M*a0,A=Math.PI*d.D*d.D/4,m=rho*V0*A;
- const tr=1+.2*M*M,Tt=T0*tr,scr=d.type==='scramjet';
- const rec=scr?.275:(M<=1?1:1-.075*Math.pow(M-1,1.35))*.9,Pt=Math.pow(tr,3.5)*rec,Tmax=Math.max(MATS[d.mat].lim+(scr?600:450),Tt);
- const T4=lit?Tt+(Tmax-Tt)*thr:Tt,ne=d.noz==='cd'?.96:.9,KE=Pt>1?1150*T4*ne*(1-Math.pow(1/Pt,.248)):0,V=Math.sqrt(2*KE);
- return {thrust:M>0?m*(V-V0):0,fuel:lit?m*1150*(T4-Tt)/((scr?120e6:43e6)*.92):0,mdot:m,pr:Pt,T4,egt:T4,Vj:V,V0,Tt,shp:0,lim:Tmax}}
-const lim=()=>MATS[d.mat].lim;
-const minM=()=>d.type==='scramjet'?4.5:1.5;
-const machs=()=>d.type==='scramjet'?SCRM:RAMM;
-const tau=()=>.4+.55*Math.pow(mdotD(d),.25)+(d.type==='turboprop'?.6*d.prop/2.5:0);
-
-/* ---------- simulation step ---------- */
+/* ================= STATE ================= */
+const norm=o=>{const d={...DEF,...o};['D','opr','tit','bpr','prop','cool','bleed'].forEach(k=>d[k]=+d[k]||DEF[k]);d.spools=+d.spools===2?2:1;d.ab=!!d.ab;d.vigv=!!d.vigv;d.rev=!!d.rev;if(!TYPES[d.type])d.type='turbojet';if(!MATS[d.mat])d.mat='steel';return d};
+let d=norm(PRESETS[0]);
+const fc={h:0,M:0,dT:0};
+const DMG=[0,.05,.15,1];
+const S={N:0,N1:0,lit:false,litT:0,starter:false,ign:false,fuel:false,thr:0,fa:0,ab:false,rev:false,fadec:true,dmg:0,broken:false,surge:0,gear:2,T4:288,out:{thrust:0,fuel:0,Vj:0,egt:288,T3:288,mdot:0,pr:1,shp:0},hist:[],msg:'',msgT:0,flame:0,over:0,ev:[],vib:0};
+const stage=()=>S.dmg>=4?3:S.dmg>=2.5?2:S.dmg>=1?1:0;
 function say(m,t=3){S.msg=m;S.msgT=t}
+const emit=e=>S.ev.push(e);
+
+/* ================= SIM STEP ================= */
 function step(dt){
- const lm=lim();
- if(ram(d.type)){
-  const M=machs()[S.mi];
-  if(S.lit&&(!S.fuel||M<minM())){S.lit=false;say(M<minM()?'Flameout — tunnel too slow':'Fuel off')}
-  if(!S.lit&&S.ign&&S.fuel&&!S.broken&&S.thr>.04){if(M>=minM()){S.lit=true;say('Light-off',1.5)}else if(S.msgT<=0)say(`Needs Mach ${minM()}+ to light`,1.5)}
+ const isR=ram(d.type),lm=limEff(d);
+ if(isR){
+  const mm=minM(d);
+  if(S.lit&&(!S.fuel||fc.M<mm)){S.lit=false;S.flame=3;say(fc.M<mm?'Flameout — airflow too slow':'Fuel off');}
+  if(!S.lit&&S.ign&&S.fuel&&!S.broken&&S.thr>.04){if(fc.M>=mm){S.lit=true;emit('light');say('Light-off',1.5)}else if(S.msgT<=0)say(`Needs Mach ${mm}+ to light`,1.5)}
   S.fa+=(S.thr-S.fa)*Math.min(1,dt*(S.fadec?3:12));
-  let o=ramCycle(d,M,S.fa,S.lit);
-  if(S.fadec&&o.T4>lm+(d.type==='scramjet'?600:450)-20){S.fa*=.995}
-  o=ramCycle(d,M,S.fa,S.lit);S.T4=o.T4;S.N=M/7;S.out=o;return}
- // turbomachinery
- const m=Math.max(0,Math.min(1,(S.N-.6)/.4));
+  let o=ramCycle(d,fc,S.fa,S.lit);
+  if(S.fadec&&o.T4>o.lim-15)S.fa*=.99;
+  if(o.T4>o.lim)S.dmg+=(o.T4-o.lim)/150*dt;
+  o=ramCycle(d,fc,S.fa,S.lit);S.T4=o.T4;S.N=0;S.N1=0;
+  if(stage()>=3&&!S.broken){S.broken=true;S.lit=false;S.fuel=false;say('COMBUSTOR BURNED THROUGH',6);emit('bang')}
+  o.thrust*=1-DMG[stage()];S.out=o;S.vib=.1+(S.lit?.3*S.fa:0)+stage()*.6;return}
+ const sm=surgeMargin(d,fc),m=clamp((S.N-.6)/.4),tg=tau(d);
+ const base=cycle(d,Math.max(S.N,.05),300,false,fc,S.gear);
  if(S.lit){
   if(!S.fuel){S.lit=false;say('Fuel cut — spooling down')}
-  let target=S.thr;
-  if(S.fadec){const up=Math.min(target,m+.35),dn=Math.max(up,m-.3);S.fa+=(dn-S.fa)*Math.min(1,dt*4)}else S.fa=target;
-  const T2=cycle(d,Math.max(S.N,.2),300,false,S.amb,S.gear).T2;
-  const match=T2+(d.tit-T2)*(.45+.55*m);let e=S.fa-m;
+  else if(base.dl<.045){S.lit=false;S.flame=3;say('Flameout — air too thin to burn');}
+ }
+ if(S.lit){
+  const target=S.rev?Math.min(S.thr,.8):S.thr;
+  if(S.fadec){const up=Math.min(target,m+clamp(sm-.04,.03,.35)),dn=Math.max(up,m-.3);S.fa+=(dn-S.fa)*Math.min(1,dt*4)}else S.fa=target;
+  const T3=base.T3,match=T3+(d.tit-T3)*(.45+.55*m);let e=S.fa-m;
   if(S.fadec){const room=(lm*.97-match)/650;if(e>room){e=room;S.fa=m+e}}
-  let T4=match+e*650+Math.max(0,.32-S.N)*2600*(S.fadec?.25:1)+(S.surge>0?260:0);
-  if(!S.fadec&&S.surge<=0&&S.N<.95&&e>.42-Math.max(0,d.opr-12)*.006){S.surge=1.2;S.N-=.07;say('COMPRESSOR SURGE',2.5);bang()}
-  if(!S.fadec&&e<-.5){S.lit=false;say('Flameout — throttle chopped too fast');}
+  const hot=Math.max(0,.32-S.N)*2600*(S.fadec?.25:1);
+  const T4=match+e*650+hot+(S.surge>0?280:0);
+  if(S.surge<=0&&S.N<.97&&e>sm+(S.fadec?0:.1)){S.surge=1.2;S.N-=.07;say('COMPRESSOR SURGE',2.5);emit('bang')}
+  if(!S.fadec&&e<-.5){S.lit=false;S.flame=3;say('Flameout — throttle chopped too fast')}
   S.T4+=(T4-S.T4)*Math.min(1,dt*5);
   const Nss=.6+.4*Math.max(0,S.fa)-(S.surge>0?.15:0)-(d.type==='turboprop'?(S.gear-1.5)*.02:0);
-  S.N+=(Nss-S.N)*dt/(S.N<.6?1.6:tau());
+  S.N+=(Nss-S.N)*dt/(S.N<.6?1.6:tg);
   if(S.starter&&S.N>.55){S.starter=false;sync()}
  }else{
-  S.fa=0;S.T4+=(AMB[S.amb].T+(S.N>.05?40:0)-S.T4)*Math.min(1,dt*.8);
-  const tgt=S.starter&&!S.broken?.25:0;S.N+=(tgt-S.N)*dt/(S.starter?2.4:3.2);
-  if(S.ign&&S.fuel&&S.N>=.12&&!S.broken){S.litT+=dt;if(S.litT>.5){S.lit=true;S.litT=0;S.T4=Math.max(S.T4,700);say('Light-off',1.5)}}else S.litT=0;
+  S.fa=0;S.T4+=(base.Tt2+(S.N>.05?40:0)-S.T4)*Math.min(1,dt*.8);
+  const wind=fc.M>.25?Math.min(.32,fc.M*.3):0,tgt=Math.max(S.starter&&!S.broken?.25:0,wind);
+  S.N+=(tgt-S.N)*dt/(S.starter?2.4:3.2);
+  if(S.ign&&S.fuel&&S.N>=.12&&!S.broken&&base.dl>.05){S.litT+=dt;if(S.litT>.5){S.lit=true;S.litT=0;S.T4=Math.max(S.T4,700);say(S.starter?'Light-off':'Airstart — relit on windmill',1.5);emit('light')}}else S.litT=0;
  }
  S.N=Math.max(0,S.N);if(S.surge>0)S.surge-=dt;
- if(S.T4>lm){const before=stage();S.dmg+=(S.T4-lm)/120*dt;const st=stage();
-  if(st>before){if(st>=3){S.broken=true;S.lit=false;S.fuel=false;S.starter=false;say('TURBINE COOKED — engine destroyed',6);sync()}else say(`Over-temp damage stage ${st}`,3)}}
- const o=cycle(d,Math.max(S.N,.001),S.T4,S.ab&&S.lit&&S.N>.85,S.amb,S.gear);
- const k=S.lit?(1-[0,.05,.15,1][stage()])*(S.surge>0?.35:1):0;
- o.thrust=S.N<.02?0:Math.max(0,o.thrust*(S.lit?k:.05*S.N));o.fuel=S.lit?o.fuel:0;o.shp*=S.lit?k:0;o.egt=S.lit?o.egt:S.T4;S.out=o;
+ S.N1=d.spools===2?S.N1+(S.N-S.N1)*Math.min(1,dt/(tg*.7)):S.N;
+ const o=cycle(d,Math.max(S.N,.001),S.T4,S.ab&&S.lit&&S.N>.85,fc,S.gear,S.rev);
+ S.over=0;
+ const before=stage();
+ if(S.T4>lm){S.dmg+=(S.T4-lm)/120*dt;S.over=1}
+ if(o.T3>T3max(d)&&S.N>.3){S.dmg+=(o.T3-T3max(d))/150*dt;S.over=2}
+ const st=stage();
+ if(st>before){if(st>=3){S.broken=true;S.lit=false;S.fuel=false;S.starter=false;S.ab=false;say(S.over===2?'COMPRESSOR MELTED — engine destroyed':'TURBINE COOKED — engine destroyed',6);emit('bang');sync()}else say(`${S.over===2?'Compressor':'Turbine'} over-temp — damage stage ${st}`,3)}
+ const k=S.lit?(1-DMG[stage()])*(S.surge>0?.35:1):0;
+ if(!S.lit){o.thrust=fc.M>0?-o.mdot*o.V0*.12:Math.max(0,o.thrust)*.05*S.N;o.fuel=0;o.shp=0;o.egt=S.T4;o.abOn=false;o.Vj=0}
+ else{o.thrust*=k;o.shp*=k}
+ S.vib=.12+S.N*.25+stage()*.7+(S.surge>0?2.5:0)+(S.rev?.15:0);
+ S.out=o;
 }
-const stage=()=>S.dmg>=4?3:S.dmg>=2.5?2:S.dmg>=1?1:0;
 
-/* ---------- sound (synthesised, no files) ---------- */
-let ac=null,A={};
+/* ================= CONTROLS ================= */
+function initSound(){initAudio()}
+function autoStart(){initSound();if(S.broken){say('Rebuild the engine first');return}
+ if(ram(d.type)){if(fc.M<minM(d)){setFC({M:d.type==='scramjet'?6:3,h:Math.max(fc.h,d.type==='scramjet'?20:10)});say('Air supply brought up to light-off speed',2)}S.ign=true;S.fuel=true;S.thr=Math.max(S.thr,.6);sync();return}
+ S.thr=0;S.starter=!S.lit;S.ign=true;S.fuel=true;sync()}
+function stop(){S.fuel=false;S.ab=false;S.starter=false;S.rev=false;S.thr=0;if(test)endTest('Test aborted — engine shut down');sync()}
+function setFC(o){Object.assign(fc,o);fc.h=clamp(fc.h,0,30);fc.M=clamp(fc.M,0,8);syncFC();envMark();renderContracts()}
+function toggleRev(){if(!d.rev){say('No reverser fitted');return}if(!S.rev&&S.N>.75&&S.lit){say('Reverser locked — pull back to idle first',2);return}S.rev=!S.rev;sync()}
+function toggleAB(){if(!d.ab||d.type==='turboprop'||ram(d.type))return;S.ab=!S.ab;if(S.ab&&S.N<.85&&S.lit)say('Afterburner arms above 85% spool',2);sync()}
+
+/* ================= TEST RUNNER (dyno + certification) ================= */
+let test=null;
+function startTest(kind,contract){
+ if(test){endTest('Test aborted');return}
+ if(S.broken){say('Rebuild the engine first');return}
+ if(contract){const r=contract.req;if(r.types&&!r.types.includes(d.type)){$('certMsg').textContent=`${contract.name}: needs a ${r.types.map(t=>TYPES[t].toLowerCase()).join(' or ')}.`;return}setFC({...contract.fc})}
+ test={kind,contract,t:0,ph:0,t0:0,dry:0,wet:0,best:Infinity,sfcMax:null,spool:null,shp:0,target:0};
+ S.rev=false;S.ab=false;if(!S.lit)autoStart();
+ $('testBadge').hidden=false;sync();
+ location.hash=contract?'contracts':'dyno';
+}
+function testMsg(m){$('testBadge').textContent=(test&&test.contract?'CERTIFYING · ':'DYNO · ')+m;(test&&test.contract?$('certMsg'):$('dynoMsg')).textContent=m}
+function testStep(dt){
+ if(!test)return;const T=test,o=S.out,isR=ram(d.type);T.t+=dt;
+ const rec=()=>{if(!S.ab&&o.thrust>T.dry)T.dry=o.thrust;if(o.thrust>.05*Math.max(T.dry,1)&&o.fuel>0&&!S.ab)T.best=Math.min(T.best,o.fuel/o.thrust*1e6);if(o.shp>T.shp)T.shp=o.shp};
+ if(T.ph===0){testMsg('Starting engine…');S.thr=isR?.6:0;
+  if(S.lit&&(isR||S.N>.58)){T.ph=1;T.t0=T.t}else if(T.t>35){endTest('Failed — the engine would not start at this condition');}return}
+ if(!S.lit){endTest('Failed — the engine went out during the test');return}
+ const el=T.t-T.t0;
+ if(isR){S.thr=.2+.8*clamp(el/6);rec();testMsg('Fuel sweep…');if(el>7){T.sfcMax=o.fuel/Math.max(1,o.thrust)*1e6;finishTest()}return}
+ if(T.ph===1){S.thr=0;testMsg('Idle hold…');if(el>2){T.ph=2;T.t0=T.t;T.target=cycle(d,1,Math.min(d.tit,limEff(d)*.97),false,fc,S.gear).thrust*(1-DMG[stage()])}}
+ else if(T.ph===2){S.thr=1;testMsg('Full power — timing spool-up…');rec();if(T.spool==null&&o.thrust>=.95*T.target)T.spool=el;
+  if(el>Math.max(5,(T.spool||0)+2.5)||el>40){T.sfcMax=o.fuel/Math.max(1,o.thrust)*1e6;T.ph=3;T.t0=T.t}}
+ else if(T.ph===3){S.thr=1-.7*clamp(el/6);testMsg('Economy sweep…');rec();if(el>6.5){T.ph=d.ab?4:5;T.t0=T.t}}
+ else if(T.ph===4){S.thr=1;if(!S.ab&&S.N>.88){S.ab=true;sync()}testMsg('Afterburner…');if(o.abOn&&o.thrust>T.wet)T.wet=o.thrust;if(el>6){S.ab=false;sync();T.ph=5}}
+ else finishTest();
+}
+function endTest(msg){if(!test)return;const c=test.contract;test=null;$('testBadge').hidden=true;S.ab=false;(c?$('certMsg'):$('dynoMsg')).textContent=msg;sync()}
+function finishTest(){const T=test;S.thr=.15;S.ab=false;
+ const res={dry:T.dry,wet:T.wet,sfc:T.sfcMax,best:isFinite(T.best)?T.best:null,spool:T.spool,shp:T.shp};
+ const r={name:d.name||'Custom engine',type:d.type,cond:condLabel(),date:new Date().toLocaleString(),...res};
+ runs.push(r);if(runs.length>60)runs.shift();store.set('ggf-runs',runs);
+ if(T.contract){const ev=evalContract(T.contract,res);const c=T.contract;
+  const prev=stars[c.id]||0;if(ev.stars>prev){stars[c.id]=ev.stars;store.set('ggf-stars',stars)}
+  test=null;$('testBadge').hidden=true;
+  $('certMsg').textContent=ev.stars?`${c.name}: certified ${'★'.repeat(ev.stars)}${ev.stars>prev?' — new best!':''}`:`${c.name}: failed — ${ev.fails.join(', ')}`;
+  renderContracts();renderStars()}
+ else{test=null;$('testBadge').hidden=true;$('dynoMsg').textContent='Run complete';
+  $('dynoRes').innerHTML=specHTML([['Max thrust (dry)',(res.dry/1e3).toFixed(1)+' kN'],['Afterburner',res.wet?(res.wet/1e3).toFixed(1)+' kN':'–'],['TSFC at max',res.sfc?res.sfc.toFixed(1)+' g/kN·s':'–'],['Best TSFC',res.best?res.best.toFixed(1)+' g/kN·s':'–'],['Spool-up',res.spool!=null?res.spool.toFixed(1)+' s':'–'],['Shaft power',res.shp?Math.round(res.shp).toLocaleString()+' hp':'–']])}
+ renderRuns();sync()}
+const condLabel=()=>`${fc.h.toFixed(1)} km · M${fc.M.toFixed(2)}${fc.dT?` · ${fc.dT>0?'+':''}${fc.dT} °C`:''}`;
+
+/* contract evaluation */
+let stars=store.get('ggf-stars',{}),runs=store.get('ggf-runs',[]);
+const REQ={thrust:['Dry thrust','≥',v=>(v/1e3).toFixed(1)+' kN',r=>r.dry],wet:['Reheat thrust','≥',v=>(v/1e3).toFixed(1)+' kN',r=>r.wet],sfc:['TSFC at max','≤',v=>v==null?'–':v.toFixed(1)+' g/kN·s',r=>r.sfc],
+ weight:['Weight','≤',v=>Math.round(v).toLocaleString()+' kg',()=>weight(d)],cost:['Build cost','≤',v=>money(v),()=>cost(d)],shp:['Shaft power','≥',v=>Math.round(v).toLocaleString()+' hp',r=>r.shp],
+ spool:['Spool-up','≤',v=>v==null?'–':v.toFixed(1)+' s',r=>r.spool],bleed:['Cabin bleed','≥',v=>v.toFixed(1)+' %',()=>d.bleed]};
+function evalContract(c,res){const rows=[],fails=[];let mn=Infinity;
+ if(c.req.types){const ok=c.req.types.includes(d.type);rows.push(['Engine type',c.req.types.map(t=>TYPES[t]).join('/'),TYPES[d.type],ok]);if(!ok)fails.push('wrong engine type')}
+ for(const k in REQ){if(c.req[k]==null)continue;const [lab,op,f,get]=REQ[k],req=c.req[k],v=get(res);let ok=false,mg=-1;
+  if(v!=null&&isFinite(v)){mg=op==='≥'?(v-req)/req:(req-v)/req;ok=mg>=0}
+  if(k!=='bleed')mn=Math.min(mn,mg);rows.push([lab,op+' '+f(req),v==null?'–':f(v),ok]);if(!ok)fails.push(lab.toLowerCase())}
+ if(c.req.rev){rows.push(['Thrust reverser','fitted',d.rev?'fitted':'none',d.rev]);if(!d.rev)fails.push('no reverser')}
+ const st=fails.length?0:mn>=.15?3:mn>=.05?2:1;return {rows,fails,stars:st}}
+function predict(c){const o=perfMax(d,c.fc,false,S.gear),w=d.ab&&!ram(d.type)?perfMax(d,c.fc,true,S.gear).thrust:0;return {dry:o.thrust,wet:w,sfc:o.thrust>1?o.fuel/o.thrust*1e6:null,spool:ram(d.type)?null:predSpool(d,c.fc),shp:o.shp}}
+
+/* ================= SOUND =================
+   Built from the noise sources a real engine makes:
+   - jet mixing roar: broadband noise peaking at Strouhal f ≈ 0.2·Vjet/Dnozzle (big slow jets rumble, small fast jets tear)
+   - fan / compressor blade-passing tones: shaft rpm × blade count, with harmonics
+   - buzz-saw: shaft-order tones when big fan tips go supersonic
+   - combustion rumble, afterburner roar with random crackle
+   - air starter whine, ignitor ticks, light-off whoomp, surge bang
+   - turboprop blade-pass drone with prop "wop" modulation
+   - everything sent through a synthetic concrete-room reverb */
+let ac=null,A=null,snd=false,tickT=0;
 function initAudio(){if(ac)return;try{ac=new (window.AudioContext||window.webkitAudioContext)()}catch(e){return}
- const len=ac.sampleRate*2,buf=ac.createBuffer(1,len,ac.sampleRate),ch=buf.getChannelData(0);for(let i=0;i<len;i++)ch[i]=Math.random()*2-1;
- const mk=(type,f)=>{const s=ac.createBufferSource();s.buffer=buf;s.loop=true;const fl=ac.createBiquadFilter();fl.type=type;fl.frequency.value=f;const g=ac.createGain();g.gain.value=0;s.connect(fl).connect(g).connect(A.master);s.start();return{fl,g}};
- A.master=ac.createGain();A.master.gain.value=.6;A.master.connect(ac.destination);
- A.roar=mk('bandpass',400);A.rumble=mk('lowpass',140);
- A.osc=ac.createOscillator();A.osc.type='sawtooth';A.wf=ac.createBiquadFilter();A.wf.type='bandpass';A.wf.Q.value=8;A.wg=ac.createGain();A.wg.gain.value=0;A.osc.connect(A.wf).connect(A.wg).connect(A.master);A.osc.start();A.buf=buf}
-function bang(){if(!ac||!snd)return;const s=ac.createBufferSource();s.buffer=A.buf;const g=ac.createGain();g.gain.setValueAtTime(1,ac.currentTime);g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+.6);const f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=600;s.connect(f).connect(g).connect(A.master);s.start();s.stop(ac.currentTime+.7)}
-let snd=false;
-function audio(){if(!ac)return;const t=ac.currentTime,o=S.out,mx=Math.max(1,designMax().dry),tn=Math.min(1.5,(o.thrust||0)/mx),N=ram(d.type)?0:S.N,on=snd?1:0;
- A.roar.g.gain.setTargetAtTime(on*(S.lit?.08+.45*tn:.02*N),t,.1);A.roar.fl.frequency.setTargetAtTime(250+900*(ram(d.type)?tn:N),t,.1);
- A.rumble.g.gain.setTargetAtTime(on*((S.ab&&S.lit&&S.N>.85)||(ram(d.type)&&S.lit)?.9:S.lit?.15*tn:0),t,.15);
- const wf=(d.type==='turbofan'&&d.bpr>3?1800:3200)*N+200;A.osc.frequency.setTargetAtTime(wf,t,.1);A.wf.frequency.setTargetAtTime(wf,t,.1);A.wg.gain.setTargetAtTime(on*.05*N,t,.1)}
-
-/* ---------- drawing ---------- */
-const cv=$('cv'),x=cv.getContext('2d');let C={},phase=0,parts=[],tm=0;
-function readColors(){const cs=getComputedStyle(document.body);const p=v=>{const e=document.createElement('i');e.style.color=`var(${v})`;document.body.appendChild(e);const c=getComputedStyle(e).color;e.remove();return c};C={ink:p('--ink'),cell:p('--cell'),steel:p('--steel'),line:p('--line'),mute:p('--mute'),panel:p('--panel')}}
-function heat(T,a){const t=Math.max(0,Math.min(1,(T-650)/1500));return `rgba(${Math.round(90+165*Math.min(1,t*2))},${Math.round(20+235*Math.max(0,t-.3)/.7)},${Math.round(15+240*Math.max(0,t-.75)/.25)},${a})`}
-const PROF={turbojet:[[0,.72],[.06,.8],[.25,.82],[.62,.84],[.82,.78],[1,.6]],turbofan:[[0,1],[.04,1.05],[.32,1.02],[.42,.88],[.46,.6],[.8,.56],[1,.42]],
- turboprop:[[0,.32],[.1,.6],[.6,.62],[.86,.55],[1,.46]],ramjet:[[0,.55],[.12,.62],[.86,.62],[1,.7]],scramjet:[[0,.3],[.28,.52],[.8,.52],[1,.72]]};
-const ZONES={turbojet:[['Compressor',.1,.42,'c'],['Combustor',.42,.6,'b'],['Turbine',.6,.72,'t'],['Nozzle',.72,.98,'n']],
- turbofan:[['Fan',.02,.1,'f'],['Compressor',.14,.5,'c'],['Combustor',.5,.66,'b'],['Turbine',.66,.78,'t'],['Nozzle',.78,.98,'n']],
- turboprop:[['Compressor',.12,.45,'c'],['Combustor',.45,.6,'b'],['Turbine',.6,.78,'t'],['Exhaust',.78,.98,'n']],
- ramjet:[['Inlet',.02,.32,'i'],['Combustor',.32,.84,'b'],['Nozzle',.84,1,'n']],scramjet:[['Inlet ramp',.02,.3,'i'],['Supersonic combustor',.3,.8,'b'],['Nozzle',.8,1,'n']]};
-function draw(dt){
- const W=cv.clientWidth,H=cv.clientHeight,dpr=window.devicePixelRatio||1;if(!W||!H)return;
- if(cv.width!==Math.round(W*dpr)||cv.height!==Math.round(H*dpr)){cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr)}
- x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);tm+=dt;
- const o=S.out,t=d.type,isR=ram(t),floor=H*.86;
- // cell wall + floor
- x.fillStyle=C.line;x.globalAlpha=.35;for(let i=0;i<W;i+=48)x.fillRect(i,0,1,floor);x.globalAlpha=1;
- x.fillStyle=C.line;x.fillRect(0,floor,W,H-floor);x.fillStyle=C.steel;x.fillRect(0,floor,W,2);
- const len=Math.min(W*.5,H*1.9),x0=W*(t==='turboprop'?.15:.08),cy=H*.46,R=Math.min(H*.2,len*.22)*(t==='turbofan'?Math.min(1.25,.85+d.bpr*.04):1),xe=x0+len;
- const N=isR?0:S.N,M=isR?machs()[S.mi]:0;
- // inflow streaks
- const sp=isR?M*260:N*700;
- if(sp>5){x.strokeStyle=C.mute;x.globalAlpha=.45;x.lineWidth=1.5;for(let i=0;i<16;i++){const y=cy+((i+.5)/16*2-1)*R*1.1,span=isR?W:x0,px=((tm*sp+i*137)%span);x.beginPath();x.moveTo(px,y);x.lineTo(px+Math.min(60,sp/12),y);x.stroke()}x.globalAlpha=1}
- // plume
- const Vj=o.Vj||0,abOn=(S.ab&&S.lit&&S.N>.85&&d.ab)||(isR&&S.lit);
- const rn=R*PROF[t][PROF[t].length-1][1];
- if(Vj>20&&(S.lit||isR)){const L=Math.min(W-xe,Math.max(0,(Vj-(o.V0||0)*.5)/1500)*len*(abOn?1.1:.8));
-  const gr=x.createLinearGradient(xe,0,xe+L,0);gr.addColorStop(0,abOn?heat(o.egt+600,.85):heat(o.egt,.35));gr.addColorStop(1,'rgba(255,140,60,0)');
-  x.fillStyle=gr;x.beginPath();x.moveTo(xe,cy-rn*.9);x.lineTo(xe+L,cy-rn*1.6);x.lineTo(xe+L,cy+rn*1.6);x.lineTo(xe,cy+rn*.9);x.fill();
-  if(abOn||d.noz==='cd'&&Vj>700){const fl=.7+.3*Math.sin(tm*40);for(let k=1;k<6;k++){const px=xe+k*rn*1.7;if(px>xe+L*.8)break;x.fillStyle=`rgba(255,${abOn?170:220},${abOn?210:255},${(abOn?.65:.3)*fl/k**.5})`;x.beginPath();x.ellipse(px,cy,rn*.35,rn*.55,0,0,7);x.fill()}}}
- // stand
- x.fillStyle=C.steel;for(const u of [.3,.7]){const px=x0+len*u;x.fillRect(px-6,cy+R*.5,12,floor-cy-R*.5)}x.fillRect(x0+len*.25,floor-10,len*.5,10);
- // prop
- if(t==='turboprop'){const pr=Math.min(H*.42,R*d.prop/1.1),px=x0+len*.03;phase+=N*dt*60;
-  if(N>.45){x.fillStyle=C.steel;x.globalAlpha=.35;x.beginPath();x.ellipse(px,cy,8,pr,0,0,7);x.fill();x.globalAlpha=1}
-  else{x.strokeStyle=C.steel;x.lineWidth=8;x.lineCap='round';for(let b=0;b<4;b++){const a=phase+b*Math.PI/2;x.beginPath();x.moveTo(px,cy);x.lineTo(px+Math.cos(a)*6,cy+Math.sin(a)*pr);x.stroke()}}}
- // body
- const path=()=>{const p=PROF[t];x.beginPath();p.forEach(([u,v],i)=>{const X=x0+u*len,Y=cy-v*R;i?x.lineTo(X,Y):x.moveTo(X,Y)});for(let i=p.length-1;i>=0;i--)x.lineTo(x0+p[i][0]*len,cy+p[i][1]*R);x.closePath()};
- const mg=x.createLinearGradient(0,cy-R,0,cy+R);mg.addColorStop(0,'#d9e0de');mg.addColorStop(.35,'#9aa7a4');mg.addColorStop(1,'#4b5754');
- path();x.fillStyle=mg;x.fill();
- // cutaway
- x.save();path();x.clip();const ir=R*(t==='turbofan'?.5:t==='turboprop'?.48:.62);
- x.fillStyle='#161c1b';x.fillRect(x0+len*.02,cy-ir,len*.98,ir*2);
- if(t==='turbofan'){x.fillStyle='#232b2a';x.fillRect(x0+len*.1,cy-R*.95,len*.34,R*.38);x.fillRect(x0+len*.1,cy+R*.57,len*.34,R*.38)}
- phase+=dt*N*900;
- for(const [,a,b,k] of ZONES[t]){const X0=x0+a*len,X1=x0+b*len,w=X1-X0;
-  if(k==='c'||k==='t'||k==='f'){const h=k==='f'?R*.98:ir*.92,n=Math.max(4,Math.floor(w/7));x.strokeStyle=k==='t'?heat(S.T4-200,.9):'#9fb0ad';x.lineWidth=2;
-   for(let i=0;i<n;i++){const px=X0+((i*7+phase)%w),tp=k==='c'?1-.35*(px-X0)/w:1;x.globalAlpha=N>.5?.45:.9;x.beginPath();x.moveTo(px,cy-h*tp);x.lineTo(px,cy+h*tp);x.stroke()}x.globalAlpha=1;
-   if(k==='t'){x.fillStyle=heat(S.T4-150,.35);x.fillRect(X0,cy-ir,w,ir*2)}}
-  if(k==='b'){const T=S.lit||isR?S.T4:300,g=x.createRadialGradient(X0+w/2,cy,2,X0+w/2,cy,w*.7);g.addColorStop(0,heat(T,S.lit?.95:.2));g.addColorStop(1,heat(T-300,0));x.fillStyle=g;x.fillRect(X0,cy-ir,w,ir*2);
-   if(S.lit){x.fillStyle=heat(T+200,.8);for(let i=0;i<6;i++){const fx=X0+w*(.2+.12*i),fy=cy+Math.sin(tm*30+i)*ir*.3;x.beginPath();x.arc(fx,fy,ir*.18,0,7);x.fill()}}}
-  if(k==='n'&&abOn&&!isR){const g=x.createLinearGradient(X0,0,X1,0);g.addColorStop(0,'rgba(255,120,40,.2)');g.addColorStop(1,'rgba(255,200,120,.9)');x.fillStyle=g;x.fillRect(X0,cy-ir,w,ir*2)}
-  if(k==='i'){x.strokeStyle='rgba(180,220,255,.6)';x.lineWidth=1.5;for(let s=0;s<3;s++){x.beginPath();x.moveTo(X0+w*.1,cy-ir*(.9-s*.25));x.lineTo(X1,cy);x.stroke()}}}
- x.restore();
- if(t==='ramjet'){x.fillStyle='#b9c4c1';x.beginPath();x.moveTo(x0-len*.08,cy);x.lineTo(x0+len*.22,cy-R*.32);x.lineTo(x0+len*.22,cy+R*.32);x.closePath();x.fill()}
- path();x.strokeStyle='#2c3533';x.lineWidth=1.5;x.stroke();
- // labels
- x.fillStyle=C.ink;x.font='600 12px Barlow, sans-serif';x.textAlign='center';
- const ly=Math.min(floor-30,cy+R*1.12+14);let re=-1e9,row=0;if(len>220)for(const [n,a,b] of ZONES[t]){const lx=x0+(a+b)/2*len,hw=x.measureText(n).width/2;if(t==='turbofan'&&n==='Fan'){x.fillText(n,lx,cy-R*1.12);continue}row=lx-hw<re+6?1-row:0;x.fillText(n,lx,ly+row*15);re=lx+hw}
- // surge flash + particles
- if(S.surge>0){x.fillStyle=`rgba(255,150,50,${S.surge/1.2})`;x.beginPath();x.ellipse(x0,cy,R*.6*(1.4-S.surge/1.2),R*.8,0,0,7);x.fill()}
- if((stage()>0&&S.lit)||(S.broken&&S.N>.02)||(S.broken&&tm%1<.5&&parts.length<40))parts.push({x:xe,y:cy,vx:40+Math.random()*60,vy:-20-Math.random()*30,l:2.5});
- x.fillStyle=C.mute;parts=parts.filter(p=>(p.l-=dt)>0);for(const p of parts){p.x+=p.vx*dt;p.y+=p.vy*dt;x.globalAlpha=p.l/2.5*.5;x.beginPath();x.arc(p.x,p.y,8+(2.5-p.l)*10,0,7);x.fill()}x.globalAlpha=1;
- if(isR){x.fillStyle=C.ink;x.textAlign='left';x.font='700 15px "Barlow Condensed", sans-serif';x.fillText(`Wind tunnel · Mach ${M} · simulated 15 km altitude`,12,floor+22)}
+ const sr=ac.sampleRate,mkBuf=pink=>{const len=sr*3,b=ac.createBuffer(1,len,sr),c=b.getChannelData(0);let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+  for(let i=0;i<len;i++){const w=Math.random()*2-1;if(!pink){c[i]=w;continue}b0=.99886*b0+w*.0555179;b1=.99332*b1+w*.0750759;b2=.969*b2+w*.153852;b3=.8665*b3+w*.3104856;b4=.55*b4+w*.5329522;b5=-.7616*b5-w*.016898;c[i]=(b0+b1+b2+b3+b4+b5+b6+w*.5362)*.11;b6=w*.115926}return b};
+ A={white:mkBuf(false),pink:mkBuf(true)};
+ const F=(type,f,Q)=>{const n=ac.createBiquadFilter();n.type=type;n.frequency.value=f;if(Q)n.Q.value=Q;return n},G=(v=0)=>{const g=ac.createGain();g.gain.value=v;return g};
+ const loop=buf=>{const s=ac.createBufferSource();s.buffer=buf;s.loop=true;s.start(0,Math.random()*2.5);return s};
+ const chain=(...n)=>{for(let i=0;i<n.length-1;i++)n[i].connect(n[i+1]);return n[n.length-1]};
+ A.out=ac.createDynamicsCompressor();A.out.threshold.value=-16;A.out.ratio.value=5;A.out.connect(ac.destination);
+ A.master=G(0);A.master.connect(A.out);
+ // concrete test-cell reverb (generated impulse with early slap)
+ const len=sr*2.2,ir=ac.createBuffer(2,len,sr);for(let ch=0;ch<2;ch++){const c=ir.getChannelData(ch);for(let i=0;i<len;i++){const t=i/sr;c[i]=(Math.random()*2-1)*Math.pow(1-t/2.2,3.2)*(t<.03?.2:1)*((i%Math.round(sr*.047))<40?2.5:1)}}
+ A.conv=ac.createConvolver();A.conv.buffer=ir;A.wet=G(.32);chain(A.master,A.conv,A.wet,A.out);
+ const shaper=ac.createWaveShaper(),cv=new Float32Array(1024);for(let i=0;i<1024;i++){const x=i/512-1;cv[i]=Math.tanh(2.2*x)}shaper.curve=cv;
+ A.bus=G(1);chain(A.bus,shaper,A.master);
+ A.roarF=F('bandpass',300,.55);A.roarG=G();chain(loop(A.pink),A.roarF,A.roarG,A.bus);
+ A.bodyF=F('lowpass',140);A.bodyG=G();chain(loop(A.pink),A.bodyF,A.bodyG,A.bus);
+ A.tearF=F('highpass',2500);A.tearG=G();chain(loop(A.white),A.tearF,A.tearG,A.bus);
+ A.hissF=F('bandpass',3000,.7);A.hissG=G();chain(loop(A.white),A.hissF,A.hissG,A.bus);
+ A.rumbF=F('lowpass',170);A.rumbG=G();chain(loop(A.white),A.rumbF,A.rumbG,A.bus);
+ A.abF=F('lowpass',360);A.abG=G();chain(loop(A.pink),A.abF,A.abG,A.bus);
+ const pw=(h)=>{const re=new Float32Array(h.length+1),im=new Float32Array(h.length+1);h.forEach((v,i)=>im[i+1]=v);return ac.createPeriodicWave(re,im)};
+ const osc=(wave,f)=>{const o=ac.createOscillator();if(typeof wave==='string')o.type=wave;else o.setPeriodicWave(wave);o.frequency.value=f;o.start();return o};
+ A.fan=osc(pw([1,.5,.3,.18,.1,.06]),200);A.fanG=G();chain(A.fan,A.fanG,A.master);
+ A.buzz=osc('sawtooth',50);A.buzzF=F('bandpass',900,.7);A.buzzG=G();chain(A.buzz,A.buzzF,A.buzzG,A.master);
+ A.comp=osc('triangle',3000);A.compG=G();chain(A.comp,A.compG,A.master);
+ A.comp2=osc('sine',6000);A.comp2G=G();chain(A.comp2,A.comp2G,A.master);
+ A.prop=osc(pw([1,.7,.5,.35,.25,.15,.1,.06]),100);A.propF=F('lowpass',1100);A.propG=G();A.propAM=G(0);chain(A.prop,A.propF,A.propG,A.master);
+ A.lfo=osc('sine',20);A.lfoG=G(0);chain(A.lfo,A.lfoG,A.propG.gain);
+ A.st=osc('sawtooth',300);A.stF=F('lowpass',2400);A.stG=G();chain(A.st,A.stF,A.stG,A.master);
+ A.F=F;A.G=G;
+}
+function burst(dur,type,f,vol,attack=.002,Q){if(!ac||!snd)return;const t=ac.currentTime,s=ac.createBufferSource();s.buffer=Math.random()<.5?A.white:A.pink;const fl=A.F(type,f,Q),g=A.G(0);
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+attack);g.gain.exponentialRampToValueAtTime(.0005,t+dur);s.connect(fl).connect(g).connect(A.master);s.start(t,Math.random()*2);s.stop(t+dur+.05)}
+function ping(f,dur,vol,f2){if(!ac||!snd)return;const t=ac.currentTime,o=ac.createOscillator(),g=A.G(0);o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+dur);g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0005,t+dur);o.connect(g).connect(A.master);o.start(t);o.stop(t+dur+.02)}
+function soundEvents(){for(const e of S.ev){if(e==='bang'){burst(.9,'lowpass',500,1.6,.003);burst(.25,'bandpass',1500,.8,.002,.6);ping(140,.6,.5,35)}if(e==='light'){burst(1.1,'lowpass',260,1.3,.12);burst(.5,'bandpass',700,.35,.05)}}S.ev.length=0}
+function audio(dt){if(!ac)return;soundEvents();const t=ac.currentTime,o=S.out,isR=ram(d.type),on=snd?1:0,set=(p,v,tc=.08)=>p.setTargetAtTime(v,t,tc);
+ set(A.master.gain,on*.85,.15);if(!snd)return;
+ const N2=S.N,N1=S.N1,fan=d.type==='turbofan',prop=d.type==='turboprop',lit=S.lit,D=d.D;
+ const dc=D/Math.sqrt(1+(fan?d.bpr:0)),dn=Math.max(.06,dc*.6),Vj=lit?(o.Vj||0):0,Vb=fan&&lit?Math.max(0,(o.Vb||0)-(o.V0||0)):0;
+ const rpm1=450/(Math.PI*D)*60*N1,rpm2=430/(Math.PI*Math.max(.08,dc*.75))*60*N2;
+ const size=clamp(Math.sqrt(D),.35,1.6);
+ // jet mixing roar (core + bypass), louder with velocity^~3, lower with size
+ const jl=clamp(Math.pow(Vj/650,3)*size,0,1.4),bl=clamp(Math.pow(Vb/320,2.2)*size*.6,0,.9);
+ set(A.roarF.frequency,clamp(.2*Vj/dn,45,2600));set(A.roarG.gain,.55*jl+.25*bl);
+ set(A.bodyF.frequency,clamp(.2*Math.max(Vj,Vb*2)/(dn*2.2),35,220));set(A.bodyG.gain,(.35*jl+.5*bl)*size);
+ set(A.tearG.gain,.06*clamp((Vj-450)/500)*(o.abOn?1.8:1));
+ // inlet / fan airflow hiss
+ const flow=isR?clamp(fc.M/6):N1;set(A.hissF.frequency,1800+2500*flow);set(A.hissG.gain,(.02+.09*flow*flow)*(fan?1.5:1)*(S.rev?1.6:1));
+ // combustion rumble
+ set(A.rumbG.gain,lit?.12+.3*(isR?S.fa:S.fa):0);
+ // afterburner / ramjet roar + crackle
+ const abOn=!!o.abOn&&lit,abl=abOn?(isR?.6+.4*S.fa:1):0;set(A.abG.gain,.9*abl);set(A.abF.frequency,isR?500:340);
+ const crack=abOn?(isR?18:34):Math.max(0,(Vj-720)/12);if(Math.random()<crack*dt)burst(.012+Math.random()*.02,'highpass',1200+Math.random()*2500,.25+Math.random()*.7,.001);
+ if(isR){['fanG','buzzG','compG','comp2G','propG','stG'].forEach(k=>set(A[k].gain,0));set(A.lfoG.gain,0);return}
+ // fan / first-stage blade-pass tone with harmonics
+ const bpf1=rpm1/60*(fan?22:prop?14:18);set(A.fan.frequency,Math.min(bpf1,9000));set(A.fanG.gain,N1*(fan?.055:.03)*(1-.5*clamp(jl)));
+ // buzz-saw: supersonic fan tips produce shaft-order harmonics
+ const tipM=N1*450/340,bz=fan&&D>.7?clamp((tipM-1)*4)*(.06+.06*clamp(D/2)):0;set(A.buzz.frequency,Math.max(20,rpm1/60));set(A.buzzF.frequency,500+700*N1);set(A.buzzG.gain,bz);
+ // HP compressor whine (the classic high-pitched scream), beating second tone
+ const bpf2=Math.min(rpm2/60*38,11000);set(A.comp.frequency,bpf2);set(A.comp2.frequency,Math.min(bpf2*2.013,15000));
+ set(A.compG.gain,N2>.05?(.022+.03*N2)*(1-.6*clamp(jl)):0);set(A.comp2G.gain,N2>.05?.012*N2:0);
+ // turboprop drone with prop rotation modulation
+ if(prop){const pr=1700*N1*(1-.04*(S.gear-2)),bpfP=pr/60*4;set(A.prop.frequency,Math.max(10,bpfP));set(A.propG.gain,clamp(N1*1.1)*.3*(.7+.15*S.gear));set(A.lfo.frequency,Math.max(1,pr/60));set(A.lfoG.gain,.08*N1)}
+ else{set(A.propG.gain,0);set(A.lfoG.gain,0)}
+ // air starter whine
+ set(A.st.frequency,250+3200*clamp(N2/.3));set(A.stG.gain,S.starter?.07:0,.2);
+ // ignitor ticks while ignition is on and the engine is unlit
+ if(S.ign&&!S.lit&&!S.broken){tickT-=dt;if(tickT<=0){tickT=.42;burst(.006,'highpass',3500,.7,.0005);ping(2300,.03,.06)}}
 }
 
-/* ---------- chart ---------- */
-const ch=$('chart'),cx=ch.getContext('2d');
-function drawChart(){const W=ch.clientWidth,H=ch.clientHeight,dpr=window.devicePixelRatio||1;if(!W)return;if(ch.width!==Math.round(W*dpr)){ch.width=Math.round(W*dpr);ch.height=Math.round(H*dpr)}
- cx.setTransform(dpr,0,0,dpr,0,0);cx.clearRect(0,0,W,H);const h=S.hist,mx=Math.max(1,...h.map(v=>v[0]),designMax().wet);
- cx.fillStyle=C.mute;cx.font='12px Barlow';cx.fillText('Thrust, last 30 s',2,12);
- const line=(i,col)=>{cx.strokeStyle=col;cx.lineWidth=2;cx.beginPath();h.forEach((v,j)=>{const px=j/(300-1)*W,py=H-2-(v[i]/mx)*(H-18);j?cx.lineTo(px,py):cx.moveTo(px,py)});cx.stroke()};line(0,'#ff6a1a')}
+/* ================= DRAWING: TEST CELL ================= */
+const cv=$('cv'),x=cv.getContext('2d');
+let bgC=null,bgKey='',tm=0,ph1=0,ph2=0,phP=0,parts=[],dust=[];
+const DPR=()=>Math.min(2,window.devicePixelRatio||1);
+function heat(T,a){const t=clamp((T-650)/1500);return `rgba(${Math.round(90+165*Math.min(1,t*2))},${Math.round(18+237*Math.max(0,t-.3)/.7)},${Math.round(12+243*Math.max(0,t-.75)/.25)},${a})`}
+function buildBg(W,H){const c=document.createElement('canvas'),dp=DPR();c.width=W*dp;c.height=H*dp;const g=c.getContext('2d');g.scale(dp,dp);
+ const fl=H*.82;let sd=11;const rnd=()=>(sd=(sd*16807)%2147483647)/2147483647;
+ let gr=g.createLinearGradient(0,0,0,fl);gr.addColorStop(0,'#141615');gr.addColorStop(.55,'#24272500');gr.addColorStop(1,'#2c302d');g.fillStyle='#202321';g.fillRect(0,0,W,fl);g.fillStyle=gr;g.fillRect(0,0,W,fl);
+ for(let i=0;i<W*H/700;i++){g.fillStyle=`rgba(0,0,0,${.03+rnd()*.09})`;g.beginPath();g.ellipse(rnd()*W,rnd()*fl,4+rnd()*55,3+rnd()*26,rnd()*3,0,7);g.fill()}
+ for(let i=0;i<W*H/2500;i++){g.fillStyle=`rgba(255,255,240,${rnd()*.028})`;g.beginPath();g.ellipse(rnd()*W,rnd()*fl,3+rnd()*40,3+rnd()*18,0,0,7);g.fill()}
+ for(let i=0;i<W/30;i++){const sx=rnd()*W,len=30+rnd()*fl*.7,s=g.createLinearGradient(0,0,0,len);s.addColorStop(0,'rgba(0,0,0,.22)');s.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=s;g.fillRect(sx,0,1+rnd()*5,len)}
+ for(let px=110;px<W;px+=190){g.fillStyle='rgba(0,0,0,.5)';g.fillRect(px,0,3,fl);g.fillStyle='rgba(255,255,255,.05)';g.fillRect(px+3,0,1,fl)}
+ for(let k=1;k<3;k++){const py=fl*k/3;g.fillStyle='rgba(0,0,0,.4)';g.fillRect(0,py,W,2);g.fillStyle='rgba(255,255,255,.04)';g.fillRect(0,py+2,W,1)}
+ g.fillStyle='rgba(0,0,0,.45)';for(let px=55;px<W;px+=95)for(let k=0;k<3;k++){g.beginPath();g.arc(px,fl*(k+.5)/3,2.5,0,7);g.fill()}
+ // overhead cable tray and pipes
+ g.fillStyle='#161817';g.fillRect(0,H*.035,W,H*.025);g.fillStyle='rgba(255,255,255,.06)';g.fillRect(0,H*.035,W,1);
+ g.strokeStyle='#3a3f3c';g.lineWidth=6;g.beginPath();g.moveTo(0,H*.085);g.lineTo(W,H*.085);g.stroke();g.strokeStyle='rgba(255,255,255,.08)';g.lineWidth=1;g.beginPath();g.moveTo(0,H*.085-2);g.lineTo(W,H*.085-2);g.stroke();
+ g.fillStyle='#8a2a1c';for(let px=40;px<W;px+=160)g.fillRect(px,H*.085-5,10,10);
+ // stencilled wall marks
+ g.font=`800 ${Math.round(H*.12)}px "Big Shoulders Stencil Display","Barlow Condensed",sans-serif`;g.fillStyle='rgba(230,222,200,.075)';g.textAlign='left';g.fillText('TEST CELL 3',W*.035,H*.25);
+ g.font=`700 ${Math.round(H*.035)}px "Barlow Condensed",sans-serif`;g.fillStyle='rgba(232,185,35,.35)';g.fillText('DANGER — JET BLAST — HEARING PROTECTION REQUIRED',W*.035,H*.31);
+ // floor
+ gr=g.createLinearGradient(0,fl,0,H);gr.addColorStop(0,'#3a3d3a');gr.addColorStop(1,'#151615');g.fillStyle=gr;g.fillRect(0,fl,W,H-fl);
+ for(let i=0;i<W/4;i++){g.fillStyle=`rgba(0,0,0,${rnd()*.18})`;g.beginPath();g.ellipse(rnd()*W,fl+rnd()*(H-fl),8+rnd()*60,1.5+rnd()*6,0,0,7);g.fill()}
+ g.fillStyle='rgba(20,14,8,.35)';for(let i=0;i<6;i++){g.beginPath();g.ellipse(rnd()*W,fl+(H-fl)*(.4+rnd()*.5),30+rnd()*80,4+rnd()*8,0,0,7);g.fill()}
+ g.strokeStyle='rgba(0,0,0,.45)';g.lineWidth=1.5;for(let i=-12;i<=24;i++){const xb=W/2+(i-6)*W/10;g.beginPath();g.moveTo(W/2+(xb-W/2)*.55,fl);g.lineTo(xb,H);g.stroke()}
+ g.beginPath();g.moveTo(0,fl+(H-fl)*.45);g.lineTo(W,fl+(H-fl)*.45);g.stroke();
+ const hb=Math.max(8,H*.022);g.save();g.beginPath();g.rect(0,fl,W,hb);g.clip();g.fillStyle='#d9ab1f';g.fillRect(0,fl,W,hb);g.fillStyle='#141414';for(let px=-30;px<W+30;px+=26){g.beginPath();g.moveTo(px,fl+hb);g.lineTo(px+13,fl);g.lineTo(px+26,fl);g.lineTo(px+13,fl+hb);g.fill()}
+ for(let i=0;i<W/6;i++){g.fillStyle=`rgba(0,0,0,${rnd()*.35})`;g.fillRect(rnd()*W,fl,2+rnd()*14,hb)}g.restore();
+ return c}
 
-/* ---------- UI ---------- */
-const GA=[['N','Spool speed'],['egt','EGT'],['t4','Turbine temp'],['ff','Fuel flow'],['sfc','TSFC'],['air','Airflow'],['pr','Pressure ratio'],['tw','Thrust/weight'],['shp','Shaft power']];
-$('gauges').innerHTML=GA.map(([k,l])=>`<div class="g" id="g_${k}"><span>${l}</span><div class="bar${k==='t4'||k==='egt'?' t':''}"><i id="b_${k}"></i>${k==='t4'?'<em id="red"></em>':''}</div><output id="v_${k}">–</output></div>`).join('');
-const setG=(k,frac,txt)=>{$('b_'+k).style.width=Math.max(0,Math.min(100,frac*100))+'%';$('v_'+k).textContent=txt};
-let dmCache=null;function designMax(){if(dmCache)return dmCache;let dry,wet,sfc;
- if(ram(d.type)){const ms=machs(),M=ms[ms.length-2],o=ramCycle(d,M,1,true);dry=wet=Math.max(1,o.thrust);sfc=o.fuel/Math.max(1,o.thrust)*1e6}
- else{const T4=Math.min(d.tit,lim()),o=cycle(d,1,T4,false,0,S.gear);dry=o.thrust;sfc=o.fuel/o.thrust*1e6;wet=d.ab&&d.type!=='turboprop'?cycle(d,1,T4,true,0,S.gear).thrust:dry}
- return dmCache={dry,wet,sfc}}
+const PROF={turbojet:[[0,.72],[.06,.8],[.25,.82],[.62,.84],[.82,.78],[1,.6]],turbofan:[[0,1],[.04,1.05],[.32,1.02],[.43,.9],[.46,.6],[.8,.56],[1,.42]],
+ turboprop:[[0,.3],[.1,.62],[.6,.64],[.86,.56],[1,.46]],ramjet:[[0,.55],[.12,.64],[.84,.64],[.92,.5],[1,.66]]};
+const profAt=(p,u)=>{if(u<=p[0][0])return p[0][1];for(let i=1;i<p.length;i++)if(u<=p[i][0]){const a=p[i-1],b=p[i];return a[1]+(b[1]-a[1])*(u-a[0])/(b[0]-a[0])}return p[p.length-1][1]};
+function zones(d){const t=d.type;
+ if(t==='turbofan')return {fan:[.03,.1],comp:[.15,.5],comb:[.5,.64],turb:[.64,.8],ab:d.ab?[.8,.97]:null,noz:[.8,1]};
+ if(t==='turboprop')return {comp:[.13,.46],comb:[.46,.6],turb:[.6,.78],noz:[.78,1]};
+ return {comp:[.08,.42],comb:[.42,.58],turb:[.58,.7],ab:d.ab?[.7,.95]:null,noz:[.7,1]}}
+
+function draw(dt){
+ const W=cv.clientWidth,H=cv.clientHeight,dp=DPR();if(!W||!H)return;
+ if(cv.width!==Math.round(W*dp)||cv.height!==Math.round(H*dp)){cv.width=Math.round(W*dp);cv.height=Math.round(H*dp)}
+ const key=W+'x'+H;if(key!==bgKey||!bgC){bgC=buildBg(W,H);bgKey=key}
+ x.setTransform(dp,0,0,dp,0,0);x.drawImage(bgC,0,0,W,H);tm+=dt;
+ const t=d.type,isR=ram(t),fan=t==='turbofan',prop=t==='turboprop',o=S.out,fl=H*.82;
+ const len=Math.min(W*(prop?.46:.5),H*1.75),x0=W*(prop?.2:isR?.15:.12),cy=H*.47;
+ let R=Math.min(H*.23,len*.22);if(fan)R*=Math.min(1.35,.9+d.bpr*.035);if(isR)R*=.85;
+ const xe=x0+len,xc=W-Math.max(46,W*.07),alt=fc.h>0||fc.M>0;
+ const lit=S.lit,abOn=!!o.abOn&&lit,Vj=o.Vj||0,ht=lit?clamp((o.egt-500)/1200):0;
+ const N1=S.N1,N2=S.N;
+ // floodlights
+ x.save();x.globalCompositeOperation='lighter';
+ for(const lx of [W*.3,W*.68]){const g=x.createLinearGradient(0,0,0,fl);g.addColorStop(0,'rgba(255,235,200,.14)');g.addColorStop(1,'rgba(255,235,200,0)');x.fillStyle=g;x.beginPath();x.moveTo(lx-14,H*.1);x.lineTo(lx+14,H*.1);x.lineTo(lx+W*.16,fl);x.lineTo(lx-W*.16,fl);x.fill();
+  const pg=x.createRadialGradient(lx,fl+(H-fl)*.35,4,lx,fl+(H-fl)*.35,W*.17);pg.addColorStop(0,'rgba(255,235,200,.12)');pg.addColorStop(1,'rgba(255,235,200,0)');x.fillStyle=pg;x.fillRect(lx-W*.2,fl,W*.4,H-fl)}
+ x.restore();
+ for(const lx of [W*.3,W*.68]){x.fillStyle='#0d0f0e';x.fillRect(lx-22,H*.06,44,H*.045);x.fillStyle='#fff6dd';x.fillRect(lx-16,H*.1-3,32,4);x.fillStyle='#2b302d';x.fillRect(lx-2,H*.035,4,H*.03)}
+ // dust motes in the light
+ if(dust.length<40)dust.push({x:Math.random()*W,y:Math.random()*fl,v:Math.random()*6+2});
+ x.fillStyle='rgba(255,240,210,.35)';for(const p of dust){p.y+=p.v*dt;p.x+=Math.sin(tm+p.v)*3*dt+(o.thrust>0?clamp(Vj/800)*30*dt:0);if(p.y>fl||p.x>W){p.y=H*.1;p.x=Math.random()*W}x.fillRect(p.x,p.y,1.5,1.5)}
+ // intake danger zone on floor
+ if(!isR&&!alt){const zy=fl+(H-fl)*.45,zx=Math.max(R*1.2,x0-R*.6);x.save();x.beginPath();x.ellipse(zx,zy,R*1.5,(H-fl)*.3,0,0,7);x.clip();
+  x.fillStyle='rgba(190,40,30,.22)';x.fillRect(zx-R*2.3,fl,R*2.3,H-fl);x.strokeStyle='rgba(200,45,35,.45)';x.lineWidth=5;for(let i=-10;i<14;i++){x.beginPath();x.moveTo(zx-R*2.3+i*16,fl);x.lineTo(zx-R*2.3+i*16+40,H);x.stroke()}x.restore();
+  x.strokeStyle='rgba(220,60,40,.75)';x.lineWidth=2.5;x.setLineDash([10,7]);x.beginPath();x.ellipse(zx,zy,R*1.5,(H-fl)*.3,0,0,7);x.stroke();x.setLineDash([]);x.fillStyle='rgba(235,90,70,.8)';x.font='700 12px "Barlow Condensed",sans-serif';x.textAlign='center';x.fillText('INTAKE DANGER ZONE',zx,zy+4)}
+ // exhaust collector (augmenter tube)
+ const cr=Math.min(H*.36,R*1.9);
+ x.fillStyle='#1a1c1b';x.fillRect(xc,cy-cr*1.08,W-xc,cr*2.16);
+ let g2=x.createLinearGradient(0,cy-cr,0,cy+cr);g2.addColorStop(0,'#5a605c');g2.addColorStop(.4,'#3a3f3c');g2.addColorStop(1,'#141615');x.fillStyle=g2;x.fillRect(xc+cr*.18,cy-cr,W-xc,cr*2);
+ for(let px=xc+cr*.18+18;px<W;px+=22){x.fillStyle='rgba(0,0,0,.35)';x.fillRect(px,cy-cr,2,cr*2)}
+ x.fillStyle='#070808';x.beginPath();x.ellipse(xc+cr*.18,cy,cr*.2,cr,0,0,7);x.fill();
+ x.save();x.beginPath();x.ellipse(xc+cr*.18,cy,cr*.26,cr*1.05,0,0,7);x.ellipse(xc+cr*.18,cy,cr*.2,cr,0,0,7);x.clip('evenodd');x.fillStyle='#d9ab1f';x.fillRect(xc-cr,cy-cr*1.1,cr*2,cr*2.2);x.fillStyle='#141414';for(let k=-12;k<12;k++){x.fillRect(xc-cr,cy+k*cr*.18,cr*2,cr*.09)}x.restore();
+ x.fillStyle='#2b2f2d';x.fillRect(xc+cr*.3,cy+cr,cr*.25,fl-cy-cr);x.fillRect(xc+cr*1.2,cy+cr,cr*.25,fl-cy-cr);
+ const pipeIn=xc+cr*.05;
+ // altitude test chamber: air supply duct into the inlet
+ if(alt){const dr=(isR?R*.75:R*1.12),dx1=x0-(isR?len*.12:R*.15);x.fillStyle='#2a2e2c';x.fillRect(0,cy-dr-8,dx1,dr*2+16);
+  g2=x.createLinearGradient(0,cy-dr,0,cy+dr);g2.addColorStop(0,'#6b726e');g2.addColorStop(.45,'#3c413e');g2.addColorStop(1,'#151716');x.fillStyle=g2;x.fillRect(0,cy-dr,dx1,dr*2);
+  x.fillStyle='#0c0e0d';x.fillRect(0,cy-dr*.88,dx1,dr*.88);
+  x.strokeStyle='rgba(170,215,255,.55)';x.lineWidth=1.5;const spd=80+(o.V0||fc.M*300)*.8;for(let i=0;i<10;i++){const yy=cy-dr*.85+i*dr*.085,px=(tm*spd+i*97)%dx1;x.beginPath();x.moveTo(px,yy);x.lineTo(Math.min(dx1,px+18+spd*.05),yy);x.stroke()}
+  for(let px=40;px<dx1;px+=70){x.fillStyle='#1d201f';x.fillRect(px,cy-dr-6,8,dr*2+12)}
+  x.fillStyle='rgba(232,185,35,.85)';x.font='700 13px "Barlow Condensed",sans-serif';x.textAlign='left';x.fillText(`AIR SUPPLY · ${fc.h.toFixed(1)} KM · MACH ${fc.M.toFixed(2)}`,8,cy+dr+22);
+  const at=atmo(fc.h,fc.dT);x.fillStyle='rgba(230,222,200,.5)';x.fillText(`${Math.round(at.T-273)} °C · ${(at.p/1000).toFixed(1)} kPa`,8,cy+dr+38)}
+ else if(N1>.05&&!isR){x.strokeStyle='rgba(200,215,225,.25)';x.lineWidth=1.2;const spd=N1*700;for(let i=0;i<14;i++){const yy=cy+((i+.5)/14*2-1)*R*1.05,px=(tm*spd+i*137)%x0;x.beginPath();x.moveTo(px,yy+(cy-yy)*px/x0*.4);x.lineTo(Math.min(x0,px+Math.min(50,spd/12)),yy+(cy-yy)*Math.min(1,(px+20)/x0)*.4);x.stroke()}}
+ // stand
+ drawStand(x0,len,cy,R,fl,isR);
+ // plume (behind collector rim)
+ drawPlume({x0,len,cy,R,xe,pipeIn,cr,fan,prop,isR,lit,abOn,Vj,o});
+ // engine
+ if(t==='scramjet')drawScram(x0,len,cy,R,dt);else drawTurbo(x0,len,cy,R,dt);
+ // fire glow on the room
+ const glow=(abOn?1:0)*(.7+.3*Math.random())+(lit?ht*.35:0)+(S.surge>0?.8:0);
+ if(glow>.02){x.save();x.globalCompositeOperation='lighter';const gg=x.createRadialGradient(xe+len*.2,cy,10,xe+len*.2,cy,W*.55);gg.addColorStop(0,`rgba(255,120,40,${.22*glow})`);gg.addColorStop(1,'rgba(255,80,20,0)');x.fillStyle=gg;x.fillRect(0,0,W,H);x.restore()}
+ // particles: smoke, sparks
+ if(lit&&stage()>0&&Math.random()<.5*stage())parts.push({x:xe,y:cy-R*.2,vx:60+Math.random()*80,vy:-25-Math.random()*30,l:2.5,s:1});
+ if(S.broken&&Math.random()<.3)parts.push({x:x0+len*.6,y:cy-R*.6,vx:10+Math.random()*30,vy:-30-Math.random()*20,l:3,s:1});
+ if(S.surge>1.05)for(let i=0;i<6;i++){parts.push({x:x0,y:cy+(Math.random()-.5)*R,vx:-120-Math.random()*200,vy:(Math.random()-.5)*160,l:.6,s:0});parts.push({x:xe,y:cy+(Math.random()-.5)*R*.4,vx:200+Math.random()*200,vy:(Math.random()-.5)*120,l:.6,s:0})}
+ if(S.flame>0){S.flame-=dt;if(Math.random()<.4)parts.push({x:xe,y:cy,vx:40+Math.random()*40,vy:-10-Math.random()*20,l:2.2,s:2})}
+ parts=parts.filter(p=>(p.l-=dt)>0);for(const p of parts){p.x+=p.vx*dt;p.y+=p.vy*dt;
+  if(p.s===0){x.fillStyle=`rgba(255,${150+Math.random()*80|0},60,${p.l/.6})`;x.fillRect(p.x,p.y,3,3)}
+  else{const a=p.l/2.5;x.fillStyle=p.s===2?`rgba(200,200,190,${a*.35})`:`rgba(30,30,30,${a*.55})`;x.beginPath();x.arc(p.x,p.y,6+(2.5-p.l)*14,0,7);x.fill()}}
+ if(S.surge>0){x.save();x.globalCompositeOperation='lighter';const a=S.surge/1.2;const sg=x.createRadialGradient(x0,cy,4,x0,cy,R*1.6);sg.addColorStop(0,`rgba(255,200,90,${a})`);sg.addColorStop(1,'rgba(255,80,20,0)');x.fillStyle=sg;x.beginPath();x.ellipse(x0-R*.3,cy,R*1.4*(1.5-a*.5),R,0,0,7);x.fill();x.restore()}
+ // vibration shake on damage/surge
+ if(S.vib>1.2){cv.style.transform=`translate(${(Math.random()-.5)*S.vib}px,${(Math.random()-.5)*S.vib}px)`}else if(cv.style.transform)cv.style.transform='';
+}
+function drawStand(x0,len,cy,R,fl,isR){const legs=[.3,.68],top=cy+R*(isR?.5:.62);
+ for(const u of legs){const px=x0+len*u;
+  x.fillStyle='#454b47';x.beginPath();x.moveTo(px-6,top);x.lineTo(px+6,top);x.lineTo(px+R*.55,fl);x.lineTo(px+R*.55-12,fl);x.lineTo(px,top+14);x.lineTo(px-R*.55+12,fl);x.lineTo(px-R*.55,fl);x.closePath();x.fill();
+  x.fillStyle='rgba(255,255,255,.08)';x.fillRect(px-6,top,12,2);
+  x.fillStyle='#2a2e2c';x.fillRect(px-R*.7,fl-8,R*1.4,8);x.fillStyle='#d9ab1f';for(let k=0;k<6;k++)x.fillRect(px-R*.7+k*R*.24,fl-8,R*.12,8)}
+ x.fillStyle='#3a403c';x.fillRect(x0+len*.24,top-6,len*.5,9);x.fillStyle='rgba(255,255,255,.1)';x.fillRect(x0+len*.24,top-6,len*.5,1.5);
+ // load cell
+ const lx=x0+len*.76;x.fillStyle='#1d201e';x.fillRect(lx,top-14,R*.5,20);x.fillStyle='#08100b';x.fillRect(lx+4,top-10,R*.5-8,12);
+ x.fillStyle='#9dffb8';x.font='10px "Share Tech Mono",monospace';x.textAlign='center';x.fillText((S.out.thrust/1e3).toFixed(1),lx+R*.25,top);
+ x.strokeStyle='#111';x.lineWidth=2;x.beginPath();x.moveTo(lx+R*.25,top+6);x.bezierCurveTo(lx+R*.3,fl-30,lx+R*.9,fl-10,lx+R*1.4,fl-2);x.stroke()}
+
+function drawTurbo(x0,len,cy,R,dt){
+ const t=d.type,fan=t==='turbofan',prop=t==='turboprop',isRam=t==='ramjet',pf=PROF[t],z=isRam?null:zones(d),o=S.out,lit=S.lit;
+ const X=u=>x0+u*len,rTop=u=>profAt(pf,u)*R;CY=cy;
+ const omega1=S.N1*42,omega2=S.N*48;ph1+=omega1*dt;ph2+=omega2*dt;
+ const blur=(om,n)=>clamp(om*.016*n/6.283-.25);
+ const topPath=()=>{x.beginPath();x.moveTo(X(0),cy);pf.forEach(([u,v])=>x.lineTo(X(u),cy-v*R));x.lineTo(X(1),cy);x.closePath()};
+ const botPath=()=>{x.beginPath();x.moveTo(X(0),cy);pf.forEach(([u,v])=>x.lineTo(X(u),cy+v*R));x.lineTo(X(1),cy);x.closePath()};
+ // lower half: closed casing
+ botPath();let g=x.createLinearGradient(0,cy,0,cy+R*1.05);g.addColorStop(0,'#9aa4a0');g.addColorStop(.35,'#6c7672');g.addColorStop(1,'#262b29');x.fillStyle=g;x.fill();
+ x.save();botPath();x.clip();
+ const seams=isRam?[.12,.38,.84]:[z.fan?z.fan[1]+.03:null,z.comp[0],z.comp[1],z.comb[1],z.turb[1],z.ab?z.ab[0]:null].filter(v=>v!=null);
+ for(const u of seams){x.fillStyle='rgba(0,0,0,.45)';x.fillRect(X(u)-3,cy,6,R*1.1);x.fillStyle='rgba(255,255,255,.12)';x.fillRect(X(u)-3,cy,1.5,R*1.1);
+  x.fillStyle='rgba(20,20,20,.7)';for(let k=1;k<6;k++)x.fillRect(X(u)+5,cy+k*R*.16,2,2)}
+ x.fillStyle='rgba(0,0,0,.18)';for(let k=0;k<3;k++)x.fillRect(x0,cy+R*(.3+k*.18),len,1);
+ if(lit){const hg=x.createLinearGradient(X(isRam?.4:z.comb[0]),0,X(1),0);hg.addColorStop(0,'rgba(255,90,30,0)');hg.addColorStop(1,heat(S.T4-500,.25*(o.abOn?1:.5)));x.fillStyle=hg;x.fillRect(x0,cy,len,R*1.1)}
+ x.restore();
+ // accessory gearbox + fuel line under the engine
+ if(!isRam){const gx=X(fan?.5:.2),gw=len*.16,gy=cy+rTop(fan?.5:.2)*.9;x.fillStyle='#4a524e';x.beginPath();x.roundRect(gx,gy,gw,R*.22,4);x.fill();x.fillStyle='rgba(255,255,255,.1)';x.fillRect(gx,gy,gw,1.5);
+  x.fillStyle='#2a2f2d';for(let k=0;k<3;k++){x.beginPath();x.arc(gx+gw*(.2+k*.3),gy+R*.22,R*.06,0,7);x.fill()}
+  x.strokeStyle='#b0742a';x.lineWidth=3;x.beginPath();x.moveTo(gx+gw,gy+R*.08);x.bezierCurveTo(X(z.comb[0]),gy+R*.1,X(z.comb[0]),cy+rTop(z.comb[0])*.95,X((z.comb[0]+z.comb[1])/2),cy+rTop(z.comb[1])*.9);x.stroke()}
+ // upper half: cutaway interior
+ topPath();g=x.createLinearGradient(0,cy-R,0,cy);g.addColorStop(0,'#0b0d0c');g.addColorStop(1,'#1d2220');x.fillStyle=g;x.fill();
+ x.save();topPath();x.clip();
+ if(isRam)drawRamInside(X,rTop,cy,R,len);
+ else{
+  // shaft(s)
+  x.fillStyle='#59615d';x.fillRect(X(.04),cy-R*.07,X(z.turb[1])-X(.04),R*.07);if(d.spools===2||fan){x.fillStyle='#7d8682';x.fillRect(X(z.comp[0]+.1),cy-R*.12,X(z.turb[0]+.06)-X(z.comp[0]+.1),R*.05)}
+  // drum / hub
+  const hubAt=u=>{if(u<.07)return R*.3*u/.07;if(fan&&u<z.comp[0])return R*.3;if(u<z.comp[1])return R*(fan?.2:.3)+R*.12*(u-z.comp[0])/(z.comp[1]-z.comp[0]);if(u<z.turb[1])return R*.36;return Math.max(0,R*.36*(1-(u-z.turb[1])/.2))};
+  x.fillStyle='#343b38';x.beginPath();x.moveTo(X(0),cy);for(let u=0;u<=1.001;u+=.01)x.lineTo(X(u),cy-hubAt(u));x.lineTo(X(1),cy);x.fill();
+  x.fillStyle='rgba(255,255,255,.08)';x.beginPath();for(let u=0;u<=1.001;u+=.01)x.lineTo(X(u),cy-hubAt(u));x.lineTo(X(1),cy-hubAt(1)+1.5);for(let u=1;u>=0;u-=.01)x.lineTo(X(u),cy-hubAt(u)+1.5);x.fill();
+  // spinner
+  g=x.createLinearGradient(0,cy-R*.35,0,cy);g.addColorStop(0,'#c7cfcc');g.addColorStop(1,'#5f6865');x.fillStyle=g;x.beginPath();x.moveTo(X(-.02),cy);x.quadraticCurveTo(X(.02),cy-R*.32,X(.08),cy-R*.3);x.lineTo(X(.08),cy);x.fill();
+  const coreTop=u=>fan&&u>.12?Math.min(rTop(u),R*.56)*.93:rTop(u)*.93;
+  // fan + bypass duct
+  if(fan){const fu=(z.fan[0]+z.fan[1])/2;row(X(fu),R*.3,rTop(fu)*.96,18,len*.05,ph1,'#c9d2cf','#7a8581',blur(omega1,18));
+   x.fillStyle='#4b5450';x.beginPath();x.moveTo(X(.12),cy-R*.5);x.lineTo(X(.46),cy-R*.56);x.lineTo(X(.46),cy-R*.6);x.lineTo(X(.13),cy-R*.54);x.fill();
+   for(let k=0;k<9;k++){x.fillStyle='#565f5b';x.fillRect(X(.16)+k*2,cy-rTop(.16)*.95,1.5,rTop(.16)*.95-R*.56)}
+   const fl1=S.N1;if(fl1>.05){x.strokeStyle=`rgba(170,215,255,${.15+.3*fl1})`;x.lineWidth=1.5;const sp=fl1*len*1.4;for(let i=0;i<6;i++){const yy=cy-R*(.62+i*.06),px=X(.12)+((tm*sp+i*53)%(len*.34));x.beginPath();x.moveTo(px,yy);x.lineTo(px+12+fl1*14,yy);x.stroke()}}
+   if(S.rev){x.fillStyle='#d9ab1f';x.fillRect(X(.3),cy-rTop(.3)-2,len*.06,6)}}
+  // compressor stages
+  const nC=Math.round(clamp(Math.log(d.opr)/Math.log(fan?1.32:1.3),3,14)),cw=(z.comp[1]-z.comp[0])/nC;
+  for(let i=0;i<nC;i++){const u=z.comp[0]+cw*(i+.35),lp=d.spools===2&&i<nC*.38,rt=coreTop(u),rh=hubAt(u);
+   x.fillStyle='#3c4441';x.fillRect(X(u+cw*.42),cy-rt,Math.max(1.5,len*cw*.12),rt-rh);
+   row(X(u),rh,rt,lp?16:22,Math.max(3,len*cw*.42),lp?ph1:ph2,lp?'#a9bccb':'#b4bfbb','#68736f',blur(lp?omega1:omega2,lp?16:22))}
+  if(d.vigv){x.fillStyle='#d9ab1f';const u=z.comp[0]-.012;x.fillRect(X(u),cy-coreTop(u),3,coreTop(u)-hubAt(u))}
+  // combustor
+  const c0=X(z.comb[0]),c1=X(z.comb[1]),cmid=(z.comb[0]+z.comb[1])/2,rO=coreTop(cmid)*.86,rI=Math.max(hubAt(cmid)+R*.06,coreTop(cmid)*.48);
+  x.fillStyle='#4a524e';const cr2=Math.max(0,(rO-rI)/2);x.beginPath();x.roundRect(c0,cy-rO,c1-c0,Math.max(1,rO-rI),cr2);x.fill();
+  const fg=x.createLinearGradient(c0,0,c1,0),T4=lit?S.T4:400;fg.addColorStop(0,heat(T4+250,lit?.95:.1));fg.addColorStop(.6,heat(T4,lit?.9:.08));fg.addColorStop(1,heat(T4-200,lit?.6:.05));
+  x.fillStyle=fg;if(rO-rI>10){x.beginPath();x.roundRect(c0+4,cy-rO+4,c1-c0-8,rO-rI-8,Math.max(0,cr2-4));x.fill()}
+  if(lit){x.save();x.globalCompositeOperation='lighter';for(let i=0;i<5;i++){const fx=c0+(c1-c0)*(.18+.15*i)+Math.sin(tm*25+i)*3,fy=cy-(rO+rI)/2+Math.sin(tm*31+i*2)*(rO-rI)*.15;const rg=x.createRadialGradient(fx,fy,1,fx,fy,(rO-rI)*.45);rg.addColorStop(0,heat(T4+400,.9));rg.addColorStop(1,heat(T4,0));x.fillStyle=rg;x.beginPath();x.arc(fx,fy,(rO-rI)*.45,0,7);x.fill()}x.restore()}
+  x.fillStyle='#1b1f1d';for(let k=0;k<4;k++){x.beginPath();x.arc(c0+(c1-c0)*(.3+k*.16),cy-rO+3,1.6,0,7);x.fill();x.beginPath();x.arc(c0+(c1-c0)*(.3+k*.16),cy-rI-3,1.6,0,7);x.fill()}
+  x.fillStyle='#8f9894';x.fillRect(c0-6,cy-(rO+rI)/2-2,10,4);x.fillRect(c0-6,cy-coreTop(z.comb[0]),3,coreTop(z.comb[0])-(rO+rI)/2);
+  if(S.ign&&!lit&&Math.random()<.35){x.fillStyle='#bfe6ff';x.beginPath();x.arc(c0+6,cy-(rO+rI)/2,3,0,7);x.fill()}
+  // turbine stages, glowing with temperature
+  const nT=Math.round(fan?clamp(2+d.bpr*.35,2,6):prop?3:clamp(1+d.opr/12,1,3)),tw=(z.turb[1]-z.turb[0])/nT;
+  for(let i=0;i<nT;i++){const u=z.turb[0]+tw*(i+.4),lp=(d.spools===2||fan||prop)&&i>=Math.ceil(nT*.35),rt=coreTop(u),rh=hubAt(u),Tb=(lit?S.T4:S.T4)-i*120;
+   x.fillStyle=heat(Tb-250,.9);x.fillRect(X(u-tw*.38),cy-rt,Math.max(1.5,len*tw*.14),rt-rh);
+   row(X(u),rh,rt,lp?26:30,Math.max(3,len*tw*.36),lp?ph1:ph2,Tb>900?heat(Tb,1):'#9aa29e','#5c6460',blur(lp?omega1:omega2,lp?26:30))}
+  // afterburner: spray bars, V-gutter flameholders, flame
+  if(z.ab){const a0=X(z.ab[0]),a1=X(z.ab[1]),rr=coreTop(z.ab[0]+.03);x.fillStyle='#5a625e';x.fillRect(a0+6,cy-rr,2,rr);
+   for(const f of [.25,.55,.8]){const gy=cy-rr*f;x.strokeStyle='#8a938f';x.lineWidth=2;x.beginPath();x.moveTo(a0+20,gy-5);x.lineTo(a0+12,gy);x.lineTo(a0+20,gy+5);x.stroke()}
+   if(o.abOn){const ag=x.createLinearGradient(a0,0,a1+len*.05,0);ag.addColorStop(0,'rgba(255,140,50,.15)');ag.addColorStop(.3,'rgba(255,160,70,.75)');ag.addColorStop(1,'rgba(255,230,170,.95)');x.fillStyle=ag;x.fillRect(a0+16,cy-rr,a1-a0+len*.05,rr)}
+   x.fillStyle='rgba(0,0,0,.25)';for(let k=0;k<30;k++)x.fillRect(a0+((k*13)%(a1-a0)),cy-rr+2+((k*7)%6),1.5,1.5)}
+  // tail cone + nozzle petals
+  if(!z.ab){x.fillStyle='#3d4542';x.beginPath();x.moveTo(X(z.turb[1]),cy-hubAt(z.turb[1]));x.lineTo(X(z.turb[1]+.18),cy);x.lineTo(X(z.turb[1]),cy);x.fill()}
+  if(d.noz==='cd'){const n0=X(.9),n1=X(1);x.strokeStyle='#7c8581';x.lineWidth=3;x.beginPath();x.moveTo(n0,cy-rTop(.9)*.95);x.lineTo(X(.95),cy-rTop(1)*.75);x.lineTo(n1,cy-rTop(1)*.95);x.stroke()}
+ }
+ x.restore();
+ // cut face of the casing (classic red cutaway paint) + outline
+ x.strokeStyle='#a8321f';x.lineWidth=5;x.beginPath();pf.forEach(([u,v],i)=>i?x.lineTo(X(u),cy-v*R+2):x.moveTo(X(u),cy-v*R+2));x.stroke();
+ x.strokeStyle='rgba(255,210,190,.35)';x.lineWidth=1;x.beginPath();pf.forEach(([u,v],i)=>i?x.lineTo(X(u),cy-v*R):x.moveTo(X(u),cy-v*R));x.stroke();
+ botPath();x.strokeStyle='#121413';x.lineWidth=1.5;x.stroke();
+ if(isRam){x.fillStyle='#b5bfbb';x.beginPath();x.moveTo(X(-.12),cy);x.lineTo(X(.22),cy-R*.3);x.lineTo(X(.22),cy+R*.3);x.closePath();x.fill();x.fillStyle='rgba(0,0,0,.25)';x.beginPath();x.moveTo(X(-.12),cy);x.lineTo(X(.22),cy);x.lineTo(X(.22),cy+R*.3);x.fill()}
+ // turbojet clamshell reverser
+ if(S.rev&&!fan){x.fillStyle='#d9ab1f';x.save();x.translate(X(1),cy);for(const sg of [-1,1]){x.save();x.scale(1,sg);x.rotate(.7);x.fillRect(0,-4,R*.5,5);x.restore()}x.restore()}
+ // propeller (in front of the casing)
+ if(prop){const px=X(.02),pr=Math.min(cv.clientHeight*.4,R*d.prop/.75);phP+=S.N1*30*dt;const bl=clamp(S.N1*1.6-.35);
+  if(bl>.05){x.fillStyle=`rgba(170,180,175,${.08+.3*bl})`;x.beginPath();x.ellipse(px,cy,pr*.13,pr,0,0,7);x.fill();x.strokeStyle=`rgba(232,185,35,${.5*bl})`;x.lineWidth=2;x.beginPath();x.ellipse(px,cy,pr*.13,pr,0,0,7);x.stroke()}
+  for(let b=0;b<4;b++){const th=phP+b*1.5708,c=Math.cos(th),s=Math.sin(th);x.globalAlpha=1-bl*.8;x.fillStyle=s>0?'#8a9490':'#5b6461';const w=6+pr*.12*Math.abs(s);x.beginPath();x.moveTo(px-w/2,cy);x.lineTo(px+w/2,cy);x.lineTo(px+w*.3,cy-pr*c);x.lineTo(px-w*.3,cy-pr*c);x.fill();
+   if(Math.abs(c)>.3){x.fillStyle='#d9ab1f';x.fillRect(px-w*.3,cy-pr*c*.97-(c>0?0:-4),w*.6,4*Math.sign(c))}}x.globalAlpha=1}
+ if(prop){const px=X(.02);const sg=x.createLinearGradient(0,cy-R*.3,0,cy+R*.3);sg.addColorStop(0,'#d0d8d5');sg.addColorStop(1,'#4d5653');x.fillStyle=sg;x.beginPath();x.ellipse(px+R*.05,cy,R*.22,R*.26,0,Math.PI*.5,Math.PI*1.5);x.fill()}
+ // labels
+ const lab=isRam?[['Inlet spike',.05],['Flameholders',.4],['Combustor',.62],['Nozzle',.94]]:[...(fan?[['Fan',(z.fan[0]+z.fan[1])/2]]:[]),[d.spools===2?'LP / HP compressor':'Compressor',(z.comp[0]+z.comp[1])/2],['Combustor',(z.comb[0]+z.comb[1])/2],['Turbine',(z.turb[0]+z.turb[1])/2],...(z.ab?[['Afterburner',(z.ab[0]+z.ab[1])/2]]:[['Nozzle',.92]])];
+ x.font='600 12px "Barlow Condensed",sans-serif';x.textAlign='center';let re=-1e9,rowY=0;const ly=cy-R*(fan?1.12:1.0)-12;
+ if(len>240)for(const [n,u] of lab){const lx=X(u),hw=x.measureText(n).width/2;rowY=lx-hw<re+6?1-rowY:0;const yy=ly-rowY*14;x.strokeStyle='rgba(232,185,35,.45)';x.lineWidth=1;x.beginPath();x.moveTo(lx,yy+3);x.lineTo(lx,cy-rTop(u)+2);x.stroke();x.fillStyle='rgba(235,232,223,.9)';x.fillText(n,lx,yy);re=lx+hw}
+}
+function row(X0,rh,rt,n,ch,ph,cNear,cFar,bl){if(rt-rh<3)return;
+ if(bl>.05){x.fillStyle=cFar;x.globalAlpha=.15+.35*bl;x.fillRect(X0-ch/2,CY-rt,ch,rt-rh);x.globalAlpha=1}
+ for(let i=0;i<n;i++){const th=ph+i*6.2832/n,c=Math.cos(th);if(rt*c<rh+2)continue;const s=Math.sin(th),w=Math.max(1.2,ch*(.25+.75*Math.abs(s))),sk=ch*.3*c*Math.sign(s||1);
+  x.globalAlpha=(1-bl*.85)*(s>0?1:.6);x.fillStyle=s>0?cNear:cFar;x.beginPath();x.moveTo(X0-w/2,CY-rh);x.lineTo(X0+w/2,CY-rh);x.lineTo(X0+w/2+sk,CY-rt*c);x.lineTo(X0-w/2+sk,CY-rt*c);x.fill()}
+ x.globalAlpha=1}
+let CY=0;
+function drawRamInside(X,rTop,cy,R,len){const o=S.out,lit=S.lit;
+ if(fc.M>0){x.strokeStyle='rgba(170,215,255,.55)';x.lineWidth=1.5;x.beginPath();x.moveTo(X(-.12),cy);x.lineTo(X(.12),cy-rTop(.12));x.stroke();x.beginPath();x.moveTo(X(.12),cy-rTop(.12));x.lineTo(X(.3),cy-R*.15);x.stroke()}
+ for(const f of [.3,.55,.8]){const gy=cy-rTop(.4)*f;x.strokeStyle='#8a938f';x.lineWidth=2;x.beginPath();x.moveTo(X(.4)+8,gy-5);x.lineTo(X(.4),gy);x.lineTo(X(.4)+8,gy+5);x.stroke()}
+ if(lit){const T=S.T4,fg=x.createLinearGradient(X(.4),0,X(1),0);fg.addColorStop(0,heat(T,.3));fg.addColorStop(.4,heat(T+200,.85));fg.addColorStop(1,heat(T+300,.95));x.fillStyle=fg;x.fillRect(X(.41),cy-rTop(.5)*.95,X(1)-X(.41),rTop(.5)*.95);
+  x.save();x.globalCompositeOperation='lighter';for(let i=0;i<6;i++){const fx=X(.45+i*.07)+Math.sin(tm*30+i)*4,fy=cy-rTop(.5)*(.3+.4*Math.abs(Math.sin(tm*20+i)));const rg=x.createRadialGradient(fx,fy,1,fx,fy,R*.25);rg.addColorStop(0,heat(T+500,.8));rg.addColorStop(1,heat(T,0));x.fillStyle=rg;x.beginPath();x.arc(fx,fy,R*.25,0,7);x.fill()}x.restore()}}
+function drawScram(x0,len,cy,R,dt){const X=u=>x0+u*len,lit=S.lit,o=S.out;
+ const top=[[-.08,0],[.3,-.35],[.8,-.38],[1,-.6]],lip=.32,cowlY=.45;
+ const g=x.createLinearGradient(0,cy-R*.6,0,cy+R*.6);g.addColorStop(0,'#9aa4a0');g.addColorStop(1,'#353b38');
+ x.fillStyle=g;x.beginPath();x.moveTo(X(-.08),cy);x.lineTo(X(.3),cy-R*.35);x.lineTo(X(.8),cy-R*.38);x.lineTo(X(1),cy-R*.55);x.lineTo(X(1),cy+R*.1);x.lineTo(X(.78),cy+R*.22);x.lineTo(X(.32),cy+R*.22);x.closePath();x.fill();
+ x.fillStyle='#0c0e0d';x.beginPath();x.moveTo(X(lip),cy+R*.22);x.lineTo(X(.78),cy+R*.22);x.lineTo(X(.78),cy+R*cowlY);x.lineTo(X(lip),cy+R*cowlY);x.fill();
+ x.fillStyle='#5d6662';x.beginPath();x.moveTo(X(lip-.02),cy+R*cowlY);x.lineTo(X(.78),cy+R*cowlY);x.lineTo(X(.82),cy+R*(cowlY+.12));x.lineTo(X(lip+.04),cy+R*(cowlY+.12));x.closePath();x.fill();
+ if(fc.M>0){x.strokeStyle='rgba(170,215,255,.6)';x.lineWidth=1.5;x.beginPath();x.moveTo(X(-.08),cy);x.lineTo(X(lip),cy+R*cowlY);x.lineTo(X(.42),cy+R*.22);x.lineTo(X(.52),cy+R*cowlY);x.stroke()}
+ if(lit){const fg=x.createLinearGradient(X(.45),0,X(.8),0);fg.addColorStop(0,heat(S.T4,.4));fg.addColorStop(1,heat(S.T4+300,.95));x.fillStyle=fg;x.fillRect(X(.45),cy+R*.22,X(.78)-X(.45),R*(cowlY-.22))}
+ x.strokeStyle='#a8321f';x.lineWidth=3;x.beginPath();x.moveTo(X(lip),cy+R*.22);x.lineTo(X(.78),cy+R*.22);x.stroke();
+ x.font='600 12px "Barlow Condensed",sans-serif';x.fillStyle='rgba(235,232,223,.9)';x.textAlign='center';[['Compression ramp',.12,-.5],['Supersonic combustor',.6,.9],['Expansion ramp',.92,-.75]].forEach(([n,u,v])=>x.fillText(n,X(u),cy+R*v))}
+function drawPlume(p){const {x0,len,cy,R,xe,pipeIn,cr,fan,prop,isR,lit,abOn,Vj,o}=p;const t=d.type,maxL=pipeIn-xe;if(maxL<10)return;
+ const scr=t==='scramjet',ox=scr?x0+.78*len:xe,oy=scr?cy+R*.34:cy,rn=scr?R*.12:R*(fan?.42*.95:isR?.66:prop?.46:.6);
+ const spread=1+fc.h/18;
+ // turbofan bypass stream
+ if(fan&&S.N1>.1&&!S.rev){const fx=x0+.43*len,a=clamp((o.Vb||0)/420)*.12;const gb=x.createLinearGradient(fx,0,pipeIn,0);gb.addColorStop(0,`rgba(200,220,235,${a})`);gb.addColorStop(1,'rgba(200,220,235,0)');x.fillStyle=gb;
+  x.beginPath();x.moveTo(fx,cy-R*.9);x.lineTo(pipeIn,cy-R*1.1*spread);x.lineTo(pipeIn,cy+R*1.1*spread);x.lineTo(fx,cy+R*.9);x.lineTo(fx,cy+R*.6);x.lineTo(xe,cy+R*.45);x.lineTo(xe,cy-R*.45);x.lineTo(fx,cy-R*.6);x.fill()}
+ if(S.rev&&lit){const rx=fan?x0+.33*len:xe,ry=fan?R*.98:rn;x.fillStyle=`rgba(210,225,235,${.12+.2*clamp(S.N1)})`;for(const sg of [-1,1]){x.beginPath();x.moveTo(rx,cy+sg*ry);x.lineTo(rx-R*1.4,cy+sg*(ry+R*1.2));x.lineTo(rx-R*.6,cy+sg*(ry+R*1.5));x.closePath();x.fill()}if(!fan)return}
+ if(!lit||Vj<30)return;
+ const L=Math.min(maxL,Math.max(0,(Vj-(o.V0||0)*.4)/1400)*len*(abOn?1.2:.85)+rn);
+ const g=x.createLinearGradient(ox,0,ox+L,0);
+ if(abOn){g.addColorStop(0,'rgba(255,250,235,.95)');g.addColorStop(.25,'rgba(255,170,70,.85)');g.addColorStop(.7,'rgba(255,90,40,.45)');g.addColorStop(1,'rgba(255,60,20,0)')}
+ else{const hc=clamp((o.egt-950)/600);g.addColorStop(0,`rgba(255,${Math.round(205-90*hc)},${Math.round(170-120*hc)},${.1+.3*hc})`);g.addColorStop(.45,'rgba(225,215,200,.07)');g.addColorStop(1,'rgba(200,200,200,0)')}
+ x.save();x.globalCompositeOperation=abOn?'lighter':'source-over';x.fillStyle=g;
+ for(let k=0;k<(abOn?3:1);k++){const j=abOn?(Math.random()-.5)*rn*.25:0;x.beginPath();x.moveTo(ox,oy-rn*.92);x.quadraticCurveTo(ox+L*.5,oy-rn*(1.15+.25*spread)+j,ox+L,oy-rn*1.6*spread+j);x.lineTo(ox+L,oy+rn*1.6*spread+j);x.quadraticCurveTo(ox+L*.5,oy+rn*(1.15+.25*spread)+j,ox,oy+rn*.92);x.fill()}
+ if((abOn||isR||d.noz==='cd')&&Vj>650){const fl=.75+.25*Math.sin(tm*45),sp=rn*1.75*Math.min(2,spread);for(let k=1;k<7;k++){const px=ox+k*sp;if(px>ox+L*.75)break;const a=(abOn?.75:.35)*fl/Math.sqrt(k);x.fillStyle=`rgba(${abOn?'255,190,225':'200,230,255'},${a})`;x.beginPath();x.ellipse(px,oy,rn*.28,rn*.55,0,0,7);x.fill()}}
+ x.restore();
+ // heat shimmer above the plume
+ x.strokeStyle=`rgba(255,255,255,${.035+.05*clamp(Vj/900)})`;x.lineWidth=1;for(let k=0;k<5;k++){x.beginPath();for(let px=ox;px<ox+L;px+=6){const yy=oy-rn*(1.3+k*.28)*spread-k*2+Math.sin(px*.06+tm*9+k)*2.5;px===ox?x.moveTo(px,yy):x.lineTo(px,yy)}x.stroke()}
+}
+
+/* ================= DIALS ================= */
+const DIALS=[{k:'n1',l:'N1',u:'%'},{k:'n2',l:'N2',u:'%'},{k:'tit',l:'TIT',u:'°C'},{k:'ff',l:'FUEL FLOW',u:'kg/h'},{k:'thr',l:'THRUST',u:'kN'},{k:'vib',l:'VIBRATION',u:'ips'}];
+$('dials').innerHTML=DIALS.map(g=>`<canvas id="d_${g.k}" aria-label="${g.l}"></canvas>`).join('');
+const dialV={};
+function dial(id,v,min,max,red,label,unit,txt){const c=$(id),W=c.clientWidth;if(!W)return;const dp=DPR();if(c.width!==Math.round(W*dp)){c.width=Math.round(W*dp);c.height=Math.round(W*dp)}
+ const g=c.getContext('2d');g.setTransform(dp,0,0,dp,0,0);g.clearRect(0,0,W,W);const r=W/2,cx=r,cy=r;
+ let gr=g.createRadialGradient(cx-r*.3,cy-r*.3,r*.1,cx,cy,r);gr.addColorStop(0,'#5d6461');gr.addColorStop(1,'#141615');g.fillStyle=gr;g.beginPath();g.arc(cx,cy,r-1,0,7);g.fill();
+ g.fillStyle='#0b0d0c';g.beginPath();g.arc(cx,cy,r*.86,0,7);g.fill();
+ const a0=Math.PI*.75,a1=Math.PI*2.25,ang=v=>a0+(a1-a0)*clamp((v-min)/(max-min));
+ if(red!=null&&red<max){g.strokeStyle='#d8352a';g.lineWidth=r*.09;g.beginPath();g.arc(cx,cy,r*.72,ang(red),a1);g.stroke()}
+ g.strokeStyle='#d9d6cc';g.fillStyle='#bdbab0';g.font=`600 ${Math.max(9,r*.15)}px "Barlow Condensed",sans-serif`;g.textAlign='center';g.textBaseline='middle';
+ for(let i=0;i<=10;i++){const a=a0+(a1-a0)*i/10,maj=i%2===0;g.lineWidth=maj?2:1;g.beginPath();g.moveTo(cx+Math.cos(a)*r*.8,cy+Math.sin(a)*r*.8);g.lineTo(cx+Math.cos(a)*r*(maj?.66:.72),cy+Math.sin(a)*r*(maj?.66:.72));g.stroke();
+  if(maj&&r>45&&i>0&&i<10){const val=min+(max-min)*i/10;g.fillText(Math.abs(val)>=1000?(val/1000).toFixed(val%1000?1:0)+'k':Math.round(val),cx+Math.cos(a)*r*.52,cy+Math.sin(a)*r*.52)}}
+ g.fillStyle='#e8b923';g.font=`700 ${Math.max(10,r*.17)}px "Barlow Condensed",sans-serif`;g.fillText(label,cx,cy+r*.24);
+ g.fillStyle='#ffd9a8';g.font=`${Math.max(11,r*.2)}px "Share Tech Mono",monospace`;g.fillText(txt,cx,cy+r*.47);g.fillStyle='#8a918d';g.font=`${Math.max(9,r*.13)}px "Barlow Condensed",sans-serif`;g.fillText(unit,cx,cy+r*.66);
+ const a=ang(v);g.save();g.shadowColor='rgba(0,0,0,.7)';g.shadowBlur=4;g.shadowOffsetY=2;g.strokeStyle='#ff7a2e';g.lineWidth=Math.max(2,r*.05);g.lineCap='round';g.beginPath();g.moveTo(cx-Math.cos(a)*r*.15,cy-Math.sin(a)*r*.15);g.lineTo(cx+Math.cos(a)*r*.74,cy+Math.sin(a)*r*.74);g.stroke();g.restore();
+ g.fillStyle='#2b302d';g.beginPath();g.arc(cx,cy,r*.09,0,7);g.fill();g.fillStyle='rgba(255,255,255,.07)';g.beginPath();g.ellipse(cx,cy-r*.45,r*.55,r*.25,0,0,7);g.fill()}
+function drawDials(dt){const o=S.out,isR=ram(d.type),dm=designMax(),mx=Math.max(1,dm.wet)/1e3,ffm=Math.max(.01,dm.ffMax)*3600;
+ const tv={n1:isR?fc.M:S.N1*100,n2:isR?(o.mdot||0):S.N*100,tit:S.T4-273,ff:(o.fuel||0)*3600,thr:(o.thrust||0)/1e3,vib:S.vib};
+ for(const k in tv){dialV[k]=dialV[k]==null?tv[k]:dialV[k]+(tv[k]-dialV[k])*Math.min(1,dt*7)}
+ const v=dialV,lm=(isR?(o.lim||limEff(d)+450):limEff(d))-273;
+ dial('d_n1',v.n1,0,isR?8:110,isR?null:104,isR?'MACH':'N1',isR?'flight':'% rpm',isR?v.n1.toFixed(2):v.n1.toFixed(1));
+ dial('d_n2',v.n2,0,isR?Math.max(10,mdotD(d)*3):110,isR?null:104,isR?'AIRFLOW':(d.spools===2?'N2':'N2 = N1'),isR?'kg/s':'% rpm',isR?v.n2.toFixed(1):v.n2.toFixed(1));
+ dial('d_tit',v.tit,0,2400,lm,'TIT','°C',Math.round(v.tit)+'');
+ dial('d_ff',v.ff,0,Math.ceil(ffm/100)*100,null,'FUEL FLOW','kg/h',Math.round(v.ff).toLocaleString());
+ dial('d_thr',v.thr,-.3*mx,1.1*mx,null,'THRUST','kN',v.thr.toFixed(mx<10?2:1));
+ dial('d_vib',v.vib,0,5,3,'VIBRATION','in/s',v.vib.toFixed(2))}
+
+/* thrust strip chart */
+const ch=$('chart'),cx2=ch.getContext('2d');
+function drawChart(){const W=ch.clientWidth,H=ch.clientHeight,dp=DPR();if(!W)return;if(ch.width!==Math.round(W*dp)){ch.width=Math.round(W*dp);ch.height=Math.round(H*dp)}
+ cx2.setTransform(dp,0,0,dp,0,0);cx2.clearRect(0,0,W,H);const h=S.hist,mx=Math.max(1,...h.map(Math.abs),designMax().wet);
+ cx2.strokeStyle='rgba(157,255,184,.12)';for(let i=1;i<4;i++){cx2.beginPath();cx2.moveTo(0,H*i/4);cx2.lineTo(W,H*i/4);cx2.stroke()}
+ cx2.fillStyle='#6a9d7a';cx2.font='12px "Share Tech Mono",monospace';cx2.fillText('THRUST · 30 s',6,13);
+ cx2.strokeStyle='#9dffb8';cx2.lineWidth=1.8;cx2.beginPath();h.forEach((v,j)=>{const px=j/299*W,py=H-4-(v/mx)*(H-20);j?cx2.lineTo(px,py):cx2.moveTo(px,py)});cx2.stroke()}
+
+/* ================= UI ================= */
+let dmCache=null;
+function designMax(){if(dmCache)return dmCache;let dry,wet,sfc,ffMax;
+ if(ram(d.type)){const f={h:Math.max(fc.h,10),M:Math.max(fc.M,d.type==='scramjet'?6:3),dT:fc.dT},o=ramCycle(d,f,1,true);dry=wet=Math.max(1,o.thrust);sfc=o.fuel/Math.max(1,o.thrust)*1e6;ffMax=o.fuel*1.2}
+ else{const o=cycle(d,1,T4cap(d),false,SL_,S.gear);dry=o.thrust;sfc=o.fuel/o.thrust*1e6;const ow=d.ab&&d.type!=='turboprop'?cycle(d,1,T4cap(d),true,SL_,S.gear):o;wet=ow.thrust;ffMax=ow.fuel*1.25}
+ return dmCache={dry,wet,sfc,ffMax}}
+const ANN=[['STARTER','a',()=>S.starter],['IGNITION','a',()=>S.ign&&!S.lit],['FUEL','g',()=>S.fuel],['FADEC','g',()=>S.fadec],
+ ['A/B','g',()=>!!S.out.abOn&&S.lit&&!ram(d.type)],['REVERSER','a',()=>S.rev],['WINDMILL','a',()=>!S.lit&&fc.M>.25&&S.N>.1],['TEST','a',()=>!!test],
+ ['SURGE','r',()=>S.surge>0],['OVERTEMP','r',()=>S.over>0],['FLAMEOUT','r',()=>S.flame>0],['DAMAGE',null,()=>stage()>0]];
+$('ann').innerHTML=ANN.map((a,i)=>`<div id="an${i}">${a[0]}</div>`).join('');
 function updateUI(){const o=S.out,isR=ram(d.type),th=o.thrust||0,w=weight(d);
- $('bigT').textContent=(th/1000).toFixed(1)+' kN';$('bigL').textContent=Math.round(th*.224809).toLocaleString()+' lbf';
- setG('N',isR?0:S.N/1.05,isR?'n/a':(S.N*100).toFixed(1)+' %');
- const lm=isR?(o.lim||lim()+450):lim();
- setG('egt',(o.egt-273)/1900,Math.round((o.egt||288)-273)+' °C');setG('t4',(S.T4-273)/2300,Math.round(S.T4-273)+' °C');$('red').style.left=((lm-273)/2300*100)+'%';
- setG('ff',(o.fuel||0)/Math.max(.01,designMax().wet*designMax().sfc/1e6*1.3),Math.round((o.fuel||0)*3600).toLocaleString()+' kg/h');
- const sfc=th>50?(o.fuel/th*1e6):0;setG('sfc',sfc/80,sfc?sfc.toFixed(1)+' g/kN·s':'–');
- setG('air',(o.mdot||0)/Math.max(1,mdotD(d)*(isR?3:1.1)),(o.mdot||0).toFixed(o.mdot<10?2:0)+' kg/s');
- setG('pr',(o.pr||1)/60,(o.pr||1).toFixed(1)+' :1');setG('tw',th/(w*9.81)/30,(th/(w*9.81)).toFixed(1));
- $('g_shp').hidden=d.type!=='turboprop';setG('shp',(o.shp||0)/5000,Math.round(o.shp||0).toLocaleString()+' hp');
- $('thrV').textContent=Math.round(S.thr*100)+'%';$('thr').value=Math.round(S.thr*100);
- let st=S.broken?'Engine destroyed':S.surge>0?'SURGE':S.lit?(isR?'Burning':S.N<.58?'Accelerating to idle':S.ab&&S.N>.85&&d.ab?'Afterburner lit':'Running'):isR?(machs()[S.mi]?'Tunnel running — cold':'Tunnel stopped'):S.N>.02?(S.starter?'Cranking':'Spooling down'):'Cold and dark';
- if(S.msgT>0)st=S.msg;const sEl=$('status');sEl.textContent=st+(stage()&&!S.broken?` · damage ${stage()}/3`:'');sEl.className='status'+(/SURGE|COOKED|Flameout|damage|destroyed/i.test(sEl.textContent)?' bad':'');
+ $('bigT').textContent=(th/1000).toFixed(Math.abs(th)<1e4?2:1)+' kN';$('bigL').textContent=Math.round(th*.224809).toLocaleString()+' lbf';
+ ANN.forEach((a,i)=>{const on=a[2](),el=$('an'+i);const cls=on?(a[1]||(stage()>=3?'r':'a')):'';if(el.className!==cls)el.className=cls});
+ const sfc=th>50&&o.fuel>0?o.fuel/th*1e6:0;
+ const rows=[['TSFC',sfc?sfc.toFixed(1)+' g/kN·s':'—'],['TSFC',sfc?(sfc*.0353).toFixed(3)+' lb/lbf·h':'—'],['EGT',Math.round((o.egt||288)-273)+' °C'],['Comp exit T3',Math.round((o.T3||288)-273)+' °C'],
+  ['Airflow',(o.mdot||0).toFixed((o.mdot||0)<10?2:0)+' kg/s'],['Pressure ratio',(o.pr||1).toFixed(1)+' : 1'],['Thrust/weight',(th/(w*9.81)).toFixed(2)],d.type==='turboprop'?['Shaft power',Math.round(o.shp||0).toLocaleString()+' hp']:['Jet velocity',Math.round(o.Vj||0)+' m/s']];
+ $('lcd').innerHTML=rows.map(([a,b])=>`<span>${a}</span><b>${b}</b>`).join('');
+ $('thrV').textContent=Math.round(S.thr*100)+'%';if(+$('thr').value!==Math.round(S.thr*100))$('thr').value=Math.round(S.thr*100);
+ let st=S.broken?'Engine destroyed — rebuild it':S.surge>0?'SURGE':S.lit?(isR?'Burning':S.N<.58?'Accelerating to idle':o.abOn?'Afterburner lit':S.rev?'Reverse thrust':'Running'):S.N>.02?(S.starter?'Cranking':fc.M>.25?'Windmilling':'Spooling down'):isR?(fc.M>0?'Air supply running — cold':'Cold — ramjets need airflow'):'Cold and dark';
+ if(S.msgT>0)st=S.msg;const se=$('status');const txt=st+(stage()&&!S.broken?` · damage ${stage()}/3`:'');if(se.textContent!==txt){se.textContent=txt;se.className='status'+(/SURGE|COOKED|MELTED|BURNED|Flameout|damage|destroyed|over-temp/i.test(txt)?' bad':'')}
  $('bRepair').hidden=!(S.broken||S.dmg>0)}
-function sync(){$('bStart').setAttribute('aria-pressed',S.starter);$('bIgn').setAttribute('aria-pressed',S.ign);$('bFuel').setAttribute('aria-pressed',S.fuel);$('bAB').setAttribute('aria-pressed',S.ab);$('bFadec').setAttribute('aria-pressed',S.fadec);$('bSnd').setAttribute('aria-pressed',snd);
- const isR=ram(d.type);$('bStart').disabled=isR;$('bAB').disabled=!d.ab||d.type==='turboprop'||isR;$('bAuto').textContent=isR?'Light up':'Auto start';
- $('amb').closest('label').hidden=isR;$('modeRow').hidden=!(isR||d.type==='turboprop');$('modeLbl').textContent=isR?'Tunnel speed':'Prop pitch';$('modeV').textContent=isR?'Mach '+machs()[S.mi]:'Gear '+(S.gear+1)}
-function shutdownCold(){Object.assign(S,{dmg:0,broken:false,N:0,lit:false,starter:false,ign:false,fuel:false,thr:0,fa:0,ab:false,surge:0,T4:AMB[S.amb].T,mi:0,hist:[]});dyno=null}
-function setDesign(nd,cold){const tc=nd.type!==d.type;d={...d,...nd};if(!ram(d.type)&&d.type!=='turbofan')d.bpr=d.type==='turbojet'?0:d.bpr;if(d.type!=='turbofan'&&d.type!=='turbojet')d.ab=false;
- if(tc||cold)shutdownCold();dmCache=null;renderDesign();sync()}
+function sync(){const isR=ram(d.type);[['bStart',S.starter],['bIgn',S.ign],['bFuel',S.fuel],['bAB',S.ab],['bRev',S.rev],['bFadec',S.fadec],['bSnd',snd]].forEach(([id,v])=>$(id).setAttribute('aria-pressed',v));
+ $('bStart').disabled=isR;$('bAB').disabled=!d.ab||d.type==='turboprop'||isR;$('bRev').disabled=!d.rev||isR;$('bAuto').textContent=isR?'Light up':'Auto start';$('pitchRow').hidden=d.type!=='turboprop';$('pitchV').textContent=S.gear+1;
+ $('bDyno').textContent=test&&!test.contract?'Abort dyno':'Run dyno';$('engName').textContent=`${d.name||'Custom engine'} · ${TYPES[d.type]}`}
+function syncFC(){$('alt').value=fc.h;$('mach').value=fc.M;$('altV').textContent=fc.h.toFixed(1)+' km';$('machV').textContent=fc.M.toFixed(2);$('amb').value=String(fc.dT)}
+function coldStart(){Object.assign(S,{dmg:0,broken:false,N:0,N1:0,lit:false,starter:false,ign:false,fuel:false,thr:0,fa:0,ab:false,rev:false,surge:0,T4:atmo(fc.h,fc.dT).T,hist:[],flame:0});if(test)endTest('Test aborted — engine changed')}
+function setDesign(nd,cold){const tc=nd.type&&nd.type!==d.type;d=norm({...d,...nd});
+ if(d.type!=='turbofan'&&d.type!=='turbojet'){d.ab=false;d.rev=false}if(ram(d.type)){d.vigv=false;d.spools=1;d.bleed=0}if(d.type==='scramjet')d.inlet='ramp';
+ if(!d.ab)S.ab=false;if(!d.rev)S.rev=false;if(tc||cold)coldStart();dmCache=null;renderDesign();sync();envDirty=true;renderContracts()}
+const SL=[{k:'D',l:'Inlet / fan diameter',min:.08,max:3.6,st:.01,u:'m',f:2,show:()=>true},{k:'opr',l:'Overall pressure ratio',min:2,max:55,st:.5,u:': 1',f:1,show:t=>!ram(t)},
+ {k:'tit',l:'Design turbine inlet temperature',min:1000,max:2100,st:10,u:'K',f:0,show:t=>!ram(t)},{k:'bpr',l:'Bypass ratio',min:.2,max:14,st:.1,u:'',f:1,show:t=>t==='turbofan'},
+ {k:'prop',l:'Propeller diameter',min:1,max:5,st:.05,u:'m',f:2,show:t=>t==='turboprop'},{k:'cool',l:'Turbine cooling air',min:0,max:20,st:1,u:'%',f:0,show:()=>true},{k:'bleed',l:'Customer bleed air',min:0,max:10,st:.5,u:'%',f:1,show:t=>!ram(t)}];
 function renderDesign(){
- $('engName').textContent=`${d.name||'Custom engine'} · ${TYPES[d.type]}`;
  $('types').innerHTML=Object.entries(TYPES).map(([k,n])=>`<button data-t="${k}" aria-pressed="${d.type===k}">${n}</button>`).join('');
  $('sliders').innerHTML=SL.filter(s=>s.show(d.type)).map(s=>`<label class="row"><span>${s.l} <b id="sv_${s.k}">${(+d[s.k]).toFixed(s.f)} ${s.u}</b></span><input type="range" data-k="${s.k}" min="${s.min}" max="${s.max}" step="${s.st}" value="${d[s.k]}"></label>`).join('');
- $('mat').value=d.mat;$('noz').value=d.noz;$('abFit').checked=d.ab;$('abFit').disabled=!(d.type==='turbojet'||d.type==='turbofan');
- renderSpec();$('code').value=btoa(JSON.stringify(d))}
-function renderSpec(){const dm=designMax(),w=weight(d),isR=ram(d.type),T4=Math.min(d.tit,lim());
- const items=[['Max thrust (dry)',(dm.dry/1000).toFixed(1)+' kN'],['Max thrust (wet)',d.ab||isR?(dm.wet/1000).toFixed(1)+' kN':'–'],['Thrust',Math.round(dm.wet*.224809).toLocaleString()+' lbf'],['Weight',Math.round(w).toLocaleString()+' kg'],['Thrust/weight',(dm.wet/(w*9.81)).toFixed(1)],['TSFC',dm.sfc.toFixed(1)+' g/kN·s'],['TSFC (imperial)',(dm.sfc*.0353).toFixed(2)+' lb/lbf·h']];
- if(!isR){items.push(['Airflow',mdotD(d).toFixed(mdotD(d)<10?2:0)+' kg/s'],['Spool-up ≈',(tau()*3).toFixed(1)+' s']);if(d.tit>lim())items.push(['Warning','TIT over material limit']);if(d.type==='turbofan'&&d.bpr>=2)items.push(['Fan pressure ratio',cycle(d,1,T4,false,0,2).fpr.toFixed(2)]);if(d.type==='turboprop')items.push(['Shaft power',Math.round(cycle(d,1,T4,false,0,S.gear).shp).toLocaleString()+' hp'])}
- else items.push(['Lights at','Mach '+minM()+'+'],['Max at','Mach '+machs()[machs().length-2]]);
- $('spec').innerHTML=items.map(([a,b])=>`<div><small>${a}</small><b${a==='Warning'?' style="color:var(--warn)"':''}>${b}</b></div>`).join('')}
+ $('mat').value=d.mat;$('noz').value=d.noz;$('inlet').value=d.inlet;$('spools').value=String(d.spools);$('abFit').checked=d.ab;$('revFit').checked=d.rev;$('vigvFit').checked=d.vigv;
+ const tj=d.type==='turbojet'||d.type==='turbofan';$('abL').hidden=!tj;$('revL').hidden=!tj;$('vigvL').hidden=ram(d.type);$('spoolRow').hidden=ram(d.type);$('inletRow').hidden=d.type==='scramjet';
+ renderSpec();$('code').value=enc(d)}
+const specHTML=items=>items.map(([a,b,bad])=>`<div${bad?' class="bad"':''}><small>${a}</small><b>${b}</b></div>`).join('');
+function renderSpec(){const dm=designMax(),w=weight(d),isR=ram(d.type),c=cost(d);
+ const items=[['Max thrust, dry',(dm.dry/1000).toFixed(1)+' kN'],['Max thrust, reheat',d.ab?(dm.wet/1000).toFixed(1)+' kN':'—'],['Thrust',Math.round(dm.wet*.224809).toLocaleString()+' lbf'],['Weight',Math.round(w).toLocaleString()+' kg'],['Thrust/weight',(dm.wet/(w*9.81)).toFixed(1)],['Build cost',money(c)],['TSFC',dm.sfc.toFixed(1)+' g/kN·s'],['TSFC',(dm.sfc*.0353).toFixed(3)+' lb/lbf·h']];
+ if(isR){items[0][0]='Thrust at test point';items.push(['Lights at','Mach '+minM(d)+'+'],['Liner limit',Math.round(limEff(d)+(d.type==='scramjet'?600:450))+' K'])}
+ else{const sm=surgeMargin(d,SL_),o=cycle(d,1,T4cap(d),false,SL_,S.gear);items.push(['Airflow',mdotD(d).toFixed(mdotD(d)<10?2:0)+' kg/s'],['Spool-up ≈',predSpool(d,SL_).toFixed(1)+' s'],['Surge margin',Math.round(sm*100)+' %',sm<.08],['Turbine limit',Math.round(limEff(d))+' K',d.tit>limEff(d)],['Comp exit T3',Math.round(o.T3)+' K',o.T3>T3max(d)]);
+  if(d.type==='turbofan'&&d.bpr>=1.5)items.push(['Fan pressure ratio',o.fpr.toFixed(2)]);if(d.type==='turboprop')items.push(['Shaft power',Math.round(o.shp).toLocaleString()+' hp'])}
+ $('spec').innerHTML=specHTML(items)}
 $('presets').innerHTML=PRESETS.map((p,i)=>`<button data-p="${i}">${p.name}</button>`).join('');
 $('mat').innerHTML=Object.entries(MATS).map(([k,m])=>`<option value="${k}">${m.n}</option>`).join('');
-$('presets').onclick=e=>{const b=e.target.closest('[data-p]');if(b){setDesign({...PRESETS[b.dataset.p]},true);$('saveName').value=d.name}};
-$('types').onclick=e=>{const b=e.target.closest('[data-t]');if(b&&b.dataset.t!==d.type){const t=b.dataset.t,base=PRESETS.find(p=>p.type===t);setDesign({...base,name:'Custom '+TYPES[t].toLowerCase()})}};
-$('sliders').oninput=e=>{const k=e.target.dataset.k;if(!k)return;d[k]=+e.target.value;const s=SL.find(s=>s.k===k);$('sv_'+k).textContent=d[k].toFixed(s.f)+' '+s.u;dmCache=null;renderSpec();$('code').value=btoa(JSON.stringify(d))};
-$('mat').onchange=e=>setDesign({mat:e.target.value});$('noz').onchange=e=>setDesign({noz:e.target.value});$('abFit').onchange=e=>{setDesign({ab:e.target.checked});if(!d.ab)S.ab=false;sync()};
-$('amb').onchange=e=>{S.amb=+e.target.value};
-$('thr').oninput=e=>{if(!dyno)S.thr=e.target.value/100};
-const tog=k=>()=>{initAudio();S[k]=!S[k];sync()};
-$('bStart').onclick=()=>{if(S.broken)return;tog('starter')()};$('bIgn').onclick=tog('ign');$('bFuel').onclick=tog('fuel');$('bFadec').onclick=tog('fadec');
-$('bAB').onclick=()=>{if(!$('bAB').disabled)tog('ab')()};
-$('bSnd').onclick=()=>{initAudio();snd=!snd;try{ac&&ac.resume()}catch(e){}sync()};
-function autoStart(){initAudio();if(S.broken){say('Repair the engine first');return}
- if(ram(d.type)){if(machs()[S.mi]<minM())S.mi=machs().findIndex(m=>m>=minM())+1;S.ign=true;S.fuel=true;S.thr=Math.max(S.thr,.6);sync();return}
- S.thr=0;S.starter=true;S.ign=true;S.fuel=true;sync()}
-function stop(){S.fuel=false;S.ab=false;S.starter=false;S.thr=0;dyno=null;$('dynoMsg').textContent='';sync()}
-$('bAuto').onclick=autoStart;$('bStop').onclick=stop;
-$('bRepair').onclick=()=>{S.dmg=0;S.broken=false;shutdownCold();sync();say('Engine rebuilt',2)};
-const mode=dir=>{if(ram(d.type))S.mi=Math.max(0,Math.min(machs().length-1,S.mi+dir));else if(d.type==='turboprop')S.gear=Math.max(0,Math.min(3,S.gear+dir));dmCache=null;renderSpec();sync()};
-$('bUp').onclick=()=>mode(1);$('bDn').onclick=()=>mode(-1);
-document.addEventListener('keydown',e=>{if(e.target.matches('input,textarea,select'))return;const k=e.key;let h=true;
- if(k==='s'||k==='S')autoStart();else if(k==='x'||k==='X')stop();else if(k==='ArrowUp'&&!dyno)S.thr=Math.min(1,S.thr+.05);else if(k==='ArrowDown'&&!dyno)S.thr=Math.max(0,S.thr-.05);
- else if(k==='End'&&!dyno)S.thr=1;else if(k==='PageUp')$('bAB').click();else if(k==='e'||k==='E')mode(1);else if(k==='q'||k==='Q')mode(-1);else h=false;if(h)e.preventDefault()});
-
-/* hangar + build codes */
-let saved=store.get('ggf-engines',[]);
-function renderSaved(){$('saved').innerHTML=saved.length?saved.map((s,i)=>`<li><span>${esc(s.name)} · ${TYPES[s.type]}</span><button data-l="${i}">Load</button><button data-del="${i}">Delete</button></li>`).join(''):'<li class="note">No saved engines yet — save as many as you like.</li>'}
+$('fcPresets').innerHTML=FCP.map(([n],i)=>`<button data-f="${i}">${n}</button>`).join('');
+const enc=o=>{try{return btoa(unescape(encodeURIComponent(JSON.stringify(o))))}catch(e){return ''}},dec=s=>JSON.parse(decodeURIComponent(escape(atob(s.trim()))));
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-$('bSave').onclick=()=>{const n=$('saveName').value.trim()||d.name||'Custom engine';d.name=n;const i=saved.findIndex(s=>s.name===n);if(i>=0)saved[i]={...d};else saved.push({...d});store.set('ggf-engines',saved);renderSaved();renderDesign()};
-$('saved').onclick=e=>{const l=e.target.dataset.l,del=e.target.dataset.del;if(l!=null){setDesign({...saved[l]},true);$('saveName').value=d.name}if(del!=null){saved.splice(del,1);store.set('ggf-engines',saved);renderSaved()}};
-$('bCopy').onclick=async()=>{const t=$('code');try{await navigator.clipboard.writeText(t.value);$('codeMsg').textContent='Copied'}catch(e){t.select();$('codeMsg').textContent='Selected — press Ctrl+C'}};
-$('bLoadCode').onclick=()=>{try{const nd=JSON.parse(atob($('code').value.trim()));if(!TYPES[nd.type]||!MATS[nd.mat])throw 0;['D','opr','tit','bpr','prop'].forEach(k=>nd[k]=Math.max(0.05,Math.min(60,+nd[k]||1)));setDesign(nd,true);$('saveName').value=d.name||'';$('codeMsg').textContent='Loaded'}catch(e){$('codeMsg').textContent='That code is not valid'}};
 
-/* dyno */
-let dyno=null,runs=store.get('ggf-runs',[]);
-function renderRuns(){$('runs').innerHTML=runs.length?runs.slice().reverse().map(r=>`<li><span><b>${esc(r.name)}</b> · ${r.cond}<br><small class="note">${r.date}</small></span><span>${r.max} kN max${r.ab?` · ${r.ab} kN wet`:''} · ${r.sfc} g/kN·s${r.spool?` · ${r.spool} s spool`:''}</span></li>`).join('')+'<li><button id="bClr">Clear runs</button></li>':'<li class="note">No runs yet.</li>'}
+/* contracts */
+function renderStars(){const tot=Object.values(stars).reduce((a,b)=>a+b,0);$('stars').textContent=`★ ${tot} / ${CONTRACTS.length*3}`}
+let crT=0;function renderContracts(){clearTimeout(crT);crT=setTimeout(()=>{
+ $('contracts').innerHTML=CONTRACTS.map(c=>{const ev=evalContract(c,predict(c)),best=stars[c.id]||0,f=c.fc;
+  return `<div class="plate card"><h4>${esc(c.name)}</h4><p class="cl">${esc(c.client)} · ${f.h} km · Mach ${f.M}${f.dT?` · ${f.dT>0?'hot':'arctic'} day`:''}</p><p>${esc(c.brief)}</p>
+  <ul class="req">${ev.rows.map(([l,req,v,ok])=>`<li><span>${l} <small class="note">${req}</small></span><b class="${ok?'ok':'no'}">${v} ${ok?'✓':'✗'}</b></li>`).join('')}</ul>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span class="stars" aria-label="${best} of 3 stars">${'★'.repeat(best)}<i>${'★'.repeat(3-best)}</i></span><span class="note">Predicted: ${ev.stars?'★'.repeat(ev.stars):'fails'}</span><button data-c="${c.id}" class="go">${test&&test.contract===c?'Abort':'Run certification'}</button></div></div>`}).join('')},60)}
+$('contracts').onclick=e=>{const b=e.target.closest('[data-c]');if(!b)return;initSound();startTest('cert',CONTRACTS.find(c=>c.id===b.dataset.c));renderContracts()};
+
+/* flight envelope map */
+const envC=$('env'),ex=envC.getContext('2d');let envDirty=true,envGrid=null,envMax=1;
+const envMm=()=>d.type==='scramjet'?9:d.type==='ramjet'?6:3,envHm=30;
+function envCompute(){const ab=$('envAB').checked&&d.ab,NX=48,NY=32,g=[];let mx=1;
+ for(let j=0;j<NY;j++)for(let i=0;i<NX;i++){const f={h:(j+.5)/NY*envHm,M:(i+.5)/NX*envMm(),dT:fc.dT};let v,flag=0;
+  if(ram(d.type)){if(f.M<minM(d)){flag=1;v=0}else{const o=ramCycle(d,f,1,true);v=o.thrust}}
+  else{const o=cycle(d,1,T4cap(d),ab,f,S.gear);v=o.thrust;if(o.dl<.045)flag=1;else if(o.T3>T3max(d))flag=2}
+  g.push({v,flag});if(!flag&&v>mx)mx=v}
+ envGrid={g,NX,NY};envMax=mx;envDirty=false}
+function envDraw(){const W=envC.clientWidth,H=envC.clientHeight,dp=DPR();if(!W)return;if(envDirty||!envGrid)envCompute();
+ if(envC.width!==Math.round(W*dp)){envC.width=Math.round(W*dp);envC.height=Math.round(H*dp)}ex.setTransform(dp,0,0,dp,0,0);ex.clearRect(0,0,W,H);
+ const L=48,B=34,T=12,Rr=12,pw=W-L-Rr,phh=H-T-B,{g,NX,NY}=envGrid,cw=pw/NX,chh=phh/NY;
+ for(let j=0;j<NY;j++)for(let i=0;i<NX;i++){const c=g[j*NX+i],px=L+i*cw,py=T+phh-(j+1)*chh;
+  if(c.flag===1)ex.fillStyle='#2a2e2c';else if(c.v<=0)ex.fillStyle='#0e100f';else{const t=Math.pow(clamp(c.v/envMax),.6);ex.fillStyle=`rgb(${Math.round(40+215*Math.min(1,t*1.4))},${Math.round(20+200*Math.max(0,t-.35)/.65)},${Math.round(15+60*t)})`}
+  ex.fillRect(px,py,cw+.6,chh+.6);
+  if(c.flag===2){ex.fillStyle=`rgb(${Math.round(40+180*Math.pow(clamp(c.v/envMax),.6))},30,25)`;ex.fillRect(px,py,cw+.6,chh+.6);ex.strokeStyle='rgba(255,59,47,.7)';ex.lineWidth=1;ex.beginPath();ex.moveTo(px,py+chh);ex.lineTo(px+cw,py);ex.stroke()}}
+ ex.fillStyle='#9ba39d';ex.font='12px "Share Tech Mono",monospace';ex.textAlign='center';const Mm=envMm();
+ for(let m=0;m<=Mm;m+=Mm>4?1:.5){const px=L+m/Mm*pw;ex.fillText(m.toFixed(Mm>4?0:1),px,H-B+16);ex.strokeStyle='rgba(255,255,255,.08)';ex.beginPath();ex.moveTo(px,T);ex.lineTo(px,T+phh);ex.stroke()}
+ ex.textAlign='right';for(let h=0;h<=envHm;h+=5){const py=T+phh-h/envHm*phh;ex.fillText(h+' km',L-6,py+4);ex.strokeStyle='rgba(255,255,255,.08)';ex.beginPath();ex.moveTo(L,py);ex.lineTo(L+pw,py);ex.stroke()}
+ ex.textAlign='center';ex.fillText('Mach',L+pw/2,H-4);
+ const mx_=L+fc.M/Mm*pw,my=T+phh-fc.h/envHm*phh;if(fc.M<=Mm){ex.strokeStyle='#e8b923';ex.lineWidth=2;ex.beginPath();ex.moveTo(mx_-12,my);ex.lineTo(mx_+12,my);ex.moveTo(mx_,my-12);ex.lineTo(mx_,my+12);ex.stroke();ex.beginPath();ex.arc(mx_,my,6,0,7);ex.stroke()}
+ ex.fillStyle='rgba(10,12,11,.8)';ex.fillRect(L+pw-150,T+6,144,24);ex.fillStyle='#ffd9a8';ex.textAlign='right';ex.fillText(`peak ${(envMax/1e3).toFixed(1)} kN`,L+pw-12,T+22);
+ envC._geo={L,T,pw,phh,Mm}}
+function envMark(){if(!$('p-envelope').hidden)envDraw()}
+function envPt(e){const r=envC.getBoundingClientRect(),G=envC._geo;if(!G)return null;const M=(e.clientX-r.left-G.L)/G.pw*G.Mm,h=(G.T+G.phh-(e.clientY-r.top))/G.phh*envHm;if(M<0||h<0||M>G.Mm||h>envHm)return null;return {M:Math.round(M*20)/20,h:Math.round(h*2)/2}}
+envC.onclick=e=>{const p=envPt(e);if(p){setFC(p);say(`Air supply set to ${p.h} km, Mach ${p.M}`,2)}};
+envC.onmousemove=e=>{const p=envPt(e);if(!p){$('envHover').textContent='';return}const f={...p,dT:fc.dT};let txt;
+ if(ram(d.type))txt=p.M<minM(d)?"won't light":(ramCycle(d,f,1,true).thrust/1e3).toFixed(1)+' kN';else{const o=cycle(d,1,T4cap(d),$('envAB').checked&&d.ab,f,S.gear);txt=o.dl<.045?'too thin to burn':(o.thrust/1e3).toFixed(1)+' kN'+(o.T3>T3max(d)?' · compressor too hot':'')}
+ $('envHover').textContent=`${p.h} km · M${p.M.toFixed(2)} → ${txt}`};
+$('envAB').onchange=()=>{envDirty=true;envDraw()};
+
+/* hangar, runs */
+let saved=store.get('ggf-engines',[]).map(norm);
+function renderSaved(){$('saved').innerHTML=saved.length?saved.map((s,i)=>`<li><span>${esc(s.name)} · ${TYPES[s.type]}</span><button data-l="${i}">Load</button><button data-del="${i}">Delete</button></li>`).join(''):'<li class="note">No saved engines yet. Save as many as you like.</li>'}
+function renderRuns(){$('runs').innerHTML=runs.length?runs.slice().reverse().map(r=>`<li><span><b>${esc(r.name)}</b> · ${esc(r.cond)}<br><small class="note">${esc(r.date)}</small></span><span style="font-family:'Share Tech Mono',monospace;color:#ffd9a8">${(r.dry/1e3).toFixed(1)} kN${r.wet?` · ${(r.wet/1e3).toFixed(1)} wet`:''}${r.sfc?` · ${r.sfc.toFixed(1)} g/kN·s`:''}${r.spool!=null?` · ${r.spool.toFixed(1)} s`:''}</span></li>`).join('')+'<li><button id="bClr">Clear runs</button></li>':'<li class="note">No runs yet.</li>'}
+
+/* tabs */
+const TABS=['design','contracts','envelope','dyno'];
+function route(){const h=location.hash.slice(1),cur=TABS.includes(h)?h:'design';TABS.forEach(t=>$('p-'+t).hidden=t!==cur);document.querySelectorAll('#tabs a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#'+cur?'page':'false'));if(cur==='envelope')requestAnimationFrame(envDraw);if(cur==='contracts')renderContracts()}
+window.addEventListener('hashchange',route);
+
+/* events */
+$('presets').onclick=e=>{const b=e.target.closest('[data-p]');if(b){setDesign(PRESETS[b.dataset.p],true);$('saveName').value=d.name;if(ram(d.type)&&fc.M<minM(d))setFC({M:d.type==='scramjet'?6:3,h:d.type==='scramjet'?20:10})}};
+$('types').onclick=e=>{const b=e.target.closest('[data-t]');if(b&&b.dataset.t!==d.type){const t=b.dataset.t;setDesign({...PRESETS.find(p=>p.type===t),name:'Custom '+TYPES[t].toLowerCase()})}};
+$('sliders').oninput=e=>{const k=e.target.dataset.k;if(!k)return;d[k]=+e.target.value;const s=SL.find(s=>s.k===k);$('sv_'+k).textContent=d[k].toFixed(s.f)+' '+s.u;dmCache=null;envDirty=true;renderSpec();$('code').value=enc(d);renderContracts()};
+$('sliders').onchange=()=>envMark();
+$('mat').onchange=e=>setDesign({mat:e.target.value});$('noz').onchange=e=>setDesign({noz:e.target.value});$('inlet').onchange=e=>setDesign({inlet:e.target.value});$('spools').onchange=e=>setDesign({spools:+e.target.value});
+$('abFit').onchange=e=>setDesign({ab:e.target.checked});$('revFit').onchange=e=>setDesign({rev:e.target.checked});$('vigvFit').onchange=e=>setDesign({vigv:e.target.checked});
+$('alt').oninput=e=>setFC({h:+e.target.value});$('mach').oninput=e=>setFC({M:+e.target.value});$('amb').onchange=e=>{setFC({dT:+e.target.value});envDirty=true;envMark()};
+$('fcPresets').onclick=e=>{const b=e.target.closest('[data-f]');if(b)setFC({...FCP[b.dataset.f][1]})};
+$('thr').oninput=e=>{if(!test)S.thr=e.target.value/100};
+const tog=k=>()=>{initSound();S[k]=!S[k];sync()};
+$('bStart').onclick=()=>{if(!S.broken)tog('starter')()};$('bIgn').onclick=tog('ign');$('bFuel').onclick=tog('fuel');$('bFadec').onclick=tog('fadec');
+$('bAB').onclick=()=>{initSound();toggleAB()};$('bRev').onclick=()=>{initSound();toggleRev()};
+$('bSnd').onclick=()=>{initAudio();snd=!snd;try{ac&&ac.resume()}catch(e){}sync()};
+$('bAuto').onclick=()=>{if(!snd){initAudio();snd=true;try{ac&&ac.resume()}catch(e){}}autoStart()};$('bStop').onclick=stop;
+$('bRepair').onclick=()=>{coldStart();sync();say('Engine rebuilt',2)};
+const pitch=dir=>{if(d.type!=='turboprop')return;S.gear=clamp(S.gear+dir,0,3);dmCache=null;renderSpec();sync();renderContracts()};
+$('bUp').onclick=()=>pitch(1);$('bDn').onclick=()=>pitch(-1);
+$('bDyno').onclick=()=>{initSound();startTest('dyno',null)};
 $('runs').onclick=e=>{if(e.target.id==='bClr'){runs=[];store.set('ggf-runs',runs);renderRuns()}};
-$('bDyno').onclick=()=>{if(dyno){dyno=null;$('dynoMsg').textContent='Aborted';$('bDyno').textContent='Run dyno';return}
- const isR=ram(d.type);if(!S.lit||(!isR&&S.N<.55)){$('dynoMsg').textContent=isR?'Light the engine in the tunnel first':'Start the engine and let it reach idle first';return}
- dyno={t:0,ph:0,max:0,ab:0,sfc:Infinity,spool:null,target:0};$('bDyno').textContent='Abort dyno';$('dynoRes').innerHTML=''};
-function dynoStep(dt){if(!dyno)return;const o=S.out,isR=ram(d.type);dyno.t+=dt;const t=dyno.t;
- if(!S.lit){dyno=null;$('dynoMsg').textContent='Run failed — engine went out';$('bDyno').textContent='Run dyno';return}
- const rec=()=>{if(o.thrust>dyno.max)dyno.max=o.thrust;if(o.thrust>.05*Math.max(1,dyno.max)&&o.fuel>0)dyno.sfc=Math.min(dyno.sfc,o.fuel/o.thrust*1e6)};
- if(isR){S.thr=.2+.8*Math.min(1,t/8);rec();$('dynoMsg').textContent='Throttle sweep…';if(t>9)finish();return}
- if(dyno.ph===0){S.thr=0;S.ab=false;$('dynoMsg').textContent='Idle hold…';if(t>3){dyno.ph=1;dyno.t0=t;dyno.target=cycle(d,1,Math.min(d.tit,S.fadec?lim()*.97:d.tit),false,S.amb,S.gear).thrust}}
- else if(dyno.ph===1){S.thr=1;$('dynoMsg').textContent='Full power — timing spool-up…';rec();if(dyno.spool==null&&o.thrust>=.95*dyno.target*(1-[0,.05,.15,1][stage()]))dyno.spool=t-dyno.t0;if(t-dyno.t0>Math.max(6,(dyno.spool||0)+2)||t-dyno.t0>30){dyno.ph=2;dyno.t0=t}}
- else if(dyno.ph===2){S.thr=1-.75*Math.min(1,(t-dyno.t0)/8);$('dynoMsg').textContent='Economy sweep…';rec();if(t-dyno.t0>8.5){dyno.ph=d.ab?3:4;dyno.t0=t}}
- else if(dyno.ph===3){S.thr=1;S.ab=S.N>.9;sync();$('dynoMsg').textContent='Afterburner…';if(o.thrust>dyno.ab&&S.ab)dyno.ab=o.thrust;if(t-dyno.t0>7){S.ab=false;sync();dyno.ph=4}}
- else{S.thr=.2;finish()}}
-function finish(){const r={name:d.name||'Custom engine',cond:ram(d.type)?`Mach ${machs()[S.mi]} tunnel`:AMB[S.amb].n+(S.fadec?'':' · no FADEC'),date:new Date().toLocaleString(),max:(dyno.max/1000).toFixed(1),ab:dyno.ab?(dyno.ab/1000).toFixed(1):0,sfc:isFinite(dyno.sfc)?dyno.sfc.toFixed(1):'–',spool:dyno.spool?dyno.spool.toFixed(1):0};
- $('dynoRes').innerHTML=[['Max thrust (dry)',r.max+' kN'],['Afterburner',r.ab?r.ab+' kN':'–'],['Best TSFC',r.sfc+' g/kN·s'],['Spool-up',r.spool?r.spool+' s':'–']].map(([a,b])=>`<div><small>${a}</small><b>${b}</b></div>`).join('');
- runs.push(r);if(runs.length>50)runs.shift();store.set('ggf-runs',runs);renderRuns();dyno=null;$('dynoMsg').textContent='Run complete';$('bDyno').textContent='Run dyno'}
+$('bSave').onclick=()=>{const n=$('saveName').value.trim()||d.name||'Custom engine';d.name=n;const i=saved.findIndex(s=>s.name===n);if(i>=0)saved[i]={...d};else saved.push({...d});store.set('ggf-engines',saved);renderSaved();renderDesign();sync()};
+$('saved').onclick=e=>{const l=e.target.dataset.l,del=e.target.dataset.del;if(l!=null){setDesign(saved[l],true);$('saveName').value=d.name}if(del!=null){saved.splice(del,1);store.set('ggf-engines',saved);renderSaved()}};
+$('bCopy').onclick=async()=>{const t=$('code');try{await navigator.clipboard.writeText(t.value);$('codeMsg').textContent='Copied'}catch(e){t.select();$('codeMsg').textContent='Selected — press Ctrl+C'}};
+$('bLoadCode').onclick=()=>{try{const nd=dec($('code').value);if(!TYPES[nd.type])throw 0;const c=norm(nd);SL.forEach(s=>c[s.k]=clamp(c[s.k],s.min,s.max));setDesign(c,true);$('saveName').value=d.name||'';$('codeMsg').textContent='Loaded'}catch(e){$('codeMsg').textContent='That code is not valid'}};
+document.addEventListener('keydown',e=>{if(e.target.matches('input[type=text],textarea,select'))return;const k=e.key;let h=true;
+ if(k==='s'||k==='S'){if(!snd){initAudio();snd=true;try{ac.resume()}catch(_){}}autoStart()}else if(k==='x'||k==='X')stop();
+ else if(k==='ArrowUp'&&!test)S.thr=Math.min(1,S.thr+.05);else if(k==='ArrowDown'&&!test)S.thr=Math.max(0,S.thr-.05);else if(k==='End'&&!test)S.thr=1;
+ else if(k==='PageUp'){initSound();toggleAB()}else if(k==='r'||k==='R'){initSound();toggleRev()}
+ else if(k==='e'||k==='E')setFC({M:Math.round((fc.M+.1)*100)/100});else if(k==='q'||k==='Q')setFC({M:Math.round((fc.M-.1)*100)/100});
+ else if(k==='w'||k==='W')setFC({h:fc.h+.5});else if(k==='a'||k==='A')setFC({h:fc.h-.5});
+ else if(k===']')pitch(1);else if(k==='[')pitch(-1);else h=false;
+ if(h&&e.target.matches('input[type=range]')&&k.startsWith('Arrow'))return;if(h)e.preventDefault();sync()});
 
-/* loop */
-readColors();new MutationObserver(readColors).observe(document.documentElement,{attributes:true});
-try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',readColors)}catch(e){}
-let last=performance.now(),acc=0;
-function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;
- for(let i=0;i<4;i++)step(dt/4);dynoStep(dt);if(S.msgT>0)S.msgT-=dt;
- acc+=dt;if(acc>.1){acc=0;S.hist.push([S.out.thrust||0]);if(S.hist.length>300)S.hist.shift();drawChart()}
- updateUI();draw(dt);audio();requestAnimationFrame(loop)}
-setDesign({...PRESETS[0]},true);$('saveName').value=d.name;renderSaved();renderRuns();sync();
+/* ================= LOOP ================= */
+let last=performance.now(),acc=0,uiAcc=0;
+function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;try{
+ for(let i=0;i<4;i++)step(dt/4);testStep(dt);}catch(e){console.error(e)}if(S.msgT>0)S.msgT-=dt;
+ acc+=dt;if(acc>.1){acc=0;S.hist.push(S.out.thrust||0);if(S.hist.length>300)S.hist.shift();drawChart()}
+ uiAcc+=dt;if(uiAcc>.05){uiAcc=0;updateUI()}
+ try{draw(dt)}catch(e){console.error(e)}try{drawDials(dt)}catch(e){console.error(e)}try{audio(dt)}catch(e){console.error(e)}requestAnimationFrame(loop)}
+setDesign(PRESETS[0],true);$('saveName').value=d.name;syncFC();renderSaved();renderRuns();renderStars();route();sync();
+new ResizeObserver(()=>{bgC=null;envMark()}).observe($('bay'));
 requestAnimationFrame(loop);
 }
 </script>
