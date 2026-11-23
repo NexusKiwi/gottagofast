@@ -4,7 +4,9 @@ A browser jet engine simulator in one file. You design an engine, bolt it to the
 
 ## Play
 
-Open `index.html` in any modern browser. It needs no build step and no server.
+**Play it now: https://nexuskiwi.github.io/gottagofast/**
+
+Or download `index.html` and open it in any modern browser. It needs no build step and no server. Saved engines, stars and records stay in the browser you play in, and build codes move designs between browsers.
 
 ## Features
 
@@ -87,7 +89,7 @@ Everything plays through a concrete-room reverb.
 
 | Key | Action |
 |---|---|
-| `S` | Auto start / light up |
+| `S` | Auto start (starter, then fuel at about 20% spool) / light up |
 | `X` | Shutdown |
 | `↑` / `↓` | Throttle ±5% (hold Shift for ±1%) |
 | `Home` / `End` | Idle / full power |
