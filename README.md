@@ -14,7 +14,7 @@ Open `index.html` in any modern browser. It needs no build step and no server.
 - A console with analogue dials (N1, N2, turbine temperature, fuel flow, thrust, vibration), warning lights, a green-screen readout, a thrust trace and a throttle lever.
 
 ### Engines and parts
-- **Types:** turbojet, turbofan, turboprop, ramjet and scramjet.
+- **Types:** turbojet, turbofan, turboprop, helicopter turboshaft, ramjet and scramjet.
 - **Design settings:** fan or inlet size, pressure ratio, turbine temperature, bypass ratio and propeller size.
 - **Cooling air** lets the turbine run hotter than the material limit, at a cost in efficiency.
 - **Customer bleed air** costs thrust.
@@ -26,6 +26,29 @@ Open `index.html` in any modern browser. It needs no build step and no server.
 - **Afterburner.**
 - **Materials:** steel, nickel superalloy, single-crystal or ceramic matrix.
 - Every design has a weight, a build cost and a surge margin.
+
+### Design office
+A step-by-step build across 13 sheets. Each sheet has a live cutaway with that part highlighted, a diagram of its own, and a data plate:
+- **Identity:** name, notes, presets, the hangar and build codes.
+- **Layout:** engine type, inlet size and inlet type.
+- **Compressor:** stages, pressure ratio, efficiency, bleed and guide vanes.
+- **Fan or prop:** bypass ratio, plus fan pressure ratio (set it yourself or let it auto-match).
+- **Combustor:** turbine temperature, pressure loss and cooling.
+- **Turbine:** material, stages and efficiency.
+- **Nozzle:** shape, throat area and reverser.
+- **Afterburner:** fuel rate and nozzle opening, with a check for choking and liner burn-through.
+- **Rotor:** single, twin or triple spool, disc material (sets the speed limit) and rotor mass.
+- **FADEC:** fitted or not, idle speed, and a throttle map you drag into shape.
+- **Conditions.**
+- **Airframe:** wing, fuselage, fuel, structure, single or twin engines, fit checks, mass, drag polar, performance, and an animated flight test (take-off roll, climb to 11 km, top speed, range).
+- **Review:** a list of design problems.
+
+### Helicopter turboshaft
+The turboshaft drives a water-brake dyno. The governor holds the rotor at 100% while you raise the collective. Turn the governor off and you have to stop the rotor overspeeding yourself.
+
+### Goals and records
+- 13 goals with ranks, from first light to hypersonic.
+- Records kept on this device: most thrust, best thrust/weight, lowest fuel burn, quickest spool-up, most shaft power and fastest flight test.
 
 ### Flight envelope
 - An ISA atmosphere from 0 to 30 km and Mach 0 to 8, plus hot and Arctic days.
@@ -61,10 +84,11 @@ Everything plays through a concrete-room reverb.
 | `X` | Shutdown |
 | `↑` / `↓` | Throttle |
 | `End` | Full power |
-| `PgUp` | Afterburner |
+| `PgUp` | Afterburner (or push the throttle past the 100% gate) |
 | `R` | Reverser |
 | `E` / `Q` | Mach up / down |
 | `W` / `A` | Altitude up / down |
-| `[` / `]` | Prop pitch |
+| `[` / `]` | Prop pitch or collective |
+| `T` | Thermal view |
 
 The physics is a simplified gas-path model. It aims for believable numbers and is meant for fun, not engineering.

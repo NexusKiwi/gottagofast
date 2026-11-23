@@ -81,6 +81,31 @@ textarea{font:13px "Share Tech Mono",monospace;min-height:64px;overflow-wrap:any
 .req .ok{color:var(--grn)}.req .no{color:var(--red)}.req b{font-family:"Share Tech Mono",monospace;font-weight:400;white-space:nowrap}
 .fig{position:relative;height:440px;background:#0b0e0c;border:1px solid #000;border-radius:6px}.fig canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
 .resline{font:15px "Share Tech Mono",monospace;color:#ffd9a8;min-height:24px}
+.office{padding:14px 14px 18px}.offbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between;margin-bottom:10px}.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:14px "Share Tech Mono",monospace;color:var(--mute);background:#101412;border:1px solid #000;border-radius:4px;padding:6px 10px;white-space:nowrap}.chip b{color:#ffd9a8;font-weight:400}.chip.ok{color:var(--grn)}.chip.bad{color:#fff;background:#6d1810}
+.steps{display:flex;gap:4px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;scrollbar-width:thin}
+.steps button{flex:none;min-height:48px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:4px 12px;font-size:14px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,0 100%,8px 50%);padding-left:16px}
+.steps button small{font:11px "Share Tech Mono",monospace;color:var(--mute)}.steps button[aria-current=step]{background:var(--hz);color:#111}.steps button[aria-current=step] small{color:#3b2f05}.steps button.dim{opacity:.45}
+.offgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.office.wide .offgrid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+.drawing{background:#0f1311;border:1px solid #000;border-radius:6px;display:flex;flex-direction:column;min-height:520px;position:sticky;top:8px;align-self:start}
+#ofCut{width:100%;height:300px;display:block}#ofDia{width:100%;height:220px;display:block;border-top:1px dashed #2b332f;touch-action:none}.office.wide #ofCut{height:380px}
+.titleblock{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;border-top:1px solid #3b433f}.titleblock div{padding:6px 10px;border-right:1px solid #3b433f}.titleblock div:last-child{border:0}.titleblock small{display:block;font:11px "Share Tech Mono",monospace;color:var(--mute)}.titleblock b{font:14px "Share Tech Mono",monospace;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.sheethd{display:flex;align-items:center;gap:12px;margin-bottom:8px}.sheettag{font:12px "Share Tech Mono",monospace;color:var(--hz);border:1px solid var(--hz);padding:2px 8px;border-radius:3px}.sheet h4{font:800 28px "Big Shoulders Display","Barlow Condensed",sans-serif;margin:0}
+.plateD{background:repeating-linear-gradient(90deg,#1b211e 0 2px,#1e2522 2px 4px);border:1px solid #000;border-radius:6px;padding:10px 16px;margin:6px 0 12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}.plateD small{display:block;font:12px "Share Tech Mono",monospace;color:var(--hz)}.plateD b{font:400 clamp(30px,4vw,44px)/1.1 "Share Tech Mono",monospace;color:#fff;margin-right:8px;word-break:break-word}.plateD span{font:14px "Share Tech Mono",monospace;color:var(--mute)}
+.lead{margin:0 0 10px;color:#cfccc3}.help{margin:2px 0 8px;font-size:13px;color:var(--mute)}.sheet h5{font:600 13px "Share Tech Mono",monospace;color:var(--mute);margin:16px 0 6px;font-weight:400}
+.ctl{margin:6px 0 10px}.cl{display:flex;justify-content:space-between;gap:8px;font:600 15px "Barlow Condensed",sans-serif;color:#cfccc3}.cl b{font:15px "Share Tech Mono",monospace;font-weight:400;color:var(--hz);white-space:nowrap}
+.sr{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:8px;align-items:center}.nud{padding:0;font-size:20px}
+.picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}.pick{min-height:64px;text-align:left;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:8px 10px;gap:2px}.pick b{font-size:15px}.pick small{font:500 13px Barlow,sans-serif;letter-spacing:0;color:var(--mute);line-height:1.3}.pick[aria-pressed=true] small{color:#e8cf8f}
+.tg{display:flex;gap:10px;align-items:center;min-height:44px;font-weight:600;margin-top:6px}.tg input{width:22px;height:22px;accent-color:var(--hot)}
+.bigname{font:400 28px "Share Tech Mono",monospace!important;border-width:0 0 2px!important;border-color:var(--hz)!important;background:transparent!important;border-radius:0!important}
+.na{background:#151917;border:1px dashed #3b433f;border-radius:6px;padding:14px;color:#cfccc3}.navb{margin-top:18px}.wide{width:100%;margin-top:6px}
+.lcdline{font:14px "Share Tech Mono",monospace;background:#08100b;color:#9dffb8;border:1px solid #000;border-radius:4px;padding:8px 10px;margin-top:6px}.bad{color:#ff7b70}.okc{color:var(--grn)}.warnc{color:var(--amb)}
+.probs{list-style:none;padding:0;margin:0}.probs li{padding:8px 10px;border-left:4px solid;margin:6px 0;background:#151917;border-radius:0 4px 4px 0}.probs .bad{border-color:var(--red);color:#ffb3ad}.probs .warn{border-color:var(--amb);color:#ffe0a8}.probs .info{border-color:#5c8f6c;color:#cfccc3}.probs .ok{border-color:var(--grn);color:#bff5d0}
+.btnlink{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:5px;border:1px solid #000;background:#262b28;color:var(--ink);text-decoration:none;font:700 15px "Barlow Condensed",sans-serif}
+.two2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.kv{list-style:none;padding:0;margin:0;font-size:14px}.kv li{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #2b332f;padding:4px 0}.kv b{font:14px "Share Tech Mono",monospace;font-weight:400;text-align:right}
+.goalcard{position:absolute;right:12px;bottom:10px;max-width:min(320px,60%);background:rgba(10,12,11,.86);border:1px solid #000;border-left:4px solid var(--hz);border-radius:4px;padding:8px 10px;font-size:14px}.goalcard small{font:12px "Share Tech Mono",monospace;color:var(--hz);display:flex;justify-content:space-between;gap:8px}.goalcard b{display:block;font:700 17px "Barlow Condensed",sans-serif}.goalcard p{margin:2px 0 0;color:#cfccc3}.goalcard button{min-height:28px;padding:0 8px;font-size:12px}
+.gate{position:relative}.gatelbl{font:11px "Share Tech Mono",monospace;color:var(--hot)}
+@media(max-width:1000px){.offgrid,.office.wide .offgrid,.two2{grid-template-columns:minmax(0,1fr)}.drawing{position:static;min-height:0}}
 @media(max-width:1000px){.console{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.ctlp{grid-column:1/-1}}
 @media(max-width:700px){.console,.two,.fcgrid{grid-template-columns:minmax(0,1fr)}.bay{aspect-ratio:1.15/1;min-height:0}.fig{height:320px}.ann{grid-template-columns:repeat(3,minmax(0,1fr))}.tabs a{font-size:17px;padding:8px 10px}}
 @media(prefers-reduced-motion:reduce){.status.bad,.ann .r{animation:none}}
@@ -92,7 +117,7 @@ textarea{font:13px "Share Tech Mono",monospace;min-height:64px;overflow-wrap:any
  <div class="rep"><b id="stars">★ 0</b><span>contract stars earned</span></div></div>
 </header>
 <main class="wrap">
- <div class="bay" id="bay"><canvas id="cv"></canvas><div class="status" id="status">Cold and dark</div><div class="big"><b id="bigT">0.0 kN</b><span id="bigL">0 lbf</span></div><div class="testbadge" id="testBadge" hidden></div></div>
+ <div class="bay" id="bay"><canvas id="cv"></canvas><div class="status" id="status">Cold and dark</div><div class="big"><b id="bigT">0.0 kN</b><span id="bigL">0 lbf</span></div><div class="testbadge" id="testBadge" hidden></div><div class="goalcard" id="goalCard" hidden></div></div>
 
  <div class="console">
   <div class="plate"><h3>Instruments</h3><div class="dials" id="dials"></div></div>
@@ -109,11 +134,13 @@ textarea{font:13px "Share Tech Mono",monospace;min-height:64px;overflow-wrap:any
      <button id="bFadec" aria-pressed="true">FADEC</button>
      <button id="bSnd" aria-pressed="false">Sound</button>
      <button id="bStop" class="kill">Shutdown</button>
+     <button id="bTherm" aria-pressed="false">Thermal view</button>
      <button id="bRepair" class="hzb" hidden>Rebuild engine</button>
     </div>
-    <div class="quad"><span>Max</span><input type="range" id="thr" class="vert" min="0" max="100" value="0" aria-label="Throttle"><span>Idle</span><b id="thrV">0%</b></div>
+    <div class="quad"><span class="gatelbl" id="abGate">Reheat</span><input type="range" id="thr" class="vert" min="0" max="120" value="0" aria-label="Throttle"><span>Idle</span><b id="thrV">0%</b></div>
    </div>
-   <div class="row2" id="pitchRow">Prop pitch <button id="bDn" aria-label="Lower pitch">−</button><b id="pitchV">3</b><button id="bUp" aria-label="Raise pitch">+</button></div>
+   <div class="row2" id="pitchRow"><span id="pitchLbl">Prop pitch</span> <button id="bDn" aria-label="Lower">−</button><b id="pitchV">3</b><button id="bUp" aria-label="Raise">+</button></div>
+   <div class="row2" id="nozRow">Nozzle <button id="bNozAuto" aria-pressed="true">Auto</button><input type="range" id="nozA" min="70" max="130" value="100" aria-label="Nozzle area" style="flex:1;min-width:120px"><b id="nozV">×1.00</b></div>
   </div>
  </div>
 
@@ -128,32 +155,17 @@ textarea{font:13px "Share Tech Mono",monospace;min-height:64px;overflow-wrap:any
 
  <nav class="tabs" id="tabs"><a href="#design">Design office</a><a href="#contracts">Contracts</a><a href="#envelope">Flight envelope</a><a href="#dyno">Dyno &amp; runs</a></nav>
 
- <section class="tab" id="p-design"><div class="two">
-  <div class="plate"><h3>Presets</h3><div class="seg" id="presets"></div>
-   <h3 style="margin-top:16px">Engine type</h3><div class="seg" id="types"></div>
-   <div id="sliders" style="margin-top:8px"></div>
-   <div class="two" style="gap:10px">
-    <label class="row"><span>Hot-section material</span><select id="mat"></select></label>
-    <label class="row" id="spoolRow"><span>Spools</span><select id="spools"><option value="1">Single spool</option><option value="2">Twin spool</option></select></label>
-    <label class="row"><span>Nozzle</span><select id="noz"><option value="conv">Convergent</option><option value="cd">Convergent–divergent</option></select></label>
-    <label class="row" id="inletRow"><span>Inlet</span><select id="inlet"><option value="pitot">Fixed pitot</option><option value="ramp">Variable ramp (supersonic)</option></select></label>
-   </div>
-   <div class="checks">
-    <label id="abL"><input type="checkbox" id="abFit"> Afterburner</label>
-    <label id="revL"><input type="checkbox" id="revFit"> Thrust reverser</label>
-    <label id="vigvL"><input type="checkbox" id="vigvFit"> Variable inlet guide vanes</label>
+ <section class="tab" id="p-design">
+  <div class="plate office" id="office">
+   <div class="offbar"><h3 style="margin:0">Design office</h3><span class="chips"><span class="chip">Cost <b id="chipCost">—</b></span><span class="chip">Weight <b id="chipW">—</b></span><span class="chip">Max <b id="chipT">—</b></span><span class="chip ok" id="chipP">OK</span></span><button class="go" id="bSave">Save engine</button></div>
+   <nav class="steps" id="steps" aria-label="Design sheets"></nav>
+   <div class="offgrid">
+    <div class="drawing"><canvas id="ofCut"></canvas><canvas id="ofDia"></canvas>
+     <div class="titleblock"><div><small>Title</small><b id="tbTitle"></b></div><div><small>Type</small><b id="tbType"></b></div><div><small>Drawing</small><b>GGF-3</b></div><div><small>Sheet</small><b id="tbSheet"></b></div></div></div>
+    <div class="sheet" id="sheet"></div>
    </div>
   </div>
-  <div class="plate"><h3>Design sheet — standard day, ground stand</h3>
-   <div class="spec" id="spec"></div>
-   <h3 style="margin-top:18px">Hangar</h3>
-   <div style="display:flex;gap:8px"><input type="text" id="saveName" placeholder="Engine name" aria-label="Engine name"><button id="bSave">Save</button></div>
-   <ul class="list" id="saved"></ul>
-   <h3 style="margin-top:14px">Build code</h3>
-   <textarea id="code" aria-label="Build code"></textarea>
-   <div class="seg" style="margin-top:8px"><button id="bCopy">Copy code</button><button id="bLoadCode">Load code</button><span class="note" id="codeMsg" style="align-self:center"></span></div>
-  </div>
- </div></section>
+ </section>
 
  <section class="tab" id="p-contracts" hidden>
   <p class="note" style="margin-top:0">Design an engine that meets the brief, then run certification. The test cell sets the flight condition, runs the engine through its paces and grades it: one star to pass, two with a 5% margin on everything, three with 15%. Predicted figures update live as you change the design.</p>
@@ -173,10 +185,10 @@ textarea{font:13px "Share Tech Mono",monospace;min-height:64px;overflow-wrap:any
   <div class="plate"><h3>Dyno</h3><p class="note" style="margin:0 0 10px">Automatic test at the current flight condition: start, idle hold, slam to full power to time spool-up, economy sweep, then afterburner if fitted.</p>
    <div class="seg"><button id="bDyno" class="go">Run dyno</button><span class="note" id="dynoMsg" style="align-self:center"></span></div>
    <div class="spec" id="dynoRes" style="margin-top:10px"></div></div>
-  <div class="plate"><h3>My runs</h3><ul class="list" id="runs"></ul></div>
+  <div class="plate"><h3>Records on this device</h3><ul class="kv" id="records" style="margin-bottom:14px"></ul><h3>My runs</h3><ul class="list" id="runs"></ul></div>
  </div></section>
 
- <p class="note" style="margin:18px 0 30px">Keys: <kbd>S</kbd> auto start · <kbd>X</kbd> shutdown · <kbd>↑</kbd>/<kbd>↓</kbd> throttle · <kbd>End</kbd> full power · <kbd>PgUp</kbd> afterburner · <kbd>R</kbd> reverser · <kbd>E</kbd>/<kbd>Q</kbd> Mach up/down · <kbd>W</kbd>/<kbd>A</kbd> altitude up/down · <kbd>[</kbd>/<kbd>]</kbd> prop pitch. The physics is a simplified gas-path model built for fun, not certification.</p>
+ <p class="note" style="margin:18px 0 30px">Keys: <kbd>S</kbd> auto start · <kbd>X</kbd> shutdown · <kbd>↑</kbd>/<kbd>↓</kbd> throttle · <kbd>End</kbd> full power · <kbd>PgUp</kbd> afterburner · <kbd>R</kbd> reverser · <kbd>E</kbd>/<kbd>Q</kbd> Mach up/down · <kbd>W</kbd>/<kbd>A</kbd> altitude up/down · <kbd>[</kbd>/<kbd>]</kbd> prop pitch or collective · <kbd>T</kbd> thermal view. Push the throttle past 100% for the afterburner. The physics is a simplified gas-path model built for fun, not certification.</p>
 </main>
 
 <script>
@@ -185,19 +197,27 @@ const $=id=>document.getElementById(id),clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 
 /* ================= DATA ================= */
-const MATS={steel:{n:'Steel (1250 K)',lim:1250,w:1.15,c:1},nickel:{n:'Nickel superalloy (1500 K)',lim:1500,w:1,c:1.6},sx:{n:'Single-crystal (1750 K)',lim:1750,w:.97,c:2.6},cmc:{n:'Ceramic matrix (2000 K)',lim:2000,w:.82,c:4}};
-const TYPES={turbojet:'Turbojet',turbofan:'Turbofan',turboprop:'Turboprop',ramjet:'Ramjet',scramjet:'Scramjet'};
+const MATS={steel:{n:'Steel alloy',lim:1250,w:1.15,c:1},nickel:{n:'Nickel superalloy',lim:1500,w:1,c:1.6},sx:{n:'Single-crystal nickel',lim:1750,w:.97,c:2.6},cmc:{n:'Ceramic matrix',lim:2000,w:.82,c:4}};
+const ROTORS={al:{n:'Aluminium alloy',lim:1.05,w:.9,c:.85},ti:{n:'Titanium alloy',lim:1.12,w:1,c:1},ni:{n:'Nickel disc',lim:1.2,w:1.12,c:1.3}};
+const TYPES={turbojet:'Turbojet',turbofan:'Turbofan',turboprop:'Turboprop',turboshaft:'Turboshaft',ramjet:'Ramjet',scramjet:'Scramjet'};
+const TYPEDESC={turbojet:'Pure jet. Simple, loud and fast.',turbofan:'Bypass fan. Low ratio for fighters, high for airliners.',turboprop:'Drives a propeller through a gearbox, with pitch gears.',turboshaft:'Drives a helicopter rotor, held at speed by a governor.',ramjet:'No moving parts. Needs supersonic air to light.',scramjet:'Burns hydrogen in supersonic air. Mach 4.5 and up.'};
 const GEARS=[{x:.75,e:.84},{x:.85,e:.81},{x:.92,e:.77},{x:.96,e:.71}];
-const DEF={name:'Custom engine',type:'turbojet',D:.45,opr:6,tit:1150,bpr:0,prop:2.5,mat:'steel',noz:'conv',ab:false,spools:1,vigv:false,rev:false,cool:0,bleed:0,inlet:'pitot'};
+const AF0={S:30,sweep:40,AR:3.2,L:15,FD:1.5,fuel:3000,mat:'al',eng:1};
+const DEF={name:'Custom engine',notes:'',type:'turbojet',D:.45,opr:6,tit:1150,bpr:0,fpr:0,prop:2.5,mat:'steel',noz:'conv',ab:false,spools:1,vigv:false,rev:false,cool:0,bleed:0,inlet:'pitot',
+ stages:0,ec:.88,dpb:5,tstages:0,et:.9,throat:1,abFuel:28,abOpen:40,rotorMat:'ti',rotorMass:1,idle:.6,map:[0,.25,.5,.75,1],fadecFit:true,af:{...AF0}};
 const P=o=>({...DEF,...o});
 const PRESETS=[
  P({name:'Trainer jet',type:'turbojet',D:.45,opr:6,tit:1150,mat:'steel'}),
+ P({name:'1950s turbojet',type:'turbojet',D:.9,opr:5,tit:1100,mat:'steel',ec:.82,et:.86,rotorMat:'al',rotorMass:1.3,fadecFit:false}),
+ P({name:'Hot rod',type:'turbojet',D:.6,opr:9,tit:1450,mat:'nickel',ab:true,noz:'cd',abFuel:40,abOpen:55,cool:6,rotorMat:'ni',rotorMass:.75,map:[0,.35,.65,.9,1.08]}),
  P({name:'Bizjet cruiser',type:'turbofan',D:.9,opr:22,tit:1450,bpr:4.5,mat:'nickel',spools:2,vigv:true,rev:true,bleed:3,cool:4}),
- P({name:'Strike fighter',type:'turbofan',D:.85,opr:26,tit:1700,bpr:.4,mat:'sx',noz:'cd',ab:true,spools:2,vigv:true,inlet:'ramp',cool:8}),
+ P({name:'Strike fighter',type:'turbofan',D:.85,opr:26,tit:1700,bpr:.4,mat:'sx',noz:'cd',ab:true,abFuel:30,abOpen:45,spools:2,vigv:true,inlet:'ramp',cool:8,rotorMat:'ni'}),
+ P({name:'Interceptor',type:'turbojet',D:1.0,opr:8,tit:1600,mat:'sx',noz:'cd',ab:true,abFuel:36,abOpen:50,inlet:'ramp',cool:6,spools:2,rotorMat:'ni'}),
  P({name:'Widebody fan',type:'turbofan',D:2.9,opr:42,tit:1650,bpr:10,mat:'sx',spools:2,vigv:true,rev:true,bleed:2,cool:10}),
- P({name:'Cargo lifter',type:'turbofan',D:3.3,opr:46,tit:1850,bpr:12,mat:'cmc',spools:2,vigv:true,rev:true,bleed:2,cool:8}),
+ P({name:'Cargo lifter',type:'turbofan',D:3.3,opr:46,tit:1850,bpr:12,mat:'cmc',spools:3,vigv:true,rev:true,bleed:2,cool:8}),
  P({name:'Commuter prop',type:'turboprop',D:.2,opr:9,tit:1300,prop:2.6,mat:'nickel',vigv:true}),
- P({name:'Micro drone jet',type:'turbojet',D:.11,opr:3.5,tit:1100,mat:'steel'}),
+ P({name:'Rescue helicopter',type:'turboshaft',D:.18,opr:12,tit:1400,mat:'nickel',vigv:true,spools:2,cool:4}),
+ P({name:'Micro drone jet',type:'turbojet',D:.11,opr:3.5,tit:1100,mat:'steel',rotorMass:.8}),
  P({name:'Ramjet missile',type:'ramjet',D:.5,mat:'nickel',noz:'cd',inlet:'ramp'}),
  P({name:'Scramjet demonstrator',type:'scramjet',D:.4,mat:'cmc',noz:'cd',cool:10})];
 const SL_={h:0,M:0,dT:0};
@@ -205,20 +225,21 @@ const CONTRACTS=[
  {id:'trainer',name:'Flight school trainer',client:'Ruahine Flying School',brief:'Cheap, tough and simple to keep running.',fc:SL_,req:{thrust:12e3,weight:330,cost:950}},
  {id:'drone',name:'Target drone',client:'Range services',brief:'A disposable target. Light and dirt cheap.',fc:SL_,req:{thrust:900,weight:25,cost:70}},
  {id:'topdress',name:'Topdressing plane',client:'Rural aviation operator',brief:'Haul fertiliser off short farm strips on a hot day.',fc:{h:0,M:0,dT:25},req:{types:['turboprop'],shp:700,weight:300,cost:900}},
+ {id:'rescue',name:'Mountain rescue helicopter',client:'Air ambulance trust',brief:'Hover at 3 km on a hot day with a full crew.',fc:{h:3,M:0,dT:25},req:{types:['turboshaft'],shp:1200,weight:260}},
  {id:'bizjet',name:'Business jet cruise',client:'Corporate jet maker',brief:'Frugal at 12 km and Mach 0.8, with bleed air for the cabin.',fc:{h:12,M:.8,dT:0},req:{types:['turbofan'],thrust:8e3,sfc:19,bleed:3}},
- {id:'hothigh',name:'Hot and high regional',client:'Regional airline',brief:'Full power from a 2 km high airfield at 40 °C. Needs a reverser.',fc:{h:2,M:0,dT:25},req:{thrust:90e3,sfc:11,weight:3000,rev:true}},
+ {id:'hothigh',name:'Hot and high regional',client:'Regional airline',brief:'Full power from a 2 km high airfield at 40 °C. Needs a reverser.',fc:{h:2,M:0,dT:25},req:{thrust:90e3,sfc:11,weight:3500,rev:true}},
  {id:'arctic',name:'Arctic patrol',client:'Polar survey',brief:'Big shaft power and quick response at −40 °C.',fc:{h:0,M:0,dT:-55},req:{types:['turboprop'],shp:3000,spool:8}},
  {id:'widebody',name:'Widebody launch',client:'Long-haul airline',brief:'Big and frugal. Reverser and cabin bleed required.',fc:SL_,req:{thrust:380e3,sfc:8.5,rev:true,bleed:2,spool:14}},
  {id:'intercept',name:'Interceptor',client:'Air force',brief:'Huge reheat thrust at 11 km and Mach 1.6.',fc:{h:11,M:1.6,dT:0},req:{wet:70e3,weight:1800}},
  {id:'supercruise',name:'Supercruise',client:'Air force',brief:'Mach 1.5 at 11 km without lighting the afterburner.',fc:{h:11,M:1.5,dT:0},req:{thrust:45e3,weight:2000}},
  {id:'missile',name:'Ramjet missile',client:'Defence research',brief:'Sustain Mach 3 at 10 km.',fc:{h:10,M:3,dT:0},req:{types:['ramjet'],thrust:18e3,weight:150}},
  {id:'hyper',name:'Hypersonic demonstrator',client:'Space agency',brief:'Real thrust at Mach 6 and 20 km.',fc:{h:20,M:6,dT:0},req:{types:['scramjet'],thrust:5e3,weight:300}},
- {id:'lifter',name:'Heavy airlifter',client:'Cargo airline',brief:'Raw thrust on a budget. Reverser required.',fc:SL_,req:{thrust:450e3,cost:30000,sfc:9,rev:true}},
+ {id:'lifter',name:'Heavy airlifter',client:'Cargo airline',brief:'Raw thrust on a budget. Reverser required.',fc:SL_,req:{thrust:450e3,cost:36000,sfc:9,rev:true}},
  {id:'miser',name:'Fuel miser',client:'Green aviation fund',brief:'The lowest fuel burn money can buy.',fc:SL_,req:{thrust:150e3,sfc:6.8}}];
 const FCP=[['Ground stand',{h:0,M:0}],['Climb 5 km M0.5',{h:5,M:.5}],['Cruise 11 km M0.8',{h:11,M:.8}],['Supersonic 11 km M1.6',{h:11,M:1.6}],['Ramjet 10 km M3',{h:10,M:3}],['Hypersonic 20 km M6',{h:20,M:6}]];
 
 /* ================= PHYSICS ================= */
-const ram=t=>t==='ramjet'||t==='scramjet';
+const ram=t=>t==='ramjet'||t==='scramjet',shaftT=t=>t==='turboprop'||t==='turboshaft';
 function atmo(h,dT){const hm=h*1000;let Ts,p;if(hm<11000){Ts=288.15-.0065*hm;p=101325*Math.pow(Ts/288.15,5.2559)}else{Ts=216.65;p=22632*Math.exp(-(hm-11000)/6341.6)}const T=Math.max(150,Ts+dT);return{T,p,rho:p/(287*T),a:Math.sqrt(401.8*T)}}
 function shockRec(M){if(M<=1)return 1;const g=1.4,M2=M*M;return Math.pow((g+1)*M2/((g-1)*M2+2),g/(g-1))*Math.pow((g+1)/(2*g*M2-(g-1)),1/(g-1))}
 const inletRec=(d,M)=>M<=1?.98:d.inlet==='ramp'?.98*Math.max(.25,1-.075*Math.pow(M-1,1.35)):.98*shockRec(M);
@@ -226,57 +247,97 @@ const mdotD=d=>1.225*Math.PI*d.D*d.D/4*(120+40*Math.min(d.D,1));
 const limEff=d=>MATS[d.mat].lim+(d.cool||0)*12;
 const T3max=d=>900+(d.mat==='sx'||d.mat==='cmc'?80:0);
 const minM=d=>d.type==='scramjet'?4.5:1.2;
-function surgeMargin(d,fc){if(ram(d.type))return 1;let s=.3+(d.spools===2?.15:0)+(d.vigv?.1:0)-Math.max(0,d.opr-12)*.012*(d.spools===2?.45:1);if(fc&&fc.M>1.5&&d.inlet!=='ramp')s-=(fc.M-1.5)*.12;return s}
-const effC=(d,Nc)=>.885-(d.spools===1?Math.max(0,d.opr-16)*.004:0)-Math.max(0,.85-Nc)*(d.vigv?.04:.12);
-const tau=d=>(.4+.55*Math.pow(mdotD(d),.25)+(d.type==='turboprop'?.6*d.prop/2.5:0))*(d.spools===2?.88:1);
-function cycle(d,N,T4,ab,fc,gear=2,rev=false){
+const autoStages=d=>Math.max(1,Math.ceil(Math.log(Math.max(1.5,d.opr))/Math.log(1.3)));
+const nStages=d=>d.stages>0?d.stages:autoStages(d);
+const stagePR=d=>Math.pow(d.opr,1/nStages(d));
+const rotorLim=d=>ROTORS[d.rotorMat].lim;
+function surgeMargin(d,fc){if(ram(d.type))return 1;let s=.3+(d.spools>=2?.15:0)+(d.spools===3?.08:0)+(d.vigv?.1:0)-Math.max(0,d.opr-12)*.012*(d.spools===3?.3:d.spools===2?.45:1);
+ s-=Math.max(0,stagePR(d)-1.35)*1.5;if(d.throat<1)s-=(1-d.throat)*.5;if(fc&&fc.M>1.5&&d.inlet!=='ramp')s-=(fc.M-1.5)*.12;return s}
+const effC=(d,Nc)=>d.ec-(d.spools===1?Math.max(0,d.opr-16)*.004:0)-Math.max(0,.85-Nc)*(d.vigv?.04:.12)-Math.max(0,stagePR(d)-1.45)*.15;
+const tau=d=>(.4+.55*Math.pow(mdotD(d),.25)+(shaftT(d.type)?.6*(d.type==='turboprop'?d.prop/2.5:.6):0))*(d.spools===3?.8:d.spools===2?.88:1)*d.rotorMass;
+const abNeed=(T7,egt)=>(Math.sqrt(T7/Math.max(egt,300))-1)*100;
+function cycle(d,N,T4,ab,fc,gear=2,rev=false,nozA=null){
  const cpa=1005,cpg=1150,LHV=43e6,at=atmo(fc.h,fc.dT),V0=fc.M*at.a,tr=1+.2*fc.M*fc.M,Tt2=at.T*tr,Pt2=at.p*Math.pow(tr,3.5)*inletRec(d,fc.M);
- const th=Tt2/288.15,dl=Pt2/101325,Nc=Math.max(.001,N/Math.sqrt(th));
- const mt=mdotD(d)*Math.pow(Math.min(Nc,1.08),1.6)*dl/Math.sqrt(th);
+ const th=Tt2/288.15,dl=Pt2/101325,Nc=Math.max(.001,N/Math.sqrt(th)),Ncc=Math.min(Nc,1.15);
+ const mt=mdotD(d)*Math.pow(Ncc,1.6)*dl/Math.sqrt(th);
  const bpr=d.type==='turbofan'?d.bpr:0,mc=mt/(1+bpr),mtb=mc*(1-(d.bleed||0)/100);
- const pr=1+(d.opr-1)*Math.pow(Math.min(Nc,1.05),2.5),ec=effC(d,Nc),T3=Tt2*(1+(Math.pow(pr,.2857)-1)/ec);
+ const pr=1+(d.opr-1)*Math.pow(Ncc,2.5),ec=effC(d,Nc),T3=Tt2*(1+(Math.pow(pr,.2857)-1)/ec);
  T4=Math.max(T4,T3+30);
- const dTt=cpa*(T3-Tt2)*mc/(cpg*mtb),T5=T4-dTt,T5s=T4-dTt/.9;
- const P5r=(Pt2/at.p)*pr*.95*Math.pow(Math.max(T5s,1)/T4,4.03),ne=d.noz==='cd'?.98:(P5r>1.85?.93:.97);
- let KE=P5r>1&&T5>0?cpg*T5*ne*(1-Math.pow(1/P5r,.248)):0;KE*=1-(d.cool||0)*.006;
- let fuel=mtb*cpg*(T4-T3)/(LHV*.98),Vc=Math.sqrt(2*KE),Vb=V0,shp=0,egt=T5,fpr=1,propT=0,Tb=Tt2,abOn=false;
- if(bpr>0){const et=.82,av=Math.max(0,KE-.5*V0*V0);let best=-1e18,bx=0;
-  for(let i=0;i<=24;i++){const ex=i/25*av,vc=Math.sqrt(Math.max(0,2*(KE-ex))),vb=Math.sqrt(V0*V0+2*et*ex*mtb/(mc*bpr)),F=mtb*vc+mc*bpr*vb;if(F>best){best=F;bx=ex;Vc=vc;Vb=vb}}
-  egt=T5-bx/cpg;Tb=Tt2+(Vb*Vb-V0*V0)/(2*cpa*.9);fpr=Math.pow(1+(Vb*Vb-V0*V0)/(2*cpa*Tt2),3.5)}
+ const dTt=cpa*(T3-Tt2)*mc/(cpg*mtb),nT=d.tstages>0?d.tstages:Math.max(1,Math.ceil(dTt/280)),et=d.et-Math.max(0,(dTt/nT-280)/800);
+ const T5=T4-dTt,T5s=T4-dTt/Math.max(.6,et);
+ const thrA=nozA||d.throat||1;
+ const P5r=(Pt2/at.p)*pr*(1-d.dpb/100)*Math.pow(Math.max(T5s,1)/T4,4.03),ne=d.noz==='cd'?.98:(P5r>1.85?.93:.97);
+ let KE=P5r>1&&T5>0?cpg*T5*ne*(1-Math.pow(1/P5r,.248)):0;KE*=(1-(d.cool||0)*.006)*clamp(1+(1/thrA-1)*.12,.85,1.08);
+ let fuel=mtb*cpg*(T4-T3)/(LHV*.98),Vc=Math.sqrt(2*KE),Vb=V0,shp=0,egt=T5,fpr=1,propT=0,Tb=Tt2,abOn=false,starve=false,abChoke=0,T7=0,abHot=false;
+ if(bpr>0){const av=Math.max(0,KE-.5*V0*V0);let bx=0;
+  if(d.fpr>0){const wf=cpa*Tt2*(Math.pow(d.fpr,.2857)-1)/.88*Ncc*Ncc;let ex=mc*bpr*wf/(mtb*.9);if(ex>av*.97){starve=N>.8;ex=av*.97}bx=ex;
+   const wfa=ex*mtb*.9/(mc*bpr);Vc=Math.sqrt(Math.max(0,2*(KE-ex)));Vb=Math.sqrt(V0*V0+2*wfa*.85);fpr=d.fpr}
+  else{const e2=.82;let best=-1e18;for(let i=0;i<=24;i++){const ex=i/25*av,vc=Math.sqrt(Math.max(0,2*(KE-ex))),vb=Math.sqrt(V0*V0+2*e2*ex*mtb/(mc*bpr)),F=mtb*vc+mc*bpr*vb;if(F>best){best=F;bx=ex;Vc=vc;Vb=vb}}
+   fpr=Math.pow(1+(Vb*Vb-V0*V0)/(2*cpa*Tt2),3.5)}
+  egt=T5-bx/cpg;Tb=Tt2+(Vb*Vb-V0*V0)/(2*cpa*.9)}
  if(d.type==='turboprop'){const g=GEARS[gear],Pw=mtb*KE*g.x;Vc=Math.sqrt(2*KE*(1-g.x));const Ap=Math.PI*d.prop*d.prop/4,Ts=Math.cbrt(2*at.rho*Ap)*Math.pow(g.e*Pw,2/3);
   let ep=.85;if(fc.M>.55)ep*=clamp(1-((fc.M-.55)/.35)**2);propT=V0<1?Ts:(Pw>0?ep*Pw/(V0+ep*Pw/Math.max(Ts,1)):0);shp=Pw/745.7;egt=T5-g.x*KE/cpg}
- if(ab&&d.ab&&d.type!=='turboprop'){const T7=2050;if(egt<T7){abOn=true;const k=d.noz==='cd'?1.04:1;fuel+=mtb*cpg*(T7-egt)/(LHV*.9);Vc=Vc*Math.sqrt(T7/Math.max(egt,300))*k;
-  if(bpr>0&&bpr<1.5){fuel+=mc*bpr*cpg*(T7-Tb)/(LHV*.9);Vb=Math.max(V0,Vb)*Math.sqrt(T7/Tb)*k}}}
+ if(d.type==='turboshaft'){const Pw=mtb*KE*.97;Vc=Math.sqrt(2*KE*.03);shp=Pw/745.7;egt=T5-.97*KE/cpg}
+ if(ab&&d.ab&&!shaftT(d.type)){T7=Math.min(2400,egt+d.abFuel/1000*LHV*.9/cpg);if(T7>egt+20){abOn=true;abHot=T7>2250;const need=abNeed(T7,egt),open=nozA?d.abOpen*nozA:d.abOpen;abChoke=Math.max(0,need-open-8);
+   const k=(d.noz==='cd'?1.04:1)*(1-Math.max(0,open-need-15)*.004)*(1-abChoke*.006);fuel+=mtb*d.abFuel/1000;Vc=Vc*Math.sqrt(T7/Math.max(egt,300))*k;
+   if(bpr>0&&bpr<1.5){fuel+=mc*bpr*d.abFuel/1000;const Tb7=Math.min(2400,Tb+d.abFuel/1000*LHV*.9/1100);Vb=Math.max(V0,Vb)*Math.sqrt(Tb7/Tb)*k}}}
  let gross=mtb*Vc+mc*bpr*Vb+propT;
  if(rev&&d.rev)gross=bpr>0?mtb*Vc-.45*mc*bpr*Vb:-.4*mtb*Vc;
- return {thrust:gross-mt*V0,gross,fuel,mdot:mt,pr,T3,T4,egt,Vj:Vc,Vb,shp,fpr,V0,Tt2,dl,abOn,Nc}}
+ return {thrust:gross-mt*V0,gross,fuel,mdot:mt,mc,pr,T3,T4,egt,Vj:Vc,Vb,shp,fpr,V0,Tt2,dl,abOn,Nc,starve,abChoke,T7,abHot,dTt,nT,et}}
 function ramCycle(d,fc,thr,lit){const at=atmo(fc.h,fc.dT),M=fc.M,V0=M*at.a,A=Math.PI*d.D*d.D/4,m=at.rho*V0*A,tr=1+.2*M*M,Tt=at.T*tr,scr=d.type==='scramjet';
- const rec=scr?.275:inletRec(d,M)*.9,Pr=Math.pow(tr,3.5)*rec,Tmax=Math.max(limEff(d)+(scr?600:450),Tt);
+ const rec=scr?.275:inletRec(d,M)*(1-d.dpb/100*2),Pr=Math.pow(tr,3.5)*rec,Tmax=Math.max(limEff(d)+(scr?600:450),Tt);
  const T4=lit?Tt+(Tmax-Tt)*thr:Tt,ne=d.noz==='cd'?.96:.9,KE=Pr>1?1150*T4*ne*(1-Math.pow(1/Pr,.248)):0,V=Math.sqrt(2*KE);
- return {thrust:M>0?m*(V-V0):0,fuel:lit?m*1150*(T4-Tt)/((scr?120e6:43e6)*.92):0,mdot:m,pr:Pr,T4,T3:Tt,egt:T4,Vj:V,V0,Tt2:Tt,shp:0,lim:Tmax,abOn:lit,dl:1}}
+ return {thrust:M>0?m*(V-V0):0,fuel:lit?m*1150*(T4-Tt)/((scr?120e6:43e6)*.92):0,mdot:m,mc:m,pr:Pr,T4,T3:Tt,egt:T4,Vj:V,V0,Tt2:Tt,shp:0,lim:Tmax,abOn:lit,dl:1}}
 const T4cap=d=>Math.min(d.tit,limEff(d)*.97);
-function perfMax(d,fc,ab,gear=2){if(ram(d.type))return ramCycle(d,fc,1,fc.M>=minM(d));return cycle(d,1,T4cap(d),ab,fc,gear)}
-const shaftKW=d=>d.type==='turboprop'?cycle(d,1,T4cap(d),false,SL_,2).shp*.7457:0;
+const topN=d=>Math.min(d.map[4]>1?d.map[4]:1,d.fadecFit?rotorLim(d)-.01:9);
+function perfMax(d,fc,ab,gear=2){if(ram(d.type))return ramCycle(d,fc,1,fc.M>=minM(d));return cycle(d,Math.max(1,topN(d)),T4cap(d),ab,fc,gear)}
+const shaftKW=d=>shaftT(d.type)?cycle(d,1,T4cap(d),false,SL_,2).shp*.7457:0;
 function weight(d){const md=mdotD(d),t=d.type;if(ram(t))return (40+220*d.D*d.D)*(d.inlet==='ramp'&&t==='ramjet'?1.15:1)*MATS[d.mat].w*(1+d.cool*.004);
- const mc=md/(1+(t==='turbofan'?d.bpr:0));let w=9*Math.pow(mc,.9)*(1+d.opr/20)*MATS[d.mat].w;
- if(t==='turbofan')w+=300*Math.pow(d.D,2.5)*Math.min(1,d.bpr/3+.3);if(t==='turboprop')w+=25*d.prop*d.prop+.12*shaftKW(d);
- return w*(1+(d.ab?.25:0)+(d.noz==='cd'?.08:0)+(d.spools===2?.06:0)+(d.vigv?.03:0)+(d.rev?.1:0)+(d.inlet==='ramp'?.08:0)+d.cool*.004)}
+ const mc=md/(1+(t==='turbofan'?d.bpr:0)),sr=nStages(d)/autoStages(d);let w=9*Math.pow(mc,.9)*(1+d.opr/20)*MATS[d.mat].w*(.75+.25*sr)*(.9+.1*d.rotorMass)*ROTORS[d.rotorMat].w;
+ if(t==='turbofan')w+=300*Math.pow(d.D,2.5)*Math.min(1,d.bpr/3+.3)*(d.fpr>2.5?1.15:1);if(t==='turboprop')w+=25*d.prop*d.prop+.12*shaftKW(d);if(t==='turboshaft')w+=.08*shaftKW(d);
+ if(d.tstages>0)w*=1+(d.tstages-2)*.03;
+ return w*(1+(d.ab?.25:0)+(d.noz==='cd'?.08:0)+(d.spools===2?.06:d.spools===3?.12:0)+(d.vigv?.03:0)+(d.rev?.1:0)+(d.inlet==='ramp'?.08:0)+d.cool*.004)}
 function cost(d){const md=mdotD(d),t=d.type,M=MATS[d.mat];let c;
  if(ram(t))c=(30+150*d.D*d.D)*M.c*(t==='scramjet'?2.5:1);
- else{const mc=md/(1+(t==='turbofan'?d.bpr:0));c=40*Math.pow(mc,.85)*(1+d.opr/25)*M.c;if(t==='turbofan')c+=350*Math.pow(d.D,2.2);if(t==='turboprop')c+=60*d.prop*d.prop+.15*shaftKW(d)}
- return c*(1+(d.ab?.25:0)+(d.noz==='cd'?.08:0)+(d.spools===2?.18:0)+(d.vigv?.06:0)+(d.rev?.1:0)+(d.inlet==='ramp'?.12:0)+d.cool*.012)}
+ else{const mc=md/(1+(t==='turbofan'?d.bpr:0));c=40*Math.pow(mc,.85)*(1+d.opr/25)*M.c*ROTORS[d.rotorMat].c*(1+(1-d.rotorMass)*.6)*(1+Math.max(0,d.ec-.88)*8+Math.max(0,d.et-.9)*6);
+  if(t==='turbofan')c+=350*Math.pow(d.D,2.2);if(t==='turboprop')c+=60*d.prop*d.prop+.15*shaftKW(d);if(t==='turboshaft')c+=.12*shaftKW(d)}
+ return c*(1+(d.ab?.25:0)+(d.noz==='cd'?.08:0)+(d.spools===2?.18:d.spools===3?.35:0)+(d.vigv?.06:0)+(d.rev?.1:0)+(d.inlet==='ramp'?.12:0)+d.cool*.012+(d.fadecFit?.04:0))}
 const money=k=>k>=1000?'$'+(k/1000).toFixed(k>=10000?1:2)+'M':'$'+Math.round(k)+'k';
 function predSpool(d,fc){const a=clamp(surgeMargin(d,fc)-.04,.03,.35);return 3*tau(d)*Math.sqrt(.35/a)*.75}
+const mapAt=(d,t)=>{const m=d.map,i=Math.min(3,Math.floor(t*4)),f=t*4-i;return m[i]+(m[i+1]-m[i])*f};
 
 /* ================= STATE ================= */
-const norm=o=>{const d={...DEF,...o};['D','opr','tit','bpr','prop','cool','bleed'].forEach(k=>d[k]=+d[k]||DEF[k]);d.spools=+d.spools===2?2:1;d.ab=!!d.ab;d.vigv=!!d.vigv;d.rev=!!d.rev;if(!TYPES[d.type])d.type='turbojet';if(!MATS[d.mat])d.mat='steel';return d};
+const norm=o=>{const d={...DEF,...o};['D','opr','tit','bpr','prop','cool','bleed','ec','dpb','et','throat','abFuel','abOpen','rotorMass','idle','fpr','stages','tstages'].forEach(k=>{d[k]=+d[k];if(!isFinite(d[k]))d[k]=DEF[k]});
+ d.spools=[1,2,3].includes(+d.spools)?+d.spools:1;['ab','vigv','rev','fadecFit'].forEach(k=>d[k]=!!d[k]);if(!TYPES[d.type])d.type='turbojet';if(!MATS[d.mat])d.mat='steel';if(!ROTORS[d.rotorMat])d.rotorMat='ti';
+ d.map=Array.isArray(d.map)&&d.map.length===5?d.map.map(v=>clamp(+v||0,0,1.2)):[...DEF.map];d.af={...AF0,...(d.af||{})};d.name=String(d.name||'Custom engine').slice(0,40);d.notes=String(d.notes||'').slice(0,300);return d};
 let d=norm(PRESETS[0]);
 const fc={h:0,M:0,dT:0};
 const DMG=[0,.05,.15,1];
-const S={N:0,N1:0,lit:false,litT:0,starter:false,ign:false,fuel:false,thr:0,fa:0,ab:false,rev:false,fadec:true,dmg:0,broken:false,surge:0,gear:2,T4:288,out:{thrust:0,fuel:0,Vj:0,egt:288,T3:288,mdot:0,pr:1,shp:0},hist:[],msg:'',msgT:0,flame:0,over:0,ev:[],vib:0};
+const S={N:0,N1:0,Np:0,coll:.5,lit:false,litT:0,starter:false,ign:false,fuel:false,thr:0,fa:0,ab:false,rev:false,fadec:true,dmg:0,broken:false,surge:0,gear:2,T4:288,noz:null,
+ out:{thrust:0,fuel:0,Vj:0,egt:288,T3:288,mdot:0,pr:1,shp:0},hist:[],msg:'',msgT:0,flame:0,over:0,ev:[],vib:0,cause:''};
 const stage=()=>S.dmg>=4?3:S.dmg>=2.5?2:S.dmg>=1?1:0;
 function say(m,t=3){S.msg=m;S.msgT=t}
 const emit=e=>S.ev.push(e);
+const abReq=()=>d.ab&&!shaftT(d.type)&&!ram(d.type)&&(S.ab||S.thr>1.02);
+
+/* ================= GOALS ================= */
+const GOALS=[
+ ['light','First light','Auto start (S) or do it by hand: Starter, then Ignition, then Fuel once the spool passes 12%.'],
+ ['full','Full power','Push the throttle all the way to 100% and let the spool settle.'],
+ ['surge','Surge survivor','Turn FADEC off and slam the throttle from idle. Keep the engine alive through the bang.'],
+ ['ab','Light the burner','Pick an engine with an afterburner and push the throttle past the 100% gate.'],
+ ['kn100','100 kN club','Make 100 kN of thrust on the ground stand.'],
+ ['rev','Reverse thrust','With a reverser fitted, pull to idle, press R, then add power.'],
+ ['airstart','Windmill airstart','Shut down at altitude with Mach 0.5 or more, then relight without the starter.'],
+ ['ramlit','Ramjet light-off','Light a ramjet in supersonic air.'],
+ ['shaft','Hold the rotor','Run a turboshaft with the governor holding the rotor at 100% while you raise the collective.'],
+ ['cert','Certified','Pass any contract.'],
+ ['flight','Wheels up','Design an airframe and complete a flight test.'],
+ ['stars10','Chief engineer','Earn 10 contract stars.'],
+ ['scram','Hypersonic','Make positive thrust with a scramjet at Mach 6.']];
+let goals=store.get('ggf-goals',{});
+function goal(id){if(goals[id])return;goals[id]=1;store.set('ggf-goals',goals);const g=GOALS.find(g=>g[0]===id);if(g){say('Goal complete — '+g[1],3);emit('goal')}renderGoal()}
+const RANKS=['Bay hand','Technician','Test engineer','Senior engineer','Chief engineer','Legend'];
 
 /* ================= SIM STEP ================= */
 function step(dt){
@@ -284,64 +345,80 @@ function step(dt){
  if(isR){
   const mm=minM(d);
   if(S.lit&&(!S.fuel||fc.M<mm)){S.lit=false;S.flame=3;say(fc.M<mm?'Flameout — airflow too slow':'Fuel off');}
-  if(!S.lit&&S.ign&&S.fuel&&!S.broken&&S.thr>.04){if(fc.M>=mm){S.lit=true;emit('light');say('Light-off',1.5)}else if(S.msgT<=0)say(`Needs Mach ${mm}+ to light`,1.5)}
-  S.fa+=(S.thr-S.fa)*Math.min(1,dt*(S.fadec?3:12));
+  if(!S.lit&&S.ign&&S.fuel&&!S.broken&&S.thr>.04){if(fc.M>=mm){S.lit=true;emit('light');say('Light-off',1.5);goal('ramlit')}else if(S.msgT<=0)say(`Needs Mach ${mm}+ to light`,1.5)}
+  S.fa+=(Math.min(1,S.thr)-S.fa)*Math.min(1,dt*(S.fadec?3:12));
   let o=ramCycle(d,fc,S.fa,S.lit);
   if(S.fadec&&o.T4>o.lim-15)S.fa*=.99;
-  if(o.T4>o.lim)S.dmg+=(o.T4-o.lim)/150*dt;
+  if(o.T4>o.lim){S.dmg+=(o.T4-o.lim)/150*dt;S.over=1}else S.over=0;
   o=ramCycle(d,fc,S.fa,S.lit);S.T4=o.T4;S.N=0;S.N1=0;
   if(stage()>=3&&!S.broken){S.broken=true;S.lit=false;S.fuel=false;say('COMBUSTOR BURNED THROUGH',6);emit('bang')}
-  o.thrust*=1-DMG[stage()];S.out=o;S.vib=.1+(S.lit?.3*S.fa:0)+stage()*.6;return}
- const sm=surgeMargin(d,fc),m=clamp((S.N-.6)/.4),tg=tau(d);
- const base=cycle(d,Math.max(S.N,.05),300,false,fc,S.gear);
+  o.thrust*=1-DMG[stage()];S.out=o;S.vib=.1+(S.lit?.3*S.fa:0)+stage()*.6;
+  if(d.type==='scramjet'&&S.lit&&o.thrust>0&&fc.M>=5.9)goal('scram');return}
+ const prot=S.fadec&&d.fadecFit,idle=d.idle,span=1-idle,nozA=S.noz||d.throat;
+ const sm=surgeMargin(d,fc)-(S.out.abChoke||0)*.01,m=Math.max(0,(S.N-idle)/span),mc=Math.min(1,m),tg=tau(d);
+ const base=cycle(d,Math.max(S.N,.05),300,false,fc,S.gear,false,nozA);
  if(S.lit){
   if(!S.fuel){S.lit=false;say('Fuel cut — spooling down')}
   else if(base.dl<.045){S.lit=false;S.flame=3;say('Flameout — air too thin to burn');}
  }
+ let shaftLoad=0;
  if(S.lit){
-  const target=S.rev?Math.min(S.thr,.8):S.thr;
-  if(S.fadec){const up=Math.min(target,m+clamp(sm-.04,.03,.35)),dn=Math.max(up,m-.3);S.fa+=(dn-S.fa)*Math.min(1,dt*4)}else S.fa=target;
-  const T3=base.T3,match=T3+(d.tit-T3)*(.45+.55*m);let e=S.fa-m;
-  if(S.fadec){const room=(lm*.97-match)/650;if(e>room){e=room;S.fa=m+e}}
-  const hot=Math.max(0,.32-S.N)*2600*(S.fadec?.25:1);
-  const T4=match+e*650+hot+(S.surge>0?280:0);
-  if(S.surge<=0&&S.N<.97&&e>sm+(S.fadec?0:.1)){S.surge=1.2;S.N-=.07;say('COMPRESSOR SURGE',2.5);emit('bang')}
-  if(!S.fadec&&e<-.5){S.lit=false;S.flame=3;say('Flameout — throttle chopped too fast')}
+  let target=mapAt(d,clamp(S.thr));if(S.rev)target=Math.min(target,.8);
+  if(d.type==='turboshaft'){if(prot){S.gov=(S.gov==null?.5:S.gov)+(1-S.Np)*2.5*dt-(S.Np-(S.NpL||S.Np))*1.5;S.gov=clamp(S.gov,0,mapAt(d,clamp(S.thr)));target=S.gov}S.NpL=S.Np}
+  const nMax=prot?(rotorLim(d)-.01-idle)/span:9;target=Math.min(target,nMax);
+  if(prot){const up=Math.min(target,mc+clamp(sm-.04,.03,.35)),dn=Math.max(up,mc-.3);S.fa+=(dn-S.fa)*Math.min(1,dt*4)}else S.fa=target;
+  const T3=base.T3,match=T3+(d.tit-T3)*(.45+.55*m)+(1/nozA-1)*380;let e=S.fa-m;
+  if(prot){const room=(lm*.97-match)/650;if(e>room){e=room;S.fa=m+e}}
+  const hot=Math.max(0,idle*.53-S.N)*2600*(prot?.25:1);
+  const T4=match+e*650+hot+(S.surge>0?280:0)+(S.out.abChoke||0)*6;
+  if(S.surge<=0&&S.N<.97&&e>sm+(prot?0:.1)){S.surge=1.2;S.N-=.07;say('COMPRESSOR SURGE',2.5);emit('bang');S.surged=1}
+  if(!prot&&e<-.5){S.lit=false;S.flame=3;say('Flameout — throttle chopped too fast')}
   S.T4+=(T4-S.T4)*Math.min(1,dt*5);
-  const Nss=.6+.4*Math.max(0,S.fa)-(S.surge>0?.15:0)-(d.type==='turboprop'?(S.gear-1.5)*.02:0);
-  S.N+=(Nss-S.N)*dt/(S.N<.6?1.6:tg);
-  if(S.starter&&S.N>.55){S.starter=false;sync()}
+  const Nss=idle+span*Math.max(0,S.fa)-(S.surge>0?.15:0)-(d.type==='turboprop'?(S.gear-1.5)*.02:0);
+  S.N+=(Nss-S.N)*dt/(S.N<idle?1.6:tg);
+  if(S.starter&&S.N>idle-.05){S.starter=false;sync()}
+  if(S.surged&&S.surge<=0&&S.lit){S.surged=0;goal('surge')}
  }else{
   S.fa=0;S.T4+=(base.Tt2+(S.N>.05?40:0)-S.T4)*Math.min(1,dt*.8);
   const wind=fc.M>.25?Math.min(.32,fc.M*.3):0,tgt=Math.max(S.starter&&!S.broken?.25:0,wind);
   S.N+=(tgt-S.N)*dt/(S.starter?2.4:3.2);
-  if(S.ign&&S.fuel&&S.N>=.12&&!S.broken&&base.dl>.05){S.litT+=dt;if(S.litT>.5){S.lit=true;S.litT=0;S.T4=Math.max(S.T4,700);say(S.starter?'Light-off':'Airstart — relit on windmill',1.5);emit('light')}}else S.litT=0;
+  if(S.ign&&S.fuel&&S.N>=.12&&!S.broken&&base.dl>.05){S.litT+=dt;if(S.litT>.5){S.lit=true;S.litT=0;S.T4=Math.max(S.T4,700);
+   if(!S.starter&&wind>.12){say('Airstart — relit on windmill',2);goal('airstart')}else say('Light-off',1.5);emit('light');goal('light')}}else S.litT=0;
  }
  S.N=Math.max(0,S.N);if(S.surge>0)S.surge-=dt;
- S.N1=d.spools===2?S.N1+(S.N-S.N1)*Math.min(1,dt/(tg*.7)):S.N;
- const o=cycle(d,Math.max(S.N,.001),S.T4,S.ab&&S.lit&&S.N>.85,fc,S.gear,S.rev);
- S.over=0;
- const before=stage();
- if(S.T4>lm){S.dmg+=(S.T4-lm)/120*dt;S.over=1}
- if(o.T3>T3max(d)&&S.N>.3){S.dmg+=(o.T3-T3max(d))/150*dt;S.over=2}
+ S.N1=d.spools>=2?S.N1+(S.N-S.N1)*Math.min(1,dt/(tg*.7)):S.N;
+ const o=cycle(d,Math.max(S.N,.001),S.T4,abReq()&&S.lit&&S.N>.85,fc,S.gear,S.rev,nozA);
+ S.over=0;const before=stage();
+ if(S.T4>lm){S.dmg+=(S.T4-lm)/120*dt;S.over=1;S.cause='turbine'}
+ if(o.T3>T3max(d)&&S.N>.3){S.dmg+=(o.T3-T3max(d))/150*dt;S.over=2;S.cause='compressor'}
+ if(S.N>rotorLim(d)||S.N1>rotorLim(d)){S.dmg+=(Math.max(S.N,S.N1)-rotorLim(d))*60*dt;S.over=3;S.cause='rotor'}
+ if(o.abHot&&o.abOn){S.dmg+=.35*dt;S.over=4;S.cause='afterburner'}
+ // turboshaft rotor (power turbine) speed and load
+ if(d.type==='turboshaft'){const Pr=Math.max(1,designMax().shp)*745.7,Pav=S.lit?o.shp*745.7*(1-DMG[stage()]):0,Pl=Pr*(.12+.88*S.coll)*Math.pow(Math.max(S.Np,0),3);
+  S.Np+=(Pav-Pl)/(Pr*1.6)*dt;S.Np=Math.max(0,S.Np);shaftLoad=Pl;
+  if(S.Np>1.1){S.dmg+=(S.Np-1.1)*40*dt;S.over=3;S.cause='rotor'}
+  if(prot&&S.lit&&Math.abs(S.Np-1)<.02&&S.coll>.75)goal('shaft')}
  const st=stage();
- if(st>before){if(st>=3){S.broken=true;S.lit=false;S.fuel=false;S.starter=false;S.ab=false;say(S.over===2?'COMPRESSOR MELTED — engine destroyed':'TURBINE COOKED — engine destroyed',6);emit('bang');sync()}else say(`${S.over===2?'Compressor':'Turbine'} over-temp — damage stage ${st}`,3)}
+ if(st>before){const nm={turbine:'TURBINE COOKED',compressor:'COMPRESSOR MELTED',rotor:'ROTOR OVERSPEED — DISC BURST',afterburner:'AFTERBURNER LINER BURNED THROUGH'}[S.cause]||'ENGINE FAILED';
+  if(st>=3){S.broken=true;S.lit=false;S.fuel=false;S.starter=false;S.ab=false;say(nm+' — engine destroyed',6);emit('bang');sync()}else say(`${S.cause[0].toUpperCase()+S.cause.slice(1)} over-limit — damage stage ${st}`,3)}
  const k=S.lit?(1-DMG[stage()])*(S.surge>0?.35:1):0;
  if(!S.lit){o.thrust=fc.M>0?-o.mdot*o.V0*.12:Math.max(0,o.thrust)*.05*S.N;o.fuel=0;o.shp=0;o.egt=S.T4;o.abOn=false;o.Vj=0}
  else{o.thrust*=k;o.shp*=k}
- S.vib=.12+S.N*.25+stage()*.7+(S.surge>0?2.5:0)+(S.rev?.15:0);
+ if(d.type==='turboshaft')o.shpOut=shaftLoad/745.7;
+ S.vib=.12+S.N*.25+stage()*.7+(S.surge>0?2.5:0)+(S.rev?.15:0)+Math.max(0,S.N-1)*8+(o.abChoke||0)*.05;
  S.out=o;
+ if(S.lit){if(S.N>.97&&S.thr>=.99)goal('full');if(o.abOn)goal('ab');if(o.thrust>=1e5&&fc.h===0&&fc.M===0)goal('kn100');if(S.rev&&o.thrust<-1000)goal('rev')}
 }
 
 /* ================= CONTROLS ================= */
 function initSound(){initAudio()}
 function autoStart(){initSound();if(S.broken){say('Rebuild the engine first');return}
  if(ram(d.type)){if(fc.M<minM(d)){setFC({M:d.type==='scramjet'?6:3,h:Math.max(fc.h,d.type==='scramjet'?20:10)});say('Air supply brought up to light-off speed',2)}S.ign=true;S.fuel=true;S.thr=Math.max(S.thr,.6);sync();return}
- S.thr=0;S.starter=!S.lit;S.ign=true;S.fuel=true;sync()}
+ S.thr=0;S.starter=!S.lit;S.ign=true;S.fuel=true;if(d.type==='turboshaft')S.thr=1;sync()}
 function stop(){S.fuel=false;S.ab=false;S.starter=false;S.rev=false;S.thr=0;if(test)endTest('Test aborted — engine shut down');sync()}
 function setFC(o){Object.assign(fc,o);fc.h=clamp(fc.h,0,30);fc.M=clamp(fc.M,0,8);syncFC();envMark();renderContracts()}
 function toggleRev(){if(!d.rev){say('No reverser fitted');return}if(!S.rev&&S.N>.75&&S.lit){say('Reverser locked — pull back to idle first',2);return}S.rev=!S.rev;sync()}
-function toggleAB(){if(!d.ab||d.type==='turboprop'||ram(d.type))return;S.ab=!S.ab;if(S.ab&&S.N<.85&&S.lit)say('Afterburner arms above 85% spool',2);sync()}
+function toggleAB(){if(!d.ab||shaftT(d.type)||ram(d.type))return;S.ab=!S.ab;if(S.ab&&S.N<.85&&S.lit)say('Afterburner arms above 85% spool',2);sync()}
 
 /* ================= TEST RUNNER (dyno + certification) ================= */
 let test=null;
@@ -350,20 +427,22 @@ function startTest(kind,contract){
  if(S.broken){say('Rebuild the engine first');return}
  if(contract){const r=contract.req;if(r.types&&!r.types.includes(d.type)){$('certMsg').textContent=`${contract.name}: needs a ${r.types.map(t=>TYPES[t].toLowerCase()).join(' or ')}.`;return}setFC({...contract.fc})}
  test={kind,contract,t:0,ph:0,t0:0,dry:0,wet:0,best:Infinity,sfcMax:null,spool:null,shp:0,target:0};
- S.rev=false;S.ab=false;if(!S.lit)autoStart();
+ S.rev=false;S.ab=false;S.noz=null;if(!S.lit)autoStart();
  $('testBadge').hidden=false;sync();
  location.hash=contract?'contracts':'dyno';
 }
 function testMsg(m){$('testBadge').textContent=(test&&test.contract?'CERTIFYING · ':'DYNO · ')+m;(test&&test.contract?$('certMsg'):$('dynoMsg')).textContent=m}
 function testStep(dt){
- if(!test)return;const T=test,o=S.out,isR=ram(d.type);T.t+=dt;
- const rec=()=>{if(!S.ab&&o.thrust>T.dry)T.dry=o.thrust;if(o.thrust>.05*Math.max(T.dry,1)&&o.fuel>0&&!S.ab)T.best=Math.min(T.best,o.fuel/o.thrust*1e6);if(o.shp>T.shp)T.shp=o.shp};
- if(T.ph===0){testMsg('Starting engine…');S.thr=isR?.6:0;
-  if(S.lit&&(isR||S.N>.58)){T.ph=1;T.t0=T.t}else if(T.t>35){endTest('Failed — the engine would not start at this condition');}return}
+ if(!test)return;const T=test,o=S.out,isR=ram(d.type),sh=d.type==='turboshaft';T.t+=dt;
+ const pwr=()=>sh?(o.shp||0):o.shp;
+ const rec=()=>{if(!abReq()&&o.thrust>T.dry)T.dry=o.thrust;if(o.thrust>.05*Math.max(T.dry,1)&&o.fuel>0&&!abReq())T.best=Math.min(T.best,o.fuel/o.thrust*1e6);if(pwr()>T.shp)T.shp=pwr()};
+ if(T.ph===0){testMsg('Starting engine…');S.thr=isR?.6:sh?1:0;if(sh)S.coll=.3;
+  if(S.lit&&(isR||S.N>d.idle-.02)){T.ph=1;T.t0=T.t}else if(T.t>35){endTest('Failed — the engine would not start at this condition');}return}
  if(!S.lit){endTest('Failed — the engine went out during the test');return}
  const el=T.t-T.t0;
  if(isR){S.thr=.2+.8*clamp(el/6);rec();testMsg('Fuel sweep…');if(el>7){T.sfcMax=o.fuel/Math.max(1,o.thrust)*1e6;finishTest()}return}
- if(T.ph===1){S.thr=0;testMsg('Idle hold…');if(el>2){T.ph=2;T.t0=T.t;T.target=cycle(d,1,Math.min(d.tit,limEff(d)*.97),false,fc,S.gear).thrust*(1-DMG[stage()])}}
+ if(sh){S.fadec=true;S.thr=1;S.coll=clamp(.3+el/5);rec();testMsg('Raising collective…');if(T.spool==null&&S.N>.95*topN(d))T.spool=el;if(el>9){finishTest()}return}
+ if(T.ph===1){S.thr=0;testMsg('Idle hold…');if(el>2){T.ph=2;T.t0=T.t;T.target=cycle(d,topN(d),Math.min(d.tit,limEff(d)*.97),false,fc,S.gear).thrust*(1-DMG[stage()])}}
  else if(T.ph===2){S.thr=1;testMsg('Full power — timing spool-up…');rec();if(T.spool==null&&o.thrust>=.95*T.target)T.spool=el;
   if(el>Math.max(5,(T.spool||0)+2.5)||el>40){T.sfcMax=o.fuel/Math.max(1,o.thrust)*1e6;T.ph=3;T.t0=T.t}}
  else if(T.ph===3){S.thr=1-.7*clamp(el/6);testMsg('Economy sweep…');rec();if(el>6.5){T.ph=d.ab?4:5;T.t0=T.t}}
@@ -371,19 +450,24 @@ function testStep(dt){
  else finishTest();
 }
 function endTest(msg){if(!test)return;const c=test.contract;test=null;$('testBadge').hidden=true;S.ab=false;(c?$('certMsg'):$('dynoMsg')).textContent=msg;sync()}
-function finishTest(){const T=test;S.thr=.15;S.ab=false;
+function finishTest(){const T=test;S.thr=d.type==='turboshaft'?1:.15;S.ab=false;if(d.type==='turboshaft')S.coll=.4;
  const res={dry:T.dry,wet:T.wet,sfc:T.sfcMax,best:isFinite(T.best)?T.best:null,spool:T.spool,shp:T.shp};
  const r={name:d.name||'Custom engine',type:d.type,cond:condLabel(),date:new Date().toLocaleString(),...res};
- runs.push(r);if(runs.length>60)runs.shift();store.set('ggf-runs',runs);
+ runs.push(r);if(runs.length>60)runs.shift();store.set('ggf-runs',runs);updateRecords(r);
  if(T.contract){const ev=evalContract(T.contract,res);const c=T.contract;
   const prev=stars[c.id]||0;if(ev.stars>prev){stars[c.id]=ev.stars;store.set('ggf-stars',stars)}
-  test=null;$('testBadge').hidden=true;
+  test=null;$('testBadge').hidden=true;if(ev.stars){goal('cert');if(Object.values(stars).reduce((a,b)=>a+b,0)>=10)goal('stars10')}
   $('certMsg').textContent=ev.stars?`${c.name}: certified ${'★'.repeat(ev.stars)}${ev.stars>prev?' — new best!':''}`:`${c.name}: failed — ${ev.fails.join(', ')}`;
   renderContracts();renderStars()}
  else{test=null;$('testBadge').hidden=true;$('dynoMsg').textContent='Run complete';
   $('dynoRes').innerHTML=specHTML([['Max thrust (dry)',(res.dry/1e3).toFixed(1)+' kN'],['Afterburner',res.wet?(res.wet/1e3).toFixed(1)+' kN':'–'],['TSFC at max',res.sfc?res.sfc.toFixed(1)+' g/kN·s':'–'],['Best TSFC',res.best?res.best.toFixed(1)+' g/kN·s':'–'],['Spool-up',res.spool!=null?res.spool.toFixed(1)+' s':'–'],['Shaft power',res.shp?Math.round(res.shp).toLocaleString()+' hp':'–']])}
  renderRuns();sync()}
 const condLabel=()=>`${fc.h.toFixed(1)} km · M${fc.M.toFixed(2)}${fc.dT?` · ${fc.dT>0?'+':''}${fc.dT} °C`:''}`;
+
+/* records (kept on this device) */
+let records=store.get('ggf-records',{});
+const RECS=[['thrust','Most thrust','kN',r=>Math.max(r.dry,r.wet||0)/1e3,1],['tw','Best thrust/weight','',r=>Math.max(r.dry,r.wet||0)/(weight(d)*9.81),1],['sfc','Lowest TSFC','g/kN·s',r=>r.sfc,-1],['spool','Quickest spool-up','s',r=>r.spool,-1],['shp','Most shaft power','hp',r=>r.shp,1],['speed','Fastest flight test','Mach',null,1]];
+function updateRecords(r){RECS.forEach(([k,,,f,dir])=>{if(!f)return;const v=f(r);if(v==null||!isFinite(v)||v<=0)return;const cur=records[k];if(!cur||(dir>0?v>cur.v:v<cur.v))records[k]={v,name:r.name,date:r.date}});store.set('ggf-records',records);renderRecords&&renderRecords()}
 
 /* contract evaluation */
 let stars=store.get('ggf-stars',{}),runs=store.get('ggf-runs',[]);
@@ -471,7 +555,8 @@ function audio(dt){if(!ac)return;soundEvents();const t=ac.currentTime,o=S.out,is
  const bpf2=Math.min(rpm2/60*38,11000);set(A.comp.frequency,bpf2);set(A.comp2.frequency,Math.min(bpf2*2.013,15000));
  set(A.compG.gain,N2>.05?(.022+.03*N2)*(1-.6*clamp(jl)):0);set(A.comp2G.gain,N2>.05?.012*N2:0);
  // turboprop drone with prop rotation modulation
- if(prop){const pr=1700*N1*(1-.04*(S.gear-2)),bpfP=pr/60*4;set(A.prop.frequency,Math.max(10,bpfP));set(A.propG.gain,clamp(N1*1.1)*.3*(.7+.15*S.gear));set(A.lfo.frequency,Math.max(1,pr/60));set(A.lfoG.gain,.08*N1)}
+ if(d.type==='turboshaft'){const pr=330*S.Np,bpfP=pr/60*4;set(A.prop.frequency,Math.max(5,bpfP*2));set(A.propG.gain,clamp(S.Np)*.32*(.5+.5*S.coll));set(A.lfo.frequency,Math.max(1,bpfP));set(A.lfoG.gain,.22*clamp(S.Np))}
+ else if(prop){const pr=1700*N1*(1-.04*(S.gear-2)),bpfP=pr/60*4;set(A.prop.frequency,Math.max(10,bpfP));set(A.propG.gain,clamp(N1*1.1)*.3*(.7+.15*S.gear));set(A.lfo.frequency,Math.max(1,pr/60));set(A.lfoG.gain,.08*N1)}
  else{set(A.propG.gain,0);set(A.lfoG.gain,0)}
  // air starter whine
  set(A.st.frequency,250+3200*clamp(N2/.3));set(A.stG.gain,S.starter?.07:0,.2);
@@ -480,9 +565,10 @@ function audio(dt){if(!ac)return;soundEvents();const t=ac.currentTime,o=S.out,is
 }
 
 /* ================= DRAWING: TEST CELL ================= */
-const cv=$('cv'),x=cv.getContext('2d');
+const cv=$('cv');let x=cv.getContext('2d'),VH=400,thermal=false;
 let bgC=null,bgKey='',tm=0,ph1=0,ph2=0,phP=0,parts=[],dust=[];
 const DPR=()=>Math.min(2,window.devicePixelRatio||1);
+function thermCol(T){const t=clamp((T-250)/1500),h=(1-t)*240;return `hsla(${h},90%,${45+10*t}%,.8)`}
 function heat(T,a){const t=clamp((T-650)/1500);return `rgba(${Math.round(90+165*Math.min(1,t*2))},${Math.round(18+237*Math.max(0,t-.3)/.7)},${Math.round(12+243*Math.max(0,t-.75)/.25)},${a})`}
 function buildBg(W,H){const c=document.createElement('canvas'),dp=DPR();c.width=W*dp;c.height=H*dp;const g=c.getContext('2d');g.scale(dp,dp);
  const fl=H*.82;let sd=11;const rnd=()=>(sd=(sd*16807)%2147483647)/2147483647;
@@ -511,21 +597,20 @@ function buildBg(W,H){const c=document.createElement('canvas'),dp=DPR();c.width=
  return c}
 
 const PROF={turbojet:[[0,.72],[.06,.8],[.25,.82],[.62,.84],[.82,.78],[1,.6]],turbofan:[[0,1],[.04,1.05],[.32,1.02],[.43,.9],[.46,.6],[.8,.56],[1,.42]],
- turboprop:[[0,.3],[.1,.62],[.6,.64],[.86,.56],[1,.46]],ramjet:[[0,.55],[.12,.64],[.84,.64],[.92,.5],[1,.66]]};
+ turboprop:[[0,.3],[.1,.62],[.6,.64],[.86,.56],[1,.46]],turboshaft:[[0,.34],[.08,.58],[.62,.62],[.84,.6],[1,.52]],ramjet:[[0,.55],[.12,.64],[.84,.64],[.92,.5],[1,.66]]};
 const profAt=(p,u)=>{if(u<=p[0][0])return p[0][1];for(let i=1;i<p.length;i++)if(u<=p[i][0]){const a=p[i-1],b=p[i];return a[1]+(b[1]-a[1])*(u-a[0])/(b[0]-a[0])}return p[p.length-1][1]};
 function zones(d){const t=d.type;
  if(t==='turbofan')return {fan:[.03,.1],comp:[.15,.5],comb:[.5,.64],turb:[.64,.8],ab:d.ab?[.8,.97]:null,noz:[.8,1]};
- if(t==='turboprop')return {comp:[.13,.46],comb:[.46,.6],turb:[.6,.78],noz:[.78,1]};
+ if(shaftT(t))return {comp:[.13,.46],comb:[.46,.6],turb:[.6,.8],noz:[.8,1]};
  return {comp:[.08,.42],comb:[.42,.58],turb:[.58,.7],ab:d.ab?[.7,.95]:null,noz:[.7,1]}}
 
 function draw(dt){
  const W=cv.clientWidth,H=cv.clientHeight,dp=DPR();if(!W||!H)return;
  if(cv.width!==Math.round(W*dp)||cv.height!==Math.round(H*dp)){cv.width=Math.round(W*dp);cv.height=Math.round(H*dp)}
  const key=W+'x'+H;if(key!==bgKey||!bgC){bgC=buildBg(W,H);bgKey=key}
- x.setTransform(dp,0,0,dp,0,0);x.drawImage(bgC,0,0,W,H);tm+=dt;
- const t=d.type,isR=ram(t),fan=t==='turbofan',prop=t==='turboprop',o=S.out,fl=H*.82;
- const len=Math.min(W*(prop?.46:.5),H*1.75),x0=W*(prop?.2:isR?.15:.12),cy=H*.47;
- let R=Math.min(H*.23,len*.22);if(fan)R*=Math.min(1.35,.9+d.bpr*.035);if(isR)R*=.85;
+ x.setTransform(dp,0,0,dp,0,0);x.drawImage(bgC,0,0,W,H);tm+=dt;VH=H;
+ const t=d.type,isR=ram(t),fan=t==='turbofan',prop=shaftT(t),o=S.out,fl=H*.82;
+ const G=geomFor(W,H),len=G.len,x0=G.x0,cy=G.cy,R=G.R;
  const xe=x0+len,xc=W-Math.max(46,W*.07),alt=fc.h>0||fc.M>0;
  const lit=S.lit,abOn=!!o.abOn&&lit,Vj=o.Vj||0,ht=lit?clamp((o.egt-500)/1200):0;
  const N1=S.N1,N2=S.N;
@@ -562,6 +647,8 @@ function draw(dt){
  else if(N1>.05&&!isR){x.strokeStyle='rgba(200,215,225,.25)';x.lineWidth=1.2;const spd=N1*700;for(let i=0;i<14;i++){const yy=cy+((i+.5)/14*2-1)*R*1.05,px=(tm*spd+i*137)%x0;x.beginPath();x.moveTo(px,yy+(cy-yy)*px/x0*.4);x.lineTo(Math.min(x0,px+Math.min(50,spd/12)),yy+(cy-yy)*Math.min(1,(px+20)/x0)*.4);x.stroke()}}
  // stand
  drawStand(x0,len,cy,R,fl,isR);
+ if(t==='turboshaft')drawBrake(x0,cy,R,fl);
+ if(!isR&&t!=='turboshaft'&&Math.abs(o.thrust)>50){const L=clamp(Math.abs(o.thrust)/Math.max(1,designMax().wet),0,1.3)*len*.35,ay=fl-28,ax=x0+len*.6,dir=o.thrust>0?-1:1;x.strokeStyle='#ff8a3d';x.fillStyle='#ff8a3d';x.lineWidth=4;x.beginPath();x.moveTo(ax,ay);x.lineTo(ax+dir*L,ay);x.stroke();x.beginPath();x.moveTo(ax+dir*(L+12),ay);x.lineTo(ax+dir*L,ay-7);x.lineTo(ax+dir*L,ay+7);x.fill();x.font='700 15px "Share Tech Mono",monospace';x.textAlign='center';x.fillText((o.thrust/1e3).toFixed(Math.abs(o.thrust)<1e4?2:1)+' kN',ax+dir*L/2,ay-10)}
  // plume (behind collector rim)
  drawPlume({x0,len,cy,R,xe,pipeIn,cr,fan,prop,isR,lit,abOn,Vj,o});
  // engine
@@ -581,6 +668,16 @@ function draw(dt){
  // vibration shake on damage/surge
  if(S.vib>1.2){cv.style.transform=`translate(${(Math.random()-.5)*S.vib}px,${(Math.random()-.5)*S.vib}px)`}else if(cv.style.transform)cv.style.transform='';
 }
+function geomFor(W,H){const t=d.type,fan=t==='turbofan',pr=t==='turboprop',sh=t==='turboshaft',isR=ram(t);const len=Math.min(W*(pr||sh?.46:.5),H*1.75),x0=W*(pr?.2:sh?.24:isR?.15:.12),cy=H*.47;let R=Math.min(H*.23,len*.22);if(fan)R*=Math.min(1.35,.9+d.bpr*.035);if(isR)R*=.85;return {len,x0,cy,R}}
+function renderCutaway(ctx,W,H,hl){const sx=x,svh=VH;x=ctx;VH=H;try{const t=d.type,fan=t==='turbofan',sh=shaftT(t),len=Math.min(W*(sh?.66:.8),H*2.6),G={len,x0:(W-len)/2+(sh?W*.1:0)},cy=H*.56;let R=Math.min(H*.3,len*.2);if(fan)R*=Math.min(1.2,.85+d.bpr*.03);if(ram(t))R*=.85;
+ if(d.type==='scramjet')drawScram(G.x0,G.len,cy,R,0);else drawTurbo(G.x0,G.len,cy,R,0);
+ if(hl){const X=u=>G.x0+u*G.len,a=X(hl[0]),b=X(hl[1]);x.fillStyle='rgba(8,10,9,.62)';x.fillRect(0,0,a,H);x.fillRect(b,0,W-b,H);x.strokeStyle='#e8b923';x.lineWidth=2;x.setLineDash([8,5]);x.strokeRect(a,cy-R*1.25,b-a,R*2.5);x.setLineDash([])}
+}finally{x=sx;VH=svh}}
+function drawBrake(x0,cy,R,fl){const bx=x0-R*2.1,bw=R*1.3,bh=R*1.5;x.strokeStyle='#8a938f';x.lineWidth=R*.08;x.beginPath();x.moveTo(bx+bw,cy);x.lineTo(x0,cy);x.stroke();
+ const g=x.createLinearGradient(0,cy-bh/2,0,cy+bh/2);g.addColorStop(0,'#5d6662');g.addColorStop(1,'#232826');x.fillStyle=g;x.beginPath();x.roundRect(bx,cy-bh/2,bw,bh,6);x.fill();x.fillStyle='#2a2f2d';x.fillRect(bx+bw*.35,cy+bh/2,bw*.3,fl-cy-bh/2);
+ x.fillStyle='#d9ab1f';x.fillRect(bx,cy-bh/2,bw,6);x.fillStyle='#08100b';x.fillRect(bx+8,cy-14,bw-16,30);x.fillStyle=S.Np>1.05?'#ff6b5e':'#9dffb8';x.font='13px "Share Tech Mono",monospace';x.textAlign='center';x.fillText('ROTOR '+Math.round(S.Np*100)+'%',bx+bw/2,cy+1);x.fillStyle='#6a9d7a';x.font='10px "Share Tech Mono",monospace';x.fillText(Math.round(S.out.shpOut||0)+' hp',bx+bw/2,cy+13);
+ x.fillStyle='rgba(235,232,223,.85)';x.font='600 12px "Barlow Condensed",sans-serif';x.fillText('Water-brake dyno',bx+bw/2,cy-bh/2-8);
+ const sp=S.Np*40;x.strokeStyle='rgba(180,220,255,.4)';for(let i=0;i<3;i++){const yy=cy+bh/2-10-i*8;x.beginPath();x.moveTo(bx+6,yy);x.lineTo(bx+6+((tm*sp+i*20)%(bw-12)),yy);x.stroke()}}
 function drawStand(x0,len,cy,R,fl,isR){const legs=[.3,.68],top=cy+R*(isR?.5:.62);
  for(const u of legs){const px=x0+len*u;
   x.fillStyle='#454b47';x.beginPath();x.moveTo(px-6,top);x.lineTo(px+6,top);x.lineTo(px+R*.55,fl);x.lineTo(px+R*.55-12,fl);x.lineTo(px,top+14);x.lineTo(px-R*.55+12,fl);x.lineTo(px-R*.55,fl);x.closePath();x.fill();
@@ -593,7 +690,7 @@ function drawStand(x0,len,cy,R,fl,isR){const legs=[.3,.68],top=cy+R*(isR?.5:.62)
  x.strokeStyle='#111';x.lineWidth=2;x.beginPath();x.moveTo(lx+R*.25,top+6);x.bezierCurveTo(lx+R*.3,fl-30,lx+R*.9,fl-10,lx+R*1.4,fl-2);x.stroke()}
 
 function drawTurbo(x0,len,cy,R,dt){
- const t=d.type,fan=t==='turbofan',prop=t==='turboprop',isRam=t==='ramjet',pf=PROF[t],z=isRam?null:zones(d),o=S.out,lit=S.lit;
+ const t=d.type,fan=t==='turbofan',prop=t==='turboprop',shaft=t==='turboshaft',isRam=t==='ramjet',pf=PROF[t],z=isRam?null:zones(d),o=S.out,lit=S.lit;
  const X=u=>x0+u*len,rTop=u=>profAt(pf,u)*R;CY=cy;
  const omega1=S.N1*42,omega2=S.N*48;ph1+=omega1*dt;ph2+=omega2*dt;
  const blur=(om,n)=>clamp(om*.016*n/6.283-.25);
@@ -606,6 +703,7 @@ function drawTurbo(x0,len,cy,R,dt){
  for(const u of seams){x.fillStyle='rgba(0,0,0,.45)';x.fillRect(X(u)-3,cy,6,R*1.1);x.fillStyle='rgba(255,255,255,.12)';x.fillRect(X(u)-3,cy,1.5,R*1.1);
   x.fillStyle='rgba(20,20,20,.7)';for(let k=1;k<6;k++)x.fillRect(X(u)+5,cy+k*R*.16,2,2)}
  x.fillStyle='rgba(0,0,0,.18)';for(let k=0;k<3;k++)x.fillRect(x0,cy+R*(.3+k*.18),len,1);
+ if(thermal&&!isRam){const tg=x.createLinearGradient(X(0),0,X(1),0),Tt2=o.Tt2||288,T3=o.T3||Tt2,T4=S.T4,eg=o.egt||Tt2;const st=[[0,Tt2],[z.comp[1],T3],[(z.comb[0]+z.comb[1])/2,T4],[z.turb[1],eg],[1,o.abOn?2000:eg]];st.forEach(([u,T])=>tg.addColorStop(clamp(u),thermCol(T)));x.fillStyle=tg;x.fillRect(x0,cy,len,R*1.1)}
  if(lit){const hg=x.createLinearGradient(X(isRam?.4:z.comb[0]),0,X(1),0);hg.addColorStop(0,'rgba(255,90,30,0)');hg.addColorStop(1,heat(S.T4-500,.25*(o.abOn?1:.5)));x.fillStyle=hg;x.fillRect(x0,cy,len,R*1.1)}
  x.restore();
  // accessory gearbox + fuel line under the engine
@@ -618,7 +716,7 @@ function drawTurbo(x0,len,cy,R,dt){
  if(isRam)drawRamInside(X,rTop,cy,R,len);
  else{
   // shaft(s)
-  x.fillStyle='#59615d';x.fillRect(X(.04),cy-R*.07,X(z.turb[1])-X(.04),R*.07);if(d.spools===2||fan){x.fillStyle='#7d8682';x.fillRect(X(z.comp[0]+.1),cy-R*.12,X(z.turb[0]+.06)-X(z.comp[0]+.1),R*.05)}
+  x.fillStyle='#59615d';x.fillRect(X(.04),cy-R*.07,X(z.turb[1])-X(.04),R*.07);if(d.spools>=2||fan){x.fillStyle='#7d8682';x.fillRect(X(z.comp[0]+.1),cy-R*.12,X(z.turb[0]+.06)-X(z.comp[0]+.1),R*.05)}
   // drum / hub
   const hubAt=u=>{if(u<.07)return R*.3*u/.07;if(fan&&u<z.comp[0])return R*.3;if(u<z.comp[1])return R*(fan?.2:.3)+R*.12*(u-z.comp[0])/(z.comp[1]-z.comp[0]);if(u<z.turb[1])return R*.36;return Math.max(0,R*.36*(1-(u-z.turb[1])/.2))};
   x.fillStyle='#343b38';x.beginPath();x.moveTo(X(0),cy);for(let u=0;u<=1.001;u+=.01)x.lineTo(X(u),cy-hubAt(u));x.lineTo(X(1),cy);x.fill();
@@ -633,8 +731,8 @@ function drawTurbo(x0,len,cy,R,dt){
    const fl1=S.N1;if(fl1>.05){x.strokeStyle=`rgba(170,215,255,${.15+.3*fl1})`;x.lineWidth=1.5;const sp=fl1*len*1.4;for(let i=0;i<6;i++){const yy=cy-R*(.62+i*.06),px=X(.12)+((tm*sp+i*53)%(len*.34));x.beginPath();x.moveTo(px,yy);x.lineTo(px+12+fl1*14,yy);x.stroke()}}
    if(S.rev){x.fillStyle='#d9ab1f';x.fillRect(X(.3),cy-rTop(.3)-2,len*.06,6)}}
   // compressor stages
-  const nC=Math.round(clamp(Math.log(d.opr)/Math.log(fan?1.32:1.3),3,14)),cw=(z.comp[1]-z.comp[0])/nC;
-  for(let i=0;i<nC;i++){const u=z.comp[0]+cw*(i+.35),lp=d.spools===2&&i<nC*.38,rt=coreTop(u),rh=hubAt(u);
+  const nC=clamp(nStages(d),2,20),cw=(z.comp[1]-z.comp[0])/nC;
+  for(let i=0;i<nC;i++){const u=z.comp[0]+cw*(i+.35),lp=d.spools>=2&&i<nC*.38,rt=coreTop(u),rh=hubAt(u);
    x.fillStyle='#3c4441';x.fillRect(X(u+cw*.42),cy-rt,Math.max(1.5,len*cw*.12),rt-rh);
    row(X(u),rh,rt,lp?16:22,Math.max(3,len*cw*.42),lp?ph1:ph2,lp?'#a9bccb':'#b4bfbb','#68736f',blur(lp?omega1:omega2,lp?16:22))}
   if(d.vigv){x.fillStyle='#d9ab1f';const u=z.comp[0]-.012;x.fillRect(X(u),cy-coreTop(u),3,coreTop(u)-hubAt(u))}
@@ -648,8 +746,8 @@ function drawTurbo(x0,len,cy,R,dt){
   x.fillStyle='#8f9894';x.fillRect(c0-6,cy-(rO+rI)/2-2,10,4);x.fillRect(c0-6,cy-coreTop(z.comb[0]),3,coreTop(z.comb[0])-(rO+rI)/2);
   if(S.ign&&!lit&&Math.random()<.35){x.fillStyle='#bfe6ff';x.beginPath();x.arc(c0+6,cy-(rO+rI)/2,3,0,7);x.fill()}
   // turbine stages, glowing with temperature
-  const nT=Math.round(fan?clamp(2+d.bpr*.35,2,6):prop?3:clamp(1+d.opr/12,1,3)),tw=(z.turb[1]-z.turb[0])/nT;
-  for(let i=0;i<nT;i++){const u=z.turb[0]+tw*(i+.4),lp=(d.spools===2||fan||prop)&&i>=Math.ceil(nT*.35),rt=coreTop(u),rh=hubAt(u),Tb=(lit?S.T4:S.T4)-i*120;
+  const nT=d.tstages>0?d.tstages:Math.round(fan?clamp(2+d.bpr*.35,2,6):(prop||shaft)?3:clamp(1+d.opr/12,1,3)),tw=(z.turb[1]-z.turb[0])/nT;
+  for(let i=0;i<nT;i++){const u=z.turb[0]+tw*(i+.4),lp=(d.spools>=2||fan||prop||shaft)&&i>=Math.ceil(nT*.35),rt=coreTop(u),rh=hubAt(u),Tb=(lit?S.T4:S.T4)-i*120;
    x.fillStyle=heat(Tb-250,.9);x.fillRect(X(u-tw*.38),cy-rt,Math.max(1.5,len*tw*.14),rt-rh);
    row(X(u),rh,rt,lp?26:30,Math.max(3,len*tw*.36),lp?ph1:ph2,Tb>900?heat(Tb,1):'#9aa29e','#5c6460',blur(lp?omega1:omega2,lp?26:30))}
   // afterburner: spray bars, V-gutter flameholders, flame
@@ -670,13 +768,13 @@ function drawTurbo(x0,len,cy,R,dt){
  // turbojet clamshell reverser
  if(S.rev&&!fan){x.fillStyle='#d9ab1f';x.save();x.translate(X(1),cy);for(const sg of [-1,1]){x.save();x.scale(1,sg);x.rotate(.7);x.fillRect(0,-4,R*.5,5);x.restore()}x.restore()}
  // propeller (in front of the casing)
- if(prop){const px=X(.02),pr=Math.min(cv.clientHeight*.4,R*d.prop/.75);phP+=S.N1*30*dt;const bl=clamp(S.N1*1.6-.35);
+ if(prop){const px=X(.02),pr=Math.min(VH*.4,R*d.prop/.75);phP+=S.N1*30*dt;const bl=clamp(S.N1*1.6-.35);
   if(bl>.05){x.fillStyle=`rgba(170,180,175,${.08+.3*bl})`;x.beginPath();x.ellipse(px,cy,pr*.13,pr,0,0,7);x.fill();x.strokeStyle=`rgba(232,185,35,${.5*bl})`;x.lineWidth=2;x.beginPath();x.ellipse(px,cy,pr*.13,pr,0,0,7);x.stroke()}
   for(let b=0;b<4;b++){const th=phP+b*1.5708,c=Math.cos(th),s=Math.sin(th);x.globalAlpha=1-bl*.8;x.fillStyle=s>0?'#8a9490':'#5b6461';const w=6+pr*.12*Math.abs(s);x.beginPath();x.moveTo(px-w/2,cy);x.lineTo(px+w/2,cy);x.lineTo(px+w*.3,cy-pr*c);x.lineTo(px-w*.3,cy-pr*c);x.fill();
    if(Math.abs(c)>.3){x.fillStyle='#d9ab1f';x.fillRect(px-w*.3,cy-pr*c*.97-(c>0?0:-4),w*.6,4*Math.sign(c))}}x.globalAlpha=1}
  if(prop){const px=X(.02);const sg=x.createLinearGradient(0,cy-R*.3,0,cy+R*.3);sg.addColorStop(0,'#d0d8d5');sg.addColorStop(1,'#4d5653');x.fillStyle=sg;x.beginPath();x.ellipse(px+R*.05,cy,R*.22,R*.26,0,Math.PI*.5,Math.PI*1.5);x.fill()}
  // labels
- const lab=isRam?[['Inlet spike',.05],['Flameholders',.4],['Combustor',.62],['Nozzle',.94]]:[...(fan?[['Fan',(z.fan[0]+z.fan[1])/2]]:[]),[d.spools===2?'LP / HP compressor':'Compressor',(z.comp[0]+z.comp[1])/2],['Combustor',(z.comb[0]+z.comb[1])/2],['Turbine',(z.turb[0]+z.turb[1])/2],...(z.ab?[['Afterburner',(z.ab[0]+z.ab[1])/2]]:[['Nozzle',.92]])];
+ const lab=isRam?[['Inlet spike',.05],['Flameholders',.4],['Combustor',.62],['Nozzle',.94]]:[...(fan?[['Fan',(z.fan[0]+z.fan[1])/2]]:[]),[d.spools===3?'LP / IP / HP compressor':d.spools===2?'LP / HP compressor':'Compressor',(z.comp[0]+z.comp[1])/2],['Combustor',(z.comb[0]+z.comb[1])/2],['Turbine',(z.turb[0]+z.turb[1])/2],...(z.ab?[['Afterburner',(z.ab[0]+z.ab[1])/2]]:[['Nozzle',.92]])];
  x.font='600 12px "Barlow Condensed",sans-serif';x.textAlign='center';let re=-1e9,rowY=0;const ly=cy-R*(fan?1.12:1.0)-12;
  if(len>240)for(const [n,u] of lab){const lx=X(u),hw=x.measureText(n).width/2;rowY=lx-hw<re+6?1-rowY:0;const yy=ly-rowY*14;x.strokeStyle='rgba(232,185,35,.45)';x.lineWidth=1;x.beginPath();x.moveTo(lx,yy+3);x.lineTo(lx,cy-rTop(u)+2);x.stroke();x.fillStyle='rgba(235,232,223,.9)';x.fillText(n,lx,yy);re=lx+hw}
 }
@@ -739,14 +837,14 @@ function dial(id,v,min,max,red,label,unit,txt){const c=$(id),W=c.clientWidth;if(
  const a=ang(v);g.save();g.shadowColor='rgba(0,0,0,.7)';g.shadowBlur=4;g.shadowOffsetY=2;g.strokeStyle='#ff7a2e';g.lineWidth=Math.max(2,r*.05);g.lineCap='round';g.beginPath();g.moveTo(cx-Math.cos(a)*r*.15,cy-Math.sin(a)*r*.15);g.lineTo(cx+Math.cos(a)*r*.74,cy+Math.sin(a)*r*.74);g.stroke();g.restore();
  g.fillStyle='#2b302d';g.beginPath();g.arc(cx,cy,r*.09,0,7);g.fill();g.fillStyle='rgba(255,255,255,.07)';g.beginPath();g.ellipse(cx,cy-r*.45,r*.55,r*.25,0,0,7);g.fill()}
 function drawDials(dt){const o=S.out,isR=ram(d.type),dm=designMax(),mx=Math.max(1,dm.wet)/1e3,ffm=Math.max(.01,dm.ffMax)*3600;
- const tv={n1:isR?fc.M:S.N1*100,n2:isR?(o.mdot||0):S.N*100,tit:S.T4-273,ff:(o.fuel||0)*3600,thr:(o.thrust||0)/1e3,vib:S.vib};
+ const sh=d.type==='turboshaft',tv={n1:isR?fc.M:sh?S.Np*100:S.N1*100,n2:isR?(o.mdot||0):S.N*100,tit:S.T4-273,ff:(o.fuel||0)*3600,thr:sh?(o.shpOut||0):(o.thrust||0)/1e3,vib:S.vib};
  for(const k in tv){dialV[k]=dialV[k]==null?tv[k]:dialV[k]+(tv[k]-dialV[k])*Math.min(1,dt*7)}
  const v=dialV,lm=(isR?(o.lim||limEff(d)+450):limEff(d))-273;
- dial('d_n1',v.n1,0,isR?8:110,isR?null:104,isR?'MACH':'N1',isR?'flight':'% rpm',isR?v.n1.toFixed(2):v.n1.toFixed(1));
- dial('d_n2',v.n2,0,isR?Math.max(10,mdotD(d)*3):110,isR?null:104,isR?'AIRFLOW':(d.spools===2?'N2':'N2 = N1'),isR?'kg/s':'% rpm',isR?v.n2.toFixed(1):v.n2.toFixed(1));
+ dial('d_n1',v.n1,0,isR?8:sh?120:Math.max(110,rotorLim(d)*100+5),isR?null:sh?110:rotorLim(d)*100,isR?'MACH':sh?'ROTOR NP':'N1',isR?'flight':'% rpm',isR?v.n1.toFixed(2):v.n1.toFixed(1));
+ dial('d_n2',v.n2,0,isR?Math.max(10,mdotD(d)*3):Math.max(110,rotorLim(d)*100+5),isR?null:rotorLim(d)*100,isR?'AIRFLOW':sh?'GAS GEN NG':(d.spools>=2?'N2 (HP)':'N2 = N1'),isR?'kg/s':'% rpm',isR?v.n2.toFixed(1):v.n2.toFixed(1));
  dial('d_tit',v.tit,0,2400,lm,'TIT','°C',Math.round(v.tit)+'');
  dial('d_ff',v.ff,0,Math.ceil(ffm/100)*100,null,'FUEL FLOW','kg/h',Math.round(v.ff).toLocaleString());
- dial('d_thr',v.thr,-.3*mx,1.1*mx,null,'THRUST','kN',v.thr.toFixed(mx<10?2:1));
+ if(sh)dial('d_thr',v.thr,0,Math.max(100,dm.shp*1.2),null,'SHAFT POWER','hp',Math.round(v.thr).toLocaleString());else dial('d_thr',v.thr,-.3*mx,1.1*mx,null,'THRUST','kN',v.thr.toFixed(mx<10?2:1));
  dial('d_vib',v.vib,0,5,3,'VIBRATION','in/s',v.vib.toFixed(2))}
 
 /* thrust strip chart */
@@ -759,58 +857,49 @@ function drawChart(){const W=ch.clientWidth,H=ch.clientHeight,dp=DPR();if(!W)ret
 
 /* ================= UI ================= */
 let dmCache=null;
-function designMax(){if(dmCache)return dmCache;let dry,wet,sfc,ffMax;
+function designMax(){if(dmCache)return dmCache;let dry,wet,sfc,ffMax,shp=0,sfcShaft=0;
  if(ram(d.type)){const f={h:Math.max(fc.h,10),M:Math.max(fc.M,d.type==='scramjet'?6:3),dT:fc.dT},o=ramCycle(d,f,1,true);dry=wet=Math.max(1,o.thrust);sfc=o.fuel/Math.max(1,o.thrust)*1e6;ffMax=o.fuel*1.2}
- else{const o=cycle(d,1,T4cap(d),false,SL_,S.gear);dry=o.thrust;sfc=o.fuel/o.thrust*1e6;const ow=d.ab&&d.type!=='turboprop'?cycle(d,1,T4cap(d),true,SL_,S.gear):o;wet=ow.thrust;ffMax=ow.fuel*1.25}
- return dmCache={dry,wet,sfc,ffMax}}
-const ANN=[['STARTER','a',()=>S.starter],['IGNITION','a',()=>S.ign&&!S.lit],['FUEL','g',()=>S.fuel],['FADEC','g',()=>S.fadec],
- ['A/B','g',()=>!!S.out.abOn&&S.lit&&!ram(d.type)],['REVERSER','a',()=>S.rev],['WINDMILL','a',()=>!S.lit&&fc.M>.25&&S.N>.1],['TEST','a',()=>!!test],
- ['SURGE','r',()=>S.surge>0],['OVERTEMP','r',()=>S.over>0],['FLAMEOUT','r',()=>S.flame>0],['DAMAGE',null,()=>stage()>0]];
+ else{const N=topN(d),o=cycle(d,N,T4cap(d),false,SL_,S.gear);dry=Math.max(1,o.thrust);sfc=o.fuel/dry*1e6;shp=o.shp;sfcShaft=shp>0?o.fuel/(shp*.7457)*3.6e6:0;const ow=d.ab&&!shaftT(d.type)?cycle(d,N,T4cap(d),true,SL_,S.gear):o;wet=Math.max(1,ow.thrust);ffMax=ow.fuel*1.25}
+ return dmCache={dry,wet,sfc,ffMax,shp,sfcShaft}}
+const ANN=[['STARTER','a',()=>S.starter],['IGNITION','a',()=>S.ign&&!S.lit],['FUEL','g',()=>S.fuel],['FADEC','g',()=>S.fadec&&d.fadecFit],
+ ['REHEAT','g',()=>!!S.out.abOn&&S.lit&&!ram(d.type)],['REVERSER','a',()=>S.rev],['WINDMILL','a',()=>!S.lit&&fc.M>.25&&S.N>.1],['TEST','a',()=>!!test],
+ ['SURGE','r',()=>S.surge>0],['OVERTEMP','r',()=>S.over===1||S.over===2||S.over===4],['OVERSPEED','r',()=>S.over===3],['DAMAGE',null,()=>stage()>0]];
 $('ann').innerHTML=ANN.map((a,i)=>`<div id="an${i}">${a[0]}</div>`).join('');
-function updateUI(){const o=S.out,isR=ram(d.type),th=o.thrust||0,w=weight(d);
- $('bigT').textContent=(th/1000).toFixed(Math.abs(th)<1e4?2:1)+' kN';$('bigL').textContent=Math.round(th*.224809).toLocaleString()+' lbf';
+function updateUI(){const o=S.out,isR=ram(d.type),th=o.thrust||0,w=weight(d),sh=d.type==='turboshaft';
+ if(sh){$('bigT').textContent=Math.round(o.shpOut||0).toLocaleString()+' hp';$('bigL').textContent='rotor '+Math.round(S.Np*100)+'% · collective '+Math.round(S.coll*100)+'%'}
+ else{$('bigT').textContent=(th/1000).toFixed(Math.abs(th)<1e4?2:1)+' kN';$('bigL').textContent=Math.round(th*.224809).toLocaleString()+' lbf'}
  ANN.forEach((a,i)=>{const on=a[2](),el=$('an'+i);const cls=on?(a[1]||(stage()>=3?'r':'a')):'';if(el.className!==cls)el.className=cls});
  const sfc=th>50&&o.fuel>0?o.fuel/th*1e6:0;
- const rows=[['TSFC',sfc?sfc.toFixed(1)+' g/kN·s':'—'],['TSFC',sfc?(sfc*.0353).toFixed(3)+' lb/lbf·h':'—'],['EGT',Math.round((o.egt||288)-273)+' °C'],['Comp exit T3',Math.round((o.T3||288)-273)+' °C'],
-  ['Airflow',(o.mdot||0).toFixed((o.mdot||0)<10?2:0)+' kg/s'],['Pressure ratio',(o.pr||1).toFixed(1)+' : 1'],['Thrust/weight',(th/(w*9.81)).toFixed(2)],d.type==='turboprop'?['Shaft power',Math.round(o.shp||0).toLocaleString()+' hp']:['Jet velocity',Math.round(o.Vj||0)+' m/s']];
+ const rows=[sh?['Shaft SFC',o.shp>1&&o.fuel>0?(o.fuel/(o.shp*.7457)*3.6e6).toFixed(0)+' g/kWh':'—']:['TSFC',sfc?sfc.toFixed(1)+' g/kN·s':'—'],sh?['Available',Math.round(o.shp||0).toLocaleString()+' hp']:['TSFC',sfc?(sfc*.0353).toFixed(3)+' lb/lbf·h':'—'],['EGT',Math.round((o.egt||288)-273)+' °C'],['Comp exit T3',Math.round((o.T3||288)-273)+' °C'],
+  ['Airflow',(o.mdot||0).toFixed((o.mdot||0)<10?2:0)+' kg/s'],['Pressure ratio',(o.pr||1).toFixed(1)+' : 1'],sh?['Rotor (Np)',Math.round(S.Np*100)+' %']:['Thrust/weight',(th/(w*9.81)).toFixed(2)],d.type==='turboprop'?['Shaft power',Math.round(o.shp||0).toLocaleString()+' hp']:['Jet velocity',Math.round(o.Vj||0)+' m/s']];
  $('lcd').innerHTML=rows.map(([a,b])=>`<span>${a}</span><b>${b}</b>`).join('');
- $('thrV').textContent=Math.round(S.thr*100)+'%';if(+$('thr').value!==Math.round(S.thr*100))$('thr').value=Math.round(S.thr*100);
- let st=S.broken?'Engine destroyed — rebuild it':S.surge>0?'SURGE':S.lit?(isR?'Burning':S.N<.58?'Accelerating to idle':o.abOn?'Afterburner lit':S.rev?'Reverse thrust':'Running'):S.N>.02?(S.starter?'Cranking':fc.M>.25?'Windmilling':'Spooling down'):isR?(fc.M>0?'Air supply running — cold':'Cold — ramjets need airflow'):'Cold and dark';
- if(S.msgT>0)st=S.msg;const se=$('status');const txt=st+(stage()&&!S.broken?` · damage ${stage()}/3`:'');if(se.textContent!==txt){se.textContent=txt;se.className='status'+(/SURGE|COOKED|MELTED|BURNED|Flameout|damage|destroyed|over-temp/i.test(txt)?' bad':'')}
+ $('thrV').textContent=S.thr>1.02&&d.ab?'RHT':Math.round(Math.min(1,S.thr)*100)+'%';if(+$('thr').value!==Math.round(S.thr*100))$('thr').value=Math.round(S.thr*100);
+ let st=S.broken?'Engine destroyed — rebuild it':S.surge>0?'SURGE':S.lit?(isR?'Burning':S.N<d.idle-.02?'Accelerating to idle':o.abOn?'Afterburner lit':S.rev?'Reverse thrust':sh?(S.fadec&&d.fadecFit?'Governor holding rotor':'Manual fuel — watch the rotor'):'Running'):S.N>.02?(S.starter?'Cranking':fc.M>.25?'Windmilling':'Spooling down'):isR?(fc.M>0?'Air supply running — cold':'Cold — ramjets need airflow'):'Cold and dark';
+ if(S.msgT>0)st=S.msg;const se=$('status');const txt=st+(stage()&&!S.broken?` · damage ${stage()}/3`:'');if(se.textContent!==txt){se.textContent=txt;se.className='status'+(/SURGE|COOKED|MELTED|BURNED|BURST|Flameout|damage|destroyed|over-limit/i.test(txt)?' bad':'')}
  $('bRepair').hidden=!(S.broken||S.dmg>0)}
-function sync(){const isR=ram(d.type);[['bStart',S.starter],['bIgn',S.ign],['bFuel',S.fuel],['bAB',S.ab],['bRev',S.rev],['bFadec',S.fadec],['bSnd',snd]].forEach(([id,v])=>$(id).setAttribute('aria-pressed',v));
- $('bStart').disabled=isR;$('bAB').disabled=!d.ab||d.type==='turboprop'||isR;$('bRev').disabled=!d.rev||isR;$('bAuto').textContent=isR?'Light up':'Auto start';$('pitchRow').hidden=d.type!=='turboprop';$('pitchV').textContent=S.gear+1;
+function sync(){const isR=ram(d.type),sh=d.type==='turboshaft';[['bStart',S.starter],['bIgn',S.ign],['bFuel',S.fuel],['bAB',S.ab],['bRev',S.rev],['bFadec',S.fadec&&d.fadecFit],['bSnd',snd],['bTherm',thermal],['bNozAuto',!S.noz]].forEach(([id,v])=>$(id).setAttribute('aria-pressed',v));
+ $('bStart').disabled=isR;$('bAB').disabled=!d.ab||shaftT(d.type)||isR;$('bRev').disabled=!d.rev||isR;$('bFadec').disabled=!d.fadecFit;$('bFadec').textContent=sh?'Governor':'FADEC';$('bAuto').textContent=isR?'Light up':'Auto start';
+ $('pitchRow').hidden=!shaftT(d.type);$('pitchLbl').textContent=sh?'Collective':'Prop pitch';$('pitchV').textContent=sh?Math.round(S.coll*100)+'%':S.gear+1;$('nozRow').hidden=isR||shaftT(d.type);$('abGate').style.visibility=d.ab&&!isR?'visible':'hidden';
+ $('nozA').disabled=!S.noz;$('nozV').textContent='×'+(S.noz||d.throat).toFixed(2);
  $('bDyno').textContent=test&&!test.contract?'Abort dyno':'Run dyno';$('engName').textContent=`${d.name||'Custom engine'} · ${TYPES[d.type]}`}
-function syncFC(){$('alt').value=fc.h;$('mach').value=fc.M;$('altV').textContent=fc.h.toFixed(1)+' km';$('machV').textContent=fc.M.toFixed(2);$('amb').value=String(fc.dT)}
-function coldStart(){Object.assign(S,{dmg:0,broken:false,N:0,N1:0,lit:false,starter:false,ign:false,fuel:false,thr:0,fa:0,ab:false,rev:false,surge:0,T4:atmo(fc.h,fc.dT).T,hist:[],flame:0});if(test)endTest('Test aborted — engine changed')}
-function setDesign(nd,cold){const tc=nd.type&&nd.type!==d.type;d=norm({...d,...nd});
- if(d.type!=='turbofan'&&d.type!=='turbojet'){d.ab=false;d.rev=false}if(ram(d.type)){d.vigv=false;d.spools=1;d.bleed=0}if(d.type==='scramjet')d.inlet='ramp';
- if(!d.ab)S.ab=false;if(!d.rev)S.rev=false;if(tc||cold)coldStart();dmCache=null;renderDesign();sync();envDirty=true;renderContracts()}
-const SL=[{k:'D',l:'Inlet / fan diameter',min:.08,max:3.6,st:.01,u:'m',f:2,show:()=>true},{k:'opr',l:'Overall pressure ratio',min:2,max:55,st:.5,u:': 1',f:1,show:t=>!ram(t)},
- {k:'tit',l:'Design turbine inlet temperature',min:1000,max:2100,st:10,u:'K',f:0,show:t=>!ram(t)},{k:'bpr',l:'Bypass ratio',min:.2,max:14,st:.1,u:'',f:1,show:t=>t==='turbofan'},
- {k:'prop',l:'Propeller diameter',min:1,max:5,st:.05,u:'m',f:2,show:t=>t==='turboprop'},{k:'cool',l:'Turbine cooling air',min:0,max:20,st:1,u:'%',f:0,show:()=>true},{k:'bleed',l:'Customer bleed air',min:0,max:10,st:.5,u:'%',f:1,show:t=>!ram(t)}];
-function renderDesign(){
- $('types').innerHTML=Object.entries(TYPES).map(([k,n])=>`<button data-t="${k}" aria-pressed="${d.type===k}">${n}</button>`).join('');
- $('sliders').innerHTML=SL.filter(s=>s.show(d.type)).map(s=>`<label class="row"><span>${s.l} <b id="sv_${s.k}">${(+d[s.k]).toFixed(s.f)} ${s.u}</b></span><input type="range" data-k="${s.k}" min="${s.min}" max="${s.max}" step="${s.st}" value="${d[s.k]}"></label>`).join('');
- $('mat').value=d.mat;$('noz').value=d.noz;$('inlet').value=d.inlet;$('spools').value=String(d.spools);$('abFit').checked=d.ab;$('revFit').checked=d.rev;$('vigvFit').checked=d.vigv;
- const tj=d.type==='turbojet'||d.type==='turbofan';$('abL').hidden=!tj;$('revL').hidden=!tj;$('vigvL').hidden=ram(d.type);$('spoolRow').hidden=ram(d.type);$('inletRow').hidden=d.type==='scramjet';
- renderSpec();$('code').value=enc(d)}
+function syncFC(){$('alt').value=fc.h;$('mach').value=fc.M;$('altV').textContent=fc.h.toFixed(1)+' km';$('machV').textContent=fc.M.toFixed(2);const o=[...$('amb').options].find(o=>+o.value===fc.dT);$('amb').value=o?o.value:'0'}
+function coldStart(){Object.assign(S,{dmg:0,broken:false,N:0,N1:0,Np:0,gov:null,lit:false,starter:false,ign:false,fuel:false,thr:0,fa:0,ab:false,rev:false,surge:0,noz:null,T4:atmo(fc.h,fc.dT).T,hist:[],flame:0});S.fadec=d.fadecFit;if(test)endTest('Test aborted — engine changed')}
 const specHTML=items=>items.map(([a,b,bad])=>`<div${bad?' class="bad"':''}><small>${a}</small><b>${b}</b></div>`).join('');
-function renderSpec(){const dm=designMax(),w=weight(d),isR=ram(d.type),c=cost(d);
- const items=[['Max thrust, dry',(dm.dry/1000).toFixed(1)+' kN'],['Max thrust, reheat',d.ab?(dm.wet/1000).toFixed(1)+' kN':'—'],['Thrust',Math.round(dm.wet*.224809).toLocaleString()+' lbf'],['Weight',Math.round(w).toLocaleString()+' kg'],['Thrust/weight',(dm.wet/(w*9.81)).toFixed(1)],['Build cost',money(c)],['TSFC',dm.sfc.toFixed(1)+' g/kN·s'],['TSFC',(dm.sfc*.0353).toFixed(3)+' lb/lbf·h']];
- if(isR){items[0][0]='Thrust at test point';items.push(['Lights at','Mach '+minM(d)+'+'],['Liner limit',Math.round(limEff(d)+(d.type==='scramjet'?600:450))+' K'])}
- else{const sm=surgeMargin(d,SL_),o=cycle(d,1,T4cap(d),false,SL_,S.gear);items.push(['Airflow',mdotD(d).toFixed(mdotD(d)<10?2:0)+' kg/s'],['Spool-up ≈',predSpool(d,SL_).toFixed(1)+' s'],['Surge margin',Math.round(sm*100)+' %',sm<.08],['Turbine limit',Math.round(limEff(d))+' K',d.tit>limEff(d)],['Comp exit T3',Math.round(o.T3)+' K',o.T3>T3max(d)]);
-  if(d.type==='turbofan'&&d.bpr>=1.5)items.push(['Fan pressure ratio',o.fpr.toFixed(2)]);if(d.type==='turboprop')items.push(['Shaft power',Math.round(o.shp).toLocaleString()+' hp'])}
- $('spec').innerHTML=specHTML(items)}
-$('presets').innerHTML=PRESETS.map((p,i)=>`<button data-p="${i}">${p.name}</button>`).join('');
-$('mat').innerHTML=Object.entries(MATS).map(([k,m])=>`<option value="${k}">${m.n}</option>`).join('');
 $('fcPresets').innerHTML=FCP.map(([n],i)=>`<button data-f="${i}">${n}</button>`).join('');
 const enc=o=>{try{return btoa(unescape(encodeURIComponent(JSON.stringify(o))))}catch(e){return ''}},dec=s=>JSON.parse(decodeURIComponent(escape(atob(s.trim()))));
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
+/* goals card */
+let goalHidden=store.get('ggf-goalhide',false);
+function renderGoal(){const el=$('goalCard'),done=GOALS.filter(g=>goals[g[0]]).length,next=GOALS.find(g=>!goals[g[0]]),rank=RANKS[Math.min(RANKS.length-1,Math.floor(done/GOALS.length*(RANKS.length-1)+.001))];
+ if(!next){el.hidden=goalHidden;el.innerHTML=`<small><span>${done}/${GOALS.length} · ${rank}</span></small><b>Every goal complete</b>`;return}
+ if(goalHidden){el.hidden=true;return}
+ el.hidden=false;el.innerHTML=`<small><span>Next goal · ${done}/${GOALS.length} · ${rank}</span><button id="gHide" aria-label="Hide goals">Hide</button></small><b>${next[1]}</b><p>${next[2]}</p>`}
+$('goalCard').addEventListener('click',e=>{if(e.target.id==='gHide'){goalHidden=true;store.set('ggf-goalhide',true);renderGoal()}});
+
 /* contracts */
 function renderStars(){const tot=Object.values(stars).reduce((a,b)=>a+b,0);$('stars').textContent=`★ ${tot} / ${CONTRACTS.length*3}`}
-let crT=0;function renderContracts(){clearTimeout(crT);crT=setTimeout(()=>{
+let crT=0;function renderContracts(){clearTimeout(crT);crT=setTimeout(()=>{if($('p-contracts').hidden)return;
  $('contracts').innerHTML=CONTRACTS.map(c=>{const ev=evalContract(c,predict(c)),best=stars[c.id]||0,f=c.fc;
   return `<div class="plate card"><h4>${esc(c.name)}</h4><p class="cl">${esc(c.client)} · ${f.h} km · Mach ${f.M}${f.dT?` · ${f.dT>0?'hot':'arctic'} day`:''}</p><p>${esc(c.brief)}</p>
   <ul class="req">${ev.rows.map(([l,req,v,ok])=>`<li><span>${l} <small class="note">${req}</small></span><b class="${ok?'ok':'no'}">${v} ${ok?'✓':'✗'}</b></li>`).join('')}</ul>
@@ -823,69 +912,63 @@ const envMm=()=>d.type==='scramjet'?9:d.type==='ramjet'?6:3,envHm=30;
 function envCompute(){const ab=$('envAB').checked&&d.ab,NX=48,NY=32,g=[];let mx=1;
  for(let j=0;j<NY;j++)for(let i=0;i<NX;i++){const f={h:(j+.5)/NY*envHm,M:(i+.5)/NX*envMm(),dT:fc.dT};let v,flag=0;
   if(ram(d.type)){if(f.M<minM(d)){flag=1;v=0}else{const o=ramCycle(d,f,1,true);v=o.thrust}}
-  else{const o=cycle(d,1,T4cap(d),ab,f,S.gear);v=o.thrust;if(o.dl<.045)flag=1;else if(o.T3>T3max(d))flag=2}
+  else{const o=cycle(d,topN(d),T4cap(d),ab,f,S.gear);v=d.type==='turboshaft'?o.shp:o.thrust;if(o.dl<.045)flag=1;else if(o.T3>T3max(d))flag=2}
   g.push({v,flag});if(!flag&&v>mx)mx=v}
  envGrid={g,NX,NY};envMax=mx;envDirty=false}
 function envDraw(){const W=envC.clientWidth,H=envC.clientHeight,dp=DPR();if(!W)return;if(envDirty||!envGrid)envCompute();
  if(envC.width!==Math.round(W*dp)){envC.width=Math.round(W*dp);envC.height=Math.round(H*dp)}ex.setTransform(dp,0,0,dp,0,0);ex.clearRect(0,0,W,H);
- const L=48,B=34,T=12,Rr=12,pw=W-L-Rr,phh=H-T-B,{g,NX,NY}=envGrid,cw=pw/NX,chh=phh/NY;
- for(let j=0;j<NY;j++)for(let i=0;i<NX;i++){const c=g[j*NX+i],px=L+i*cw,py=T+phh-(j+1)*chh;
+ const L=48,B=34,T_=12,Rr=12,pw=W-L-Rr,phh=H-T_-B,{g,NX,NY}=envGrid,cw=pw/NX,chh=phh/NY;
+ for(let j=0;j<NY;j++)for(let i=0;i<NX;i++){const c=g[j*NX+i],px=L+i*cw,py=T_+phh-(j+1)*chh;
   if(c.flag===1)ex.fillStyle='#2a2e2c';else if(c.v<=0)ex.fillStyle='#0e100f';else{const t=Math.pow(clamp(c.v/envMax),.6);ex.fillStyle=`rgb(${Math.round(40+215*Math.min(1,t*1.4))},${Math.round(20+200*Math.max(0,t-.35)/.65)},${Math.round(15+60*t)})`}
   ex.fillRect(px,py,cw+.6,chh+.6);
   if(c.flag===2){ex.fillStyle=`rgb(${Math.round(40+180*Math.pow(clamp(c.v/envMax),.6))},30,25)`;ex.fillRect(px,py,cw+.6,chh+.6);ex.strokeStyle='rgba(255,59,47,.7)';ex.lineWidth=1;ex.beginPath();ex.moveTo(px,py+chh);ex.lineTo(px+cw,py);ex.stroke()}}
  ex.fillStyle='#9ba39d';ex.font='12px "Share Tech Mono",monospace';ex.textAlign='center';const Mm=envMm();
- for(let m=0;m<=Mm;m+=Mm>4?1:.5){const px=L+m/Mm*pw;ex.fillText(m.toFixed(Mm>4?0:1),px,H-B+16);ex.strokeStyle='rgba(255,255,255,.08)';ex.beginPath();ex.moveTo(px,T);ex.lineTo(px,T+phh);ex.stroke()}
- ex.textAlign='right';for(let h=0;h<=envHm;h+=5){const py=T+phh-h/envHm*phh;ex.fillText(h+' km',L-6,py+4);ex.strokeStyle='rgba(255,255,255,.08)';ex.beginPath();ex.moveTo(L,py);ex.lineTo(L+pw,py);ex.stroke()}
+ for(let m=0;m<=Mm;m+=Mm>4?1:.5){const px=L+m/Mm*pw;ex.fillText(m.toFixed(Mm>4?0:1),px,H-B+16);ex.strokeStyle='rgba(255,255,255,.08)';ex.beginPath();ex.moveTo(px,T_);ex.lineTo(px,T_+phh);ex.stroke()}
+ ex.textAlign='right';for(let h=0;h<=envHm;h+=5){const py=T_+phh-h/envHm*phh;ex.fillText(h+' km',L-6,py+4);ex.strokeStyle='rgba(255,255,255,.08)';ex.beginPath();ex.moveTo(L,py);ex.lineTo(L+pw,py);ex.stroke()}
  ex.textAlign='center';ex.fillText('Mach',L+pw/2,H-4);
- const mx_=L+fc.M/Mm*pw,my=T+phh-fc.h/envHm*phh;if(fc.M<=Mm){ex.strokeStyle='#e8b923';ex.lineWidth=2;ex.beginPath();ex.moveTo(mx_-12,my);ex.lineTo(mx_+12,my);ex.moveTo(mx_,my-12);ex.lineTo(mx_,my+12);ex.stroke();ex.beginPath();ex.arc(mx_,my,6,0,7);ex.stroke()}
- ex.fillStyle='rgba(10,12,11,.8)';ex.fillRect(L+pw-150,T+6,144,24);ex.fillStyle='#ffd9a8';ex.textAlign='right';ex.fillText(`peak ${(envMax/1e3).toFixed(1)} kN`,L+pw-12,T+22);
- envC._geo={L,T,pw,phh,Mm}}
+ const mx_=L+fc.M/Mm*pw,my=T_+phh-fc.h/envHm*phh;if(fc.M<=Mm){ex.strokeStyle='#e8b923';ex.lineWidth=2;ex.beginPath();ex.moveTo(mx_-12,my);ex.lineTo(mx_+12,my);ex.moveTo(mx_,my-12);ex.lineTo(mx_,my+12);ex.stroke();ex.beginPath();ex.arc(mx_,my,6,0,7);ex.stroke()}
+ ex.fillStyle='rgba(10,12,11,.8)';ex.fillRect(L+pw-160,T_+6,154,24);ex.fillStyle='#ffd9a8';ex.textAlign='right';ex.fillText(d.type==='turboshaft'?`peak ${Math.round(envMax).toLocaleString()} hp`:`peak ${(envMax/1e3).toFixed(1)} kN`,L+pw-12,T_+22);
+ envC._geo={L,T:T_,pw,phh,Mm}}
 function envMark(){if(!$('p-envelope').hidden)envDraw()}
 function envPt(e){const r=envC.getBoundingClientRect(),G=envC._geo;if(!G)return null;const M=(e.clientX-r.left-G.L)/G.pw*G.Mm,h=(G.T+G.phh-(e.clientY-r.top))/G.phh*envHm;if(M<0||h<0||M>G.Mm||h>envHm)return null;return {M:Math.round(M*20)/20,h:Math.round(h*2)/2}}
 envC.onclick=e=>{const p=envPt(e);if(p){setFC(p);say(`Air supply set to ${p.h} km, Mach ${p.M}`,2)}};
 envC.onmousemove=e=>{const p=envPt(e);if(!p){$('envHover').textContent='';return}const f={...p,dT:fc.dT};let txt;
- if(ram(d.type))txt=p.M<minM(d)?"won't light":(ramCycle(d,f,1,true).thrust/1e3).toFixed(1)+' kN';else{const o=cycle(d,1,T4cap(d),$('envAB').checked&&d.ab,f,S.gear);txt=o.dl<.045?'too thin to burn':(o.thrust/1e3).toFixed(1)+' kN'+(o.T3>T3max(d)?' · compressor too hot':'')}
+ if(ram(d.type))txt=p.M<minM(d)?"won't light":(ramCycle(d,f,1,true).thrust/1e3).toFixed(1)+' kN';else{const o=cycle(d,topN(d),T4cap(d),$('envAB').checked&&d.ab,f,S.gear);txt=o.dl<.045?'too thin to burn':(d.type==='turboshaft'?Math.round(o.shp)+' hp':(o.thrust/1e3).toFixed(1)+' kN')+(o.T3>T3max(d)?' · compressor too hot':'')}
  $('envHover').textContent=`${p.h} km · M${p.M.toFixed(2)} → ${txt}`};
 $('envAB').onchange=()=>{envDirty=true;envDraw()};
 
-/* hangar, runs */
+/* hangar, runs, records */
 let saved=store.get('ggf-engines',[]).map(norm);
-function renderSaved(){$('saved').innerHTML=saved.length?saved.map((s,i)=>`<li><span>${esc(s.name)} · ${TYPES[s.type]}</span><button data-l="${i}">Load</button><button data-del="${i}">Delete</button></li>`).join(''):'<li class="note">No saved engines yet. Save as many as you like.</li>'}
-function renderRuns(){$('runs').innerHTML=runs.length?runs.slice().reverse().map(r=>`<li><span><b>${esc(r.name)}</b> · ${esc(r.cond)}<br><small class="note">${esc(r.date)}</small></span><span style="font-family:'Share Tech Mono',monospace;color:#ffd9a8">${(r.dry/1e3).toFixed(1)} kN${r.wet?` · ${(r.wet/1e3).toFixed(1)} wet`:''}${r.sfc?` · ${r.sfc.toFixed(1)} g/kN·s`:''}${r.spool!=null?` · ${r.spool.toFixed(1)} s`:''}</span></li>`).join('')+'<li><button id="bClr">Clear runs</button></li>':'<li class="note">No runs yet.</li>'}
+function renderSaved(){const el=$('saved');if(!el)return;el.innerHTML=saved.length?saved.map((s,i)=>`<li><span>${esc(s.name)} · ${TYPES[s.type]}</span><button data-l="${i}">Load</button><button data-del="${i}">Delete</button></li>`).join(''):'<li class="note">No saved engines yet. Save as many as you like.</li>'}
+function renderRuns(){$('runs').innerHTML=runs.length?runs.slice().reverse().map(r=>`<li><span><b>${esc(r.name)}</b> · ${esc(r.cond)}<br><small class="note">${esc(r.date)}</small></span><span style="font-family:'Share Tech Mono',monospace;color:#ffd9a8">${r.type==='turboshaft'?Math.round(r.shp||0)+' hp':(r.dry/1e3).toFixed(1)+' kN'}${r.wet?` · ${(r.wet/1e3).toFixed(1)} wet`:''}${r.sfc&&r.type!=='turboshaft'?` · ${r.sfc.toFixed(1)} g/kN·s`:''}${r.spool!=null?` · ${r.spool.toFixed(1)} s`:''}</span></li>`).join('')+'<li><button id="bClr">Clear runs</button></li>':'<li class="note">No runs yet.</li>'}
+function renderRecords(){$('records').innerHTML=RECS.map(([k,l,u])=>{const r=records[k];return `<li><span>${l}</span><b>${r?(k==='speed'?'Mach '+r.v.toFixed(2):r.v.toFixed(k==='shp'?0:k==='tw'||k==='sfc'||k==='spool'?2:1)+' '+u)+' · '+esc(r.name):'—'}</b></li>`}).join('')+'<li class="note">Online leaderboards need a server, so records stay in this browser.</li>'}
 
 /* tabs */
 const TABS=['design','contracts','envelope','dyno'];
-function route(){const h=location.hash.slice(1),cur=TABS.includes(h)?h:'design';TABS.forEach(t=>$('p-'+t).hidden=t!==cur);document.querySelectorAll('#tabs a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#'+cur?'page':'false'));if(cur==='envelope')requestAnimationFrame(envDraw);if(cur==='contracts')renderContracts()}
+function route(){const h=location.hash.slice(1),cur=TABS.includes(h)?h:'design';TABS.forEach(t=>$('p-'+t).hidden=t!==cur);document.querySelectorAll('#tabs a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#'+cur?'page':'false'));if(cur==='envelope')requestAnimationFrame(envDraw);if(cur==='contracts')renderContracts();if(cur==='design')renderSheet()}
 window.addEventListener('hashchange',route);
 
 /* events */
-$('presets').onclick=e=>{const b=e.target.closest('[data-p]');if(b){setDesign(PRESETS[b.dataset.p],true);$('saveName').value=d.name;if(ram(d.type)&&fc.M<minM(d))setFC({M:d.type==='scramjet'?6:3,h:d.type==='scramjet'?20:10})}};
-$('types').onclick=e=>{const b=e.target.closest('[data-t]');if(b&&b.dataset.t!==d.type){const t=b.dataset.t;setDesign({...PRESETS.find(p=>p.type===t),name:'Custom '+TYPES[t].toLowerCase()})}};
-$('sliders').oninput=e=>{const k=e.target.dataset.k;if(!k)return;d[k]=+e.target.value;const s=SL.find(s=>s.k===k);$('sv_'+k).textContent=d[k].toFixed(s.f)+' '+s.u;dmCache=null;envDirty=true;renderSpec();$('code').value=enc(d);renderContracts()};
-$('sliders').onchange=()=>envMark();
-$('mat').onchange=e=>setDesign({mat:e.target.value});$('noz').onchange=e=>setDesign({noz:e.target.value});$('inlet').onchange=e=>setDesign({inlet:e.target.value});$('spools').onchange=e=>setDesign({spools:+e.target.value});
-$('abFit').onchange=e=>setDesign({ab:e.target.checked});$('revFit').onchange=e=>setDesign({rev:e.target.checked});$('vigvFit').onchange=e=>setDesign({vigv:e.target.checked});
 $('alt').oninput=e=>setFC({h:+e.target.value});$('mach').oninput=e=>setFC({M:+e.target.value});$('amb').onchange=e=>{setFC({dT:+e.target.value});envDirty=true;envMark()};
 $('fcPresets').onclick=e=>{const b=e.target.closest('[data-f]');if(b)setFC({...FCP[b.dataset.f][1]})};
-$('thr').oninput=e=>{if(!test)S.thr=e.target.value/100};
+$('thr').oninput=e=>{if(!test){S.thr=e.target.value/100;if(S.thr>1&&!d.ab)S.thr=1}};
 const tog=k=>()=>{initSound();S[k]=!S[k];sync()};
-$('bStart').onclick=()=>{if(!S.broken)tog('starter')()};$('bIgn').onclick=tog('ign');$('bFuel').onclick=tog('fuel');$('bFadec').onclick=tog('fadec');
+$('bStart').onclick=()=>{if(!S.broken)tog('starter')()};$('bIgn').onclick=tog('ign');$('bFuel').onclick=tog('fuel');$('bFadec').onclick=()=>{if(d.fadecFit)tog('fadec')()};
 $('bAB').onclick=()=>{initSound();toggleAB()};$('bRev').onclick=()=>{initSound();toggleRev()};
 $('bSnd').onclick=()=>{initAudio();snd=!snd;try{ac&&ac.resume()}catch(e){}sync()};
+$('bTherm').onclick=()=>{thermal=!thermal;sync()};
+$('bNozAuto').onclick=()=>{S.noz=S.noz?null:d.throat;$('nozA').value=Math.round((S.noz||d.throat)*100);sync()};
+$('nozA').oninput=e=>{if(S.noz){S.noz=+e.target.value/100;sync()}};
 $('bAuto').onclick=()=>{if(!snd){initAudio();snd=true;try{ac&&ac.resume()}catch(e){}}autoStart()};$('bStop').onclick=stop;
 $('bRepair').onclick=()=>{coldStart();sync();say('Engine rebuilt',2)};
-const pitch=dir=>{if(d.type!=='turboprop')return;S.gear=clamp(S.gear+dir,0,3);dmCache=null;renderSpec();sync();renderContracts()};
+const pitch=dir=>{if(d.type==='turboshaft'){S.coll=clamp(Math.round((S.coll+dir*.1)*10)/10);sync();return}if(d.type!=='turboprop')return;S.gear=clamp(S.gear+dir,0,3);dmCache=null;sync();renderContracts()};
 $('bUp').onclick=()=>pitch(1);$('bDn').onclick=()=>pitch(-1);
 $('bDyno').onclick=()=>{initSound();startTest('dyno',null)};
 $('runs').onclick=e=>{if(e.target.id==='bClr'){runs=[];store.set('ggf-runs',runs);renderRuns()}};
-$('bSave').onclick=()=>{const n=$('saveName').value.trim()||d.name||'Custom engine';d.name=n;const i=saved.findIndex(s=>s.name===n);if(i>=0)saved[i]={...d};else saved.push({...d});store.set('ggf-engines',saved);renderSaved();renderDesign();sync()};
-$('saved').onclick=e=>{const l=e.target.dataset.l,del=e.target.dataset.del;if(l!=null){setDesign(saved[l],true);$('saveName').value=d.name}if(del!=null){saved.splice(del,1);store.set('ggf-engines',saved);renderSaved()}};
-$('bCopy').onclick=async()=>{const t=$('code');try{await navigator.clipboard.writeText(t.value);$('codeMsg').textContent='Copied'}catch(e){t.select();$('codeMsg').textContent='Selected — press Ctrl+C'}};
-$('bLoadCode').onclick=()=>{try{const nd=dec($('code').value);if(!TYPES[nd.type])throw 0;const c=norm(nd);SL.forEach(s=>c[s.k]=clamp(c[s.k],s.min,s.max));setDesign(c,true);$('saveName').value=d.name||'';$('codeMsg').textContent='Loaded'}catch(e){$('codeMsg').textContent='That code is not valid'}};
 document.addEventListener('keydown',e=>{if(e.target.matches('input[type=text],textarea,select'))return;const k=e.key;let h=true;
  if(k==='s'||k==='S'){if(!snd){initAudio();snd=true;try{ac.resume()}catch(_){}}autoStart()}else if(k==='x'||k==='X')stop();
- else if(k==='ArrowUp'&&!test)S.thr=Math.min(1,S.thr+.05);else if(k==='ArrowDown'&&!test)S.thr=Math.max(0,S.thr-.05);else if(k==='End'&&!test)S.thr=1;
- else if(k==='PageUp'){initSound();toggleAB()}else if(k==='r'||k==='R'){initSound();toggleRev()}
+ else if(k==='ArrowUp'&&!test)S.thr=Math.min(d.ab?1.2:1,S.thr+.05);else if(k==='ArrowDown'&&!test)S.thr=Math.max(0,S.thr-.05);else if(k==='End'&&!test)S.thr=1;
+ else if(k==='PageUp'){initSound();toggleAB()}else if(k==='r'||k==='R'){initSound();toggleRev()}else if(k==='t'||k==='T'){thermal=!thermal}
  else if(k==='e'||k==='E')setFC({M:Math.round((fc.M+.1)*100)/100});else if(k==='q'||k==='Q')setFC({M:Math.round((fc.M-.1)*100)/100});
  else if(k==='w'||k==='W')setFC({h:fc.h+.5});else if(k==='a'||k==='A')setFC({h:fc.h-.5});
  else if(k===']')pitch(1);else if(k==='[')pitch(-1);else h=false;
@@ -893,12 +976,293 @@ document.addEventListener('keydown',e=>{if(e.target.matches('input[type=text],te
 
 /* ================= LOOP ================= */
 let last=performance.now(),acc=0,uiAcc=0;
-function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;try{
- for(let i=0;i<4;i++)step(dt/4);testStep(dt);}catch(e){console.error(e)}if(S.msgT>0)S.msgT-=dt;
- acc+=dt;if(acc>.1){acc=0;S.hist.push(S.out.thrust||0);if(S.hist.length>300)S.hist.shift();drawChart()}
+function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;
+ try{for(let i=0;i<4;i++)step(dt/4);testStep(dt)}catch(e){console.error(e)}if(S.msgT>0)S.msgT-=dt;
+ acc+=dt;if(acc>.1){acc=0;const dm=designMax();S.hist.push(d.type==='turboshaft'?(S.out.shpOut||0)/Math.max(1,dm.shp)*dm.wet:(S.out.thrust||0));if(S.hist.length>300)S.hist.shift();drawChart()}
  uiAcc+=dt;if(uiAcc>.05){uiAcc=0;updateUI()}
- try{draw(dt)}catch(e){console.error(e)}try{drawDials(dt)}catch(e){console.error(e)}try{audio(dt)}catch(e){console.error(e)}requestAnimationFrame(loop)}
-setDesign(PRESETS[0],true);$('saveName').value=d.name;syncFC();renderSaved();renderRuns();renderStars();route();sync();
+ try{draw(dt)}catch(e){console.error(e)}try{drawDials(dt)}catch(e){console.error(e)}try{audio(dt)}catch(e){console.error(e)}
+ if(!$('p-design').hidden){try{drawOffice()}catch(e){console.error(e)}}
+ requestAnimationFrame(loop)}
+
+/* ================= DESIGN OFFICE (step by step) ================= */
+const STEPS=[{id:'id',n:'Identity'},{id:'layout',n:'Layout'},{id:'comp',n:'Compressor',hl:z=>z.comp,turbo:1},{id:'fan',n:'Fan · prop',hl:z=>z.fan||[-.08,.1],turbo:1},
+ {id:'comb',n:'Combustor',hl:z=>z.comb},{id:'turb',n:'Turbine',hl:z=>z.turb,turbo:1},{id:'noz',n:'Nozzle',hl:z=>z.noz},{id:'ab',n:'Afterburner',hl:z=>z.ab||[.7,1],jet:1},
+ {id:'rotor',n:'Rotor',hl:z=>[z.comp[0],z.turb[1]],turbo:1},{id:'fadec',n:'FADEC'},{id:'cond',n:'Conditions'},{id:'af',n:'Airframe'},{id:'review',n:'Review'}];
+let stepI=0;const FMT={};
+const fx=(n,u='')=>v=>(+v).toFixed(n)+(u?' '+u:'');
+const getK=k=>k.startsWith('af.')?d.af[k.slice(3)]:k.startsWith('fc.')?fc[k.slice(3)]:d[k];
+function setK(k,v){if(k.startsWith('af.'))d.af[k.slice(3)]=v;else if(k.startsWith('fc.'))setFC({[k.slice(3)]:v});else d[k]=v;designChanged(k)}
+function sld(k,l,min,max,st,fmt,help){FMT[k]={fmt,min,max,st};const v=getK(k);return `<div class="ctl"><div class="cl"><span>${l}</span><b id="v_${k.replace('.','_')}">${fmt(v)}</b></div><div class="sr"><button class="nud" data-n="${k}" data-d="-1" aria-label="Decrease ${l}">−</button><input type="range" data-k="${k}" min="${min}" max="${max}" step="${st}" value="${v}" aria-label="${l}"><button class="nud" data-n="${k}" data-d="1" aria-label="Increase ${l}">+</button></div>${help?`<p class="help">${help}</p>`:''}</div>`}
+function picks(k,opts){const cur=getK(k);return `<div class="picks">${opts.map(o=>`<button class="pick" data-pk="${k}" data-pv="${o.v}" aria-pressed="${String(cur)===String(o.v)}"><b>${o.l}</b><small>${o.d||''}</small></button>`).join('')}</div>`}
+function togK(k,l,help){return `<label class="tg"><input type="checkbox" data-tk="${k}" ${getK(k)?'checked':''}> <span>${l}</span></label>${help?`<p class="help">${help}</p>`:''}`}
+const sec=(n,t)=>`<h5>${n} · ${t}</h5>`;
+const na=t=>`<div class="na">${t}</div>`;
+function stepApplies(s){const t=d.type;if(s.turbo&&ram(t))return false;if(s.jet&&!(t==='turbojet'||t==='turbofan'))return false;if(s.id==='fan'&&t==='turbojet')return true;return true}
+function plate(){const s=STEPS[stepI].id,t=d.type;
+ switch(s){case 'id':return ['Engine',d.name||'Custom engine',''];case 'layout':return ['Inlet diameter',d.D.toFixed(2),'m'];case 'comp':return ram(t)?['Ram compression','Mach '+minM(d)+'+','']:['Pressure ratio',d.opr.toFixed(1),': 1'];
+  case 'fan':return t==='turbofan'?['Bypass ratio',d.bpr.toFixed(1),': 1']:t==='turboprop'?['Propeller',d.prop.toFixed(2),'m']:t==='turboshaft'?['Rated shaft power',Math.round(designMax().shp).toLocaleString(),'hp']:['Bypass','None','pure jet'];
+  case 'comb':return ram(t)?['Liner limit',Math.round(limEff(d)+(t==='scramjet'?600:450)),'K']:['Turbine inlet',Math.round(d.tit),'K'];case 'turb':return ['Blade limit',Math.round(limEff(d)),'K'];
+  case 'noz':return ['Throat area','× '+d.throat.toFixed(2),''];case 'ab':return d.ab?['Afterburner fuel',Math.round(d.abFuel),'g/kg']:['Afterburner','Not fitted',''];
+  case 'rotor':return ['Speed limit',Math.round(rotorLim(d)*100),'% N · '+['','single','twin','triple'][d.spools]+' spool'];case 'fadec':return [d.fadecFit?'FADEC fitted · idle':'No FADEC · idle',Math.round(d.idle*100),'% N'];
+  case 'cond':return ['Altitude',fc.h.toFixed(1),'km · Mach '+fc.M.toFixed(2)];case 'af':return ['Take-off mass',Math.round(airframe().TOW).toLocaleString(),'kg'];
+  case 'review':{const m=designMax();return [shaftT(t)&&t==='turboshaft'?'Rated shaft power':'Max thrust',t==='turboshaft'?Math.round(m.shp).toLocaleString():(m.wet/1e3).toFixed(1),t==='turboshaft'?'hp':'kN']}}}
+function sheetHTML(){const s=STEPS[stepI].id,t=d.type,isR=ram(t);
+ switch(s){
+ case 'id':return `<p class="lead">Every engine starts with a name. It shows in the test cell, the hangar and your runs. Start from scratch or from one of the presets.</p>
+  ${sec('1.1','Name')}<input type="text" id="ofName" class="bigname" value="${esc(d.name)}" maxlength="40" aria-label="Engine name">
+  ${sec('1.2','Notes · optional')}<textarea id="ofNotes" placeholder="What is it for? What makes it special?" maxlength="300">${esc(d.notes||'')}</textarea>
+  ${sec('1.3','Start from a preset')}<div class="picks">${PRESETS.map((p,i)=>`<button class="pick" data-preset="${i}"><b>${p.name}</b><small>${TYPES[p.type]}</small></button>`).join('')}</div>
+  ${sec('1.4','Hangar')}<ul class="list" id="saved"></ul>
+  ${sec('1.5','Build code')}<textarea id="code" aria-label="Build code">${enc(d)}</textarea><div class="seg" style="margin-top:8px"><button id="bCopy">Copy code</button><button id="bLoadCode">Load code</button><span class="note" id="codeMsg" style="align-self:center"></span></div>`;
+ case 'layout':return `<p class="lead">Pick the kind of engine, then size its inlet. More inlet area swallows more air: more thrust, more weight and more cost.</p>
+  ${sec('2.1','Engine type')}${picks('type',Object.keys(TYPES).map(k=>({v:k,l:TYPES[k],d:TYPEDESC[k]})))}
+  ${sec('2.2','Inlet diameter')}${sld('D','Inlet / fan diameter',.08,3.6,.01,fx(2,'m'),'Airflow grows with the square of the diameter. Fans can be huge; small jets and turboshafts are a fraction of a metre.')}
+  ${t!=='scramjet'?sec('2.3','Inlet type')+picks('inlet',[{v:'pitot',l:'Fixed pitot',d:'Simple and light. Loses a lot to shock waves above Mach 1.5.'},{v:'ramp',l:'Variable ramp',d:'Heavier, costly. Keeps pressure recovery high at supersonic speed.'}]):''}`;
+ case 'comp':if(isR)return na('Ramjets and scramjets have no compressor: the inlet compresses the air using flight speed alone. That is why they need Mach '+minM(d)+' or more to light.');
+  return `<p class="lead">The compressor squeezes the air before it burns. A higher pressure ratio saves fuel. More stages share the work, so each blade row is less likely to stall.</p>
+  ${sld('stages','Compressor stages',0,20,1,v=>+v?String(v):'Auto ('+autoStages(d)+')','Leave on auto for a sensible count. Fewer stages are lighter, but each one works harder and the surge margin shrinks.')}
+  ${sld('opr','Overall pressure ratio',2,55,.5,fx(1,': 1'),'Higher ratio saves fuel and makes more power, but heats the air and needs more stages.')}
+  ${sld('ec','Compressor efficiency',.78,.92,.005,v=>(v*100).toFixed(1)+' %','Better blades waste less work. Each point above 88% costs more to make.')}
+  ${sld('bleed','Customer bleed air',0,10,.5,fx(1,'%'),'Air taken off for the cabin and anti-ice. It costs thrust; some contracts need it.')}
+  ${togK('vigv','Variable inlet guide vanes','Adjustable vanes ahead of the first stage. They add stall margin and keep part-power efficiency up.')}`;
+ case 'fan':if(isR)return na('No fan or propeller: ramjets push all their air through the burner.');
+  if(t==='turbojet')return na('A pure turbojet sends all its air through the core. Switch to a turbofan on the Layout sheet to add a fan.')+`<button class="go" id="toFan" style="margin-top:12px">Make it a turbofan</button>`;
+  if(t==='turboprop')return `<p class="lead">The turbine drives a propeller through a reduction gearbox. A bigger prop moves more air gently: more static thrust per horsepower.</p>${sld('prop','Propeller diameter',1,5,.05,fx(2,'m'),'Static thrust grows with prop disc area. Pitch gears in the test cell trade grip for power absorbed.')}`;
+  if(t==='turboshaft')return `<p class="lead">A free power turbine drives the helicopter rotor through a gearbox. The governor in the FADEC holds the rotor at 100% while the pilot moves the collective.</p>${na('Rated shaft power comes from the core. Raise the pressure ratio, turbine temperature or inlet size to get more.')}`;
+  return `<p class="lead">Bypass air goes around the core. A little bypass makes a fighter engine; a lot makes a quiet, frugal airliner engine.</p>
+  ${sld('bpr','Bypass ratio',.2,14,.1,fx(1,': 1'),'Around 0.5 is a fighter, 5 a business jet, 10 or more an airliner.')}
+  ${togK('fprAuto','Auto-match fan pressure ratio','Picks the fan pressure ratio that gives the most thrust for this core.')}
+  ${d.fpr>0?sld('fpr','Fan pressure ratio',1.15,4,.05,fx(2,': 1'),'Low ratios move a lot of air gently and use little fuel. High ratios make a fast, loud stream — and too high starves the core.'):''}`;
+ case 'comb':if(isR)return `<p class="lead">The burner adds heat to the rammed air. The liner material sets how hot it can run.</p>${sld('cool','Liner cooling air',0,20,1,fx(0,'%'),'Each percent buys about 12 K of extra liner temperature.')}${sld('dpb','Burner pressure loss',2,10,.5,fx(1,'%'),'Flameholders and mixing cost pressure. Less loss, more thrust.')}`;
+  return `<p class="lead">Hotter gas makes more thrust from every kilo of air, until the turbine metal gives up. Cooling air lets the blades live hotter, at a cost in efficiency.</p>
+  ${sld('tit','Turbine inlet temperature',1000,2100,10,v=>Math.round(v)+' K · '+Math.round(v-273)+' °C','Set it above the blade limit and the FADEC will hold the engine back — or, with no FADEC, cook the turbine.')}
+  ${sld('dpb','Combustor pressure loss',2,10,.5,fx(1,'%'),'A shorter, rougher burner is lighter but wastes pressure.')}
+  ${sld('cool','Blade cooling air',0,20,1,fx(0,'%'),'Each percent lets the blades live about 12 K hotter.')}`;
+ case 'turb':if(isR)return `<p class="lead">No turbine, but the material still sets how hot the burner liner can run.</p>${sec('6.1','Hot-section material')}${matPicks()}`;
+  return `<p class="lead">The turbine drives the compressor${t==='turbofan'?' and fan':shaftT(t)?' and the output shaft':''}. Better alloys survive hotter gas. More stages share the load, at the cost of weight.</p>
+  ${sec('6.1','Hot-section material')}${matPicks()}
+  ${sld('tstages','Turbine stages',0,8,1,v=>+v?String(v):'Auto','Fewer stages are lighter, but each is heavily loaded and less efficient.')}
+  ${sld('et','Turbine efficiency',.82,.94,.005,v=>(v*100).toFixed(1)+' %','Better aerodynamics extract more work. Above 90% costs extra.')}`;
+ case 'noz':return `<p class="lead">The nozzle turns hot pressure into speed. The throat sets the back-pressure: smaller squeezes out more thrust but heats the turbine; larger runs cool and gives some thrust up.</p>
+  ${sec('7.1','Nozzle shape')}${picks('noz',[{v:'conv',l:'Convergent',d:'Simple cone. Fine below about Mach 1.5.'},{v:'cd',l:'Convergent–divergent',d:'Expands the jet past sonic. Heavier, better when fast or with a burner.'}])}
+  ${isR?'':sld('throat','Nozzle throat area',.7,1.3,.01,v=>'× '+(+v).toFixed(2),'Smaller raises back-pressure and turbine temperature and eats surge margin. Larger gives up thrust.')}
+  ${(t==='turbojet'||t==='turbofan')?tog('rev','Thrust reverser',t==='turbofan'?'Cascade reverser on the fan duct. Turns bypass air forward for braking.':'Clamshell buckets behind the nozzle.'):''}`;
+ case 'ab':if(!(t==='turbojet'||t==='turbofan'))return na('Afterburners only fit turbojets and turbofans.');
+  return `<p class="lead">Burn extra fuel behind the turbine for a big kick. Too rich and the liner burns through; too little nozzle opening and it chokes the turbine.</p>
+  ${togK('ab','Afterburner fitted','Adds about a quarter to the weight. Light it in the test cell by pushing the throttle past the 100% gate.')}
+  ${d.ab?sld('abFuel','Afterburner fuel rate',10,50,1,fx(0,'g/kg'),'Grams of fuel per kilo of core air. Hotter means more thrust, until the liner burns.')+sld('abOpen','Nozzle opening on afterburner',0,80,1,v=>'+ '+Math.round(v)+' %','The hot gas needs a bigger nozzle. Too little chokes the turbine; too much wastes thrust.')+`<div class="lcdline" id="abNeedLine"></div>`:''}`;
+ case 'rotor':if(isR)return na('No rotating parts at all — that is the whole point of a ramjet.');
+  return `<p class="lead">How many shafts the engine has, and what the discs are made of. Stronger discs raise the speed limit; a lighter rotor spools faster but costs more.</p>
+  ${sec('9.1','Spool arrangement')}${picks('spools',[{v:1,l:'Single spool',d:'Light and cheap. Stalls easily at high pressure ratio.'},{v:2,l:'Twin spool',d:'The standard. Much more surge margin.'},{v:3,l:'Triple spool',d:'Most margin and quickest response. Heavy and costly.'}])}
+  ${sec('9.2','Disc material')}${picks('rotorMat',Object.entries(ROTORS).map(([k,r])=>({v:k,l:r.n,d:Math.round(r.lim*100)+'% speed limit'})))}
+  ${sld('rotorMass','Rotor mass',.6,1.5,.05,v=>'× '+(+v).toFixed(2),'Heavy rotors spool slowly. Light ones respond quickly but cost more to make.')}`;
+ case 'fadec':return `<p class="lead">The engine computer. It schedules fuel, protects against surge, over-temperature and overspeed, and maps the throttle lever to spool speed. Drag the points on the map.</p>
+  ${togK('fadecFit','FADEC fitted','Without it you get raw fuel control: slam the throttle and the engine will surge, cook or overspeed.')}
+  ${isR?'':sld('idle','Idle speed',.4,.75,.01,v=>Math.round(v*100)+' % N','Higher idle spools up faster but burns more fuel on the ground.')}
+  ${isR?'':`<button id="mapReset" class="wide">Reset throttle map</button><p class="help">The top point can ask for more than 100%. With protections on the FADEC stops at the disc limit (${Math.round(rotorLim(d)*100)}%).</p>`}`;
+ case 'cond':return `<p class="lead">Where the test cell pretends to be. Thin cold air at altitude, ram air at speed. This is the same air supply as the console in the test cell.</p>
+  ${sld('fc.h','Altitude',0,30,.5,fx(1,'km'),'')}${sld('fc.M','Flight speed',0,8,.05,v=>'Mach '+(+v).toFixed(2),'Ram air raises inlet pressure but adds drag against the thrust.')}${sld('fc.dT','Ambient temperature offset',-55,40,1,v=>(v>0?'+':'')+Math.round(v)+' °C','Hot days thin the air and rob thrust.')}`;
+ case 'af':return airframeHTML();
+ case 'review':return reviewHTML();}}
+const matPicks=()=>picks('mat',Object.entries(MATS).map(([k,m])=>({v:k,l:m.n,d:m.lim+' K'})));
+function problems(){const p=[],t=d.type;if(ram(t)){if(d.inlet!=='ramp'&&t==='ramjet')p.push(['warn','A fixed pitot inlet loses most of its pressure at Mach 3. Fit a variable ramp.']);return p}
+ const o=cycle(d,1,T4cap(d),d.ab,SL_,S.gear),sm=surgeMargin(d,SL_);
+ if(d.tit>limEff(d))p.push([d.fadecFit?'warn':'bad',`Turbine inlet ${Math.round(d.tit)} K is above the ${Math.round(limEff(d))} K blade limit. ${d.fadecFit?'The FADEC will hold it back':'Without a FADEC it will cook the turbine'} — add cooling air or a better material.`]);
+ if(sm<.08)p.push([sm<.03?'bad':'warn',`Surge margin is only ${Math.round(sm*100)}%. Add stages, a second spool or inlet guide vanes, or lower the pressure ratio.`]);
+ if(stagePR(d)>1.45)p.push(['warn',`Each compressor stage is doing ${stagePR(d).toFixed(2)} : 1. Add stages to spread the work.`]);
+ if(o.dTt/o.nT>280)p.push(['warn',`Each turbine stage drops ${Math.round(o.dTt/o.nT)} K, which is heavily loaded. Add a turbine stage.`]);
+ if(o.T3>T3max(d))p.push(['bad',`Air leaves the compressor at ${Math.round(o.T3)} K, hotter than the blades can take (${T3max(d)} K). Lower the pressure ratio.`]);
+ if(o.starve)p.push(['bad','The fan pressure ratio is too high for this core: the core runs out of energy. Lower it or auto-match.']);
+ if(d.ab&&o.abOn){const need=abNeed(o.T7,cycle(d,1,T4cap(d),false,SL_).egt);if(o.abChoke>0)p.push(['bad',`The afterburner needs about ${Math.round(need)}% more nozzle area; you open ${Math.round(d.abOpen)}%. It will choke the turbine.`]);if(o.abHot)p.push(['bad','Afterburner fuel rate is so rich the liner will burn through. Lower it.'])}
+ if(!d.fadecFit&&d.map[4]>rotorLim(d))p.push(['bad',`The throttle map asks for ${Math.round(d.map[4]*100)}% but the discs are only good for ${Math.round(rotorLim(d)*100)}%, and there's no FADEC to stop it.`]);
+ if(!d.fadecFit)p.push(['info','No FADEC fitted: you manage surges, over-temperatures and overspeed yourself.']);
+ if(o.thrust<=0&&t!=='turboshaft')p.push(['bad','This engine makes no positive thrust on the ground stand.']);
+ const a=airframe();a.fits.forEach(f=>{if(!f[2])p.push(['warn','Airframe: '+f[0]+' does not fit ('+f[1]+').'])});
+ return p}
+function reviewHTML(){const m=designMax(),w=weight(d),c=cost(d),t=d.type,sh=t==='turboshaft';const pr=problems();
+ return `<p class="lead">Check the numbers and fix any problems before you save. You can always come back to any sheet.</p>
+  <div class="spec">${specHTML([[sh?'Shaft power':'Thrust, dry',sh?Math.round(m.shp).toLocaleString()+' hp':(m.dry/1e3).toFixed(1)+' kN'],['Afterburner',d.ab?(m.wet/1e3).toFixed(1)+' kN':'—'],['Weight',Math.round(w).toLocaleString()+' kg'],['Thrust/weight',sh?'—':(m.wet/(w*9.81)).toFixed(2)],['Fuel use',sh?(m.sfcShaft?m.sfcShaft.toFixed(0)+' g/kWh':'—'):m.sfc.toFixed(1)+' g/kN·s'],['Build cost',money(c)],['Spool-up ≈',ram(t)?'—':predSpool(d,SL_).toFixed(1)+' s'],['Surge margin',ram(t)?'—':Math.round(surgeMargin(d,SL_)*100)+' %']])}</div>
+  ${sec('13.1','Problems')}<ul class="probs">${pr.length?pr.map(([k,txt])=>`<li class="${k}">${txt}</li>`).join(''):'<li class="ok">No problems found. This engine is ready to save and test.</li>'}</ul>
+  <div class="seg" style="margin-top:12px"><button class="go" id="ofSave">Save to hangar</button><a class="btnlink" href="#contracts">Try a contract</a></div><span class="note" id="ofSaved"></span>`}
+function renderSteps(){$('steps').innerHTML=STEPS.map((s,i)=>`<button data-step="${i}" aria-current="${i===stepI?'step':'false'}" class="${stepApplies(s)?'':'dim'}"><small>${String(i+1).padStart(2,'0')}</small>${s.n}</button>`).join('')}
+function renderSheet(){const s=STEPS[stepI];renderSteps();const [l,v,u]=plate();
+ $('sheet').innerHTML=`<div class="sheethd"><span class="sheettag">Sheet ${stepI+1} / ${STEPS.length}</span><h4>${s.n}</h4></div>
+  <div class="plateD"><small>Data plate · ${l}</small><b id="plateV">${esc(String(v))}</b><span id="plateU">${u}</span></div>${sheetHTML()}
+  <div class="seg navb"><button id="stPrev" ${stepI?'':'disabled'}>Back</button><button id="stNext" class="go">${stepI<STEPS.length-1?'Next: '+STEPS[stepI+1].n:'Done'}</button></div>`;
+ $('office').classList.toggle('wide',s.id==='af');
+ if(s.id==='id')renderSaved();if(s.id==='ab')abLine();
+ $('tbTitle').textContent=d.name||'Custom engine';$('tbType').textContent=TYPES[d.type];$('tbSheet').textContent=`${stepI+1} of ${STEPS.length}`}
+function updatePlate(){const [l,v,u]=plate();if($('plateV')){$('plateV').textContent=v;$('plateU').textContent=u}if(STEPS[stepI].id==='ab')abLine()}
+function abLine(){const el=$('abNeedLine');if(!el)return;const o=cycle(d,1,T4cap(d),false,SL_),T7=Math.min(2400,o.egt+d.abFuel/1000*43e6*.9/1150),need=abNeed(T7,o.egt);
+ el.innerHTML=`Gas ${Math.round(o.egt)} K → ${Math.round(T7)} K · needs about +${Math.round(need)}% opening · you open +${Math.round(d.abOpen)}%${d.abOpen<need-8?' — <span class="bad">will choke</span>':d.abOpen>need+15?' — <span class="warnc">wasting thrust</span>':' — <span class="okc">matched</span>'}${T7>2250?' · <span class="bad">liner too hot</span>':''}`}
+function renderChips(){const m=designMax(),sh=d.type==='turboshaft';$('chipCost').textContent=money(cost(d));$('chipW').textContent=Math.round(weight(d)).toLocaleString()+' kg';
+ $('chipT').textContent=sh?Math.round(m.shp).toLocaleString()+' hp':(m.wet/1e3).toFixed(1)+' kN';const pr=problems().filter(p=>p[0]==='bad').length;$('chipP').textContent=pr?pr+' problem'+(pr>1?'s':''):'OK';$('chipP').className=pr?'chip bad':'chip ok'}
+function designChanged(k){dmCache=null;envDirty=true;if(k==='type'){if(d.type!=='turbofan'&&d.type!=='turbojet'){d.ab=false;d.rev=false}if(ram(d.type)){d.vigv=false;d.spools=1;d.bleed=0}if(d.type==='scramjet')d.inlet='ramp';coldStart()}
+ if(!d.ab)S.ab=false;if(!d.rev)S.rev=false;if(!d.fadecFit)S.fadec=false;
+ renderChips();updatePlate();renderContracts();sync();const c=$('code');if(c)c.value=enc(d)}
+const office=$('office');
+office.addEventListener('input',e=>{const el=e.target;
+ if(el.dataset.k){const k=el.dataset.k;setK(k,+el.value);const f=FMT[k];const lab=$('v_'+k.replace('.','_'));if(lab&&f)lab.textContent=f.fmt(getK(k));if(k==='abFuel'||k==='abOpen')abLine();return}
+ if(el.id==='ofName'){d.name=el.value.slice(0,40);$('tbTitle').textContent=d.name;updatePlate();sync()}if(el.id==='ofNotes')d.notes=el.value.slice(0,300)});
+office.addEventListener('change',e=>{const el=e.target;if(el.dataset.tk){const k=el.dataset.tk;if(k==='fprAuto'){d.fpr=el.checked?0:Math.max(1.3,Math.round(cycle(d,1,T4cap(d),false,SL_).fpr*20)/20);designChanged('fpr')}else setK(k,el.checked);renderSheet()}});
+office.addEventListener('click',e=>{const b=e.target.closest('button,a');if(!b)return;
+ if(b.dataset.step!=null){stepI=+b.dataset.step;renderSheet();return}
+ if(b.id==='stPrev'){stepI=Math.max(0,stepI-1);renderSheet();return}if(b.id==='stNext'){if(stepI<STEPS.length-1){stepI++;renderSheet()}else location.hash='contracts';return}
+ if(b.dataset.n){const k=b.dataset.n,f=FMT[k],v=clamp(+getK(k)+(+b.dataset.d)*f.st,f.min,f.max);setK(k,Math.round(v/f.st)*f.st);renderSheet();return}
+ if(b.dataset.pk){const k=b.dataset.pk,cur=getK(k),v=typeof cur==='number'?+b.dataset.pv:b.dataset.pv;if(k==='type'&&v!==d.type){const base=PRESETS.find(p=>p.type===v);d=norm({...base,name:d.name,notes:d.notes,af:d.af});designChanged('type')}else setK(k,v);renderSheet();return}
+ if(b.dataset.preset!=null){d=norm(PRESETS[b.dataset.preset]);designChanged('type');S.gear=2;if(ram(d.type)&&fc.M<minM(d))setFC({M:d.type==='scramjet'?6:3,h:d.type==='scramjet'?20:10});renderSheet();return}
+ if(b.id==='toFan'){d=norm({...PRESETS.find(p=>p.name==='Bizjet cruiser'),name:d.name,notes:d.notes,af:d.af});designChanged('type');renderSheet();return}
+ if(b.id==='mapReset'){d.map=[...DEF.map];designChanged('map');return}
+ if(b.id==='ofSave'||b.id==='bSave'){saveEngine();if($('ofSaved'))$('ofSaved').textContent=' Saved to the hangar.';return}
+ if(b.dataset.l!=null){d=norm(saved[b.dataset.l]);designChanged('type');renderSheet();return}
+ if(b.dataset.del!=null){saved.splice(b.dataset.del,1);store.set('ggf-engines',saved);renderSaved();return}
+ if(b.id==='bCopy'){const t=$('code');navigator.clipboard.writeText(t.value).then(()=>$('codeMsg').textContent='Copied',()=>{t.select();$('codeMsg').textContent='Selected — press Ctrl+C'});return}
+ if(b.id==='bLoadCode'){try{const nd=dec($('code').value);if(!TYPES[nd.type])throw 0;d=norm(nd);designChanged('type');renderSheet();$('codeMsg').textContent='Loaded'}catch(_){$('codeMsg').textContent='That code is not valid'}return}
+ if(b.id==='ftRun'){runFlightTest();return}if(b.id==='afReset'){d.af={...AF0};designChanged('af');renderSheet();return}
+});
+function saveEngine(){const n=(d.name||'Custom engine').trim();d.name=n;const i=saved.findIndex(s=>s.name===n);if(i>=0)saved[i]=JSON.parse(JSON.stringify(d));else saved.push(JSON.parse(JSON.stringify(d)));store.set('ggf-engines',saved);renderSaved();sync()}
+
+/* ---------- drawing panel ---------- */
+const ofCut=$('ofCut'),ofDia=$('ofDia');
+function fitC(c){const W=c.clientWidth,H=c.clientHeight,dp=DPR();if(!W||!H)return null;if(c.width!==Math.round(W*dp)||c.height!==Math.round(H*dp)){c.width=Math.round(W*dp);c.height=Math.round(H*dp)}const g=c.getContext('2d');g.setTransform(dp,0,0,dp,0,0);g.clearRect(0,0,W,H);return {g,W,H}}
+function drawOffice(){const s=STEPS[stepI];
+ if(s.id==='af'){const a=fitC(ofCut);if(a){if(ft&&ft.anim)drawFlight(a.g,a.W,a.H);else drawPlan(a.g,a.W,a.H)}const b=fitC(ofDia);if(b)drawDrag(b.g,b.W,b.H);return}
+ const a=fitC(ofCut);if(a){a.g.fillStyle='#0f1311';a.g.fillRect(0,0,a.W,a.H);grid(a.g,a.W,a.H);const hl=s.hl&&!ram(d.type)?s.hl(zones(d)):null;renderCutaway(a.g,a.W,a.H,hl)}
+ const b=fitC(ofDia);if(b){b.g.fillStyle='#0f1311';b.g.fillRect(0,0,b.W,b.H);grid(b.g,b.W,b.H);dia(b.g,b.W,b.H,s.id)}}
+function grid(g,W,H){g.strokeStyle='rgba(232,185,35,.06)';g.lineWidth=1;for(let i=0;i<W;i+=24){g.beginPath();g.moveTo(i,0);g.lineTo(i,H);g.stroke()}for(let j=0;j<H;j+=24){g.beginPath();g.moveTo(0,j);g.lineTo(W,j);g.stroke()}}
+const T=(g,txt,x_,y,sz=14,col='#ebe8df',al='center',f='"Share Tech Mono",monospace')=>{g.fillStyle=col;g.font=`${sz}px ${f}`;g.textAlign=al;g.fillText(txt,x_,y)};
+function bars(g,W,H,vals,cols,labels,top,redAt){const n=vals.length,pad=30,bw=Math.min(70,(W-pad*2)/n*.7),gap=(W-pad*2-bw*n)/Math.max(1,n-1||1),mx=Math.max(...vals,redAt||0)*1.15||1,bh=H-70;
+ vals.forEach((v,i)=>{const px=pad+i*(bw+(n>1?gap:0))+(n===1?(W-pad*2-bw)/2:0),h=bh*v/mx;g.fillStyle=cols[i]||cols[0];g.beginPath();g.roundRect(px,H-36-h,bw,h,4);g.fill();if(labels)T(g,labels[i],px+bw/2,H-16,12,'#9ba39d')});
+ if(redAt){const y=H-36-bh*redAt/mx;g.strokeStyle='#ff3b2f';g.setLineDash([8,6]);g.lineWidth=2;g.beginPath();g.moveTo(pad-10,y);g.lineTo(W-pad+10,y);g.stroke();g.setLineDash([])}if(top)T(g,top,W/2,22,15,'#e8b923')}
+function dia(g,W,H,id){const t=d.type,o=ram(t)?null:cycle(d,1,T4cap(d),false,SL_,S.gear);
+ if(id==='id'||id==='review'){T(g,`${(designMax().wet/1e3).toFixed(1)} kN · ${Math.round(weight(d)).toLocaleString()} kg · ${money(cost(d))}`,W/2,H/2+5,18,'#ffd9a8');T(g,TYPES[t]+(d.ab?' · afterburner':'')+(d.rev?' · reverser':''),W/2,H/2+30,13,'#9ba39d');return}
+ if(id==='layout'){const sc=(H-60)/Math.max(1.9,d.D*1.15),px=W*.62,cy=H/2+5,r=d.D/2*sc;g.strokeStyle='#8fb6d8';g.lineWidth=3;g.beginPath();g.arc(px,cy,r,0,7);g.stroke();g.fillStyle='rgba(143,182,216,.12)';g.fill();
+  const ph=1.8*sc,mx_=W*.2,base=cy+Math.max(r,ph/2);g.fillStyle='#e8b923';g.beginPath();g.arc(mx_,base-ph+ph*.07,ph*.07,0,7);g.fill();g.fillRect(mx_-ph*.06,base-ph*.86,ph*.12,ph*.45);g.fillRect(mx_-ph*.05,base-ph*.42,ph*.04,ph*.42);g.fillRect(mx_+ph*.01,base-ph*.42,ph*.04,ph*.42);
+  T(g,'1.8 m person',mx_,base+16,12,'#9ba39d');T(g,d.D.toFixed(2)+' m inlet · '+mdotD(d).toFixed(mdotD(d)<10?1:0)+' kg/s',px,Math.min(H-8,cy+r+20),14,'#ffd9a8');return}
+ if(id==='comp'){if(!o)return dia(g,W,H,'id');const n=clamp(nStages(d),1,20),spr=stagePR(d),vals=Array.from({length:n},(_,i)=>1-.45*i/n);bars(g,W,H,vals,[d.spools>=2?'#9fb2c0':'#8fb6d8'],null,`${spr.toFixed(2)} : 1 per stage · surge margin ${Math.round(surgeMargin(d,SL_)*100)}%`);return}
+ if(id==='fan'){if(t==='turbofan'){const tot=mdotD(d),core=tot/(1+d.bpr),byp=tot-core,w=W-60;g.fillStyle='#d9862a';g.fillRect(30,H/2-18,w*core/tot,36);g.fillStyle='#8fb6d8';g.fillRect(30+w*core/tot,H/2-18,w*byp/tot,36);
+   T(g,`Core ${core.toFixed(0)} kg/s`,30,H/2-30,13,'#ffb36b','left');T(g,`Bypass ${byp.toFixed(0)} kg/s`,W-30,H/2-30,13,'#8fb6d8','right');T(g,`Fan pressure ratio ${o.fpr.toFixed(2)}${d.fpr>0?'':' (auto)'}${o.starve?' · core starved':''}`,W/2,H/2+44,14,o.starve?'#ff6b5e':'#ffd9a8');return}
+  if(t==='turboprop'){const r=Math.min(H*.4,d.prop/5*H*.45);g.strokeStyle='#8fb6d8';g.lineWidth=2;g.beginPath();g.ellipse(W/2,H/2,r*.15,r,0,0,7);g.stroke();T(g,`${Math.round(o.shp).toLocaleString()} hp · ${(o.thrust/1e3).toFixed(1)} kN static`,W/2,H-12,14,'#ffd9a8');return}
+  if(t==='turboshaft'){T(g,`${Math.round(o.shp).toLocaleString()} hp to the rotor`,W/2,H/2,18,'#ffd9a8');T(g,`${(o.fuel/Math.max(1,o.shp*.7457)*3.6e6).toFixed(0)} g/kWh`,W/2,H/2+26,13,'#9ba39d');return}
+  T(g,'All air goes through the core',W/2,H/2,16,'#9ba39d');return}
+ if(id==='comb'){const gas=ram(t)?limEff(d)+(t==='scramjet'?600:450):d.tit,lim=ram(t)?gas:limEff(d);bars(g,W,H,[gas,lim],[gas>lim?'#ff6b3d':'#d9862a','#8fb6d8'],[`Gas ${Math.round(gas)} K`,`Blades ${Math.round(lim)} K`],null,lim);return}
+ if(id==='turb'){if(!o)return dia(g,W,H,'comb');const n=o.nT,ld=o.dTt/n;bars(g,W,H,Array(n).fill(ld),[ld>280?'#ff6b3d':'#d9862a'],Array(n).fill(Math.round(ld)+' K'),`${MATS[d.mat].n} · ${n} stage${n>1?'s':''} · ${(o.et*100).toFixed(1)}% eff`,280);return}
+ if(id==='noz'){const cy=H/2,th=(H*.22)*Math.sqrt(d.throat),inR=H*.36,x1=W*.15,x2=W*.55,x3=W*.85,exR=d.noz==='cd'?th*1.35:th;g.strokeStyle='#bcd3e6';g.lineWidth=4;
+  for(const s of[-1,1]){g.beginPath();g.moveTo(x1,cy+s*inR);g.lineTo(x2,cy+s*th);g.lineTo(x3,cy+s*exR);g.stroke()}g.strokeStyle='#ff3b2f';g.setLineDash([7,6]);g.beginPath();g.moveTo(x2,cy-th);g.lineTo(x2,cy+th);g.stroke();g.setLineDash([]);T(g,'Throat × '+d.throat.toFixed(2),W/2,H-10,14,'#ffd9a8');return}
+ if(id==='ab'){if(!d.ab||!o){T(g,'No afterburner',W/2,H/2,16,'#9ba39d');return}const T7=Math.min(2400,o.egt+d.abFuel/1000*43e6*.9/1150),need=abNeed(T7,o.egt),cy=H/2,r0=H*.25,open=r0*Math.sqrt(1+d.abOpen/100),rn=r0*Math.sqrt(1+need/100);
+  g.fillStyle='rgba(255,140,50,.85)';g.beginPath();g.moveTo(W*.45,cy-r0*.7);g.lineTo(W*.98,cy);g.lineTo(W*.45,cy+r0*.7);g.fill();g.strokeStyle='#bcd3e6';g.lineWidth=4;for(const s of[-1,1]){g.beginPath();g.moveTo(W*.1,cy+s*r0*1.3);g.lineTo(W*.55,cy+s*r0*1.3);g.lineTo(W*.72,cy+s*open);g.stroke()}
+  g.strokeStyle='#e8b923';g.setLineDash([5,5]);g.lineWidth=1.5;g.beginPath();g.moveTo(W*.72,cy-rn);g.lineTo(W*.72,cy+rn);g.stroke();g.setLineDash([]);T(g,`needs +${Math.round(need)}% · set +${Math.round(d.abOpen)}%`,W/2,H-10,14,d.abOpen<need-8?'#ff6b5e':'#ffd9a8');return}
+ if(id==='rotor'){if(!o)return;const tg=tau(d),Tm=Math.max(6,predSpool(d,SL_)*1.6),pts=[],pts1=[];let n=d.idle,n1=d.idle;const a=clamp(surgeMargin(d,SL_)-.04,.03,.35);let fa=0;
+  for(let t_=0;t_<=Tm;t_+=Tm/120){const m_=(n-d.idle)/(1-d.idle);fa=Math.min(1,m_+a);n+=((d.idle+(1-d.idle)*fa)-n)*(Tm/120)/tg;n1+=(n-n1)*Math.min(1,(Tm/120)/(tg*.7));pts.push([t_,n]);pts1.push([t_,d.spools>=2?n1:n])}
+  const X=t_=>30+t_/Tm*(W-60),Y=v=>H-40-(v-.3)/(1.25-.3)*(H-70);const lim=rotorLim(d);g.strokeStyle='#ff3b2f';g.setLineDash([8,6]);g.beginPath();g.moveTo(30,Y(lim));g.lineTo(W-30,Y(lim));g.stroke();g.setLineDash([]);T(g,'Limit '+Math.round(lim*100)+'%',W-30,Y(lim)-6,12,'#ff8d84','right');
+  g.lineWidth=2.5;g.strokeStyle='#8fb6d8';g.beginPath();pts.forEach(([a_,b_],i)=>i?g.lineTo(X(a_),Y(b_)):g.moveTo(X(a_),Y(b_)));g.stroke();if(d.spools>=2){g.setLineDash([6,4]);g.strokeStyle='#c9d8e6';g.beginPath();pts1.forEach(([a_,b_],i)=>i?g.lineTo(X(a_),Y(b_)):g.moveTo(X(a_),Y(b_)));g.stroke();g.setLineDash([])}
+  const t90=(pts.find(p=>p[1]>=d.idle+(1-d.idle)*.9)||[Tm])[0];T(g,`${d.spools>=2?'Solid HP, dashed LP · ':''}90% in ${t90.toFixed(1)} s`,W/2,H-12,13,'#ffd9a8');return}
+ if(id==='fadec'){mapEditor(g,W,H);return}
+ if(id==='cond'){const X=T_=>40+(T_-150)/(330-150)*(W-70),Y=h=>H-30-h/30*(H-50);g.strokeStyle='#8fb6d8';g.lineWidth=2;g.beginPath();for(let h=0;h<=30;h+=.5){const a=atmo(h,fc.dT);h?g.lineTo(X(a.T),Y(h)):g.moveTo(X(a.T),Y(h))}g.stroke();
+  const a=atmo(fc.h,fc.dT);g.fillStyle='#e8b923';g.beginPath();g.arc(X(a.T),Y(fc.h),7,0,7);g.fill();T(g,`${Math.round(a.T-273)} °C · ${(a.p/1000).toFixed(1)} kPa · Mach ${fc.M.toFixed(2)}`,W/2,16,13,'#ffd9a8');T(g,'0 km',8,H-30,11,'#9ba39d','left');T(g,'30 km',8,Y(30)+10,11,'#9ba39d','left');return}}
+/* draggable throttle map */
+let mapDrag=-1;
+const mapGeo=(W,H)=>({X:i=>40+i/4*(W-70),Y:v=>H-34-v/1.2*(H-60),inv:y=>clamp((H-34-y)/(H-60)*1.2,0,1.2)});
+function mapEditor(g,W,H){if(ram(d.type)){T(g,'Ramjets: the throttle sets fuel directly',W/2,H/2,14,'#9ba39d');return}const G=mapGeo(W,H);
+ g.strokeStyle='rgba(255,255,255,.08)';for(let i=0;i<5;i++){g.beginPath();g.moveTo(G.X(i),G.Y(0));g.lineTo(G.X(i),G.Y(1.2));g.stroke();T(g,i*25+'%',G.X(i),H-14,12,'#9ba39d')}
+ const lim=(rotorLim(d)-d.idle)/(1-d.idle);g.strokeStyle='#ff3b2f';g.setLineDash([6,5]);g.beginPath();g.moveTo(G.X(0),G.Y(Math.min(1.2,lim)));g.lineTo(G.X(4),G.Y(Math.min(1.2,lim)));g.stroke();g.setLineDash([]);
+ g.strokeStyle='#8fb6d8';g.lineWidth=3;g.beginPath();d.map.forEach((v,i)=>i?g.lineTo(G.X(i),G.Y(v)):g.moveTo(G.X(i),G.Y(v)));g.stroke();
+ d.map.forEach((v,i)=>{g.fillStyle=i===mapDrag?'#e8b923':'#bcd3e6';g.beginPath();g.arc(G.X(i),G.Y(v),i===0?6:11,0,7);g.fill()});
+ T(g,'Speed asked for',40,18,13,'#9ba39d','left');T(g,'Throttle lever',W-30,H-30,12,'#9ba39d','right')}
+ofDia.addEventListener('pointerdown',e=>{if(STEPS[stepI].id!=='fadec'||ram(d.type))return;const r=ofDia.getBoundingClientRect(),G=mapGeo(r.width,r.height),px=e.clientX-r.left,py=e.clientY-r.top;
+ let best=-1,bd=30;d.map.forEach((v,i)=>{if(!i)return;const dd=Math.hypot(G.X(i)-px,G.Y(v)-py);if(dd<bd){bd=dd;best=i}});mapDrag=best;if(best>0)ofDia.setPointerCapture(e.pointerId)});
+ofDia.addEventListener('pointermove',e=>{if(mapDrag<1)return;const r=ofDia.getBoundingClientRect(),G=mapGeo(r.width,r.height);let v=G.inv(e.clientY-r.top);const lo=d.map[mapDrag-1],hi=mapDrag<4?d.map[mapDrag+1]:1.2;d.map[mapDrag]=Math.round(clamp(v,lo,hi)*100)/100});
+ofDia.addEventListener('pointerup',()=>{if(mapDrag>0){mapDrag=-1;designChanged('map')}});
+
+/* ================= AIRFRAME + FLIGHT TEST ================= */
+const AFM={al:{n:'Al-Li alloy',d:'Light and cheap. Softens with heat, good to about Mach 2.2.',w:1,c:1,Tlim:400,g:7.5,q:70},ti:{n:'Titanium',d:'Heavy and very costly. Keeps its strength past Mach 3.',w:1.35,c:2.8,Tlim:720,g:9,q:95},cf:{n:'Carbon composite',d:'Lightest by far. The resin limits skin heat to about Mach 1.9.',w:.72,c:2.2,Tlim:380,g:9,q:65}};
+function airframe(){const a=d.af,g=9.81,sw=a.sweep*Math.PI/180,cs=Math.cos(sw),m=AFM[a.mat]||AFM.al,eng=a.eng;
+ const Deng=d.type==='turboprop'?d.D*1.4:d.type==='turboshaft'?d.D*1.6:d.D*1.08,engW=weight(d)*eng;
+ const wingM=a.S*(16+2.4*a.AR)*(1+a.sweep/120)*m.w,fusM=Math.PI*a.FD*a.L*20*m.w,empty=wingM+fusM+600+(eng===2?250:0),payload=600;
+ const fuelCap=Math.PI*(a.FD/2)**2*a.L*.33*800+a.S*.06*800,fuel=Math.min(a.fuel,fuelCap),TOW=empty+engW+fuel+payload;
+ const fits=[[`Engine diameter (≤ ${(a.FD*(eng===2?.48:.9)).toFixed(2)} m)`,Deng.toFixed(2)+' m',Deng<=a.FD*(eng===2?.48:.9)],[`Engine mass (≤ 40% of take-off)`,Math.round(engW).toLocaleString()+' kg',engW<=TOW*.4],[`Fuel (≤ ${Math.round(fuelCap).toLocaleString()} kg tankage)`,Math.round(a.fuel).toLocaleString()+' kg',a.fuel<=fuelCap]];
+ const Swf=Math.PI*a.FD*a.L*.9,Sww=2.05*a.S,Cf=.0032,CD0=Cf*(Swf+Sww)/a.S*1.1*(eng===2?1.08:1);
+ const e=clamp(1.78*(1-.045*Math.pow(a.AR,.68))-.64,.55,.9),K=1/(Math.PI*a.AR*e),CLmax=1.45*Math.sqrt(cs)+.15;
+ const fin=a.L/a.FD,CDwPk=(18/(fin*fin))*(Math.PI*a.FD*a.FD/4)/a.S*1.5+.008*cs;
+ const Mdd=CL=>clamp(.87/cs-.1/(cs*cs)-CL/(10*cs*cs*cs),.55,.99);
+ const CDw=(M,CL)=>{const Mc=Mdd(CL)-.08;if(M<=Mc)return 0;if(M<1.2){const s=clamp((M-Mc)/(1.2-Mc));return CDwPk*(s*s*(3-2*s))*(1+.25*Math.sin(s*Math.PI))}return CDwPk*Math.pow(1.2/M,.5)};
+ const CD=(M,CL)=>CD0*(M>1?1.15:1)+K*CL*CL+CDw(M,CL);
+ const rho0=1.225,Vs=Math.sqrt(2*TOW*g/(rho0*a.S*CLmax)),b=Math.sqrt(a.AR*a.S);
+ const at11=atmo(11,0),Mskin=Math.sqrt(Math.max(0,((m.Tlim)/(at11.T*.92)-1)/.2)+0),Mq=Math.sqrt(m.q*1000*2/(1.4*at11.p));
+ const Mlim=Math.min(Mskin,Mq*1.6,4);
+ const cst=(wingM+fusM)*1.4*m.c+cost(d)*eng*1000/1000;
+ return {a,TOW,empty,engW,fuel,fuelCap,fits,CD0,K,e,CLmax,Mdd,CD,CDw,Vs,b,Mlim,Mskin,m,eng,cost:cst,wingM,fusM,payload}}
+function perfAt(A,h,M,ab,W){const at=atmo(h,0),V=Math.max(1,M*at.a),q=.5*at.rho*V*V,CL=W*9.81/(q*A.a.S),D=q*A.a.S*A.CD(M,CL);let Th=0,ff=0;
+ if(!ram(d.type)){const o=cycle(d,topN(d),T4cap(d),ab,{h,M,dT:0},S.gear);Th=Math.max(0,o.thrust)*A.eng;ff=o.fuel*A.eng;if(d.type==='turboshaft'){Th=Math.min(o.shp*745.7*.7/Math.max(V,30),o.shp*745.7*.7/30);}}
+ else if(M>=minM(d)){const o=ramCycle(d,{h,M,dT:0},1,true);Th=Math.max(0,o.thrust)*A.eng;ff=o.fuel*A.eng}
+ return {T:Th,D,ff,CL,V,q,LD:CL/A.CD(M,CL)}}
+function topSpeed(A,h,ab,W){let best=0;for(let M=.2;M<=4.01;M+=.01){const p=perfAt(A,h,M,ab,W);if(p.CL>A.CLmax)continue;if(p.T>=p.D)best=M}return best}
+function afPerf(){const A=airframe(),Wm=A.TOW-A.fuel*.5,dry=topSpeed(A,11,false,Wm),wet=d.ab?topSpeed(A,11,true,Wm):dry,p=perfAt(A,5,.9,false,Wm),pw=d.ab?perfAt(A,5,.9,true,Wm):p;
+ const Ps=(p.T-p.D)*p.V/(Wm*9.81),Psw=(pw.T-pw.D)*pw.V/(Wm*9.81),sl=perfAt(A,0,.2,false,A.TOW),slw=d.ab?perfAt(A,0,.2,true,A.TOW):sl;
+ return {A,dry,wet,Ps,Psw,LD:p.LD,TWd:sl.T/(A.TOW*9.81),TWw:slw.T/(A.TOW*9.81)}}
+function airframeHTML(){const A=airframe(),P_=afPerf(),r=v=>Math.round(v).toLocaleString();
+ const row=(l,v,ok)=>`<li><span>${l}</span><b class="${ok==null?'':ok?'okc':'bad'}">${ok==null?'':ok?'✓ ':'✗ '}${v}</b></li>`;
+ return `<p class="lead">Design an aircraft around the engine: wing, fuselage, fuel, structure and engine mount. Everything updates live, and the flight test flies it from brake release to top speed.</p>
+ <div class="two2"><div>
+  ${sec('12.1','Wing')}${sld('af.S','Wing area',8,150,1,fx(0,'m²'),'')}${sld('af.sweep','Sweep angle',0,65,1,fx(0,'°'),'')}${sld('af.AR','Aspect ratio',1.5,10,.1,fx(1),'More sweep delays the drag rise near the speed of sound but cuts lift. A long thin wing glides and turns well but is heavy and draggy when fast.')}
+  ${sec('12.2','Fuselage and fuel')}${sld('af.L','Fuselage length',5,45,.5,fx(1,'m'),'')}${sld('af.FD','Fuselage diameter',.6,5,.05,fx(2,'m'),'')}${sld('af.fuel','Fuel',200,40000,100,v=>r(v)+' kg','A long slim body has low supersonic drag. A wide one carries more fuel and bigger engines.')}
+  ${sec('12.3','Structure')}${picks('af.mat',Object.entries(AFM).map(([k,m])=>({v:k,l:m.n,d:m.d})))}
+  ${sec('12.4','Engines')}${picks('af.eng',[{v:1,l:'Single engine',d:'One engine in the fuselage. Simple and light.'},{v:2,l:'Twin engine',d:'Two side by side. Twice the thrust, each gets half the room.'}])}
+ </div><div>
+  <div class="seg" style="margin:4px 0 10px"><button class="go" id="ftRun" ${ram(d.type)?'disabled':''}>${ft&&ft.anim?'Flying…':'Flight test this aircraft'}</button><button id="afReset">Reset airframe</button></div>
+  ${ram(d.type)?'<p class="help">Ramjet and scramjet aircraft need a rocket booster to get going, so they can\'t take off for a flight test. Try a turbo engine.</p>':''}
+  ${ftResultsHTML()}
+  ${sec('12.5','Engine fit')}<ul class="kv">${A.fits.map(f=>row(f[0],f[1],f[2])).join('')}</ul>
+  ${sec('12.6','Mass')}<ul class="kv">${row('Airframe, empty',r(A.empty)+' kg')}${row('Engines',r(A.engW)+' kg')}${row('Fuel',r(A.fuel)+' kg')}${row('Take-off mass',r(A.TOW)+' kg')}${row('Wing loading',r(A.TOW/A.a.S)+' kg/m²')}${row('Thrust/weight',P_.TWd.toFixed(2)+' dry'+(d.ab?' · '+P_.TWw.toFixed(2)+' reheat':''))}${row('Span · stall speed',A.b.toFixed(1)+' m · '+Math.round(A.Vs*1.944)+' kt')}${row('Cost, airframe + engines',money(A.cost))}</ul>
+  ${sec('12.7','Aerodynamics')}<ul class="kv">${row('Zero-lift drag CD0',A.CD0.toFixed(4))}${row('Induced drag K · Oswald e',A.K.toFixed(3)+' · '+A.e.toFixed(2))}${row('Max lift CL · L/D at M0.9 5 km',A.CLmax.toFixed(2)+' · '+P_.LD.toFixed(1))}${row('Drag-rise Mach (CL 0.2)',A.Mdd(.2).toFixed(2))}</ul>
+  ${sec('12.8','Performance with this engine')}<ul class="kv">${row('Supercruise (above Mach 1 dry)',P_.dry>1?'Yes, Mach '+P_.dry.toFixed(2):'No',P_.dry>1)}${row('Top speed at 11 km',P_.wet?'Mach '+Math.min(P_.wet,A.Mlim).toFixed(2)+(d.ab?' with reheat':''):'Can\'t hold level flight',P_.wet>0)}${row('Climb rate, M0.9 at 5 km',Math.round(P_.Ps)+' m/s'+(d.ab?' · '+Math.round(P_.Psw)+' reheat':''))}${row('Load limit · dynamic pressure',A.m.g+' g · '+A.m.q+' kPa')}${row('Skin-heat speed limit',`Mach ${A.Mskin.toFixed(1)} · ${A.m.Tlim-273} °C`)}</ul>
+ </div></div>`}
+function drawPlan(g,W,H){g.fillStyle='#0f1311';g.fillRect(0,0,W,H);grid(g,W,H);const A=airframe(),a=A.a,sw=a.sweep*Math.PI/180,b=A.b;const sc=Math.min((W-60)/a.L,(H-60)/b),cx=W/2,cy=H/2,X=v=>cx+(v-a.L/2)*sc;
+ const lam=.3,cr=2*a.S/(b*(1+lam)),ct=cr*lam,xr=a.L*.42,LEtip=xr+Math.tan(sw)*b/2;
+ g.fillStyle='rgba(143,182,216,.22)';g.strokeStyle='#bcd3e6';g.lineWidth=1.5;
+ for(const s of[-1,1]){g.beginPath();g.moveTo(X(xr),cy);g.lineTo(X(LEtip),cy+s*b/2*sc);g.lineTo(X(LEtip+ct),cy+s*b/2*sc);g.lineTo(X(xr+cr),cy);g.closePath();g.fill();g.stroke()}
+ const tb=b*.38,tc=cr*.45,tx=a.L*.82;for(const s of[-1,1]){g.beginPath();g.moveTo(X(tx),cy);g.lineTo(X(tx+Math.tan(sw)*tb/2),cy+s*tb/2*sc);g.lineTo(X(tx+Math.tan(sw)*tb/2+tc*.4),cy+s*tb/2*sc);g.lineTo(X(Math.min(a.L,tx+tc)),cy);g.closePath();g.fill();g.stroke()}
+ g.fillStyle='#1e2a33';g.beginPath();g.moveTo(X(0),cy);g.quadraticCurveTo(X(a.L*.15),cy-a.FD/2*sc,X(a.L*.3),cy-a.FD/2*sc);g.lineTo(X(a.L*.97),cy-a.FD/2*sc*.85);g.lineTo(X(a.L),cy-a.FD/2*sc*.6);g.lineTo(X(a.L),cy+a.FD/2*sc*.6);g.lineTo(X(a.L*.97),cy+a.FD/2*sc*.85);g.lineTo(X(a.L*.3),cy+a.FD/2*sc);g.quadraticCurveTo(X(a.L*.15),cy+a.FD/2*sc,X(0),cy);g.fill();g.stroke();
+ const el=Math.min(a.L*.35,d.D*4.5+1),ed=Math.min(a.FD*.9,d.D*1.08);g.strokeStyle=A.fits[0][2]?'#5ee0f0':'#ff6b5e';g.fillStyle='rgba(94,224,240,.18)';
+ (a.eng===2?[-1,1]:[0]).forEach(s=>{const oy=s*a.FD*.24*sc,h=(a.eng===2?Math.min(ed,a.FD*.46):ed)*sc;g.beginPath();g.rect(X(a.L-el-.2),cy+oy-h/2,el*sc,h);g.fill();g.stroke()});
+ g.strokeStyle='#e8b923';g.setLineDash([5,4]);const fl=clamp(A.fuel/A.fuelCap,.05,1)*a.L*.45;g.strokeRect(X(a.L*.22),cy-a.FD*.3*sc,fl*sc,a.FD*.6*sc);g.setLineDash([]);
+ T(g,`Wing ${a.S} m² · sweep ${a.sweep}° · AR ${a.AR.toFixed(1)} · ${AFM[a.mat].n}`,12,20,12,'#e8b923','left');T(g,`Span ${b.toFixed(1)} m · length ${a.L} m`,12,H-10,12,'#9ba39d','left')}
+function drawDrag(g,W,H){g.fillStyle='#0f1311';g.fillRect(0,0,W,H);grid(g,W,H);const A=airframe(),X=M=>40+(M-.3)/(2.7)*(W-60);let mx=.01;const pts=[];for(let M=.3;M<=3.001;M+=.02){const v=A.CD0*(M>1?1.15:1)+A.CDw(M,.2);pts.push([M,v]);mx=Math.max(mx,v)}
+ const Y=v=>H-30-v/(mx*1.15)*(H-50);g.strokeStyle='#5ee0f0';g.lineWidth=2.5;g.beginPath();pts.forEach(([m,v],i)=>i?g.lineTo(X(m),Y(v)):g.moveTo(X(m),Y(v)));g.stroke();
+ const md=A.Mdd(.2);g.strokeStyle='#ff8a3d';g.setLineDash([5,4]);g.beginPath();g.moveTo(X(md),10);g.lineTo(X(md),H-30);g.stroke();g.setLineDash([]);T(g,'drag rise',X(md)+6,22,12,'#ff8a3d','left');
+ [.5,1,1.5,2,2.5,3].forEach(m=>T(g,'M'+m,X(m),H-10,11,'#9ba39d'));T(g,'CD '+(mx).toFixed(3),8,16,11,'#9ba39d','left')}
+let ft=null;
+function runFlightTest(){if(ram(d.type))return;const A=airframe(),g=9.81,pts=[];let W=A.TOW,fuel=A.fuel,t=0,h=0,M=0,x_=0,V=0,phase='Take-off roll',res={};
+ const at0=atmo(0,0),Vlof=A.Vs*1.2,ab=d.ab;
+ // take-off roll
+ while(V<Vlof&&t<240){const p=perfAt(A,0,Math.max(V/at0.a,.01),ab,W),qS=.5*at0.rho*V*V*A.a.S,Dg=qS*(A.CD0+A.K*.04+.012),acc=(p.T-Dg-.03*Math.max(0,W*g-qS*.4))/W;if(acc<=.05){res.fail='Not enough thrust to take off';break}V+=acc;x_+=V;fuel-=p.ff;W-=p.ff;t+=1;pts.push([t,0,V/at0.a,'Take-off roll'])}
+ res.roll=x_;
+ if(!res.fail){// climb to 11 km at best of M0.6–0.9
+  const Mc=clamp(topSpeed(A,5,false,W)*.85,.45,.9);let stall=0;
+  while(h<11000&&t<3600&&fuel>0){const hk=h/1000,p=perfAt(A,hk,Mc,false,W),Ps=(p.T-p.D)*p.V/(W*g);if(Ps<1.5){stall++;if(stall>5){res.ceiling=h;break}}h+=Math.max(0,Ps)*5;fuel-=p.ff*5;W-=p.ff*5;t+=5;pts.push([t,h,Mc,'Climb'])}
+  res.tClimb=h>=11000?t:null;if(!res.ceiling)res.ceiling=h;
+  // accelerate at the top
+  if(fuel>0){let Mx=Mc;const hk=Math.min(11,h/1000);for(let i=0;i<600&&fuel>0;i++){const p=perfAt(A,hk,Mx,ab,W),acc=(p.T-p.D)/W;if(acc<.05||Mx>=A.Mlim)break;Mx+=acc*5/atmo(hk,0).a;fuel-=p.ff*5;W-=p.ff*5;t+=5;pts.push([t,h,Mx,'Dash'])}res.top=Math.min(Mx,A.Mlim);res.limited=Mx>=A.Mlim}
+  // cruise range (Breguet at the best speed found)
+  let best=0;for(let Mm=.4;Mm<=Math.max(.5,topSpeed(A,11,false,W));Mm+=.05){const p=perfAt(A,11,Mm,false,W);if(p.T<p.D||p.CL>A.CLmax)continue;const o=cycle(d,topN(d),T4cap(d),false,{h:11,M:Mm,dT:0},S.gear),tsfc=o.thrust>0?o.fuel/o.thrust*.92:1;const R=p.V/(g*tsfc)*p.LD*Math.log(Math.max(1.0001,(A.TOW-A.fuel*.05)/(A.TOW-A.fuel*.95)));if(R>best)best=R}
+  res.range=best/1000;res.fuelUsed=A.fuel-fuel}
+ ft={pts,res,anim:true,t0:performance.now(),dur:9000};goal('flight');if(res.top)updateRecordsSpeed(res.top);renderSheet()}
+function updateRecordsSpeed(M){const cur=records.speed;if(!cur||M>cur.v){records.speed={v:M,name:d.name,date:new Date().toLocaleString()};store.set('ggf-records',records);renderRecords&&renderRecords()}}
+function drawFlight(g,W,H){const P=ft.pts;if(!P.length){ft.anim=false;return}const tmax=P[P.length-1][0],k=clamp((performance.now()-ft.t0)/ft.dur),tn=k*tmax;
+ const sky=g.createLinearGradient(0,0,0,H);sky.addColorStop(0,'#05070c');sky.addColorStop(.6,'#13243a');sky.addColorStop(1,'#2a3a46');g.fillStyle=sky;g.fillRect(0,0,W,H);
+ g.fillStyle='#1d2420';g.fillRect(0,H-26,W,26);const hmax=Math.max(12000,...P.map(p=>p[1])),X=t=>30+t/tmax*(W-60),Y=h=>H-26-h/hmax*(H-60),Mm=Math.max(1,...P.map(p=>p[2])),YM=m=>H-26-m/(Mm*1.1)*(H-60);
+ g.strokeStyle='rgba(255,255,255,.07)';for(let h=0;h<=hmax;h+=5000){g.beginPath();g.moveTo(30,Y(h));g.lineTo(W-30,Y(h));g.stroke();T(g,h/1000+' km',4,Y(h)-3,11,'#7d8a85','left')}
+ let cur=P[0];g.strokeStyle='#e8b923';g.lineWidth=2.5;g.beginPath();P.forEach((p,i)=>{if(p[0]>tn)return;cur=p;i?g.lineTo(X(p[0]),Y(p[1])):g.moveTo(X(p[0]),Y(p[1]))});g.stroke();
+ g.strokeStyle='#5ee0f0';g.lineWidth=1.5;g.setLineDash([5,4]);g.beginPath();P.forEach((p,i)=>{if(p[0]>tn)return;i?g.lineTo(X(p[0]),YM(p[2])):g.moveTo(X(p[0]),YM(p[2]))});g.stroke();g.setLineDash([]);
+ const px=X(cur[0]),py=Y(cur[1]);g.save();g.translate(px,py);g.fillStyle='#ebe8df';g.beginPath();g.moveTo(14,0);g.lineTo(-12,-3);g.lineTo(-12,3);g.closePath();g.fill();g.beginPath();g.moveTo(2,0);g.lineTo(-6,-9);g.lineTo(-9,-9);g.lineTo(-4,0);g.fill();g.beginPath();g.moveTo(-9,0);g.lineTo(-13,-6);g.lineTo(-14,0);g.fill();if(d.ab&&cur[3]!=='Climb'){g.fillStyle='rgba(255,150,60,.8)';g.beginPath();g.moveTo(-12,-2);g.lineTo(-24-Math.random()*6,0);g.lineTo(-12,2);g.fill()}g.restore();
+ T(g,`${cur[3]} · ${(cur[1]/1000).toFixed(1)} km · Mach ${cur[2].toFixed(2)} · ${Math.round(cur[0]/60)}:${String(Math.round(cur[0]%60)).padStart(2,'0')}`,W/2,22,14,'#ffd9a8');
+ T(g,'— altitude',W-140,H-8,11,'#e8b923','left');T(g,'- - Mach',W-70,H-8,11,'#5ee0f0','left');
+ if(k>=1&&ft.anim){ft.anim=false;renderSheet()}}
+function ftResultsHTML(){if(!ft)return '';const r=ft.res,row=(l,v)=>`<li><span>${l}</span><b>${v}</b></li>`;
+ return `${sec('Flight test','Results')}<ul class="kv">${r.fail?row('Result','<span class="bad">'+r.fail+'</span>'):row('Take-off roll',Math.round(r.roll).toLocaleString()+' m')+row('Time to 11 km',r.tClimb?Math.floor(r.tClimb/60)+' min '+Math.round(r.tClimb%60)+' s':'Ceiling '+(r.ceiling/1000).toFixed(1)+' km')+row('Top speed',r.top?'Mach '+r.top.toFixed(2)+' · '+Math.round(r.top*atmo(11,0).a*3.6).toLocaleString()+' km/h'+(r.limited?' (structure limit)':''):'—')+row('Cruise range',r.range?Math.round(r.range).toLocaleString()+' km':'—')+row('Fuel used on the test',Math.round(r.fuelUsed||0).toLocaleString()+' kg')}</ul>`}
+
+/* ================= INIT ================= */
+designChanged('type');syncFC();renderRuns();renderRecords();renderStars();renderGoal();route();sync();
 new ResizeObserver(()=>{bgC=null;envMark()}).observe($('bay'));
 requestAnimationFrame(loop);
 }
