@@ -333,7 +333,7 @@ const S={N:0,N1:0,Np:0,coll:.5,lit:false,litT:0,starter:false,ign:false,fuel:fal
 const stage=()=>S.dmg>=4?3:S.dmg>=2.5?2:S.dmg>=1?1:0;
 function say(m,t=3){S.msg=m;S.msgT=t}
 const emit=e=>S.ev.push(e);
-const abReq=()=>d.ab&&!shaftT(d.type)&&!ram(d.type)&&(S.ab||S.thr>1.02);
+const abReq=()=>d.ab&&!shaftT(d.type)&&!ram(d.type)&&(S.thr>1.02||(S.ab&&S.thr>=.995));
 
 /* ================= GOALS ================= */
 const GOALS=[
@@ -433,7 +433,7 @@ function autoStart(){initSound();if(S.broken){say('Rebuild the engine first');re
 function stop(){S.fuel=false;S.ab=false;S.starter=false;S.rev=false;S.thr=0;if(test)endTest('Test aborted — engine shut down');sync()}
 function setFC(o){Object.assign(fc,o);fc.h=clamp(fc.h,0,30);fc.M=clamp(fc.M,0,8);syncFC();envMark();renderContracts()}
 function toggleRev(){if(!d.rev){say('No reverser fitted');return}if(!S.rev&&S.N>.75&&S.lit){say('Reverser locked — pull back to idle first',2);return}S.rev=!S.rev;sync()}
-function toggleAB(){if(!d.ab||shaftT(d.type)||ram(d.type))return;S.ab=!S.ab;if(S.ab&&S.N<.85&&S.lit)say('Afterburner arms above 85% spool',2);sync()}
+function toggleAB(){if(!d.ab||shaftT(d.type)||ram(d.type))return;S.ab=!S.ab;if(S.ab&&S.thr<.995)say('Afterburner armed — it lights at full power',2.5);sync()}
 
 /* ================= TEST RUNNER (dyno + certification) ================= */
 let test=null;
@@ -891,9 +891,9 @@ function updateUI(){const o=S.out,isR=ram(d.type),th=o.thrust||0,w=weight(d),sh=
  thrUI();
  let st=S.broken?'Engine destroyed — rebuild it':S.surge>0?'SURGE':S.lit?(isR?'Burning':S.N<d.idle-.02?'Accelerating to idle':o.abOn?'Afterburner lit':S.rev?'Reverse thrust':sh?(S.fadec&&d.fadecFit?'Governor holding rotor':'Manual fuel — watch the rotor'):'Running'):S.N>.02?(S.starter?'Cranking':fc.M>.25?'Windmilling':'Spooling down'):isR?(fc.M>0?'Air supply running — cold':'Cold — ramjets need airflow'):'Cold and dark';
  if(S.msgT>0)st=S.msg;const se=$('status');const txt=st+(stage()&&!S.broken?` · damage ${stage()}/3`:'');if(se.textContent!==txt){se.textContent=txt;se.className='status'+(/SURGE|COOKED|MELTED|BURNED|BURST|Flameout|damage|destroyed|over-limit/i.test(txt)?' bad':'')}
- $('bRepair').hidden=!(S.broken||S.dmg>0)}
-function sync(){const isR=ram(d.type),sh=d.type==='turboshaft';[['bStart',S.starter],['bIgn',S.ign],['bFuel',S.fuel],['bAB',S.ab],['bRev',S.rev],['bFadec',S.fadec&&d.fadecFit],['bSnd',snd],['bTherm',thermal],['bNozAuto',!S.noz]].forEach(([id,v])=>$(id).setAttribute('aria-pressed',v));
- $('bStart').disabled=isR;$('bAB').disabled=!d.ab||shaftT(d.type)||isR;$('bRev').disabled=!d.rev||isR;$('bFadec').disabled=!d.fadecFit;$('bFadec').textContent=sh?'Governor':'FADEC';$('bAuto').textContent=isR?'Light up':'Auto start';
+ $('bRepair').hidden=!(S.broken||S.dmg>0);const abl=S.ab&&!S.out.abOn?'Afterburner armed':'Afterburner';if($('bAB').textContent!==abl)$('bAB').textContent=abl;$('bAB').setAttribute('aria-pressed',S.ab||S.thr>1.02)}
+function sync(){const isR=ram(d.type),sh=d.type==='turboshaft';[['bStart',S.starter],['bIgn',S.ign],['bFuel',S.fuel],['bAB',S.ab||S.thr>1.02],['bRev',S.rev],['bFadec',S.fadec&&d.fadecFit],['bSnd',snd],['bTherm',thermal],['bNozAuto',!S.noz]].forEach(([id,v])=>$(id).setAttribute('aria-pressed',v));
+ $('bStart').disabled=isR;$('bAB').disabled=!d.ab||shaftT(d.type)||isR;$('bRev').disabled=!d.rev||isR;$('bFadec').disabled=!d.fadecFit;$('bFadec').textContent=sh?'Governor':'FADEC';$('bAuto').textContent=isR?'Light up':'Auto start';$('bAB').textContent=S.ab&&!S.out.abOn?'Afterburner armed':'Afterburner';
  $('pitchRow').hidden=!shaftT(d.type);$('pitchLbl').textContent=sh?'Collective':'Prop pitch';$('pitchV').textContent=sh?Math.round(S.coll*100)+'%':S.gear+1;$('nozRow').hidden=isR||shaftT(d.type);$('abGate').style.visibility=d.ab&&!isR?'visible':'hidden';
  $('nozA').disabled=!S.noz;$('nozV').textContent='×'+(S.noz||d.throat).toFixed(2);
  $('bDyno').textContent=test&&!test.contract?'Abort dyno':'Run dyno';$('engName').textContent=`${d.name||'Custom engine'} · ${TYPES[d.type]}`}
@@ -1073,7 +1073,7 @@ function sheetHTML(){const s=STEPS[stepI].id,t=d.type,isR=ram(t);
  case 'noz':return `<p class="lead">The nozzle turns hot pressure into speed. The throat sets the back-pressure: smaller squeezes out more thrust but heats the turbine; larger runs cool and gives some thrust up.</p>
   ${sec('7.1','Nozzle shape')}${picks('noz',[{v:'conv',l:'Convergent',d:'Simple cone. Fine below about Mach 1.5.'},{v:'cd',l:'Convergent–divergent',d:'Expands the jet past sonic. Heavier, better when fast or with a burner.'}])}
   ${isR?'':sld('throat','Nozzle throat area',.7,1.3,.01,v=>'× '+(+v).toFixed(2),'Smaller raises back-pressure and turbine temperature and eats surge margin. Larger gives up thrust.')}
-  ${(t==='turbojet'||t==='turbofan')?tog('rev','Thrust reverser',t==='turbofan'?'Cascade reverser on the fan duct. Turns bypass air forward for braking.':'Clamshell buckets behind the nozzle.'):''}`;
+  ${(t==='turbojet'||t==='turbofan')?togK('rev','Thrust reverser',t==='turbofan'?'Cascade reverser on the fan duct. Turns bypass air forward for braking.':'Clamshell buckets behind the nozzle.'):''}`;
  case 'ab':if(!(t==='turbojet'||t==='turbofan'))return na('Afterburners only fit turbojets and turbofans.');
   return `<p class="lead">Burn extra fuel behind the turbine for a big kick. Too rich and the liner burns through; too little nozzle opening and it chokes the turbine.</p>
   ${togK('ab','Afterburner fitted','Adds about a quarter to the weight. Light it in the test cell by pushing the throttle past the 100% gate.')}
